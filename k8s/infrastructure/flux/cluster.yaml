@@ -38,7 +38,7 @@ spec:
     name: ops
   path: must-be-patched
   dependsOn:
-    - name: config
+    - name: cluster-config
   prune: true
   wait: true
 ---
@@ -55,6 +55,6 @@ spec:
     name: ops
   path: must-be-patched
   dependsOn:
-    - name: config
-    - name: infrastructure
+    - name: cluster-config
+    - name: cluster-infrastructure
   prune: true
