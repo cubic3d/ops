@@ -1,0 +1,14 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: GitRepository
+metadata:
+  name: ops
+  namespace: flux-system
+spec:
+  interval: 1m
+  url: https://github.com/cubic3d/ops.git
+  ref:
+    branch: main
+  ignore: |
+    # Include only k8s directories
+    /*
+    !/k8s
