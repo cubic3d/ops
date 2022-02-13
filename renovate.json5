@@ -2,5 +2,44 @@
   extends: [
     "config:base",
     ":disableRateLimiting",
-  ]
+    ":timezone(Europe/Berlin)",
+    ":assignee(cubic3d)",
+    ":separatePatchReleases",
+    ":semanticCommits",
+    "docker:enableMajor",
+    ":enablePreCommit",
+  ],
+  dependencyDashboardTitle: "🤖 Renovate Dashboard 🤖",
+  suppressNotifications: ["prIgnoreNotification"],
+  "helm-values": {
+    fileMatch: ["k8s/.+\\.yaml$"],
+  },
+  kubernetes: {
+    fileMatch: ["k8s/.+\\.yaml$"],
+  },
+  flux: {
+    fileMatch: ["k8s/.+\\.yaml$"],
+  },
+  packageRules: [
+    {
+      datasources: ["docker"],
+      labels: ["renovate/container"],
+    },
+    {
+      datasources: ["helm"],
+      labels: ["renovate/helm"],
+    },
+    {
+      updateTypes: ["major"],
+      labels: ["version/major"],
+    },
+    {
+      updateTypes: ["minor"],
+      labels: ["version/minor"],
+    },
+    {
+      updateTypes: ["patch"],
+      labels: ["version/patch"],
+    },
+  ],
 }
