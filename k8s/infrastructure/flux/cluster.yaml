@@ -51,6 +51,10 @@ spec:
   postBuild:
     substituteFrom:
       - kind: ConfigMap
+        name: global-cluster-config
+      - kind: Secret
+        name: global-cluster-secrets
+      - kind: ConfigMap
         name: cluster-config
       - kind: Secret
         name: cluster-secrets
@@ -76,6 +80,10 @@ spec:
       name: sops-age
   postBuild:
     substituteFrom:
+      - kind: ConfigMap
+        name: global-cluster-config
+      - kind: Secret
+        name: global-cluster-secrets
       - kind: ConfigMap
         name: cluster-config
       - kind: Secret
