@@ -3,4 +3,5 @@ kind: ConfigMap
 metadata:
   namespace: flux-system
   name: cluster-config
-data: {}
+data:
+  cluster_name: heiji
