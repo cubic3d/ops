@@ -1,0 +1,17 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: le-stag
+spec:
+  acme:
+    email: "${email}"
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: le-stag-account-key
+    solvers:
+      - dns01:
+          cloudflare:
+            email: "${email}"
+            apiTokenSecretRef:
+              name: cloudflare-api-token
+              key: api-token
