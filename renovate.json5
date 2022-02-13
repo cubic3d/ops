@@ -3,7 +3,6 @@
     "config:base",
     ":disableRateLimiting",
     ":timezone(Europe/Berlin)",
-    ":assignee(cubic3d)",
     ":separatePatchReleases",
     ":semanticCommits",
     "docker:enableMajor",
