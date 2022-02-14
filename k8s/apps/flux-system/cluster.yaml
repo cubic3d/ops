@@ -32,6 +32,36 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
+  name: cluster-crds
+  namespace: flux-system
+spec:
+  interval: 10m
+  sourceRef:
+    kind: GitRepository
+    name: ops
+  path: must-be-patched
+  dependsOn:
+    - name: cluster-config
+  prune: true
+  wait: true
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: global-cluster-config
+      - kind: Secret
+        name: global-cluster-secrets
+      - kind: ConfigMap
+        name: cluster-config
+      - kind: Secret
+        name: cluster-secrets
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
   name: cluster-infrastructure
   namespace: flux-system
 spec:
@@ -42,6 +72,7 @@ spec:
   path: must-be-patched
   dependsOn:
     - name: cluster-config
+    - name: cluster-crds
   prune: true
   wait: true
   decryption:
@@ -72,6 +103,7 @@ spec:
   path: must-be-patched
   dependsOn:
     - name: cluster-config
+    - name: cluster-crds
     - name: cluster-infrastructure
   prune: true
   decryption:
