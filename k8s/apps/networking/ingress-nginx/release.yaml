@@ -16,6 +16,7 @@ spec:
   values:
     controller:
       service:
+        hostNetwork: true
         hostPort:
           enabled: true
 
