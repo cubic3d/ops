@@ -9,4 +9,3 @@ resources:
   # networking
   - ../../../apps/networking
   - ../../../apps/networking/cert-manager
-  #- ../../../apps/networking/ingress-nginx

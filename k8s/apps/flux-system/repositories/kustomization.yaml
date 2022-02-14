@@ -3,4 +3,3 @@ kind: Kustomization
 resources:
   - jetstack.yaml
   - k8s-at-home.yaml
-  - ingress-nginx.yaml
