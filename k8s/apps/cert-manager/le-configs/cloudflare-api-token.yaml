@@ -2,7 +2,6 @@ apiVersion: v1
 kind: Secret
 metadata:
     name: cloudflare-api-token
-    namespace: networking
 stringData:
     api-token: ENC[AES256_GCM,data:pJm3VsEaNf85NU9w+d9NeWyL436F4qSLun6fSUnj25RBs7/LQZ9uVg==,iv:KEF7Q7v5+QIqK85AGILVo7mudRp0SOMsfOiwAmpjVUc=,tag:ZYyp+wd0WVEdDNVu/SYulw==,type:str]
 sops:
@@ -20,8 +19,8 @@ sops:
             azNXazZ2dGl0ZDh6TGEyS3hMRWYvVlEKjERBAwFn75SbSFyOi7cly/Iwve6Fp9yB
             6lUA95uCOis0SfhZjl1K3d24M9RjhmcbtbjTcfivMM2rGEskujwyEw==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2022-02-13T22:20:54Z"
-    mac: ENC[AES256_GCM,data:M4SSPX32uljmfTGsi8DesoQx7RD9JrTbGXZ34MQyvn9H4tfszMN8gIshgP27JMd+a7+mEwflWdXgTyIBubjFq8HeAf9CFJWfNCV6oaEcufPRhanxe9282Yky+mKFJuTi1RP4Zfc6GkZHH1VboCqFMiNUKGjIZi/2iyv8jAOFgTE=,iv:d9SD1GEtOKSa/+Ku6oI+brrCqZMl10AM+Z5jkxhMwKM=,tag:nc5Xhm6dfi6Xt5g2TG5Xsw==,type:str]
+    lastmodified: "2022-02-15T13:23:33Z"
+    mac: ENC[AES256_GCM,data:oB8tJCdcVPHA4eYwVcWEmtqIM6a+bdE7hq3JYlsiBD96iem9n9R0eZn6v/yYbMSQA794YVSWeBTyUZCBrAy/y2pGIuLByA4Obf3BgHIW6Ner1s5ZgnLt5g9qI2uTPjudAR78xFuujFOlEPbbLjBKVMLd5SE67NHLhvG4LoH896s=,iv:zWdc1FcSNbuWzoCFiWjYyVIgpAetLxuLrpXEYajHQtY=,tag:hlOqidZk4fAXg8OCnKn/pw==,type:str]
     pgp: []
     encrypted_regex: ((?i)(pass|secret($|[^N])|key|token|^data$|^stringData))
     version: 3.7.1

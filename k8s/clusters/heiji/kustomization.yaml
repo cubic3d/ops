@@ -1,14 +1,14 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+namespace: flux-system
 resources:
-  - ../../apps/flux-system
+  - ../../apps/flux
 patchesStrategicMerge:
   - |-
     apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
     kind: Kustomization
     metadata:
       name: cluster
-      namespace: flux-system
     spec:
       path: ./k8s/clusters/heiji
   - |-
@@ -16,7 +16,6 @@ patchesStrategicMerge:
     kind: Kustomization
     metadata:
       name: cluster-config
-      namespace: flux-system
     spec:
       path: ./k8s/clusters/heiji/config
   - |-
@@ -24,7 +23,6 @@ patchesStrategicMerge:
     kind: Kustomization
     metadata:
       name: cluster-crds
-      namespace: flux-system
     spec:
       path: ./k8s/clusters/heiji/crds
   - |-
@@ -32,7 +30,6 @@ patchesStrategicMerge:
     kind: Kustomization
     metadata:
       name: cluster-infrastructure
-      namespace: flux-system
     spec:
       path: ./k8s/clusters/heiji/infrastructure
   - |-
@@ -40,6 +37,5 @@ patchesStrategicMerge:
     kind: Kustomization
     metadata:
       name: cluster-apps
-      namespace: flux-system
     spec:
       path: ./k8s/clusters/heiji/apps
