@@ -8,7 +8,7 @@ spec:
   eventSeverity: info
   eventSources:
     - kind: Kustomization
-      namespace: cluster
-      name: flux-system
+      name: cluster
+      namespace: flux-system
   exclusionList:
     - "waiting.*socket"
