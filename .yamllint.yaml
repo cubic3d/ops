@@ -1,0 +1,6 @@
+extends: default
+ignore: |-
+  gotk-components.yaml
+rules:
+  line-length: disable
+  document-start: disable

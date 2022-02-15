@@ -32,12 +32,12 @@ spec:
     ingressRoute:
       dashboard:
         enabled: false
-    
+
     logs:
       access:
         enabled: true
         format: json
-    
+
     globalArguments:
       - --api.insecure=true
 
