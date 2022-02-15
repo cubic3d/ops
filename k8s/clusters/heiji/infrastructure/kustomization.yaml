@@ -10,6 +10,7 @@ resources:
   - ../../../apps/networking
   - ../../../apps/networking/cert-manager
   - ../../../apps/networking/metallb
+  - ../../../apps/networking/traefik
 
 patchesStrategicMerge:
   - |-

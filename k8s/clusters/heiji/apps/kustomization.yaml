@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   # networking
   - ../../../apps/networking/cert-manager/le-configs
+  - ../../../apps/networking/traefik/tls-store
