@@ -8,7 +8,8 @@ spec:
   eventSeverity: info
   eventSources:
     - kind: Kustomization
-      name: cluster
-      namespace: flux-system
+      name: "*"
+    - kind: HelmRelease
+      name: "*"
   exclusionList:
     - "waiting.*socket"
