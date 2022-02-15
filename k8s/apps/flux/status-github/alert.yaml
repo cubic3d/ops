@@ -9,7 +9,5 @@ spec:
   eventSources:
     - kind: Kustomization
       name: "*"
-    - kind: HelmRelease
-      name: "*"
   exclusionList:
     - "waiting.*socket"
