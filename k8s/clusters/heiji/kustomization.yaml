@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: flux-system
 resources:
-  - ../../apps/flux
+  - ../../apps/flux-system
 patchesStrategicMerge:
   - |-
     apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
