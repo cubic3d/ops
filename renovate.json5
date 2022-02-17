@@ -22,14 +22,6 @@
   },
   packageRules: [
     {
-      datasources: ["docker"],
-      labels: ["renovate/container"],
-    },
-    {
-      datasources: ["helm"],
-      labels: ["renovate/helm"],
-    },
-    {
       updateTypes: ["major"],
       labels: ["version/major"],
     },

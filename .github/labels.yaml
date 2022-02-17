@@ -1,0 +1,11 @@
+- name: version/major
+  color: "d93f0b"
+  description: Major update
+
+- name: version/minor
+  color: "fbca04"
+  description: Major update
+
+- name: version/patch
+  color: "0e8a16"
+  description: Major update
