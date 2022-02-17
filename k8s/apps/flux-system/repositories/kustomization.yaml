@@ -6,3 +6,4 @@ resources:
   - traefik.yaml
   - metallb.yaml
   - csi-driver-smb.yaml
+  - ebrianne.yaml

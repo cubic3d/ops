@@ -4,3 +4,4 @@ namespace: storage
 resources:
   - namespace.yaml
   - ../../../../apps/csi-driver-smb
+  - ../../../../apps/local-path-provisioner
