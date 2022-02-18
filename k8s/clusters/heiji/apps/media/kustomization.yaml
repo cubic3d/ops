@@ -8,3 +8,4 @@ resources:
   - ../../../../apps/sabnzbd
   - ../../../../apps/radarr
   - ../../../../apps/sonarr
+  - ../../../../apps/bazarr
