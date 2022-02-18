@@ -21,6 +21,7 @@ spec:
       source: "${media_volume_uri}"
     nodeStageSecretRef:
       name: media-creds
+      namespace: media
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
