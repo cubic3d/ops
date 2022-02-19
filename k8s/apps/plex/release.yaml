@@ -31,3 +31,17 @@ spec:
         mountPath: /media
         readOnly: true
         retain: true
+
+    ingress:
+      main:
+        enabled: true
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        hosts:
+          - host: "watch.${domain}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - "{{ (index .Values.ingress.main.hosts 0).host }}"
