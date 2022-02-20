@@ -7,3 +7,4 @@ resources:
   - metallb.yaml
   - csi-driver-smb.yaml
   - ebrianne.yaml
+  - metrics-server.yaml
