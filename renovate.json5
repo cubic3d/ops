@@ -33,5 +33,12 @@
       updateTypes: ["patch"],
       labels: ["version/patch"],
     },
+    {
+      matchDatasources: ["docker", "github-releases"],
+      versioning: "loose",
+      matchPackageNames: [
+        "ghcr.io/k8s-at-home/plex",
+      ],
+    },
   ],
 }
