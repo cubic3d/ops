@@ -3,8 +3,8 @@ kind: Secret
 metadata:
     name: media-creds
 stringData:
-    username: ENC[AES256_GCM,data:DfbcY/EhKLQwXbB8,iv:/dJSYBed7DorTtWzsPs/BhQY8urUnvJ21w0VfqBEaoY=,tag:0cKKUpjUm+iRJqhLcH1DyA==,type:str]
-    password: ENC[AES256_GCM,data:2sRQjNsEXWTGhQ1Zceh7mg==,iv:IMGwgmeKSvboq82pqVCudQNRVssLmCIGe1wXx9rmBro=,tag:t5D1QPtDrngXwomr4P2O9g==,type:str]
+    username: ENC[AES256_GCM,data:mAf/hT1mE0vkZSCn,iv:Y5b5plDbMaXbvOYOcBf95Z4mHhnWqQT6NVlFZdB/vaM=,tag:QEdOMQtDt6JLr54qsYlaFw==,type:str]
+    password: ENC[AES256_GCM,data:SsaelvipBr1Iyqx0PczDZQ==,iv:j96AV4ixWZfgkjJB1645SPTt4ArIINHYbo6iLh2YUo0=,tag:Y39U/+Icmp4ZHa801GhOqw==,type:str]
 sops:
     kms: []
     gcp_kms: []
@@ -20,8 +20,8 @@ sops:
             d2xOOWwvL0I2aXZjRlVXaWxjcEJ3UW8K5QKpWKh2oe6cqNmr42doEu3WFsyz7QxX
             2C3jVBqHUpIMHOU4swJKy27AQ4gr/tim7N2V2Qwy5twepqg9oUU1kQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2022-02-18T20:59:43Z"
-    mac: ENC[AES256_GCM,data:ArSY1E60jzHUzMeKMIgJFb4SDYa8aVL7a/7C7qxbl7C9l1zX3Ik77W3LxBIdXHT4ld0QI0WtmWEX0Wl0LBstcSef0Vhtw0Dq46fQozTJh/yCfr5/B3R3veDRi5KuMCoP7YZADyABK10f0lOBCMtZwWTiqGyf7afic6zM0FpY2sM=,iv:dW9Ygk9to69I80jc+I0sFHf2jssFuBNJuICLynMi8DQ=,tag:nJRvqwU9F5BDFTxRPsxbqQ==,type:str]
+    lastmodified: "2022-05-18T22:16:53Z"
+    mac: ENC[AES256_GCM,data:TiyRaX6eSSmPBaPL7ZRdCWTS6v0PEnbR0Mo+k/4v7ZhtCRTPG8MF7k0SiVve9TMOJ08J/g/HJZjGUwPguhuc+nb+qoVX/17p5tEqLcyjq+ncE5dD0Bkd4zHT4A3+HBhPxzn8w6RBWVicxmL3qZL4f1hOOcCmjm5DgEorgrnbkW0=,iv:6+cswGHFzJhQPJbu3J7rb6ESksqXpH4CBANI2GG6ZV4=,tag:Sh29sTPphcH42YdybtGWDw==,type:str]
     pgp: []
     encrypted_regex: ((?i)(pass|secret($|[^N])|key|token|^data$|^stringData))
-    version: 3.7.1
+    version: 3.7.2
