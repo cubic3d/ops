@@ -15,7 +15,7 @@ jobs:
           fetch-depth: 1
 
       - name: Install python
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v4
 
       - name: Install pre-commit
         run: pip install pre-commit
