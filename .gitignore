@@ -1,2 +1,3 @@
 .decrypted~*.yaml
 /_tmp/
+.terraform
