@@ -8,7 +8,7 @@ resource "vyos_config_block" "ssh-keys" {
   }
 }
 
-resource "vyos_config_block" "service-ssh" {
+resource "vyos_config_block" "ssh-config" {
   path = "service ssh"
 
   configs = {

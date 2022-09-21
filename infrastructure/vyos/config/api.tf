@@ -1,4 +1,4 @@
-resource "vyos_config_block_tree" "service-https" {
+resource "vyos_config_block_tree" "api" {
   path = "service https"
 
   configs = {
