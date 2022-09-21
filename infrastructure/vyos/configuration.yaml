@@ -1,5 +1,0 @@
-ssh:
-  keys:
-    personal:
-      type: ssh-ed25519
-      key: AAAAC3NzaC1lZDI1NTE5AAAAIGmuAEePThJJA68KT08hJtmsyUx8MpA+8IpzbSs/pr8x
