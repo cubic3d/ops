@@ -1,0 +1,10 @@
+- name: Apply config
+  vyos.vyos.vyos_config:
+    src: config/main.j2
+    match: none
+    save: yes
+  register: config_out
+
+- name: Debug
+  ansible.builtin.debug:
+    var: config_out
