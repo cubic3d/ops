@@ -1,0 +1,68 @@
+ansible_host: 192.168.178.2
+ansible_user: vyos
+domain_enc: ENC[AES256_GCM,data:sJ+kg38=,iv:MXWVju7NAx/GxuZMC5t0zhtplJDb++H5wP4THkXZMgg=,tag:FTRGwu89V+3gxdgm/lkJsg==,type:str]
+ssh:
+    password_enc: ENC[AES256_GCM,data:iPqYIv+ir/YrXfl4JIqUbOpsRQWVEHGZhRvBrhofGc+R2nyO3F8+nFzB2kB3vQjfKTNWmpiGwDDFK7fsR2ItHghfLTfBKUHYeXT2UEbY9Cd2xGsDm13R+wKLH0YJTSo+yK4c,iv:rYFVT0zvKFTMNijDDIqU/BCglk6bZniqEppoZmRo+qU=,tag:mliHkxRNQi9E3Ox46kiKQg==,type:str]
+settings:
+    zones:
+        local:
+            name: Local
+        wan:
+            name: WAN
+            interface: eth0
+            address: dhcp
+        modem:
+            name: Modem
+            interface: eth1
+            address: 192.168.178.2/24
+        management:
+            name: Management
+            interface: eth2
+            vlan: 0
+        iot:
+            name: IoT
+            interface: eth2
+            vlan: 10
+        guest:
+            name: Guest
+            interface: eth2
+            vlan: 20
+        trusted:
+            name: Trusted
+            interface: eth2
+            vlan: 30
+        server:
+            name: Server
+            interface: eth2
+            vlan: 40
+        gaming:
+            name: Gaming
+            interface: eth2
+            vlan: 50
+    ip:
+        ulaPrefix: fd00:c01d:1ced
+    staticHosts:
+        example:
+            zone: management
+            address: 20
+            mac_enc: ENC[AES256_GCM,data:fVk+1iZB6nxnuGVHdR/NRy0=,iv:6RC7D8V/W8vHdPopgg4eCW2vfkj9VIsXKj8LAq+DOu4=,tag:vWD0ocL+4vX3h0c6uG0elQ==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1xehfrre93knutglwzsamhetvk70sh2gcdn4zhdreu8762m4l03tszgh8j6
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBZTFNUalV6NWxCU2M1QmND
+            a3hueW5LSnFLU25kMjhka0tkMGI0bGJ0Mmw0Ckl5d1lud3dZU3B1R1RkQzZXN2pn
+            bisxU05ycW02aEoydmx2bkg2aFZLbU0KLS0tIFFocHQ2OEk1MWprekdLTFZyUXY2
+            U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
+            82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2022-09-25T17:53:41Z"
+    mac: ENC[AES256_GCM,data:nHFhs35z2AIeFGNKwy9b0pM721yo7LPyHYAF0UUT2gEifQZu/gh4XAO+Yz74qSUXyfNrGGuYLpRWbeJ8N4O4g7jL3A1UtWBjqHB9gMdHv2hHcdbqQWU2r9tOCu2Bk005Dg/29KZ3B7joZBn0iNJREKkwdGoq7Hq0BAYjTBq0G8s=,iv:sw3Fef0h5Njtpd61TdnFMrc8YnXgEZFxRYoPPY20q5w=,tag:Eo2sfmDcH9BBKVlWGe6zXw==,type:str]
+    pgp: []
+    encrypted_suffix: _enc
+    version: 3.7.3
