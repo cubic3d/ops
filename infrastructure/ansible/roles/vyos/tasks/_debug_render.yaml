@@ -1,0 +1,3 @@
+- name: Debug rendered config
+  ansible.builtin.debug:
+    msg: "{{ lookup('template', 'config/main.j2') | split('\n') | map('trim') | select() }}"

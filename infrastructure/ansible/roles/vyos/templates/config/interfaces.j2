@@ -1,3 +1,30 @@
 set interfaces loopback lo
 
-set interfaces ethernet eth1 address 192.168.178.2/24
+{# Generate zone interfaces #}
+{% for zone in settings.zones.values() if zone.interface is defined %}
+  {% if zone.vlan is not defined %}
+    {# Set IPv4 #}
+    set interfaces ethernet {{ zone.interface }} description {{ zone.name }}
+    set interfaces ethernet {{ zone.interface }} address {{ zone.address }}
+  {% else %}
+    {% set path = zone.interface~" vif "~zone.vlan if zone.vlan > 0 else zone.interface %}
+    {% set interface = zone.interface~"."~zone.vlan if zone.vlan > 0 else zone.interface %}
+    {# Set IPv4 #}
+    set interfaces ethernet {{ path }} description {{ zone.name }}
+    set interfaces ethernet {{ path }} address 192.168.{{ zone.vlan }}.1/24
+    {# Set IPv6 from PD #}
+    set interfaces ethernet {{ settings.zones.wan.interface }} dhcpv6-options pd 0 interface {{ interface }} address 1
+    set interfaces ethernet {{ settings.zones.wan.interface }} dhcpv6-options pd 0 interface {{ interface }} sla-id {{ zone.vlan }}
+    {# Set IPv6 ULA #}
+    set interfaces ethernet {{ path }} address {{ settings.ip.ulaPrefix }}:{{ zone.vlan }}::1/128
+    {# Set RA #}
+    set service router-advert interface {{ interface }} prefix ::/64 valid-lifetime 86400
+    set service router-advert interface {{ interface }} prefix ::/64 decrement-lifetime
+    set service router-advert interface {{ interface }} prefix ::/64 deprecate-prefix
+    set service router-advert interface {{ interface }} name-server {{ settings.ip.ulaPrefix }}:{{ zone.vlan }}::1
+  {% endif %}
+{% endfor %}
+
+{# IPv6 public address and prefix #}
+set interfaces ethernet {{ settings.zones.wan.interface }} ipv6 address autoconf
+set interfaces ethernet {{ settings.zones.wan.interface }} dhcpv6-options pd 0 length 56
