@@ -41,11 +41,14 @@ settings:
             vlan: 50
     ip:
         ulaPrefix: fd00:c01d:1ced
-    staticHosts:
+    hosts:
         example:
             zone: management
             address: 20
-            mac_enc: ENC[AES256_GCM,data:fVk+1iZB6nxnuGVHdR/NRy0=,iv:6RC7D8V/W8vHdPopgg4eCW2vfkj9VIsXKj8LAq+DOu4=,tag:vWD0ocL+4vX3h0c6uG0elQ==,type:str]
+            mac_enc: ENC[AES256_GCM,data:iKoEwRoyzw3/Fs9yGPAvdJA=,iv:lhf5juKW5iEwDsQrA6URZXrHw+6H7T+Iv9AToMhD3s0=,tag:TvXYL7FOWrHnRABLxJuJbQ==,type:str]
+    services:
+        example:
+            address: 1.1.1.1
 sops:
     kms: []
     gcp_kms: []
@@ -61,8 +64,8 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2022-09-25T18:15:01Z"
-    mac: ENC[AES256_GCM,data:0Xre5eEr6tOUwmkWg4tYxsH/2gmi/8mNRIVPHX83RIW0riwW2N5h7VGa+quKZaTNWLLbBVIgxvBmPgM+TRTNp5OTOfczyZSPa60kEHuEpOY6RZQ5nv4rirqmDkonwaIvMhWZDOl+etgsKmU1JJqjDbzm3RxWbL0Jyt9JxDfweVw=,iv:YC2DURm++EBPUYdAjFyjezDbh9096baRQ5Poq45iICo=,tag:lo+3Q4Zm+OslnF+UTWCd5g==,type:str]
+    lastmodified: "2022-09-25T18:19:34Z"
+    mac: ENC[AES256_GCM,data:0LO4jwFTN8KFAj8VHCPflgAgZxWLFiqhNg3xxNiBoETsq7GHkqSjJQWlt8Lncw2vOHtmTDBRYZk3O4X8C74MM+2PRfjaxle+dA+MUiK+Q5H7QxHIx5cEsKejugKqrgjgnjKQnG/pFpTuHpJqqvxwQFpHEJ/Ykk8iWrFTE6fxFXc=,iv:sxkI+WEiKGyueH1rnoIxPVxLz7jD3R7M3TK9yCOROzA=,tag:rxrK6G3RCRWUUBctPrYKcA==,type:str]
     pgp: []
     encrypted_suffix: _enc
     version: 3.7.3

@@ -1,0 +1,13 @@
+{# Static host mappings with static DHCP entries #}
+{% for name, host in settings.hosts.items() %}
+    set system static-host-mapping host-name {{ name }}.h.{{ settings.domain_enc }} inet 192.168.{{ settings.zones[host.zone].vlan }}.{{ host.address }}
+    {% if host.zone is defined and host.mac_enc is defined %}
+        set service dhcp-server shared-network-name {{ host.zone }} subnet 192.168.{{ settings.zones[host.zone].vlan }}.0/24 static-mapping {{ name }} ip-address 192.168.{{ settings.zones[host.zone].vlan }}.{{ host.address }}
+        set service dhcp-server shared-network-name {{ host.zone }} subnet 192.168.{{ settings.zones[host.zone].vlan }}.0/24 static-mapping {{ name }} mac-address {{ host.mac_enc }}
+    {% endif %}
+{% endfor %}
+
+{# Static service mappings #}
+{% for name, service in settings.services.items() %}
+    set system static-host-mapping host-name {{ name }}.{{ settings.domain_enc }} inet {{ service.address }}
+{% endfor %}
