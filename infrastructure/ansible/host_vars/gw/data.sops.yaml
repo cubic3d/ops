@@ -1,9 +1,9 @@
 ansible_host: 192.168.178.2
 ansible_user: vyos
-domain_enc: ENC[AES256_GCM,data:sJ+kg38=,iv:MXWVju7NAx/GxuZMC5t0zhtplJDb++H5wP4THkXZMgg=,tag:FTRGwu89V+3gxdgm/lkJsg==,type:str]
-ssh:
-    password_enc: ENC[AES256_GCM,data:iPqYIv+ir/YrXfl4JIqUbOpsRQWVEHGZhRvBrhofGc+R2nyO3F8+nFzB2kB3vQjfKTNWmpiGwDDFK7fsR2ItHghfLTfBKUHYeXT2UEbY9Cd2xGsDm13R+wKLH0YJTSo+yK4c,iv:rYFVT0zvKFTMNijDDIqU/BCglk6bZniqEppoZmRo+qU=,tag:mliHkxRNQi9E3Ox46kiKQg==,type:str]
 settings:
+    domain_enc: ENC[AES256_GCM,data:GrXJaRI=,iv:ErXM2nQQ/YuVVYdI/LBIrjY4srzk3uEQsK3w46iv3Xw=,tag:UQe4ZNIAUwdaQLZRIaPGWA==,type:str]
+    ssh:
+        password_enc: ENC[AES256_GCM,data:/+HMeZlPVqAG8mrd/3Xqd8S1rSmvGQV2ZYFmcnotOEFusxDVolgikJ4Rxb/8XK5pLEoIuBn+wGl37O7Gz8PMUl4LV64rSZFq4nkUNIopydVP6Y6RVdp/k198Y0DCOuE8U0Qu,iv:IkCBUMhfMfSgkpD/Oq0JpOn51HvNXFd84EmCOLGZoi8=,tag:lXyHRrDjiNninGi3qU8X0Q==,type:str]
     zones:
         local:
             name: Local
@@ -61,8 +61,8 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2022-09-25T17:53:41Z"
-    mac: ENC[AES256_GCM,data:nHFhs35z2AIeFGNKwy9b0pM721yo7LPyHYAF0UUT2gEifQZu/gh4XAO+Yz74qSUXyfNrGGuYLpRWbeJ8N4O4g7jL3A1UtWBjqHB9gMdHv2hHcdbqQWU2r9tOCu2Bk005Dg/29KZ3B7joZBn0iNJREKkwdGoq7Hq0BAYjTBq0G8s=,iv:sw3Fef0h5Njtpd61TdnFMrc8YnXgEZFxRYoPPY20q5w=,tag:Eo2sfmDcH9BBKVlWGe6zXw==,type:str]
+    lastmodified: "2022-09-25T18:15:01Z"
+    mac: ENC[AES256_GCM,data:0Xre5eEr6tOUwmkWg4tYxsH/2gmi/8mNRIVPHX83RIW0riwW2N5h7VGa+quKZaTNWLLbBVIgxvBmPgM+TRTNp5OTOfczyZSPa60kEHuEpOY6RZQ5nv4rirqmDkonwaIvMhWZDOl+etgsKmU1JJqjDbzm3RxWbL0Jyt9JxDfweVw=,iv:YC2DURm++EBPUYdAjFyjezDbh9096baRQ5Poq45iICo=,tag:lo+3Q4Zm+OslnF+UTWCd5g==,type:str]
     pgp: []
     encrypted_suffix: _enc
     version: 3.7.3

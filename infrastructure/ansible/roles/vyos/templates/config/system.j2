@@ -16,12 +16,12 @@ set system name-server 2606:4700:4700::1111
 set system name-server 2606:4700:4700::1001
 
 {# Naming #}
-set system domain-name h.{{ secrets.domain }}
+set system domain-name h.{{ settings.domain_enc }}
 set system host-name fw
 
 {# System authentication #}
 {# NOTICE '' around encrypted-password are required to avoid filtering this command by the module #}
-set system login user vyos authentication 'encrypted-password' '{{ secrets.ssh.password_encrypted }}'
+set system login user vyos authentication 'encrypted-password' '{{ settings.ssh.password_enc }}'
 set system login user vyos authentication plaintext-password ''
 set system login user vyos authentication public-keys private key AAAAC3NzaC1lZDI1NTE5AAAAIGmuAEePThJJA68KT08hJtmsyUx8MpA+8IpzbSs/pr8x
 set system login user vyos authentication public-keys private type ssh-ed25519

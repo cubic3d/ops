@@ -27,7 +27,7 @@ set interfaces loopback lo
     set service dhcp-server shared-network-name {{ zoneName }} description {{ zone.name }}
     set service dhcp-server shared-network-name {{ zoneName }} subnet 192.168.{{ zone.vlan }}.0/24 default-router 192.168.{{ zone.vlan }}.1
     set service dhcp-server shared-network-name {{ zoneName }} subnet 192.168.{{ zone.vlan }}.0/24 name-server 192.168.{{ zone.vlan }}.1
-    set service dhcp-server shared-network-name {{ zoneName }} subnet 192.168.{{ zone.vlan }}.0/24 domain-name h.{{ secrets.domain }}
+    set service dhcp-server shared-network-name {{ zoneName }} subnet 192.168.{{ zone.vlan }}.0/24 domain-name h.{{ settings.domain_enc }}
     set service dhcp-server shared-network-name {{ zoneName }} subnet 192.168.{{ zone.vlan }}.0/24 range default start 192.168.{{ zone.vlan }}.100
     set service dhcp-server shared-network-name {{ zoneName }} subnet 192.168.{{ zone.vlan }}.0/24 range default stop 192.168.{{ zone.vlan }}.254
   {% endif %}
