@@ -25,3 +25,10 @@ set system login user vyos authentication 'encrypted-password' '{{ secrets.ssh.p
 set system login user vyos authentication plaintext-password ''
 set system login user vyos authentication public-keys private key AAAAC3NzaC1lZDI1NTE5AAAAIGmuAEePThJJA68KT08hJtmsyUx8MpA+8IpzbSs/pr8x
 set system login user vyos authentication public-keys private type ssh-ed25519
+
+{# Enable LLDP discovery #}
+set service lldp
+
+{# SSH settings #}
+set service ssh disable-host-validation
+set service ssh disable-password-authentication
