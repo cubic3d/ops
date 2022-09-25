@@ -1,27 +1,35 @@
 set interfaces loopback lo
 
 {# Generate zone interfaces #}
-{% for zone in settings.zones.values() if zone.interface is defined %}
+{% for zoneName, zone in settings.zones.items() if zone.interface is defined %}
   {% if zone.vlan is not defined %}
-    {# Set IPv4 #}
+    {# IPv4 #}
     set interfaces ethernet {{ zone.interface }} description {{ zone.name }}
     set interfaces ethernet {{ zone.interface }} address {{ zone.address }}
   {% else %}
     {% set path = zone.interface~" vif "~zone.vlan if zone.vlan > 0 else zone.interface %}
     {% set interface = zone.interface~"."~zone.vlan if zone.vlan > 0 else zone.interface %}
-    {# Set IPv4 #}
+    {# IPv4 #}
     set interfaces ethernet {{ path }} description {{ zone.name }}
     set interfaces ethernet {{ path }} address 192.168.{{ zone.vlan }}.1/24
-    {# Set IPv6 from PD #}
+    {# IPv6 from PD #}
     set interfaces ethernet {{ settings.zones.wan.interface }} dhcpv6-options pd 0 interface {{ interface }} address 1
     set interfaces ethernet {{ settings.zones.wan.interface }} dhcpv6-options pd 0 interface {{ interface }} sla-id {{ zone.vlan }}
-    {# Set IPv6 ULA #}
+    {# IPv6 ULA #}
     set interfaces ethernet {{ path }} address {{ settings.ip.ulaPrefix }}:{{ zone.vlan }}::1/128
-    {# Set RA #}
+    {# RA #}
     set service router-advert interface {{ interface }} prefix ::/64 valid-lifetime 86400
     set service router-advert interface {{ interface }} prefix ::/64 decrement-lifetime
     set service router-advert interface {{ interface }} prefix ::/64 deprecate-prefix
     set service router-advert interface {{ interface }} name-server {{ settings.ip.ulaPrefix }}:{{ zone.vlan }}::1
+    {# DHCP Server #}
+    set service dhcp-server shared-network-name {{ zoneName }} authoritative
+    set service dhcp-server shared-network-name {{ zoneName }} description {{ zone.name }}
+    set service dhcp-server shared-network-name {{ zoneName }} subnet 192.168.{{ zone.vlan }}.0/24 default-router 192.168.{{ zone.vlan }}.1
+    set service dhcp-server shared-network-name {{ zoneName }} subnet 192.168.{{ zone.vlan }}.0/24 name-server 192.168.{{ zone.vlan }}.1
+    set service dhcp-server shared-network-name {{ zoneName }} subnet 192.168.{{ zone.vlan }}.0/24 domain-name h.{{ secrets.domain }}
+    set service dhcp-server shared-network-name {{ zoneName }} subnet 192.168.{{ zone.vlan }}.0/24 range default start 192.168.{{ zone.vlan }}.100
+    set service dhcp-server shared-network-name {{ zoneName }} subnet 192.168.{{ zone.vlan }}.0/24 range default stop 192.168.{{ zone.vlan }}.254
   {% endif %}
 {% endfor %}
 
