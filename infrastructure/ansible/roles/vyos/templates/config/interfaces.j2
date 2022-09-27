@@ -15,6 +15,9 @@ set interfaces loopback lo
     {# IPv6 from PD #}
     set interfaces ethernet {{ settings.zones.wan.interface }} dhcpv6-options pd 0 interface {{ interface }} address 1
     set interfaces ethernet {{ settings.zones.wan.interface }} dhcpv6-options pd 0 interface {{ interface }} sla-id {{ zone.vlan }}
+    {# IPv6 Local Link #}
+    set interfaces ethernet {{ path }} ipv6 address no-default-link-local
+    set interfaces ethernet {{ path }} address fe80::1/128
     {# IPv6 ULA #}
     set interfaces ethernet {{ path }} address {{ settings.ip.ulaPrefix }}:{{ zone.vlan }}::1/128
     {# RA #}
