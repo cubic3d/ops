@@ -1,0 +1,6 @@
+{# Source NAT #}
+{% for zoneName, zone in settings.zones.items() if zone.nat is defined and zone.nat %}
+  set nat source rule {{ loop.index }} description {{ zone.name }}
+  set nat source rule {{ loop.index }} outbound-interface {{ zone.interface }}
+  set nat source rule {{ loop.index }} translation address masquerade
+{% endfor %}

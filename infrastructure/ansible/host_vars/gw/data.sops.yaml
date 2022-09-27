@@ -11,10 +11,12 @@ settings:
             name: WAN
             interface: eth0
             address: dhcp
+            nat: true
         modem:
             name: Modem
             interface: eth1
             address: 192.168.178.2/24
+            nat: true
         management:
             name: Management
             interface: eth2
@@ -64,8 +66,8 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2022-09-25T18:19:34Z"
-    mac: ENC[AES256_GCM,data:0LO4jwFTN8KFAj8VHCPflgAgZxWLFiqhNg3xxNiBoETsq7GHkqSjJQWlt8Lncw2vOHtmTDBRYZk3O4X8C74MM+2PRfjaxle+dA+MUiK+Q5H7QxHIx5cEsKejugKqrgjgnjKQnG/pFpTuHpJqqvxwQFpHEJ/Ykk8iWrFTE6fxFXc=,iv:sxkI+WEiKGyueH1rnoIxPVxLz7jD3R7M3TK9yCOROzA=,tag:rxrK6G3RCRWUUBctPrYKcA==,type:str]
+    lastmodified: "2022-09-27T18:05:14Z"
+    mac: ENC[AES256_GCM,data:9zRmzZ8RjFLMSIhc+4WQJcDg+/RkayQ+dz09c3pk0+5rQHlT/259puZRSm+F7Dh7B5ihgjmOs2kQPwkARhgMkjcmTBQUGYnJFofgyNgu+YnKcG+x77xfpLDEtti6lv1RdurYDKA+AMgSePoosf1xS5afpNIWtPoNMff27XWZErI=,iv:GZmCP0+ydLQmB7HrrNxxIIgOPfJam4fVqvblFeYEnfY=,tag:IYSD26tC8/wI+jIgTqLNeA==,type:str]
     pgp: []
     encrypted_suffix: _enc
     version: 3.7.3
