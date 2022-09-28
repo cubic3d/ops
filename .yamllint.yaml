@@ -1,6 +1,7 @@
 extends: default
 ignore: |-
   gotk-components.yaml
+  *.sops.*
 rules:
   line-length: disable
   document-start: disable

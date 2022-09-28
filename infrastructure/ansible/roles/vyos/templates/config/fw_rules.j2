@@ -1,0 +1,67 @@
+{% macro accept_established(path) %}
+  set firewall {{ path }} action accept
+  set firewall {{ path }} state established enable
+  set firewall {{ path }} state related enable
+{% endmacro %}
+
+{% macro drop_invalid(path) %}
+  set firewall {{ path }} action drop
+  set firewall {{ path }} state invalid enable
+  set firewall {{ path }} log enable
+{% endmacro %}
+
+{% macro drop_network_group(path, group, direction) %}
+  set firewall {{ path }} action drop
+  set firewall {{ path }} {{ direction }} group network-group {{ group }}
+  set firewall {{ path }} log enable
+{% endmacro %}
+
+{% macro accept_wireguard(path) %}
+  set firewall {{ path }} action accept
+  set firewall {{ path }} protocol udp
+  set firewall {{ path }} destination port {{ settings.wireguard.port_enc }}
+  set firewall {{ path }} log enable
+{% endmacro %}
+
+{% macro accept_dns(path) %}
+  set firewall {{ path }} action accept
+  set firewall {{ path }} protocol udp
+  set firewall {{ path }} destination port 53
+  set firewall {{ path }} log enable
+{% endmacro %}
+
+{% macro drop_icmpv6_hoplimit1(path) %}
+  set firewall {{ path }} action drop
+  set firewall {{ path }} protocol icmpv6
+  set firewall {{ path }} hop-limit eq 1
+  set firewall {{ path }} log enable
+{% endmacro %}
+
+{% macro accept_icmpv6(path) %}
+  set firewall {{ path }} action accept
+  set firewall {{ path }} protocol icmpv6
+  set firewall {{ path }} log enable
+{% endmacro %}
+
+{% macro accept_dhcpv6_pd(path) %}
+  set firewall {{ path }} action accept
+  set firewall {{ path }} protocol udp
+  set firewall {{ path }} source address fe80::/10
+  set firewall {{ path }} source port 547
+  set firewall {{ path }} destination port 546
+  set firewall {{ path }} log enable
+{% endmacro %}
+
+{% macro accept_tftp(path) %}
+  set firewall {{ path }} action accept
+  set firewall {{ path }} protocol udp
+  set firewall {{ path }} destination port 69
+  set firewall {{ path }} log enable
+{% endmacro %}
+
+{% macro accept_http(path) %}
+  set firewall {{ path }} action accept
+  set firewall {{ path }} protocol tcp
+  set firewall {{ path }} destination port 80
+  set firewall {{ path }} log enable
+{% endmacro %}

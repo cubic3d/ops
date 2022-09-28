@@ -1,3 +1,5 @@
+{% import "fw_rules.j2" as fwRules with context %}
+
 {% include "clean_config.j2" %}
 
 {% include "system.j2" %}
@@ -7,3 +9,5 @@
 {% include "hosts.j2" %}
 
 {% include "nat.j2" %}
+
+{% include "fw_zones.j2" %}

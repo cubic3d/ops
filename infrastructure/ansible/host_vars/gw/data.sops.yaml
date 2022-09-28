@@ -7,16 +7,79 @@ settings:
     zones:
         local:
             name: Local
+            policies:
+                from4:
+                    - only:
+                        - modem
+                      default: accept
+                      rules:
+                        - accept_established: null
+                        - drop_invalid: null
+                    - only:
+                        - wan
+                      default: drop
+                      rules:
+                        - accept_established: null
+                        - drop_invalid: null
+                        - accept_wireguard: null
+                    - allExcept:
+                        - modem
+                        - wan
+                      default: drop
+                      rules:
+                        - accept_established: null
+                        - drop_invalid: null
+                        - accept_dns: null
+                from6:
+                    - only:
+                        - wan
+                      default: drop
+                      rules:
+                        - accept_established: null
+                        - drop_invalid: null
+                        - drop_icmpv6_hoplimit1: null
+                        - accept_icmpv6: null
+                        - accept_dhcpv6_pd: null
+                    - allExcept:
+                        - wan
+                      default: drop
+                      rules:
+                        - accept_established: null
+                        - drop_invalid: null
+                        - accept_icmpv6: null
+                        - accept_dns: null
         wan:
             name: WAN
             interface: eth0
             address: dhcp
             nat: true
+            policies:
+                from4:
+                    - default: accept
+                      rules:
+                        - accept_established: null
+                        - drop_invalid: null
+                from6:
+                    - default: accept
+                      rules:
+                        - accept_established: null
+                        - drop_invalid: null
         modem:
             name: Modem
             interface: eth1
             address: 192.168.178.2/24
             nat: true
+            policies:
+                from4:
+                    - default: drop
+                      rules:
+                        - accept_established: null
+                        - drop_invalid: null
+                from6:
+                    - default: drop
+                      rules:
+                        - accept_established: null
+                        - drop_invalid: null
         management:
             name: Management
             interface: eth2
@@ -51,6 +114,8 @@ settings:
     services:
         example:
             address: 1.1.1.1
+    wireguard:
+        port_enc: ENC[AES256_GCM,data:QFp7o7Y=,iv:zRY86ytlwFdLeLzrYUFO/F+aDff4JRjEGXhvjSwUAkw=,tag:k/xvIysUzEncbcQp7q733g==,type:int]
 sops:
     kms: []
     gcp_kms: []
@@ -66,8 +131,8 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2022-09-27T18:05:14Z"
-    mac: ENC[AES256_GCM,data:9zRmzZ8RjFLMSIhc+4WQJcDg+/RkayQ+dz09c3pk0+5rQHlT/259puZRSm+F7Dh7B5ihgjmOs2kQPwkARhgMkjcmTBQUGYnJFofgyNgu+YnKcG+x77xfpLDEtti6lv1RdurYDKA+AMgSePoosf1xS5afpNIWtPoNMff27XWZErI=,iv:GZmCP0+ydLQmB7HrrNxxIIgOPfJam4fVqvblFeYEnfY=,tag:IYSD26tC8/wI+jIgTqLNeA==,type:str]
+    lastmodified: "2022-09-28T02:11:08Z"
+    mac: ENC[AES256_GCM,data:3anDUgq5kdVTseADMZftaZGs/t4Y31QZTKk+qnkXAM/alCrTRQHox9g9Vg5If/CRv27u2eslwUAbxaYTqOPEGH9cdhxIm0z4ehZsEWHT+UpUSKx5VGYDNImC58ksyWAIUu6hmFAu3X7snD4J4ge5wHbclrtO86/+FoWdpK7Oy/o=,iv:KZ+zGdswGHyoW9I0LiklobRzO6iwYqBG6egizzXQkT4=,tag:VsyTIOWkT5O/Um0yx9v6Xg==,type:str]
     pgp: []
     encrypted_suffix: _enc
     version: 3.7.3
