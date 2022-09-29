@@ -5,7 +5,9 @@ set interfaces loopback lo
   {% if zone.vlan is not defined %}
     {# IPv4 #}
     set interfaces ethernet {{ zone.interface }} description {{ zone.name }}
-    set interfaces ethernet {{ zone.interface }} address {{ zone.address }}
+    {% for address in zone.addresses %}
+      set interfaces ethernet {{ zone.interface }} address {{ address }}
+    {% endfor %}
   {% else %}
     {% set path = zone.interface~" vif "~zone.vlan if zone.vlan > 0 else zone.interface %}
     {% set interface = zone.interface~"."~zone.vlan if zone.vlan > 0 else zone.interface %}
@@ -36,6 +38,5 @@ set interfaces loopback lo
   {% endif %}
 {% endfor %}
 
-{# IPv6 public address and prefix #}
-set interfaces ethernet {{ settings.zones.wan.interface }} ipv6 address autoconf
+{# IPv6 public prefix #}
 set interfaces ethernet {{ settings.zones.wan.interface }} dhcpv6-options pd 0 length 56
