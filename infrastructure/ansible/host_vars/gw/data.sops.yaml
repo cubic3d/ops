@@ -74,7 +74,15 @@ settings:
             nat: true
             policies:
                 from4:
-                    - default: drop
+                    - only:
+                        - local
+                      default: accept
+                      rules:
+                        - accept_established: null
+                        - drop_invalid: null
+                    - allExcept:
+                        - local
+                      default: drop
                       rules:
                         - accept_established: null
                         - drop_invalid: null
@@ -200,8 +208,8 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2022-09-29T22:09:43Z"
-    mac: ENC[AES256_GCM,data:+bN5bsBcyZRq/NVKJDHiJqGPHBI44JKMCWOzRwEy/15D5IsFaGNOhskQWwyARXoacea7eesD4FhPAtA4ABnv2ymMSljwFX9RcmcXxWku5DH9vodYN0IBcoj5teFL7bCuPaUjXUlEhIwvQhhisinDPkfNRfhfcd+eqJtGN7V7FXE=,iv:X/7GMwWUMfB8BopvwHW/JVVPmPawWE8zdkczYic7Lto=,tag:suecf7KBfKDe1hbwf6bRYA==,type:str]
+    lastmodified: "2022-09-29T23:06:15Z"
+    mac: ENC[AES256_GCM,data:xTwfjChG5/yjCzT6kSwFD3lgW3c9JbRLwKdLX0BOGmH5wddE6ZybIBSwl44sjEJXWOKsRK1c2rvXk0+SYFZHOiJvjgWFc95v4lznwApc2i4cmq9i/J7bmw053rEHSbUvjGL1HCbaNzrmz6uU2NBSObYIA5oi5Ib8tzwTCigKCho=,iv:hi/gMj5PaG3agNck4iuFW/IaoooTnz55V+tshedzCgo=,tag:qyTP8wBK4tMFZGh0E6YwhQ==,type:str]
     pgp: []
     encrypted_suffix: _enc
     version: 3.7.3
