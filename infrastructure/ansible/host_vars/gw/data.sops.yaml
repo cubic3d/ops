@@ -4,6 +4,20 @@ settings:
     domain_enc: ENC[AES256_GCM,data:GrXJaRI=,iv:ErXM2nQQ/YuVVYdI/LBIrjY4srzk3uEQsK3w46iv3Xw=,tag:UQe4ZNIAUwdaQLZRIaPGWA==,type:str]
     ssh:
         password_enc: ENC[AES256_GCM,data:/+HMeZlPVqAG8mrd/3Xqd8S1rSmvGQV2ZYFmcnotOEFusxDVolgikJ4Rxb/8XK5pLEoIuBn+wGl37O7Gz8PMUl4LV64rSZFq4nkUNIopydVP6Y6RVdp/k198Y0DCOuE8U0Qu,iv:IkCBUMhfMfSgkpD/Oq0JpOn51HvNXFd84EmCOLGZoi8=,tag:lXyHRrDjiNninGi3qU8X0Q==,type:str]
+    bonds:
+        - hash: layer3+4
+          interfaces:
+            - eth2
+            - eth3
+    bridges:
+        - interfaces:
+            - name: bond0
+              trunk:
+                - 1-100
+            - name: eth4
+              trunk:
+                - 1-100
+          vlan: true
     zones:
         local:
             name: Local
@@ -93,7 +107,7 @@ settings:
                         - drop_invalid: null
         management:
             name: Management
-            interface: eth2
+            interface: br0
             vlan: 0
             policies:
                 from4:
@@ -108,7 +122,7 @@ settings:
                         - drop_invalid: null
         iot:
             name: IoT
-            interface: eth2
+            interface: br0
             vlan: 10
             policies:
                 from4:
@@ -123,7 +137,7 @@ settings:
                         - drop_invalid: null
         guest:
             name: Guest
-            interface: eth2
+            interface: br0
             vlan: 20
             policies:
                 from4:
@@ -138,7 +152,7 @@ settings:
                         - drop_invalid: null
         trusted:
             name: Trusted
-            interface: eth2
+            interface: br0
             vlan: 30
             policies:
                 from4:
@@ -153,7 +167,7 @@ settings:
                         - drop_invalid: null
         server:
             name: Server
-            interface: eth2
+            interface: br0
             vlan: 40
             policies:
                 from4:
@@ -168,7 +182,7 @@ settings:
                         - drop_invalid: null
         gaming:
             name: Gaming
-            interface: eth2
+            interface: br0
             vlan: 50
             policies:
                 from4:
@@ -208,8 +222,8 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2022-09-29T23:06:15Z"
-    mac: ENC[AES256_GCM,data:xTwfjChG5/yjCzT6kSwFD3lgW3c9JbRLwKdLX0BOGmH5wddE6ZybIBSwl44sjEJXWOKsRK1c2rvXk0+SYFZHOiJvjgWFc95v4lznwApc2i4cmq9i/J7bmw053rEHSbUvjGL1HCbaNzrmz6uU2NBSObYIA5oi5Ib8tzwTCigKCho=,iv:hi/gMj5PaG3agNck4iuFW/IaoooTnz55V+tshedzCgo=,tag:qyTP8wBK4tMFZGh0E6YwhQ==,type:str]
+    lastmodified: "2022-10-13T21:12:30Z"
+    mac: ENC[AES256_GCM,data:wXntnOP+cx6R7P+YSV90uz6Oz5kfybuBKeOGGSUKblxlSHkR5PB8SxD7sAjYkk3orwOGXsGPfZKhvzg8ZJSZG8aNPDN6BO3eIHkLQCrQQmvWhm7tjeaNXa53abVrEVMzoXRAqb3UW47Gl8r3HpmGhyf9ATtqFGkpJCpOx7v11oE=,iv:LXJ8tw1rCdD8b3Pf5Pv6J2LftBT4eny6TPO89BRPmvI=,tag:v/Fs6ke4YrMPiXG3eN9ofw==,type:str]
     pgp: []
     encrypted_suffix: _enc
     version: 3.7.3

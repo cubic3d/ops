@@ -1,27 +1,69 @@
 set interfaces loopback lo
 
+{# Generate bonds #}
+{% for bond in settings.bonds %}
+  {% set name = "bond"~loop.index0 %}
+  set interfaces bonding {{ name }} hash-policy {{ bond.hash }}
+
+  {% for interface in bond.interfaces %}
+    set interfaces bonding {{ name }} member interface {{ interface }}
+  {% endfor %}
+{% endfor %}
+
+{# Generate bridges #}
+{% for bridge in settings.bridges %}
+  {% set name = "br"~loop.index0 %}
+  set interfaces bridge {{ name }} stp
+
+  {% if bridge.vlan %}
+    set interfaces bridge {{ name }} enable-vlan
+  {% endif %}
+
+  {% for interface in bridge.interfaces %}
+    set interfaces bridge {{ name }} member interface {{ interface.name }}
+
+    {% if interface.trunk is defined %}
+      {% for trunk in interface.trunk %}
+        set interfaces bridge {{ name }} member interface {{ interface.name }} allowed-vlan {{ trunk }}
+      {% endfor %}
+    {% endif %}
+
+    {% if interface.access is defined %}
+      set interfaces bridge {{ name }} member interface {{ interface.name }} native-vlan {{ interface.access }}
+    {% endif %}
+  {% endfor %}
+{% endfor %}
+
 {# Generate zone interfaces #}
 {% for zoneName, zone in settings.zones.items() if zone.interface is defined %}
+  {% if zone.interface.startswith("bond") %}
+    {% set interfaceType = "bonding" %}
+  {% elif zone.interface.startswith("br") %}
+    {% set interfaceType = "bridge" %}
+  {% else %}
+    {% set interfaceType = "ethernet" %}
+  {% endif %}
+
   {% if zone.vlan is not defined %}
     {# IPv4 #}
-    set interfaces ethernet {{ zone.interface }} description {{ zone.name }}
+    set interfaces {{ interfaceType }} {{ zone.interface }} description {{ zone.name }}
     {% for address in zone.addresses %}
-      set interfaces ethernet {{ zone.interface }} address {{ address }}
+      set interfaces {{ interfaceType }} {{ zone.interface }} address {{ address }}
     {% endfor %}
   {% else %}
     {% set path = zone.interface~" vif "~zone.vlan if zone.vlan > 0 else zone.interface %}
     {% set interface = zone.interface~"."~zone.vlan if zone.vlan > 0 else zone.interface %}
     {# IPv4 #}
-    set interfaces ethernet {{ path }} description {{ zone.name }}
-    set interfaces ethernet {{ path }} address 192.168.{{ zone.vlan }}.1/24
+    set interfaces {{ interfaceType }} {{ path }} description {{ zone.name }}
+    set interfaces {{ interfaceType }} {{ path }} address 192.168.{{ zone.vlan }}.1/24
     {# IPv6 from PD #}
     set interfaces ethernet {{ settings.zones.wan.interface }} dhcpv6-options pd 0 interface {{ interface }} address 1
     set interfaces ethernet {{ settings.zones.wan.interface }} dhcpv6-options pd 0 interface {{ interface }} sla-id {{ zone.vlan }}
     {# IPv6 Local Link #}
-    set interfaces ethernet {{ path }} ipv6 address no-default-link-local
-    set interfaces ethernet {{ path }} address fe80::1/128
+    set interfaces {{ interfaceType }} {{ path }} ipv6 address no-default-link-local
+    set interfaces {{ interfaceType }} {{ path }} address fe80::1/128
     {# IPv6 ULA #}
-    set interfaces ethernet {{ path }} address {{ settings.ip.ulaPrefix }}:{{ zone.vlan }}::1/128
+    set interfaces {{ interfaceType }} {{ path }} address {{ settings.ip.ulaPrefix }}:{{ zone.vlan }}::1/128
     {# RA #}
     set service router-advert interface {{ interface }} prefix ::/64 valid-lifetime 86400
     set service router-advert interface {{ interface }} prefix ::/64 decrement-lifetime
