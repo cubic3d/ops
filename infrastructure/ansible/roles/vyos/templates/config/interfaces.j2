@@ -40,6 +40,8 @@ set interfaces loopback lo
     {% set interfaceType = "bonding" %}
   {% elif zone.interface.startswith("br") %}
     {% set interfaceType = "bridge" %}
+  {% elif zone.interface.startswith("wg") %}
+    {% set interfaceType = "wireguard" %}
   {% else %}
     {% set interfaceType = "ethernet" %}
   {% endif %}
@@ -50,6 +52,19 @@ set interfaces loopback lo
     {% for address in zone.addresses %}
       set interfaces {{ interfaceType }} {{ zone.interface }} address {{ address }}
     {% endfor %}
+
+    {# Wireguard #}
+    {% if interfaceType == "wireguard" %}
+      {# Server #}
+      set interfaces {{ interfaceType }} {{ zone.interface }} port {{ zone.port_enc }}
+      set interfaces {{ interfaceType }} {{ zone.interface }} private-key {{ zone.psk_enc }}
+
+      {# Peers #}
+      {% for peerName, peer in zone.peers.items() %}
+          set interfaces {{ interfaceType }} {{ zone.interface }} peer {{ peerName }} allowed-ips {{ peer.ip }}/32
+          set interfaces {{ interfaceType }} {{ zone.interface }} peer {{ peerName }} public-key {{ peer.publicKey }}
+      {% endfor %}
+    {% endif %}
   {% else %}
     {% set path = zone.interface~" vif "~zone.vlan if zone.vlan > 0 else zone.interface %}
     {% set interface = zone.interface~"."~zone.vlan if zone.vlan > 0 else zone.interface %}

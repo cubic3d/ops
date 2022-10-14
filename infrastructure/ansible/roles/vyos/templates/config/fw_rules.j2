@@ -19,7 +19,7 @@
 {% macro accept_wireguard(path) %}
   set firewall {{ path }} action accept
   set firewall {{ path }} protocol udp
-  set firewall {{ path }} destination port {{ settings.wireguard.port_enc }}
+  set firewall {{ path }} destination port {{ settings.zones.wireguard.port_enc }}
   set firewall {{ path }} log enable
 {% endmacro %}
 

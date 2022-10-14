@@ -62,6 +62,29 @@ settings:
                         - drop_invalid: null
                         - accept_icmpv6: null
                         - accept_dns: null
+        wireguard:
+            name: Wireguard
+            interface: wg0
+            addresses:
+                - 192.168.99.1/24
+            port_enc: ENC[AES256_GCM,data:Io4DLB4=,iv:bZdU3nK9/QgrsDDVN5UrS4MhkLO+oVnO95k0S1g973c=,tag:y6wtUWc3L1BbkuRwQOVHLQ==,type:int]
+            # Public key: EKY0dxRrSD98QHjfHOK13mZ5PJ7hnddRZt5woB3szyw=
+            psk_enc: ENC[AES256_GCM,data:0X3wUjjYLKc5I1PQfY5M78w7+UYBbq8Uz/L5SCT4E8uWtKvND5hJNNqXeFI=,iv:NR1Iv3OVkJN6+4LBHphCxcKbpJ+9Up+TPQZQVCZh3os=,tag:HTex+QrlIQJpeEEXYXEcMA==,type:str]
+            peers:
+                pixel6pro:
+                    ip: 192.168.99.2
+                    publicKey: KIDkI5CyorSFAwf5Yc/N0He+L9GBkutoKerSpVjMt0A=
+            policies:
+                from4:
+                    - default: drop
+                      rules:
+                        - accept_established: null
+                        - drop_invalid: null
+                from6:
+                    - default: drop
+                      rules:
+                        - accept_established: null
+                        - drop_invalid: null
         wan:
             name: WAN
             interface: eth0
@@ -205,8 +228,6 @@ settings:
     services:
         example:
             address: 1.1.1.1
-    wireguard:
-        port_enc: ENC[AES256_GCM,data:QFp7o7Y=,iv:zRY86ytlwFdLeLzrYUFO/F+aDff4JRjEGXhvjSwUAkw=,tag:k/xvIysUzEncbcQp7q733g==,type:int]
 sops:
     kms: []
     gcp_kms: []
@@ -222,8 +243,8 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2022-10-13T21:12:30Z"
-    mac: ENC[AES256_GCM,data:wXntnOP+cx6R7P+YSV90uz6Oz5kfybuBKeOGGSUKblxlSHkR5PB8SxD7sAjYkk3orwOGXsGPfZKhvzg8ZJSZG8aNPDN6BO3eIHkLQCrQQmvWhm7tjeaNXa53abVrEVMzoXRAqb3UW47Gl8r3HpmGhyf9ATtqFGkpJCpOx7v11oE=,iv:LXJ8tw1rCdD8b3Pf5Pv6J2LftBT4eny6TPO89BRPmvI=,tag:v/Fs6ke4YrMPiXG3eN9ofw==,type:str]
+    lastmodified: "2022-10-14T15:32:22Z"
+    mac: ENC[AES256_GCM,data:WuUJnH8D3jbwXrCOmfyOkwwwAsSFT7j1Go9BbYFYVzSS7wLEjSpDFeSNagedpYN6RCBks2GuEnpz6S+mKpb3XrS6dkmL26hIwbblHm8d8JqVWqZN54hR8pjZTQCKCYJl4l/5zHBiRwGbDQeGHlIYl0HzR+MYtCbUZhJ6A8H/nhI=,iv:KXbAVs7FLFldFY8aN6ETte+sHtFrVHQRkg0o8Xr82jU=,tag:cCKDpg/ZFAATrtkqEohhdQ==,type:str]
     pgp: []
     encrypted_suffix: _enc
     version: 3.7.3
