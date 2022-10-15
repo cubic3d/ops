@@ -72,7 +72,7 @@ settings:
             addresses:
                 - 192.168.99.1/24
             port_enc: ENC[AES256_GCM,data:Io4DLB4=,iv:bZdU3nK9/QgrsDDVN5UrS4MhkLO+oVnO95k0S1g973c=,tag:y6wtUWc3L1BbkuRwQOVHLQ==,type:int]
-            # Public key: EKY0dxRrSD98QHjfHOK13mZ5PJ7hnddRZt5woB3szyw=
+            # Public key: xdJzq+rVe6v390dGmd9ELxkGT4HfqQraqwQfoxDiOxM=
             psk_enc: ENC[AES256_GCM,data:0X3wUjjYLKc5I1PQfY5M78w7+UYBbq8Uz/L5SCT4E8uWtKvND5hJNNqXeFI=,iv:NR1Iv3OVkJN6+4LBHphCxcKbpJ+9Up+TPQZQVCZh3os=,tag:HTex+QrlIQJpeEEXYXEcMA==,type:str]
             peers:
                 pixel6pro:
@@ -247,8 +247,8 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2022-10-15T11:33:18Z"
-    mac: ENC[AES256_GCM,data:cfU0WV8QbCcrDHNW8ktgbF0MFW6M4qoxwX+Zvied22TzRHoFkZwomNeM0GnQRfDmcPxg+xpP1ZC5LP5ANZjA4H/nG1eDSOzocU3ZNWimwuhgpiuUe7c6WHXxJlKI7Cqm6xOtDN5bOpuKthv7uYdjCrG3nG898sNccFPy8Pd8830=,iv:I3p5hEEaxN9OOnduDSzOCeuimbAHoTw5MrdL/8wstiU=,tag:s2MglxUte2OANV+jRFIvpA==,type:str]
+    lastmodified: "2022-10-15T12:22:55Z"
+    mac: ENC[AES256_GCM,data:BXyd5GN6v+7F5K4kUvMO5TXMO8ifndmHbcb+OS/Z2oIPKmC8hxncEnsQGUg2zz0F9Lfbm617hewj1vXm0wxuGrt8JdWc8HyyNIFseR1GZN6Pb86PcyqKHqDbdibP0F2wfKlEnHiq+5DccCU3pwHopnJnJd0hTOdnDx5MlUxrz8k=,iv:7Btd8Z810nBr/8oC+bYJxIsHhGNmJIZncOgLrf7njMo=,tag:p41r/5XQDbckoPip88YXKw==,type:str]
     pgp: []
     encrypted_suffix: _enc
     version: 3.7.3
