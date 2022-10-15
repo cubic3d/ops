@@ -4,6 +4,10 @@ settings:
     domain_enc: ENC[AES256_GCM,data:GrXJaRI=,iv:ErXM2nQQ/YuVVYdI/LBIrjY4srzk3uEQsK3w46iv3Xw=,tag:UQe4ZNIAUwdaQLZRIaPGWA==,type:str]
     ssh:
         password_enc: ENC[AES256_GCM,data:/+HMeZlPVqAG8mrd/3Xqd8S1rSmvGQV2ZYFmcnotOEFusxDVolgikJ4Rxb/8XK5pLEoIuBn+wGl37O7Gz8PMUl4LV64rSZFq4nkUNIopydVP6Y6RVdp/k198Y0DCOuE8U0Qu,iv:IkCBUMhfMfSgkpD/Oq0JpOn51HvNXFd84EmCOLGZoi8=,tag:lXyHRrDjiNninGi3qU8X0Q==,type:str]
+    ddns:
+        host_enc: ENC[AES256_GCM,data:P1xBNU2P4w==,iv:ZhTv6WgCrJrv1AGHBt0v+lpqkHt8NRNFD+LQOalzvyE=,tag:HNewyXg6jUVnHD9wheGO0g==,type:str]
+        user_enc: ENC[AES256_GCM,data:2wykeA==,iv:xnLq4Od5tEGbPKeaZZpzQgDEEd+GfS8fwZ7qB4+4Zz4=,tag:oJXh7TYy5fVYf4KJRy2PaA==,type:str]
+        password_enc: ENC[AES256_GCM,data:+OaVo+ZLye2qFfpy127yIhZmvEo1juiZ0eDD6sRcFIDbErBN,iv:5dlP17f180LCZdwQ/C3gZD+WeOaWREUU5995Obxx4U8=,tag:Uz+sNTX9YJBNXEymYtjrPQ==,type:str]
     bonds:
         - hash: layer3+4
           interfaces:
@@ -243,8 +247,8 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2022-10-14T15:32:22Z"
-    mac: ENC[AES256_GCM,data:WuUJnH8D3jbwXrCOmfyOkwwwAsSFT7j1Go9BbYFYVzSS7wLEjSpDFeSNagedpYN6RCBks2GuEnpz6S+mKpb3XrS6dkmL26hIwbblHm8d8JqVWqZN54hR8pjZTQCKCYJl4l/5zHBiRwGbDQeGHlIYl0HzR+MYtCbUZhJ6A8H/nhI=,iv:KXbAVs7FLFldFY8aN6ETte+sHtFrVHQRkg0o8Xr82jU=,tag:cCKDpg/ZFAATrtkqEohhdQ==,type:str]
+    lastmodified: "2022-10-15T11:33:18Z"
+    mac: ENC[AES256_GCM,data:cfU0WV8QbCcrDHNW8ktgbF0MFW6M4qoxwX+Zvied22TzRHoFkZwomNeM0GnQRfDmcPxg+xpP1ZC5LP5ANZjA4H/nG1eDSOzocU3ZNWimwuhgpiuUe7c6WHXxJlKI7Cqm6xOtDN5bOpuKthv7uYdjCrG3nG898sNccFPy8Pd8830=,iv:I3p5hEEaxN9OOnduDSzOCeuimbAHoTw5MrdL/8wstiU=,tag:s2MglxUte2OANV+jRFIvpA==,type:str]
     pgp: []
     encrypted_suffix: _enc
     version: 3.7.3
