@@ -1,2 +1,4 @@
 # - include_tasks: _debug_render.yaml
+- include_tasks: dns.yaml
 - include_tasks: config.yaml
+- include_tasks: container_images.yaml

@@ -1,0 +1,9 @@
+- name: Create directory for CoreDNS configs
+  ansible.builtin.file:
+    path: /config/dns/
+    state: directory
+
+- name: CoreDNS config
+  ansible.builtin.template:
+    src: dns/Corefile.j2
+    dest: /config/dns/Corefile
