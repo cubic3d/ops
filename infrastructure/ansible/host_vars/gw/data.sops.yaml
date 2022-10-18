@@ -138,6 +138,9 @@ settings:
             name: Management
             interface: br0
             vlan: 0
+            dhcpOptions:
+                - name: capwap
+                  value_enc: ENC[AES256_GCM,data:l9ML+pVB/g==,iv:/bY9sLRzN8G9bJdOw7IPMNv11RYuRC4hRDtq1pw0lFA=,tag:u/hCA9lT2ol8oaSyjoYYaQ==,type:str]
             policies:
                 from4:
                     - default: drop
@@ -249,8 +252,8 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2022-10-18T00:32:05Z"
-    mac: ENC[AES256_GCM,data:tEygd+ZkMibMv9E8r75A6WNv0o6B+luoka61Z/6lil6xxGTHXnTm/ObdI2Y2vq58cLbtbLbbDQHzdXgsNC4vepdzfrnYphsOx64CLSNEwRvnaGgAqRvZSh6Lpb7HtaCHPkCEoUmzkw/oXfGSaetqgb/5KEZArvHy5y7xgl04SUI=,iv:z0o5jkTCKfDzlAGPgTkbUWc9MOrysX4/tYxVa0kZ56A=,tag:2fmkp3bafiTFpQMZJi39ew==,type:str]
+    lastmodified: "2022-10-18T07:54:30Z"
+    mac: ENC[AES256_GCM,data:mgarHwwsiXuzOSlogAc8TZ6bEnAJTFT2cwu9fVvEyHGSpggYFztM2iVH0etTHBNWSWgtilXZdWFaVw5kl5ldRh6WyoZoxuc3VSZGFlM1h2g5znsR/t8afVn79GwCCV5LRyzgJ4AEMGkZtH6fmwzTIfbo1kEnx+yybmgmajkFCYU=,iv:Fmc5Z84afLU0NLLwUVWVenYTCIl/2xR/JmqKb9eHCp0=,tag:kBx5X6aeogWDO1zkOad1Pw==,type:str]
     pgp: []
     encrypted_suffix: _enc
     version: 3.7.3

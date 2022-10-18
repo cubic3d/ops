@@ -41,6 +41,9 @@ set interfaces loopback lo
   {% endfor %}
 {% endfor %}
 
+{# Define DHCP option 138 for SDN controller #}
+set service dhcp-server global-parameters 'option capwap code 138 = ip-address;'
+
 {# Generate zone interfaces #}
 {% for zoneName, zone in settings.zones.items() if zone.interface is defined %}
   {% if zone.interface.startswith("bond") %}
@@ -99,6 +102,11 @@ set interfaces loopback lo
     set service dhcp-server shared-network-name {{ zoneName }} subnet 192.168.{{ zone.vlan }}.0/24 domain-name h.{{ settings.domain_enc }}
     set service dhcp-server shared-network-name {{ zoneName }} subnet 192.168.{{ zone.vlan }}.0/24 range default start 192.168.{{ zone.vlan }}.100
     set service dhcp-server shared-network-name {{ zoneName }} subnet 192.168.{{ zone.vlan }}.0/24 range default stop 192.168.{{ zone.vlan }}.254
+    {% if zone.dhcpOptions is defined %}
+      {% for option in zone.dhcpOptions %}
+        set service dhcp-server shared-network-name {{ zoneName }} subnet 192.168.{{ zone.vlan }}.0/24 subnet-parameters 'option {{ option.name }} {{ option.value_enc }};'
+      {% endfor %}
+    {% endif %}
   {% endif %}
 {% endfor %}
 
