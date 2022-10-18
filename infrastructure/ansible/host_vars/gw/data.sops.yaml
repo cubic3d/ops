@@ -16,9 +16,11 @@ settings:
     bridges:
         - interfaces:
             - name: bond0
+              access: 1
               trunk:
                 - 1-100
             - name: eth4
+              access: 1
               trunk:
                 - 1-100
           vlan: true
@@ -247,8 +249,8 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2022-10-15T12:22:55Z"
-    mac: ENC[AES256_GCM,data:BXyd5GN6v+7F5K4kUvMO5TXMO8ifndmHbcb+OS/Z2oIPKmC8hxncEnsQGUg2zz0F9Lfbm617hewj1vXm0wxuGrt8JdWc8HyyNIFseR1GZN6Pb86PcyqKHqDbdibP0F2wfKlEnHiq+5DccCU3pwHopnJnJd0hTOdnDx5MlUxrz8k=,iv:7Btd8Z810nBr/8oC+bYJxIsHhGNmJIZncOgLrf7njMo=,tag:p41r/5XQDbckoPip88YXKw==,type:str]
+    lastmodified: "2022-10-18T00:32:05Z"
+    mac: ENC[AES256_GCM,data:tEygd+ZkMibMv9E8r75A6WNv0o6B+luoka61Z/6lil6xxGTHXnTm/ObdI2Y2vq58cLbtbLbbDQHzdXgsNC4vepdzfrnYphsOx64CLSNEwRvnaGgAqRvZSh6Lpb7HtaCHPkCEoUmzkw/oXfGSaetqgb/5KEZArvHy5y7xgl04SUI=,iv:z0o5jkTCKfDzlAGPgTkbUWc9MOrysX4/tYxVa0kZ56A=,tag:2fmkp3bafiTFpQMZJi39ew==,type:str]
     pgp: []
     encrypted_suffix: _enc
     version: 3.7.3

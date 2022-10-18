@@ -7,6 +7,9 @@ set interfaces loopback lo
 
   {% for interface in bond.interfaces %}
     set interfaces bonding {{ name }} member interface {{ interface }}
+    {% if interface.startswith("eth") %}
+      set interfaces ethernet {{ interface }}
+    {% endif %}
   {% endfor %}
 {% endfor %}
 
@@ -21,6 +24,10 @@ set interfaces loopback lo
 
   {% for interface in bridge.interfaces %}
     set interfaces bridge {{ name }} member interface {{ interface.name }}
+
+    {% if interface.name.startswith("eth") %}
+      set interfaces ethernet {{ interface.name }}
+    {% endif %}
 
     {% if interface.trunk is defined %}
       {% for trunk in interface.trunk %}
