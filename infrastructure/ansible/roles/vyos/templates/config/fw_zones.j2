@@ -4,7 +4,7 @@
   set firewall zone {{ zoneName }} description {{ zone.name }}
   {% if zoneName == "local" %}
     set firewall zone {{ zoneName }} local-zone
-  {% elif zone.vlan is defined %}
+  {% elif zone.vlan is defined and zone.vlan != 0 %}
     set firewall zone {{ zoneName }} interface {{ zone.interface }}.{{ zone.vlan }}
   {% else %}
     set firewall zone {{ zoneName }} interface {{ zone.interface }}
