@@ -31,6 +31,7 @@ settings:
                 from4:
                     - only:
                         - modem
+                        - management
                       default: accept
                       rules:
                         - accept_established: null
@@ -45,6 +46,7 @@ settings:
                     - allExcept:
                         - modem
                         - wan
+                        - management
                       default: drop
                       rules:
                         - accept_established: null
@@ -66,6 +68,7 @@ settings:
                       rules:
                         - accept_established: null
                         - drop_invalid: null
+                        - drop_icmpv6_hoplimit1: null
                         - accept_icmpv6: null
                         - accept_dns: null
         wireguard:
@@ -87,10 +90,20 @@ settings:
                         - accept_established: null
                         - drop_invalid: null
                 from6:
-                    - default: drop
+                    - default: accept
+                      only:
+                        - local
                       rules:
                         - accept_established: null
                         - drop_invalid: null
+                    - default: drop
+                      allExcept:
+                        - local
+                      rules:
+                        - accept_established: null
+                        - drop_invalid: null
+                        - drop_icmpv6_hoplimit1: null
+                        - accept_icmpv6: null
         wan:
             name: WAN
             interface: eth0
@@ -130,10 +143,20 @@ settings:
                         - accept_established: null
                         - drop_invalid: null
                 from6:
-                    - default: drop
+                    - default: accept
+                      only:
+                        - local
                       rules:
                         - accept_established: null
                         - drop_invalid: null
+                    - default: drop
+                      allExcept:
+                        - local
+                      rules:
+                        - accept_established: null
+                        - drop_invalid: null
+                        - drop_icmpv6_hoplimit1: null
+                        - accept_icmpv6: null
         management:
             name: Management
             interface: br0
@@ -148,10 +171,20 @@ settings:
                         - accept_established: null
                         - drop_invalid: null
                 from6:
-                    - default: drop
+                    - default: accept
+                      only:
+                        - local
                       rules:
                         - accept_established: null
                         - drop_invalid: null
+                    - default: drop
+                      allExcept:
+                        - local
+                      rules:
+                        - accept_established: null
+                        - drop_invalid: null
+                        - drop_icmpv6_hoplimit1: null
+                        - accept_icmpv6: null
         iot:
             name: IoT
             interface: br0
@@ -163,10 +196,20 @@ settings:
                         - accept_established: null
                         - drop_invalid: null
                 from6:
-                    - default: drop
+                    - default: accept
+                      only:
+                        - local
                       rules:
                         - accept_established: null
                         - drop_invalid: null
+                    - default: drop
+                      allExcept:
+                        - local
+                      rules:
+                        - accept_established: null
+                        - drop_invalid: null
+                        - drop_icmpv6_hoplimit1: null
+                        - accept_icmpv6: null
         guest:
             name: Guest
             interface: br0
@@ -178,10 +221,20 @@ settings:
                         - accept_established: null
                         - drop_invalid: null
                 from6:
-                    - default: drop
+                    - default: accept
+                      only:
+                        - local
                       rules:
                         - accept_established: null
                         - drop_invalid: null
+                    - default: drop
+                      allExcept:
+                        - local
+                      rules:
+                        - accept_established: null
+                        - drop_invalid: null
+                        - drop_icmpv6_hoplimit1: null
+                        - accept_icmpv6: null
         trusted:
             name: Trusted
             interface: br0
@@ -193,10 +246,20 @@ settings:
                         - accept_established: null
                         - drop_invalid: null
                 from6:
-                    - default: drop
+                    - default: accept
+                      only:
+                        - local
                       rules:
                         - accept_established: null
                         - drop_invalid: null
+                    - default: drop
+                      allExcept:
+                        - local
+                      rules:
+                        - accept_established: null
+                        - drop_invalid: null
+                        - drop_icmpv6_hoplimit1: null
+                        - accept_icmpv6: null
         server:
             name: Server
             interface: br0
@@ -208,10 +271,20 @@ settings:
                         - accept_established: null
                         - drop_invalid: null
                 from6:
-                    - default: drop
+                    - default: accept
+                      only:
+                        - local
                       rules:
                         - accept_established: null
                         - drop_invalid: null
+                    - default: drop
+                      allExcept:
+                        - local
+                      rules:
+                        - accept_established: null
+                        - drop_invalid: null
+                        - drop_icmpv6_hoplimit1: null
+                        - accept_icmpv6: null
         gaming:
             name: Gaming
             interface: br0
@@ -223,10 +296,20 @@ settings:
                         - accept_established: null
                         - drop_invalid: null
                 from6:
-                    - default: drop
+                    - default: accept
+                      only:
+                        - local
                       rules:
                         - accept_established: null
                         - drop_invalid: null
+                    - default: drop
+                      allExcept:
+                        - local
+                      rules:
+                        - accept_established: null
+                        - drop_invalid: null
+                        - drop_icmpv6_hoplimit1: null
+                        - accept_icmpv6: null
     ip:
         ulaPrefix: fd00:c01d:1ced
     hosts:
@@ -252,8 +335,8 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2022-10-18T07:54:30Z"
-    mac: ENC[AES256_GCM,data:mgarHwwsiXuzOSlogAc8TZ6bEnAJTFT2cwu9fVvEyHGSpggYFztM2iVH0etTHBNWSWgtilXZdWFaVw5kl5ldRh6WyoZoxuc3VSZGFlM1h2g5znsR/t8afVn79GwCCV5LRyzgJ4AEMGkZtH6fmwzTIfbo1kEnx+yybmgmajkFCYU=,iv:Fmc5Z84afLU0NLLwUVWVenYTCIl/2xR/JmqKb9eHCp0=,tag:kBx5X6aeogWDO1zkOad1Pw==,type:str]
+    lastmodified: "2022-10-21T22:12:10Z"
+    mac: ENC[AES256_GCM,data:k3/FZYmv9IiiXQkFrKlvWwJd7f4P0xLsVf1aoodApluXwKNJStuioVrH9vz9J7kZIOUrRcXNciF9mv3mEkt95YCXv+dWRbnPErZPAxo4YDq64f4PR0vgv+raeRggEAhrS9vSPq3CT3xyKWAvunfIeJQrKvZqK6ChakQL2vSMyP4=,iv:9aNAv0dcA2JW+BVmzGMM6aUtxSR1jBa0c0SoBB9hCps=,tag:CUfyrqxY9YwcqVA1wOsKwg==,type:str]
     pgp: []
     encrypted_suffix: _enc
     version: 3.7.3
