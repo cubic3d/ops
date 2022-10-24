@@ -86,7 +86,7 @@ set service dhcp-server global-parameters 'option capwap code 138 = ip-address;'
     set interfaces ethernet {{ settings.zones.wan.interface }} dhcpv6-options pd 0 interface {{ interface }} sla-id {{ zone.vlan }}
     {# IPv6 Local Link #}
     set interfaces {{ interfaceType }} {{ path }} ipv6 address no-default-link-local
-    set interfaces {{ interfaceType }} {{ path }} address fe80::1/128
+    set interfaces {{ interfaceType }} {{ path }} address fe80::1/64
     {# IPv6 ULA #}
     set interfaces {{ interfaceType }} {{ path }} address {{ settings.ip.ulaPrefix }}:{{ zone.vlan }}::1/128
     {# RA #}
