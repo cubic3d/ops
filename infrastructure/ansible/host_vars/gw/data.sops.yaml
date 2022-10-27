@@ -83,6 +83,9 @@ settings:
                 pixel6pro:
                     ip: 192.168.99.2
                     publicKey: KIDkI5CyorSFAwf5Yc/N0He+L9GBkutoKerSpVjMt0A=
+                surface:
+                    ip: 192.168.99.3
+                    publicKey: U4N/8KqCwnUppLxpc/6da6GXswi3OSZuuUpBlgg0bjI=
             policies:
                 from4:
                     - default: drop
@@ -335,8 +338,8 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2022-10-21T22:12:10Z"
-    mac: ENC[AES256_GCM,data:k3/FZYmv9IiiXQkFrKlvWwJd7f4P0xLsVf1aoodApluXwKNJStuioVrH9vz9J7kZIOUrRcXNciF9mv3mEkt95YCXv+dWRbnPErZPAxo4YDq64f4PR0vgv+raeRggEAhrS9vSPq3CT3xyKWAvunfIeJQrKvZqK6ChakQL2vSMyP4=,iv:9aNAv0dcA2JW+BVmzGMM6aUtxSR1jBa0c0SoBB9hCps=,tag:CUfyrqxY9YwcqVA1wOsKwg==,type:str]
+    lastmodified: "2022-10-27T09:11:11Z"
+    mac: ENC[AES256_GCM,data:pT12f/Rq3L+MdLLfT4qBiml0B4EYiCq0TSqepMZ8Py1VyUTBj1Qn86A53Q5tztcRMc84MV/J5nGfhKk5IphDa87L7qAmAN3iJCPk+GsngadrR4w56hjAd4QaEHcaBIldcdqtO7Fsq8npDDSOLfjJrYbh9mR/cE9MqSDGhG78ixo=,iv:HPo3CaNy30IYQ9mnqqb+KU2FDU5z8pX8pdxiSzArKGo=,tag:iId401scYqHzBhheXGDGxA==,type:str]
     pgp: []
     encrypted_suffix: _enc
     version: 3.7.3
