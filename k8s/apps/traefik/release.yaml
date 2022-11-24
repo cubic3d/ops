@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: traefik
-      version: 20.5.1
+      version: 20.5.2
       sourceRef:
         kind: HelmRepository
         name: traefik
@@ -17,10 +17,6 @@ spec:
   upgrade:
     crds: CreateReplace
   values:
-    ingressClass:
-      enabled: true
-      isDefaultClass: true
-
     providers:
       kubernetesCRD:
         allowExternalNameServices: true
@@ -44,13 +40,15 @@ spec:
     ports:
       web:
         redirectTo: websecure
-      websecure:
-        tls:
-          enabled: true
 
     service:
       annotations:
-        metallb.universe.tf/allow-shared-ip: "public"
+        metallb.universe.tf/allow-shared-ip: public
+
+    tlsStore:
+      default:
+        defaultCertificate:
+          secretName: "${domain}-wildcard-tls"
 
     resources:
       requests:

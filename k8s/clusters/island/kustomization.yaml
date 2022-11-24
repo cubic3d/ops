@@ -1,0 +1,41 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: flux-system
+resources:
+  - ../../apps/flux-system
+patchesStrategicMerge:
+  - |-
+    apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+    kind: Kustomization
+    metadata:
+      name: cluster
+    spec:
+      path: "./k8s/clusters/island"
+  - |-
+    apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+    kind: Kustomization
+    metadata:
+      name: cluster-config
+    spec:
+      path: ./k8s/clusters/island/config
+  - |-
+    apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+    kind: Kustomization
+    metadata:
+      name: cluster-crds
+    spec:
+      path: ./k8s/clusters/island/crds
+  - |-
+    apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+    kind: Kustomization
+    metadata:
+      name: cluster-infrastructure
+    spec:
+      path: ./k8s/clusters/island/infrastructure
+  - |-
+    apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+    kind: Kustomization
+    metadata:
+      name: cluster-apps
+    spec:
+      path: ./k8s/clusters/island/apps

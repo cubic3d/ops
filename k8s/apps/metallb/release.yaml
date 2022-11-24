@@ -12,5 +12,7 @@ spec:
         kind: HelmRepository
         name: metallb
         namespace: flux-system
-  values:
-    configInline: {}
+  install:
+    crds: CreateReplace
+  upgrade:
+    crds: CreateReplace
