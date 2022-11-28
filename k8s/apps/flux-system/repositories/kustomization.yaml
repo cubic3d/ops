@@ -8,3 +8,4 @@ resources:
   - csi-driver-smb.yaml
   - ebrianne.yaml
   - metrics-server.yaml
+  - template.yaml
