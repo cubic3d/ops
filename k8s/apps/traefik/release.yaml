@@ -36,6 +36,7 @@ spec:
 
     globalArguments:
       - --api.insecure=true
+      - --serversTransport.insecureSkipVerify=true
 
     ports:
       web:
