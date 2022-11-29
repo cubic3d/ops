@@ -9,3 +9,4 @@ resources:
   - ebrianne.yaml
   - metrics-server.yaml
   - template.yaml
+  - external-dns.yaml
