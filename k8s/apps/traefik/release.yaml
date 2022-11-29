@@ -45,8 +45,6 @@ spec:
     service:
       annotations:
         metallb.universe.tf/allow-shared-ip: public
-      spec:
-        externalTrafficPolicy: Local
 
     tlsStore:
       default:
