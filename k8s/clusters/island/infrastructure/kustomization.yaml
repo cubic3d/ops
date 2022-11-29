@@ -5,3 +5,4 @@ resources:
   - networking
   - storage
   - kube-system
+  - tools
