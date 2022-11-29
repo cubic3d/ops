@@ -5,6 +5,7 @@ resources:
   - ../../../../apps/metallb/simple-pool
   - ../../../../apps/cert-manager/le-configs
   - ../../../../apps/traefik
+  - ../../../../apps/external-dns
 patchesStrategicMerge:
   - |-
     apiVersion: metallb.io/v1beta1
