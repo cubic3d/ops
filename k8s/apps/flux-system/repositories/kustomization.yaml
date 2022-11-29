@@ -10,3 +10,4 @@ resources:
   - metrics-server.yaml
   - template.yaml
   - external-dns.yaml
+  - kyverno.yaml
