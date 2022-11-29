@@ -15,7 +15,7 @@ spec:
   values:
     policy: sync
     txtOwnerId: "${cluster_name}"
-    txtPrefix: k8s
+    txtPrefix: k8s.
     provider: cloudflare
 
     env:
