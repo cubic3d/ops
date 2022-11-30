@@ -17,6 +17,11 @@ spec:
     txtOwnerId: "${cluster_name}"
     txtPrefix: k8s.
     provider: cloudflare
+    sources:
+      - ingress
+
+    extraArgs:
+      - --annotation-filter=external-dns.home.arpa/enabled in (true)
 
     env:
       - name: CF_API_TOKEN
