@@ -10,3 +10,4 @@ resources:
   - template.yaml
   - external-dns.yaml
   - kyverno.yaml
+  - authentik.yaml
