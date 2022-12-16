@@ -31,9 +31,15 @@ spec:
 
     postgresql:
       enabled: true
+      image:
+        repository: docker.io/library/postgres
+        tag: 11.18-bullseye
 
     redis:
       enabled: true
+      image:
+        repository: docker.io/library/redis
+        tag: 6.2.8
 
     ingress:
       enabled: true
