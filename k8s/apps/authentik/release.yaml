@@ -38,6 +38,8 @@ spec:
 
     redis:
       enabled: true
+      auth:
+        enabled: true
       image:
         registry: ghcr.io
         repository: zcube/bitnami-compat/redis
