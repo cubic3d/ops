@@ -33,7 +33,7 @@ spec:
       enabled: true
       image:
         repository: library/postgres
-        tag: 11.18-bullseye
+        tag: 15.1-bullseye
 
     redis:
       enabled: true
