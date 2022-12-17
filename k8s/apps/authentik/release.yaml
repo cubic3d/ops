@@ -32,13 +32,15 @@ spec:
     postgresql:
       enabled: true
       image:
-        repository: library/postgres
-        tag: 11.18-bullseye
+        registry: ghcr.io
+        repository: zcube/bitnami-compat/postgresql
+        tag: 11.18.0
 
     redis:
       enabled: true
       image:
-        repository: library/redis
+        registry: ghcr.io
+        repository: zcube/bitnami-compat/redis
         tag: 6.2.8
 
     ingress:
