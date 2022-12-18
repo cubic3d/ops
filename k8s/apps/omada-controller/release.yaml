@@ -33,6 +33,7 @@ spec:
             port: 443
       controller:
         type: LoadBalancer
+        externalTrafficPolicy: Local
         annotations:
           metallb.universe.tf/allow-shared-ip: public
         ports:
