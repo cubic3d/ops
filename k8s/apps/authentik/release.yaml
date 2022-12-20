@@ -29,6 +29,16 @@ spec:
       accountId: "${geoip_accountID}"
       licenseKey: "${geoip_licenceKey}"
 
+    envValueFrom:
+      AUTHENTIK_BOOTSTRAP_PASSWORD:
+        secretKeyRef:
+          name: authentik-values
+          key: initialPassword
+      AUTHENTIK_BOOTSTRAP_TOKEN:
+        secretKeyRef:
+          name: authentik-values
+          key: initialToken
+
     postgresql:
       enabled: true
       image:
