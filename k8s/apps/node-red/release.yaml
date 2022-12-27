@@ -33,7 +33,7 @@ spec:
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
           external-dns.home.arpa/enabled: "true"
-          traefik.ingress.kubernetes.io/router.middlewares: authentik-ak-outpost-embedded@kubernetescrd
+          traefik.ingress.kubernetes.io/router.middlewares: authentik-ak-outpost-authentik-embedded-outpost@kubernetescrd
         hosts:
           - host: "r.${domain}"
             paths:
