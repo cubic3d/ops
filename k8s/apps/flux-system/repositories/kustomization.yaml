@@ -11,3 +11,4 @@ resources:
   - external-dns.yaml
   - kyverno.yaml
   - authentik.yaml
+  - minio.yaml
