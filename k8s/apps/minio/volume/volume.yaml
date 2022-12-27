@@ -21,6 +21,7 @@ spec:
       source: "${s3_vol_url}"
     nodeStageSecretRef:
       name: s3-vol-creds
+      namespace: minio
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
