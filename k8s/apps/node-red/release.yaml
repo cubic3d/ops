@@ -1,0 +1,48 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: node-red
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.2.0
+      sourceRef:
+        kind: HelmRepository
+        name: template
+        namespace: flux-system
+  values:
+    image:
+      repository: docker.io/nodered/node-red
+      tag: 3.0.2-14
+
+    env:
+      TZ: Europe/Berlin
+      NODE_RED_ENABLE_PROJECTS: "true"
+
+    service:
+      main:
+        ports:
+          http:
+            port: 1880
+
+    ingress:
+      main:
+        enabled: true
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          external-dns.home.arpa/enabled: "true"
+          traefik.ingress.kubernetes.io/router.middlewares: authentik-forward-auth@kubernetescrd
+        hosts:
+          - host: "r.${domain}"
+            paths:
+              - path: /
+                pathType: Prefix
+
+    persistence:
+      data:
+        enabled: true
+        size: 1Gi
+        accessMode: ReadWriteOnce
+        retain: true
