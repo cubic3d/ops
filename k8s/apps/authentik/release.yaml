@@ -17,6 +17,7 @@ spec:
       name: authentik-values
   values:
     authentik:
+      log_level: trace
       email:
         host: "${service_email_host}"
         use_tls: true
