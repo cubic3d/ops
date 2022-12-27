@@ -4,4 +4,4 @@ namespace: minio
 resources:
   - namespace.yaml
   - ../../../../apps/minio
-  - ../../../../apps/volume
+  - ../../../../apps/minio/volume
