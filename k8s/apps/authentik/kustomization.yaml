@@ -3,4 +3,3 @@ kind: Kustomization
 resources:
   - release.yaml
   - values-secret.yaml
-  - forwardauth.yaml
