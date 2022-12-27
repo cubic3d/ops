@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: s3-vol-creds
+stringData:
+    username: ENC[AES256_GCM,data:CW+0NRi0TpJczt+W,iv:rljk88IMq2sj7K/VPlLHMz3HQVAQ0M2Xfg/PHuXJ/gs=,tag:OYq0g6KYaIgM5M5VvLzj6w==,type:str]
+    password: ENC[AES256_GCM,data:cJsz8POO0bryHX51xdIiYw==,iv:uWMY2ICo19TzbgEwkHjvruQaHBqOCY/YhfMjFWKx+9U=,tag:OjYXhPXKBlu5om47qy6Duw==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age17pjdz3x48re0ahdw00eqdj0da02ltp3wkxswr755cvaqj3j5938s7put83
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAzejMzN01yRUlXaTBreGpO
+            SkJoYlVsVnFtVHFJMXM2L0cxK1ZCSjdyREZjClljZFhUOGVjODVDNWdTMVNhV0J2
+            UmVGaHdPK0xjVTI2STlpLzRXUitpOXcKLS0tIDBIOG5LSmwvL0g2eGl1K2NCUkQ0
+            d2xOOWwvL0I2aXZjRlVXaWxjcEJ3UW8K5QKpWKh2oe6cqNmr42doEu3WFsyz7QxX
+            2C3jVBqHUpIMHOU4swJKy27AQ4gr/tim7N2V2Qwy5twepqg9oUU1kQ==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2022-12-27T20:08:05Z"
+    mac: ENC[AES256_GCM,data:KyP2o0xSYGW0RT7dWCWdOqdzyLiwEhOov2QmKgmY3JA4hjFv6rnTVQBiOhw7KIO+oCI33Lxd4CfCPVHv73PWf/yybHw+9Ut58o+E6a0EwtuUoAbjiPCqaz7anZBzKBk2ZAIII8ESSsm2aiKFmdib5z3cOuT4ZkCcoVo+AU4eS9c=,iv:iE0zZWbRa2Nz4YaJIfDWzKoESisLMBf2GyXNp9BCFmk=,tag:6kbd81Bh1Xl9IPv31dxfJQ==,type:str]
+    pgp: []
+    encrypted_regex: ((?i)(pass|secret($|[^N])|key|token|^data$|^stringData))
+    version: 3.7.3

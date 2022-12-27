@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: s3-vol
+spec:
+  capacity:
+    storage: 5Ti
+  accessModes:
+    - ReadWriteMany
+  mountOptions:
+    - seal
+    - vers=3.0
+    - uid=1000
+    - gid=1000
+    - dir_mode=0777
+    - file_mode=0777
+  csi:
+    driver: smb.csi.k8s.io
+    volumeHandle: s3-vol
+    volumeAttributes:
+      source: "${s3-vol-url}"
+    nodeStageSecretRef:
+      name: s3-vol-creds
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: s3-vol
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Ti
+  volumeName: s3-vol
+  storageClassName: ""

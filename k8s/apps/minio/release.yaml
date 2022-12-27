@@ -1,0 +1,50 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: minio
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: minio
+      version: 5.0.4
+      sourceRef:
+        kind: HelmRepository
+        name: minio
+        namespace: flux-system
+  values:
+    mode: standalone
+    persistence:
+      existingClaim: s3-vol
+
+    environment:
+      MINIO_BROWSER_REDIRECT_URL: "https://minio.${domain}"
+
+    ingress:
+      enabled: true
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        external-dns.home.arpa/enabled: "true"
+      path: /
+      hosts:
+        - s3.${domain}
+
+    consoleIngress:
+      enabled: true
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        external-dns.home.arpa/enabled: "true"
+      path: /
+      hosts:
+        - minio.${domain}
+
+    resources:
+      requests:
+        memory: 350Mi
+
+    oidc:
+      enabled: true
+      configUrl: https://id.${domain}/application/o/minio/.well-known/openid-configuration
+      clientId: 52fedd3da698b74bad101ccabc8e3f1dad451139
+      scopes: openid,profile,email,minio
+      redirectUri: https://minio.${domain}/oauth_callback
