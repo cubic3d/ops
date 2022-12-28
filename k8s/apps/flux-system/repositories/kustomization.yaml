@@ -12,3 +12,4 @@ resources:
   - kyverno.yaml
   - authentik.yaml
   - minio.yaml
+  - backube.yaml
