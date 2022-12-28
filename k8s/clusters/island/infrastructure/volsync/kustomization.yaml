@@ -1,6 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: volsys
+namespace: volsync
 resources:
   - namespace.yaml
-  - ../../../../apps/volsys
+  - ../../../../apps/volsync
