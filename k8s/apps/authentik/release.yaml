@@ -48,7 +48,7 @@ spec:
       image:
         registry: ghcr.io
         repository: zcube/bitnami-compat/redis
-        tag: 6.2.8
+        tag: 6.2.10
 
     ingress:
       enabled: true
