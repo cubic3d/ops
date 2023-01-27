@@ -41,7 +41,7 @@
       ],
     },
     {
-      matchDatasources: ["helm"],
+      matchDatasources: ["flux"],
       matchPackageNames: ["authentik"],
       separateMajorMinor: false,
     },
