@@ -76,7 +76,7 @@ spec:
         enabled: true
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
-          traefik.ingress.kubernetes.io/router.middlewares: omada-controller-omada-headers@kubernetescrd
+          traefik.ingress.kubernetes.io/router.middlewares: omada-controller-omada-headers@kubernetescrd,omada-controller-omada-redirect@kubernetescrd
           external-dns.home.arpa/enabled: "true"
         hosts:
           - host: "omada.${domain}"

@@ -10,3 +10,12 @@ spec:
       X-Forwarded-Proto: ""
     customResponseHeaders:
       Host: "omada.${domain}"
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: omada-redirect
+spec:
+  redirectRegex:
+    regex: :8043/
+    replacement: /
