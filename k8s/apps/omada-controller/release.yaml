@@ -58,8 +58,10 @@ spec:
             protocol: TCP
 
     ingress:
+      # Login page does not redirect if host header is overwritten, but omada requires the backend port in host header on other pages
       login:
         enabled: true
+        primary: true
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
         hosts:
