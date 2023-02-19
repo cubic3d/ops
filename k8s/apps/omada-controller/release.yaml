@@ -58,7 +58,19 @@ spec:
             protocol: TCP
 
     ingress:
-      main:
+      login:
+        enabled: true
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        hosts:
+          - host: "omada.${domain}"
+            paths:
+              - path: /
+                pathType: Exact
+              - path: /login
+                pathType: Prefix
+
+      web:
         enabled: true
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
