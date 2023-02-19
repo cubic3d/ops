@@ -13,3 +13,4 @@ resources:
   - authentik.yaml
   - minio.yaml
   - backube.yaml
+  - ingress-nginx.yaml
