@@ -24,6 +24,7 @@ spec:
 
       extraArgs:
         default-ssl-certificate: "${domain}-wildcard-tls"
+        force-ssl-redirect: "true"
 
       config:
         proxy-buffer-size: 128k
