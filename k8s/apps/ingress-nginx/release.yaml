@@ -23,7 +23,7 @@ spec:
         default: true
 
       extraArgs:
-        default-ssl-certificate: "${domain}-wildcard-tls"
+        default-ssl-certificate: "networking/${domain}-wildcard-tls"
 
       config:
         proxy-buffer-size: 128k
