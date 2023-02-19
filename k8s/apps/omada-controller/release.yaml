@@ -38,6 +38,7 @@ spec:
         annotations:
           metallb.universe.tf/allow-shared-ip: public
         ports:
+          # TODO add port 8043 after ingress is working correctly for devices to receive fw updates using IP address
           app-discovery:
             port: 27001
             protocol: UDP
@@ -58,25 +59,9 @@ spec:
             protocol: TCP
 
     ingress:
-      # Login page does not redirect if host header is overwritten, but omada requires the backend port in host header on other pages
-      login:
-        enabled: true
-        primary: true
-        annotations:
-          traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        hosts:
-          - host: "omada.${domain}"
-            paths:
-              - path: /
-                pathType: Exact
-              - path: /login
-                pathType: Prefix
-
-      web:
+      main:
         enabled: true
         annotations:
-          traefik.ingress.kubernetes.io/router.entrypoints: websecure
-          traefik.ingress.kubernetes.io/router.middlewares: omada-controller-omada-headers@kubernetescrd,omada-controller-omada-redirect@kubernetescrd
           external-dns.home.arpa/enabled: "true"
         hosts:
           - host: "omada.${domain}"

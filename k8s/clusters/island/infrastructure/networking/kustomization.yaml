@@ -4,7 +4,6 @@ namespace: networking
 resources:
   - ../../../../apps/metallb/simple-pool
   - ../../../../apps/cert-manager/le-configs
-  - ../../../../apps/traefik
   - ../../../../apps/external-dns
 patchesStrategicMerge:
   - |-
