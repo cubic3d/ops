@@ -15,7 +15,9 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
   name: omada-redirect
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled
 spec:
   redirectRegex:
-    regex: :8043/
-    replacement: /
+    regex: ^https://(.+):8043/(.+)/login$
+    replacement: https://$1/$2/login
