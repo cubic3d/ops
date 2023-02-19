@@ -19,7 +19,6 @@ spec:
 
     env:
       TZ: Europe/Berlin
-      MANAGE_HTTPS_PORT: "443"
 
     podSecurityContext:
       sysctls:
@@ -28,9 +27,11 @@ spec:
 
     service:
       main:
+        annotations:
+          traefik.ingress.kubernetes.io/service.serversscheme: https
         ports:
           http:
-            port: 443
+            port: 8043
       controller:
         type: LoadBalancer
         externalTrafficPolicy: Local
