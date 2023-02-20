@@ -36,7 +36,6 @@ spec:
         annotations:
           metallb.universe.tf/allow-shared-ip: public
         ports:
-          # TODO add port 8043 after ingress is working correctly for devices to receive fw updates using IP address
           manager-https:
             port: 8043
             protocol: TCP
