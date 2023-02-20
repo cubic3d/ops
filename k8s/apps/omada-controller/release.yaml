@@ -37,6 +37,9 @@ spec:
           metallb.universe.tf/allow-shared-ip: public
         ports:
           # TODO add port 8043 after ingress is working correctly for devices to receive fw updates using IP address
+          manager-https:
+            port: 8043
+            protocol: TCP
           app-discovery:
             port: 27001
             protocol: UDP
@@ -66,8 +69,6 @@ spec:
           nginx.ingress.kubernetes.io/upstream-vhost: "omada.${domain}:8043"
           nginx.ingress.kubernetes.io/proxy-redirect-from: "~https://(.+):8043/(.+)/login$"
           nginx.ingress.kubernetes.io/proxy-redirect-to: "https://$1/$2/login"
-          nginx.ingress.kubernetes.io/configuration-snippet: |
-            more_clear_input_headers "X-Forwarded-Proto";
         hosts:
           - host: "omada.${domain}"
             paths:
