@@ -36,7 +36,7 @@ spec:
         annotations:
           metallb.universe.tf/allow-shared-ip: public
         ports:
-          manager-https:
+          http:
             port: 8043
             protocol: TCP
           app-discovery:
