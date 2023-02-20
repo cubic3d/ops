@@ -32,7 +32,6 @@ spec:
         enabled: true
         annotations:
           external-dns.home.arpa/enabled: "true"
-          # TODO Create kyverno rule to apply authentication
           nginx.ingress.kubernetes.io/auth-url: |-
             http://ak-outpost-authentik-embedded-outpost.authentik.svc.cluster.local:9000/outpost.goauthentik.io/auth/nginx
           nginx.ingress.kubernetes.io/auth-signin: |-
