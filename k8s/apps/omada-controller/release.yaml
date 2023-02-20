@@ -27,8 +27,6 @@ spec:
 
     service:
       main:
-        annotations:
-          traefik.ingress.kubernetes.io/service.serversscheme: https
         ports:
           http:
             port: 8043
@@ -63,6 +61,11 @@ spec:
         enabled: true
         annotations:
           external-dns.home.arpa/enabled: "true"
+          nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+          nginx.ingress.kubernetes.io/proxy-ssl-verify: "off"
+          nginx.ingress.kubernetes.io/upstream-vhost: "omada.${domain}:8043"
+          nginx.ingress.kubernetes.io/proxy-redirect-from: "~https://(.+):8043/(.+)/login$"
+          nginx.ingress.kubernetes.io/proxy-redirect-to: "https://$1/$2/login"
         hosts:
           - host: "omada.${domain}"
             paths:
