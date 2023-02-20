@@ -20,10 +20,10 @@ spec:
     env:
       TZ: Europe/Berlin
 
-    podSecurityContext:
-      sysctls:
-        - name: net.ipv4.ip_unprivileged_port_start
-          value: "0"
+    # podSecurityContext:
+    #   sysctls:
+    #     - name: net.ipv4.ip_unprivileged_port_start
+    #       value: "0"
 
     service:
       main:
@@ -66,6 +66,8 @@ spec:
           nginx.ingress.kubernetes.io/upstream-vhost: "omada.${domain}:8043"
           nginx.ingress.kubernetes.io/proxy-redirect-from: "~https://(.+):8043/(.+)/login$"
           nginx.ingress.kubernetes.io/proxy-redirect-to: "https://$1/$2/login"
+          nginx.ingress.kubernetes.io/configuration-snippet: |
+            more_clear_input_headers "X-Forwarded-Proto";
         hosts:
           - host: "omada.${domain}"
             paths:
