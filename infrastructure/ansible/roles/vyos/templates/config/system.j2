@@ -6,8 +6,8 @@ set system syslog global facility protocols level debug
 set system time-zone Europe/Berlin
 
 {# NTP #}
-set system ntp server time.cloudflare.com
-set system ntp server time.google.com
+set service ntp server time.cloudflare.com
+set service ntp server time.google.com
 
 {# DNS (for VyOS internal use only) #}
 set system name-server 1.1.1.1
