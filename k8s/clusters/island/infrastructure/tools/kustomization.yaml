@@ -4,4 +4,3 @@ namespace: tools
 resources:
   - namespace.yaml
   - ../../../../apps/kyverno
-  - ../../../../apps/kyverno/policies/external-dns-target.yaml
