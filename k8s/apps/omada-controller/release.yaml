@@ -32,7 +32,8 @@ spec:
             port: 8043
       controller:
         type: LoadBalancer
-        externalTrafficPolicy: Local
+        # TODO make it Local again, after proper LB deployment / CNI change
+        externalTrafficPolicy: Cluster
         annotations:
           metallb.universe.tf/allow-shared-ip: public
         ports:

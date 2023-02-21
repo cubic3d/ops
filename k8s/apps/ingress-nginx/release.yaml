@@ -17,7 +17,8 @@ spec:
       service:
         annotations:
           metallb.universe.tf/allow-shared-ip: public
-        externalTrafficPolicy: Local
+        # TODO make it Local again, after proper LB deployment / CNI change
+        externalTrafficPolicy: Cluster
 
       ingressClassResource:
         default: true
