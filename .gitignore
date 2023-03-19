@@ -1,3 +1,12 @@
+# Temporarily encrypted files from vscode SOPS plugin
 .decrypted~*.yaml
+
+# Tests
 /_tmp/
+
+# Terraform
 .terraform
+
+# Talos generated files
+/infrastructure/talos/**/clusterconfig/
+/infrastructure/talos/**/charts/
