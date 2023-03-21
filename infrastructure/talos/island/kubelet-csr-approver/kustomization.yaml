@@ -6,6 +6,7 @@ helmCharts:
     version: 0.2.8
     releaseName: kubelet-csr-approver
     namespace: kube-system
+    skipTests: true
     valuesInline:
       bypassDnsResolution: true
       providerRegex: "^triss$"
