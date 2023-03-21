@@ -1,0 +1,37 @@
+clusterName: island
+
+talosVersion: v1.3.6
+kubernetesVersion: v1.26.2
+
+endpoint: https://${domain}:6443
+allowSchedulingOnMasters: true
+
+additionalApiServerCertSans:
+  - ${ip}
+
+additionalMachineCertSans:
+  - ${domain}
+  - ${ip}
+
+nodes:
+  - hostname: triss
+    ipAddress: ${ip}
+    controlPlane: true
+    disableSearchDomain: true
+    nameservers:
+      - 1.1.1.1
+      - 1.0.0.1
+    installDisk: /dev/sda
+
+controlPlane:
+  inlinePatch:
+    cluster:
+      extraManifests:
+        - https://raw.githubusercontent.com/cubic3d/ops/main/infrastructure/talos/island/kubelet-csr-approver/deploy.yaml
+    machine:
+      kubelet:
+        extraArgs:
+          rotate-server-certificates: "true"
+      time:
+        servers:
+          - 169.254.169.254
