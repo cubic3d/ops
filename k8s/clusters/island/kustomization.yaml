@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: flux-system
 resources:
   - ../../apps/flux-system
+  - ../../apps/flux-system/repositories
 patchesStrategicMerge:
   - |-
     apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
