@@ -3,9 +3,6 @@ kind: Kustomization
 namespace: flux-system
 resources:
   - ../../apps/flux-system
-  - ../../../../apps/flux-system/repositories
-  - ../../../../apps/flux-system/notifications-discord
-  - ../../../../apps/flux-system/status-github
 patchesStrategicMerge:
   - |-
     apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
