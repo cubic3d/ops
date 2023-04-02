@@ -15,10 +15,11 @@ spec:
   values:
     controller:
       service:
-        annotations:
-          metallb.universe.tf/allow-shared-ip: public
-        # TODO make it Local again, after proper LB deployment / CNI change
-        externalTrafficPolicy: Cluster
+        externalTrafficPolicy: Local
+        type: NodePort
+        nodePorts:
+          http: 80
+          https: 443
 
       watchIngressWithoutClass: true
       ingressClassResource:

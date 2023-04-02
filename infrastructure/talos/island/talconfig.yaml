@@ -28,6 +28,9 @@ controlPlane:
     cluster:
       extraManifests:
         - https://raw.githubusercontent.com/cubic3d/ops/main/infrastructure/talos/island/kubelet-csr-approver/deploy.yaml
+      apiServer:
+        extraArgs:
+          service-node-port-range: 1-32767
     machine:
       kubelet:
         extraArgs:

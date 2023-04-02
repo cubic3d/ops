@@ -3,5 +3,4 @@ kind: Kustomization
 namespace: networking
 resources:
   - namespace.yaml
-  - ../../../../apps/metallb
   - ../../../../apps/cert-manager

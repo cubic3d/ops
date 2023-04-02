@@ -31,32 +31,36 @@ spec:
       #     http:
       #       port: 8043
       main:
-        type: LoadBalancer
-        # TODO make it Local again, after proper LB deployment / CNI change
-        externalTrafficPolicy: Cluster
-        annotations:
-          metallb.universe.tf/allow-shared-ip: public
+        type: NodePort
+        externalTrafficPolicy: Local
         ports:
           http:
             port: 8043
+            nodePort: 8043
             protocol: TCP
           app-discovery:
             port: 27001
+            nodePort: 27001
             protocol: UDP
           discovery:
             port: 29810
+            nodePort: 29810
             protocol: UDP
           manager-v1:
             port: 29811
+            nodePort: 29811
             protocol: TCP
           adopt-v1:
             port: 29812
+            nodePort: 29812
             protocol: TCP
           upgrade-v1:
             port: 29813
+            nodePort: 29813
             protocol: TCP
           manager-v2:
             port: 29814
+            nodePort: 29814
             protocol: TCP
 
     ingress:
