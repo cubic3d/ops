@@ -3,3 +3,4 @@ kind: Kustomization
 namespace: kube-system
 resources:
   - ../../../../apps/metrics-server
+  - ../../../../apps/kubelet-csr-approver
