@@ -1,0 +1,64 @@
+name: Generate and update static manifests
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - infrastructure/talos/**/kustomization.yaml
+
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3.5.0
+        with:
+          fetch-depth: 2
+
+      - name: Changed Files
+        uses: tj-actions/changed-files@v35.7.8
+        id: changed-files
+        with:
+          dir_names: true
+          json: true
+          files: infrastructure/talos/**/kustomization.yaml
+
+      - name: Set matrix
+        id: set-matrix
+        run: echo "matrix={\"dir\":${{ steps.changed-files.outputs.all_changed_files }}}" >> "$GITHUB_OUTPUT"
+
+  generate:
+    runs-on: ubuntu-latest
+    needs:
+      - changes
+    strategy:
+      matrix: ${{ fromJSON(needs.changes.outputs.matrix) }}
+      fail-fast: false
+    env:
+      dir: ${{ matrix.dir }}
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3.5.0
+
+      - name: Setup Kustomize
+        uses: imranismail/setup-kustomize@v2.0.0
+
+      - name: Build manifests
+        id: build-manifests
+        run: |
+          echo "app=${dir##*/}" >> "$GITHUB_OUTPUT"
+          g=${dir%/*}; echo "cluster=${g##*/}" >> "$GITHUB_OUTPUT"
+          kustomize build ${{ matrix.dir }} --enable-helm -o "${{ matrix.dir }}/deploy.yaml"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4.2.4
+        with:
+          branch: gen-manifest/${{ steps.build-manifests.outputs.cluster }}/${{ steps.build-manifests.outputs.app }}
+          delete-branch: true
+          commit-message: "cluster(${{ steps.build-manifests.outputs.cluster }}): generate ${{ steps.build-manifests.outputs.app }}"
+          title: Generate manifests for ${{ steps.build-manifests.outputs.app }} on ${{ steps.build-manifests.outputs.cluster }}
+          body: ""
+          labels: flux/update

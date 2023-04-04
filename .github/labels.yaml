@@ -9,3 +9,7 @@
 - name: version/patch
   color: "0e8a16"
   description: Major update
+
+- name: infrastructure/manifests
+  color: "1d76db"
+  description: Generated manifests
