@@ -3,7 +3,7 @@ clusterName: island
 # renovate: image depName=ghcr.io/siderolabs/installer
 talosVersion: v1.3.7
 # renovate: image depName=registry.k8s.io/kube-apiserver
-kubernetesVersion: v1.26.3
+kubernetesVersion: v1.26.4
 
 endpoint: https://${domain}:6443
 allowSchedulingOnMasters: true
