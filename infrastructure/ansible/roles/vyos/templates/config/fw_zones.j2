@@ -1,13 +1,13 @@
 {# Zone rules #}
 {% for zoneName, zone in settings.zones.items() %}
   {# Defaults #}
-  set firewall zone {{ zoneName }} description {{ zone.name }}
+  set firewall zone {{ zoneName }} description '{{ zone.name }}'
   {% if zoneName == "local" %}
     set firewall zone {{ zoneName }} local-zone
   {% elif zone.vlan is defined and zone.vlan != 0 %}
-    set firewall zone {{ zoneName }} interface {{ zone.interface }}.{{ zone.vlan }}
+    set firewall zone {{ zoneName }} interface '{{ zone.interface }}.{{ zone.vlan }}'
   {% else %}
-    set firewall zone {{ zoneName }} interface {{ zone.interface }}
+    set firewall zone {{ zoneName }} interface '{{ zone.interface }}'
   {% endif %}
 
   {# Rules #}
@@ -30,16 +30,18 @@
           {# Distinguish IPv4/6 rules #}
           {% if policyName == "from4" %}
             {% set path = "name "~fromZone~"-"~zoneName %}
+            {% set pathQuoted = "name '"~fromZone~"-"~zoneName~"'" %}
           {% elif policyName == "from6" %}
             {% set path = "ipv6-name "~fromZone~"-"~zoneName~"-6" %}
+            {% set pathQuoted = "ipv6-name '"~fromZone~"-"~zoneName~"-6'" %}
           {% endif %}
 
           {# Assign rule set to zone combination #}
-          set firewall zone {{ zoneName }} from {{ fromZone }} firewall {{ path }}
+          set firewall zone {{ zoneName }} from {{ fromZone }} firewall {{ pathQuoted }}
 
           {# Create rule set #}
           set firewall {{ path }} description 'From {{ settings.zones[fromZone].name }} to {{ zone.name }}'
-          set firewall {{ path }} default-action {{ ruleSet.default }}
+          set firewall {{ path }} default-action '{{ ruleSet.default }}'
           set firewall {{ path }} enable-default-log
 
           {% if ruleSet.rules is defined %}
