@@ -1,0 +1,7 @@
+- hosts: gw
+  tasks:
+    - vyconf:
+        config: "{{ lookup('template', 'roles/vyos/templates/config/main.j2') }}"
+      register: debug_out
+    - debug:
+        var: debug_out
