@@ -28,6 +28,8 @@ options:
 notes:
     - Check mode does not commit or save operations determined by this module.
     - The existing can be exported using C(show configuration commands) and used as an input.
+    - Due to U(https://vyos.dev/T4487) regarding container handling, requires applying configurations in 2 stages.
+    - Unused container images are never deleted to allow safe boot configuration fallback.
 """
 
 EXAMPLES = r"""
@@ -73,6 +75,7 @@ operations_result:
 from ansible.module_utils.basic import AnsibleModule
 from bisect import bisect_right
 from shlex import split
+import re
 
 
 def run_commands(commands: list[str]) -> list[str]:
@@ -127,9 +130,16 @@ def create_plan(
     return {"add": add, "delete": delete, "unchanged": unchanged}
 
 
-def create_operations(plan: dict[str, list[str]]) -> list[str]:
-    delete_operations = set()
+def create_operations(plan: dict[str, list[str]]) -> dict[str, list[str]]:
+    operations_stage1_delete = set()
+    operations_stage1_add = set()
+    operations_stage2_delete = set()
+    operations_stage2_add = set()
+    image_pulls = set()
+
     unchanged_sorted = sorted(plan["unchanged"])
+
+    image_pattern = re.compile(r"set container name \w+ image (.*)")
 
     for d in plan["delete"]:
         position = bisect_right(unchanged_sorted, d)
@@ -158,18 +168,46 @@ def create_operations(plan: dict[str, list[str]]) -> list[str]:
                 longest_prefix_count = count
 
         delete_command = "delete " + " ".join(deleted[: longest_prefix_count + 1])
-        delete_operations.add(delete_command)
 
-    return list(delete_operations) + plan["add"]
+        if delete_command.startswith("delete container"):
+            operations_stage2_delete.add(delete_command)
+        else:
+            operations_stage1_delete.add(delete_command)
+
+    for a in plan["add"]:
+        if a.startswith("set container"):
+            image_name = image_pattern.search(a)
+            if image_name and image_name.group(1):
+                image_pulls.add(f"run add container image {image_name.group(1)}")
+            operations_stage2_add.add(a)
+        else:
+            operations_stage1_add.add(a)
+
+    return {
+        "operations_stage1": list(operations_stage1_delete)
+        + list(operations_stage1_add),
+        "operations_stage2": list(image_pulls)
+        + list(operations_stage2_delete)
+        + list(operations_stage2_add),
+    }
 
 
-def run_operations(operations: list[str]) -> list[str]:
-    commands = operations.copy()
+def run_operations(
+    operations_stage1: list[str], operations_stage2: list[str]
+) -> list[str]:
+    commands = []
 
-    if not module.check_mode:
-        commands.append("commit comment 'commited by VyConf Ansible module'")
-        if module.params["save"]:
-            commands.append("save")
+    for op_list in (operations_stage1, operations_stage2):
+        if not op_list:
+            continue
+
+        if module.check_mode:
+            commands.extend([c for c in op_list if not c.startswith("run")])
+        else:
+            commands.extend(op_list)
+            commands.append("commit comment 'commited by VyConf Ansible module'")
+            if module.params["save"]:
+                commands.append("save")
 
     return run_commands(commands)
 
@@ -188,11 +226,13 @@ def run_module():
     config_current = run_commands(["run show configuration commands"])
 
     result["plan"] = create_plan(config_new, config_current)
-    result["operations"] = create_operations(result["plan"])
+    result.update(create_operations(result["plan"]))
 
-    if len(result["operations"]):
+    if len(result["operations_stage1"] or result["operations_stage2"]):
         result["changed"] = True
-        result["operations_result"] = run_operations(result["operations"])
+        result["operations_result"] = run_operations(
+            result["operations_stage1"], result["operations_stage2"]
+        )
 
     module.exit_json(**result)
 
