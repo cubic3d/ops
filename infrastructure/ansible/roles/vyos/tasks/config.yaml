@@ -1,13 +1,9 @@
 - name: Apply config
-  vars:
-    ansible_connection: ansible.netcommon.network_cli
-    ansible_network_os: vyos.vyos.vyos
-  vyos.vyos.vyos_config:
-    src: config/main.j2
-    match: none
+  vyconf:
+    config: "{{ lookup('template', 'config/main.j2') }}"
     save: yes
-  register: config_out
+  register: report
 
 - name: Debug
   ansible.builtin.debug:
-    var: config_out
+    msg: '{{ report | combine({ "plan": { "unchanged": omit } }, recursive=true) }}'
