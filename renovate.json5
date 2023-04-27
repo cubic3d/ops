@@ -32,6 +32,15 @@
       datasourceTemplate: "docker",
       versioningTemplate: "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}",
     },
+    {
+      fileMatch: [
+        "infrastructure/.+\\.j2$",
+      ],
+      matchStrings: [
+        "set container name .+ image '?(?<depName>.+?):(?<currentValue>[^\"'\n ]+)",
+      ],
+      datasourceTemplate: "docker",
+    },
   ],
   packageRules: [
     {
