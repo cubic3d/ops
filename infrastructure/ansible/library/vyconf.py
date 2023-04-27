@@ -139,7 +139,7 @@ def create_operations(plan: dict[str, list[str]]) -> dict[str, list[str]]:
 
     unchanged_sorted = sorted(plan["unchanged"])
 
-    image_pattern = re.compile(r"set container name \w+ image (.*)")
+    image_pattern = re.compile(r"set container name .+ image (.+)")
 
     for d in plan["delete"]:
         position = bisect_right(unchanged_sorted, d)
