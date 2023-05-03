@@ -46,3 +46,5 @@ spec:
       clientId: 52fedd3da698b74bad101ccabc8e3f1dad451139
       scopes: openid,profile,email,minio
       redirectUri: https://minio.${domain}/oauth_callback
+
+    users:
