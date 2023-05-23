@@ -29,7 +29,7 @@ spec:
 
     envFrom:
       - secretRef:
-          name: env-secret
+          name: sabnzbd-config
 
     service:
       main:
