@@ -64,5 +64,5 @@ spec:
         retain: true
       media:
         enabled: true
-        existingClaim: media-vol
+        existingClaim: media
         retain: true
