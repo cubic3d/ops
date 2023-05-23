@@ -6,3 +6,4 @@ resources:
   - media-volume.yaml
   - media-creds.yaml
   - ../../../../apps/sabnzbd
+  - ../../../../apps/prowlarr
