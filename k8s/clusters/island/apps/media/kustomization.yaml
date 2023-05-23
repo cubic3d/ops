@@ -5,3 +5,4 @@ resources:
   - namespace.yaml
   - media-volume.yaml
   - media-creds.yaml
+  - ../../../../apps/sabnzbd
