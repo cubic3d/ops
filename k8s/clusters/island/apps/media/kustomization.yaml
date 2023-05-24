@@ -12,3 +12,4 @@ resources:
   - ../../../../apps/bazarr
   - ../../../../apps/overseerr
   - ../../../../apps/plex
+  - ../../../../apps/recyclarr
