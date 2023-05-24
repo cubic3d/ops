@@ -11,3 +11,4 @@ resources:
   - ../../../../apps/sonarr
   - ../../../../apps/bazarr
   - ../../../../apps/overseerr
+  - ../../../../apps/plex
