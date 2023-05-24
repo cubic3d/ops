@@ -62,7 +62,7 @@ spec:
         size: 1Gi
         accessMode: ReadWriteOnce
         retain: true
-      media:
+      downloads:
         enabled: true
         existingClaim: media
         subPath: downloads
