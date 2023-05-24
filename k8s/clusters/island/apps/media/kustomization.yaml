@@ -8,3 +8,5 @@ resources:
   - ../../../../apps/sabnzbd
   - ../../../../apps/prowlarr
   - ../../../../apps/radarr
+  - ../../../../apps/sonarr
+  - ../../../../apps/bazarr
