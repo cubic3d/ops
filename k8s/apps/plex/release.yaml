@@ -56,4 +56,5 @@ spec:
         existingClaim: media
         subPath: media
         mountPath: /media/media
+        readOnly: true
         retain: true
