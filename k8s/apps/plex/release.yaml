@@ -54,4 +54,5 @@ spec:
       media:
         enabled: true
         existingClaim: media
+        subPath: media
         retain: true

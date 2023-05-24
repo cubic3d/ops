@@ -65,4 +65,5 @@ spec:
       media:
         enabled: true
         existingClaim: media
+        subPath: downloads
         retain: true
