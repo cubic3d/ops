@@ -10,3 +10,4 @@ resources:
   - ../../../../apps/radarr
   - ../../../../apps/sonarr
   - ../../../../apps/bazarr
+  - ../../../../apps/overseerr
