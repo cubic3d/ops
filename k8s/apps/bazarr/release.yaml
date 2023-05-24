@@ -24,7 +24,7 @@ spec:
       main:
         ports:
           http:
-            port: 5432
+            port: 6767
 
     ingress:
       main:
