@@ -32,6 +32,7 @@ settings:
                     - only:
                         - modem
                         - management
+                        - trusted
                       default: accept
                       rules:
                         - accept_established: null
@@ -47,6 +48,7 @@ settings:
                         - modem
                         - wan
                         - management
+                        - trusted
                       default: drop
                       rules:
                         - accept_established: null
@@ -135,12 +137,14 @@ settings:
                 from4:
                     - only:
                         - local
+                        - trusted
                       default: accept
                       rules:
                         - accept_established: null
                         - drop_invalid: null
                     - allExcept:
                         - local
+                        - trusted
                       default: drop
                       rules:
                         - accept_established: null
@@ -338,8 +342,8 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-02-18T14:58:34Z"
-    mac: ENC[AES256_GCM,data:bzDbveZhHE7RQakj8FCOT1fVbz7VpqO3WGSg3LPwwDKVTpJgvmVj7H0Lo+3LZOPeDGt8ift4H1zxFflVGOM78h7CSBoa2mPH+/UGnU+orx3XW+0c3nMfAkMnBWHJO2Kl8UD8kDT3LL9W7EYtvOMVsQwr9ot0Ww6z/Rpj+/hra3A=,iv:dz/ouxNFZeTkM3Ofwucgp0KHt+HtR6T/a+Os4uO9mmc=,tag:lq9krVf3xRqVMeaN/TFVOQ==,type:str]
+    lastmodified: "2023-05-25T18:48:04Z"
+    mac: ENC[AES256_GCM,data:+NJSQleh1Mpysf2I35zpV3OInwQiwCaYYRpvN+zqQc5kUIL4T8zVISPyuOruAVWkNn0Tyi72FVV+5B+LX8ndXQJIxDC/N2hOWGbXANRnWksICANaXsL8cRmvPi4hZh36XsQjh1rInHsnojmDct6FQerMOfz70iPpyq6VGOqL3uk=,iv:9PlHxX856/4tH7YIUmOzSg2ozJ8IfN+VQG0NUsChUHA=,tag:64M0Bv1eFDe/vwP9AOjnqA==,type:str]
     pgp: []
     encrypted_suffix: _enc
     version: 3.7.3
