@@ -8,7 +8,6 @@ resources:
   - metrics-server.yaml
   - template.yaml
   - external-dns.yaml
-  - kyverno.yaml
   - authentik.yaml
   - minio.yaml
   - backube.yaml
