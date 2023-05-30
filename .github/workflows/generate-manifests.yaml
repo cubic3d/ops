@@ -19,7 +19,7 @@ jobs:
           fetch-depth: 2
 
       - name: Changed Files
-        uses: tj-actions/changed-files@v36.0.8
+        uses: tj-actions/changed-files@v36.0.9
         id: changed-files
         with:
           dir_names: true
