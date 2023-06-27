@@ -15,7 +15,7 @@ spec:
   values:
     image:
       repository: ghcr.io/dgtlmoon/changedetection.io
-      tag: 0.42.3
+      tag: 0.43.1
 
     env:
       TZ: Europe/Berlin
