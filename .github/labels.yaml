@@ -4,11 +4,11 @@
 
 - name: version/minor
   color: "fbca04"
-  description: Major update
+  description: Minor update
 
 - name: version/patch
   color: "0e8a16"
-  description: Major update
+  description: Patch update
 
 - name: infrastructure/manifests
   color: "1d76db"
