@@ -1,6 +1,6 @@
 {# Dynamic DNS setup (not on Cloudflare because current legacy client requires account key) #}
-set service dns dynamic interface {{ settings.zones.wan.interface }} service duckdns protocol 'duckdns'
-set service dns dynamic interface {{ settings.zones.wan.interface }} service duckdns server 'www.duckdns.org'
-set service dns dynamic interface {{ settings.zones.wan.interface }} service duckdns host-name '{{ settings.ddns.host_enc }}'
-set service dns dynamic interface {{ settings.zones.wan.interface }} service duckdns login '{{ settings.ddns.user_enc }}'
-set service dns dynamic interface {{ settings.zones.wan.interface }} service duckdns password '{{ settings.ddns.password_enc }}'
+set service dns dynamic address {{ settings.zones.wan.interface }} service duckdns protocol 'duckdns'
+set service dns dynamic address {{ settings.zones.wan.interface }} service duckdns server 'www.duckdns.org'
+set service dns dynamic address {{ settings.zones.wan.interface }} service duckdns host-name '{{ settings.ddns.host_enc }}'
+set service dns dynamic address {{ settings.zones.wan.interface }} service duckdns username '{{ settings.ddns.user_enc }}'
+set service dns dynamic address {{ settings.zones.wan.interface }} service duckdns password '{{ settings.ddns.password_enc }}'
