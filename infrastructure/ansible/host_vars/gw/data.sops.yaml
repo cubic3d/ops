@@ -123,6 +123,8 @@ settings:
                 - dhcp
                 - dhcpv6
             nat: true
+            nat66_from:
+                - fd00:c01d:1ced:99::/64
             policies:
                 from4:
                     - default: accept
@@ -351,8 +353,8 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-08-05T10:12:50Z"
-    mac: ENC[AES256_GCM,data:MsYlGrgaA5bSix7O6+XLXqLZ76nelB/7XwwF/yvZEoiqfghLK9z2t+xsQpmy9zrf1L8Ofxx3qi6GAk18TEiRrmigPh6mZxSa9ufHglIA2sqM/Rw0Eb03iAi9MiWG1CTIinSXRU0awU1Fe60Ae43DxH1ieyPZoc4TkbC7MWkFeP4=,iv:O0HmocIGc9tjx8hbWIHHEnHFQFVtKKPBr8uf1fQLrYI=,tag:wFBbYiZwDqKafhJI0rBEkA==,type:str]
+    lastmodified: "2023-08-05T11:56:14Z"
+    mac: ENC[AES256_GCM,data:xTwYafbUX4lGOcoHN+6Zs7SlZZfNWmIr5mPbHbnYck2dvdLtUeafHFZnjTcnrbPgqJ5zXEpP9Op7jwZtjA1upByHEEI4uQWM1xa+XzaSDQMxE/pj2fsx+i9pH1ZOyrVwkZUJydqzH5Bkot+13VsCjGgCYVl1mBnL6uCGXeyDGNk=,iv:0T45FdR9eY8jAtJQwIajQcmVMVdSvCd9NJ5TVaNRk60=,tag:UiA+GVEuJr09Mvut+f10pg==,type:str]
     pgp: []
     encrypted_suffix: _enc
     version: 3.7.3
