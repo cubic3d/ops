@@ -33,6 +33,7 @@ settings:
                         - modem
                         - management
                         - trusted
+                        - wireguard
                       default: accept
                       rules:
                         - accept_established: null
@@ -49,6 +50,7 @@ settings:
                         - wan
                         - management
                         - trusted
+                        - wireguard
                       default: drop
                       rules:
                         - accept_established: null
@@ -78,15 +80,20 @@ settings:
             interface: wg0
             addresses:
                 - 192.168.99.1/24
+                - fd00:c01d:1ced:99::1/64
             port_enc: ENC[AES256_GCM,data:Io4DLB4=,iv:bZdU3nK9/QgrsDDVN5UrS4MhkLO+oVnO95k0S1g973c=,tag:y6wtUWc3L1BbkuRwQOVHLQ==,type:int]
             # Public key: xdJzq+rVe6v390dGmd9ELxkGT4HfqQraqwQfoxDiOxM=
             psk_enc: ENC[AES256_GCM,data:0X3wUjjYLKc5I1PQfY5M78w7+UYBbq8Uz/L5SCT4E8uWtKvND5hJNNqXeFI=,iv:NR1Iv3OVkJN6+4LBHphCxcKbpJ+9Up+TPQZQVCZh3os=,tag:HTex+QrlIQJpeEEXYXEcMA==,type:str]
             peers:
                 pixel6pro:
-                    ip: 192.168.99.2
+                    ips:
+                        - 192.168.99.2/32
+                        - fd00:c01d:1ced:99::2/128
                     publicKey: KIDkI5CyorSFAwf5Yc/N0He+L9GBkutoKerSpVjMt0A=
                 surface:
-                    ip: 192.168.99.3
+                    ips:
+                        - 192.168.99.3/32
+                        - fd00:c01d:1ced:99::3/128
                     publicKey: U4N/8KqCwnUppLxpc/6da6GXswi3OSZuuUpBlgg0bjI=
             policies:
                 from4:
@@ -138,6 +145,7 @@ settings:
                     - only:
                         - local
                         - trusted
+                        - wireguard
                       default: accept
                       rules:
                         - accept_established: null
@@ -145,6 +153,7 @@ settings:
                     - allExcept:
                         - local
                         - trusted
+                        - wireguard
                       default: drop
                       rules:
                         - accept_established: null
@@ -342,8 +351,8 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-05-25T18:48:04Z"
-    mac: ENC[AES256_GCM,data:+NJSQleh1Mpysf2I35zpV3OInwQiwCaYYRpvN+zqQc5kUIL4T8zVISPyuOruAVWkNn0Tyi72FVV+5B+LX8ndXQJIxDC/N2hOWGbXANRnWksICANaXsL8cRmvPi4hZh36XsQjh1rInHsnojmDct6FQerMOfz70iPpyq6VGOqL3uk=,iv:9PlHxX856/4tH7YIUmOzSg2ozJ8IfN+VQG0NUsChUHA=,tag:64M0Bv1eFDe/vwP9AOjnqA==,type:str]
+    lastmodified: "2023-08-05T10:12:50Z"
+    mac: ENC[AES256_GCM,data:MsYlGrgaA5bSix7O6+XLXqLZ76nelB/7XwwF/yvZEoiqfghLK9z2t+xsQpmy9zrf1L8Ofxx3qi6GAk18TEiRrmigPh6mZxSa9ufHglIA2sqM/Rw0Eb03iAi9MiWG1CTIinSXRU0awU1Fe60Ae43DxH1ieyPZoc4TkbC7MWkFeP4=,iv:O0HmocIGc9tjx8hbWIHHEnHFQFVtKKPBr8uf1fQLrYI=,tag:wFBbYiZwDqKafhJI0rBEkA==,type:str]
     pgp: []
     encrypted_suffix: _enc
     version: 3.7.3

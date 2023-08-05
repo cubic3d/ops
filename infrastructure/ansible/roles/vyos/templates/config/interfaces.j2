@@ -73,8 +73,10 @@ set service dhcp-server global-parameters 'option capwap code 138 = ip-address;'
 
       {# Peers #}
       {% for peerName, peer in zone.peers.items() %}
-          set interfaces {{ interfaceType }} {{ zone.interface }} peer {{ peerName }} allowed-ips '{{ peer.ip }}/32'
           set interfaces {{ interfaceType }} {{ zone.interface }} peer {{ peerName }} public-key '{{ peer.publicKey }}'
+          {% for ip in peer.ips %}
+            set interfaces {{ interfaceType }} {{ zone.interface }} peer {{ peerName }} allowed-ips '{{ ip }}'
+          {% endfor %}
       {% endfor %}
     {% endif %}
   {% else %}
