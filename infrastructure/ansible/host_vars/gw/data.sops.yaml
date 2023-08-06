@@ -184,7 +184,19 @@ settings:
                   value_enc: ENC[AES256_GCM,data:L6nfyQFdSWJ/vK0=,iv:Vit7oE1TbS/D2SYxUkr1NroZXKx3B7AVnAOQgTtKcQc=,tag:m9NP91leMjgzh66N5c8pdg==,type:str]
             policies:
                 from4:
-                    - default: drop
+                    - only:
+                        - local
+                        - trusted
+                        - wireguard
+                      default: accept
+                      rules:
+                        - accept_established: null
+                        - drop_invalid: null
+                    - allExcept:
+                        - local
+                        - trusted
+                        - wireguard
+                      default: drop
                       rules:
                         - accept_established: null
                         - drop_invalid: null
@@ -209,7 +221,19 @@ settings:
             vlan: 10
             policies:
                 from4:
-                    - default: drop
+                    - only:
+                        - local
+                        - trusted
+                        - wireguard
+                      default: accept
+                      rules:
+                        - accept_established: null
+                        - drop_invalid: null
+                    - allExcept:
+                        - local
+                        - trusted
+                        - wireguard
+                      default: drop
                       rules:
                         - accept_established: null
                         - drop_invalid: null
@@ -259,7 +283,17 @@ settings:
             vlan: 30
             policies:
                 from4:
-                    - default: drop
+                    - only:
+                        - local
+                        - wireguard
+                      default: accept
+                      rules:
+                        - accept_established: null
+                        - drop_invalid: null
+                    - allExcept:
+                        - local
+                        - wireguard
+                      default: drop
                       rules:
                         - accept_established: null
                         - drop_invalid: null
@@ -284,7 +318,19 @@ settings:
             vlan: 40
             policies:
                 from4:
-                    - default: drop
+                    - only:
+                        - local
+                        - trusted
+                        - wireguard
+                      default: accept
+                      rules:
+                        - accept_established: null
+                        - drop_invalid: null
+                    - allExcept:
+                        - local
+                        - trusted
+                        - wireguard
+                      default: drop
                       rules:
                         - accept_established: null
                         - drop_invalid: null
@@ -309,7 +355,19 @@ settings:
             vlan: 50
             policies:
                 from4:
-                    - default: drop
+                    - only:
+                        - local
+                        - trusted
+                        - wireguard
+                      default: accept
+                      rules:
+                        - accept_established: null
+                        - drop_invalid: null
+                    - allExcept:
+                        - local
+                        - trusted
+                        - wireguard
+                      default: drop
                       rules:
                         - accept_established: null
                         - drop_invalid: null
@@ -353,8 +411,8 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-08-05T11:56:14Z"
-    mac: ENC[AES256_GCM,data:xTwYafbUX4lGOcoHN+6Zs7SlZZfNWmIr5mPbHbnYck2dvdLtUeafHFZnjTcnrbPgqJ5zXEpP9Op7jwZtjA1upByHEEI4uQWM1xa+XzaSDQMxE/pj2fsx+i9pH1ZOyrVwkZUJydqzH5Bkot+13VsCjGgCYVl1mBnL6uCGXeyDGNk=,iv:0T45FdR9eY8jAtJQwIajQcmVMVdSvCd9NJ5TVaNRk60=,tag:UiA+GVEuJr09Mvut+f10pg==,type:str]
+    lastmodified: "2023-08-06T17:16:53Z"
+    mac: ENC[AES256_GCM,data:UAlTpRoqF3f33J75eIlJc0idqFmrBnPZZZcyJ1FpKzEDwTZTa6SU5tFy4J7XhaC/ujR+vRBZgMwDC1v5ZwzmkXh5Impaf/2KeC6mQT0nOS6b1m3DEUukvYzZXQfLfatBQKmcISyvuoK4hOA6pj4BVmCCDgfO96ijFAACEqUhQLk=,iv:o8ETjJy4Tt5dHKGDqICgWzbajfhT7qBtkycL0jN9Whw=,tag:mhaFbhyOUmJcvWWxQLac1w==,type:str]
     pgp: []
     encrypted_suffix: _enc
     version: 3.7.3
