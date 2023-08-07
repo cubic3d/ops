@@ -61,4 +61,4 @@ jobs:
           commit-message: "cluster(${{ steps.build-manifests.outputs.cluster }}): generate ${{ steps.build-manifests.outputs.app }}"
           title: Generate manifests for ${{ steps.build-manifests.outputs.app }} on ${{ steps.build-manifests.outputs.cluster }}
           body: ""
-          labels: flux/update
+          labels: infrastructure/manifests
