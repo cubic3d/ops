@@ -15,13 +15,18 @@ spec:
     - dir_mode=0777
     - file_mode=0777
   csi:
-    driver: smb.csi.k8s.io
+    driver: democratic-csi.node-manual
+    readOnly: false
+    fsType: cifs
     volumeHandle: media
-    volumeAttributes:
-      source: "${media_volume_uri}"
     nodeStageSecretRef:
       name: media-creds
       namespace: media
+    volumeAttributes:
+      server: "${media_volume_host}"
+      share: "${media_volume_share}"
+      node_attach_driver: smb
+      provisioner_driver: node-manual
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
