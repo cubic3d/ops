@@ -15,6 +15,7 @@ spec:
   values:
     csiDriver:
       name: democratic-csi.node-manual
+      attachRequired: false
 
     controller:
       enabled: false
