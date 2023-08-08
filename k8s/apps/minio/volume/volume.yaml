@@ -7,9 +7,6 @@ spec:
     storage: 5Ti
   accessModes:
     - ReadWriteMany
-  nodeStageSecretRef:
-    name: s3-vol-creds
-    namespace: minio
   mountOptions:
     - seal
     - vers=3.0
@@ -22,6 +19,9 @@ spec:
     readOnly: false
     fsType: cifs
     volumeHandle: s3-vol
+    nodeStageSecretRef:
+      name: s3-vol-creds
+      namespace: minio
     volumeAttributes:
       server: "${s3_vol_host}"
       share: "${s3_vol_share}"
