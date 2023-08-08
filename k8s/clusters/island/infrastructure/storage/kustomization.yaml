@@ -3,6 +3,5 @@ kind: Kustomization
 namespace: storage
 resources:
   - namespace.yaml
-  - ../../../../apps/csi-driver-smb
   - ../../../../apps/local-path-provisioner
   - ../../../../apps/democratic-csi/node-manual
