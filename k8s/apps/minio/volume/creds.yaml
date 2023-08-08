@@ -3,8 +3,7 @@ kind: Secret
 metadata:
     name: s3-vol-creds
 stringData:
-    username: ENC[AES256_GCM,data:CW+0NRi0TpJczt+W,iv:rljk88IMq2sj7K/VPlLHMz3HQVAQ0M2Xfg/PHuXJ/gs=,tag:OYq0g6KYaIgM5M5VvLzj6w==,type:str]
-    password: ENC[AES256_GCM,data:cJsz8POO0bryHX51xdIiYw==,iv:uWMY2ICo19TzbgEwkHjvruQaHBqOCY/YhfMjFWKx+9U=,tag:OjYXhPXKBlu5om47qy6Duw==,type:str]
+    mount_flags: ENC[AES256_GCM,data:bncZhsBi56L95wrL6SkVTZdEV+t/oymNvHGWdzb56a/2V4DCRJlBucdKaQwi+lU=,iv:MRQAJ+ekaV5KYkPJqYqpt4yHeISPD1+0NnogtB9OmbI=,tag:3G1eZQSpC/EmGFrQRtKV5Q==,type:str]
 sops:
     kms: []
     gcp_kms: []
@@ -20,8 +19,8 @@ sops:
             d2xOOWwvL0I2aXZjRlVXaWxjcEJ3UW8K5QKpWKh2oe6cqNmr42doEu3WFsyz7QxX
             2C3jVBqHUpIMHOU4swJKy27AQ4gr/tim7N2V2Qwy5twepqg9oUU1kQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2022-12-27T20:08:05Z"
-    mac: ENC[AES256_GCM,data:KyP2o0xSYGW0RT7dWCWdOqdzyLiwEhOov2QmKgmY3JA4hjFv6rnTVQBiOhw7KIO+oCI33Lxd4CfCPVHv73PWf/yybHw+9Ut58o+E6a0EwtuUoAbjiPCqaz7anZBzKBk2ZAIII8ESSsm2aiKFmdib5z3cOuT4ZkCcoVo+AU4eS9c=,iv:iE0zZWbRa2Nz4YaJIfDWzKoESisLMBf2GyXNp9BCFmk=,tag:6kbd81Bh1Xl9IPv31dxfJQ==,type:str]
+    lastmodified: "2023-08-08T10:05:29Z"
+    mac: ENC[AES256_GCM,data:O0UhHvsvT9T5CCmw9RLdCIdbkUkv22H3mv9ED+GE/eyHnqr+S204LOBfwtaS3XrbWU6y1elS+cNf1tLENf9/4iEFnZP7gYpxnvX0sJgNaimCGithX4JuzB7iyeUKW+xjDG6iXKhOsIPA8AfR6P0pFd9Vy5bBpfNI/xf7gx/r8Ck=,iv:oF/3nzfPN2o/H+l2+IfCoGxu1xKVsuEPZ4zASRp6e/A=,tag:MC0qHzJrw3x9rjLTgmJ3Kg==,type:str]
     pgp: []
     encrypted_regex: ((?i)(pass|secret($|[^N])|key|token|^data$|^stringData))
     version: 3.7.3

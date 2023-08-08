@@ -7,6 +7,9 @@ spec:
     storage: 5Ti
   accessModes:
     - ReadWriteMany
+  nodeStageSecretRef:
+    name: s3-vol-creds
+    namespace: minio
   mountOptions:
     - seal
     - vers=3.0
@@ -15,13 +18,15 @@ spec:
     - dir_mode=0777
     - file_mode=0777
   csi:
-    driver: smb.csi.k8s.io
+    driver: democratic-csi.node-manual
+    readOnly: false
+    fsType: cifs
     volumeHandle: s3-vol
     volumeAttributes:
-      source: "${s3_vol_url}"
-    nodeStageSecretRef:
-      name: s3-vol-creds
-      namespace: minio
+      server: "${s3_vol_host}"
+      share: "${s3_vol_share}"
+      node_attach_driver: smb
+      provisioner_driver: node-manual
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
