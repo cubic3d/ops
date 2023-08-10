@@ -13,3 +13,4 @@ resources:
   - ingress-nginx.yaml
   - postfinance.yaml
   - democratic-csi.yaml
+  - piraeus.yaml
