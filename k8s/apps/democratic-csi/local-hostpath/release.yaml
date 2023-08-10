@@ -28,9 +28,8 @@ spec:
         parameters:
 
     volumeSnapshotClasses:
-      []
-      # - name: local-hostpath
-      #   deletionPolicy: Delete
+      - name: local-hostpath
+        deletionPolicy: Delete
 
     controller:
       enabled: true
