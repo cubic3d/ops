@@ -5,3 +5,4 @@ resources:
   - namespace.yaml
   - ../../../../apps/local-path-provisioner
   - ../../../../apps/democratic-csi/node-manual
+  - ../../../../apps/democratic-csi/local-hostpath
