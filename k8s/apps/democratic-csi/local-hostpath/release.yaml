@@ -22,7 +22,7 @@ spec:
     storageClasses:
       - name: local-hostpath
         defaultClass: false
-        reclaimPolicy: Retain
+        reclaimPolicy: Delete
         volumeBindingMode: WaitForFirstConsumer
         allowVolumeExpansion: false
         parameters:
