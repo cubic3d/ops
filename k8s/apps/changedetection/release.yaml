@@ -52,4 +52,5 @@ spec:
         mountPath: /datastore
         size: 1Gi
         accessMode: ReadWriteOnce
+        storageClass: local-hostpath
         retain: true
