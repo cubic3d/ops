@@ -48,3 +48,19 @@ spec:
       redirectUri: https://minio.${domain}/oauth_callback
 
     users:
+      - accessKey: volsync-island
+        existingSecret: user-passwords
+        existingSecretKey: volsync-island
+        policy: volsync-island
+
+    policies:
+      - name: volsync-island
+        statements:
+          - resources:
+              - "arn:aws:s3:::k8s-backups-island"
+              - "arn:aws:s3:::k8s-backups-island/"
+            actions:
+              - "s3:*"
+
+    buckets:
+      - name: volsync-island
