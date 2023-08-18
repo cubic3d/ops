@@ -57,8 +57,8 @@ spec:
       - name: volsync-island
         statements:
           - resources:
-              - "arn:aws:s3:::k8s-backups-island"
-              - "arn:aws:s3:::k8s-backups-island/"
+              - "arn:aws:s3:::volsync-island"
+              - "arn:aws:s3:::volsync-island/"
             actions:
               - "s3:*"
 
