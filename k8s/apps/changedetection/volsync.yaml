@@ -5,7 +5,7 @@ metadata:
 spec:
   sourcePVC: changedetection-data
   trigger:
-    schedule: "0 6 * * *"
+    schedule: "0 5 * * *"
   restic:
     repository: volsync-changedetection
     copyMethod: Clone
