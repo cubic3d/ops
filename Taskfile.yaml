@@ -114,6 +114,6 @@ tasks:
       - sh: kubectl -n {{ .ns }} get replicationsource {{.rsrc}}
         msg: ReplicationSource "{{ .rsrc }}" or namespace "{{ .ns }}" do not exist
     cmds:
-      - kubectl -n {{ .ns }} patch replicationsources {{ .rsrc }} --type merge -p '{"spec":{"trigger":{"manual":"{{ now }}"}}}'
+      - kubectl -n {{ .ns }} patch replicationsources {{ .rsrc }} --type merge -p '{"spec":{"trigger":{"manual":"{{ now | unixEpoch }}"}}}'
       - kubectl -n {{ .ns }} wait replicationsources {{ .rsrc }} --for condition=Synchronizing=True --timeout=5m
       - kubectl -n {{ .ns }} wait replicationsources {{ .rsrc }} --for condition=Synchronizing=False --timeout=60m
