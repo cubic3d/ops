@@ -1,0 +1,48 @@
+version: "3"
+
+tasks:
+  default:
+    cmd: go-task -l
+
+  k8s:mount:
+    desc: Mounts a PVC to a temporary pod
+    vars:
+      ns: '{{ default "default" .ns }}'
+      pvc: '{{ or .pvc (fail "PersistentVolumeClaim `pvc` is required") }}'
+    preconditions:
+      - sh: kubectl -n {{.ns}} get pvc {{.pvc}}
+        msg: PersistentVolumeClaim "{{ .pvc }}" or namespace "{{ .ns }}" do not exist
+    cmd: |-
+      kubectl run -n {{.ns}} debug-{{.pvc}} -i --tty --rm --image=null --privileged --overrides='
+        {
+          "apiVersion": "v1",
+          "spec": {
+            "containers": [
+              {
+                "name": "debug",
+                "image": "ghcr.io/onedr0p/alpine:rolling",
+                "command": [
+                  "/bin/bash"
+                ],
+                "stdin": true,
+                "stdinOnce": true,
+                "tty": true,
+                "volumeMounts": [
+                  {
+                    "name": "data",
+                    "mountPath": "/data"
+                  }
+                ]
+              }
+            ],
+            "volumes": [
+              {
+                "name": "data",
+                "persistentVolumeClaim": {
+                  "claimName": "{{.pvc}}"
+                }
+              }
+            ],
+            "restartPolicy": "Never"
+          }
+        }'
