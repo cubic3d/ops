@@ -67,7 +67,7 @@ tasks:
               {
                 "name": "list",
                 "image": "ghcr.io/restic/restic:latest",
-                "args": {{ .CLI_ARGS | splitList " " | mustToJson }},
+                "args": {{ .CLI_ARGS | splitArgs | mustToJson }},
                 "stdin": true,
                 "stdinOnce": true,
                 "tty": true,
