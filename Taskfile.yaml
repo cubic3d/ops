@@ -5,7 +5,7 @@ tasks:
     cmd: go-task -l
 
   k8s:mount:
-    desc: Mounts a PVC to a temporary pod
+    desc: Mounts a PVC to a temporary pod (k8s:mount ns=my-ns pvc=my-pvc)
     vars:
       ns: '{{ default "default" .ns }}'
       pvc: '{{ or .pvc (fail "PersistentVolumeClaim `pvc` is required") }}'
@@ -43,6 +43,41 @@ tasks:
                 "persistentVolumeClaim": {
                   "claimName": "{{.pvc}}"
                 }
+              }
+            ],
+            "restartPolicy": "Never"
+          }
+        }'
+
+  volsync:run:
+    desc: Runs an arbitrary restic command for a given ReplicationSource (volsync:list ns=my-ns rsrc=my-rsrc -- snapshots)
+    vars:
+      ns: '{{ default "default" .ns }}'
+      rsrc: '{{ or .rsrc (fail "ReplicationSource `rsrc` is required") }}'
+    preconditions:
+      - sh: kubectl -n {{.ns}} get replicationsource {{.rsrc}}
+        msg: ReplicationSource "{{ .rsrc }}" or namespace "{{ .ns }}" do not exist
+    interactive: true
+    cmd: |-
+      kubectl run -n {{.ns}} volsync-list-{{.rsrc}} -i --tty --rm --image=null --privileged --overrides='
+        {
+          "apiVersion": "v1",
+          "spec": {
+            "containers": [
+              {
+                "name": "list",
+                "image": "ghcr.io/restic/restic:latest",
+                "args": {{ .CLI_ARGS | splitList " " | mustToJson }},
+                "stdin": true,
+                "stdinOnce": true,
+                "tty": true,
+                "envFrom": [
+                  {
+                    "secretRef": {
+                      "name": "volsync-{{.rsrc}}"
+                    }
+                  }
+                ]
               }
             ],
             "restartPolicy": "Never"
