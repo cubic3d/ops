@@ -97,3 +97,10 @@ tasks:
       - task: volsync:run
         vars:
           CLI_ARGS: ls latest --long
+
+  volsync:unlock:
+    desc: Unlocks a repository of a given ReplicationSource (volsync:unlock ns=my-ns rsrc=my-rsrc)
+    cmds:
+      - task: volsync:run
+        vars:
+          CLI_ARGS: unlock --remove-all
