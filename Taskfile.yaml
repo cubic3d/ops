@@ -83,3 +83,17 @@ tasks:
             "restartPolicy": "Never"
           }
         }'
+
+  volsync:list:
+    desc: Lists snapshots for a given ReplicationSource (volsync:list ns=my-ns rsrc=my-rsrc)
+    cmds:
+      - task: volsync:run
+        vars:
+          CLI_ARGS: snapshots
+
+  volsync:latest:
+    desc: Lists files for latest snapshot for a given ReplicationSource (volsync:latest ns=my-ns rsrc=my-rsrc)
+    cmds:
+      - task: volsync:run
+        vars:
+          CLI_ARGS: ls latest --long
