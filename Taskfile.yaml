@@ -25,6 +25,7 @@ tasks:
                 "command": [
                   "/bin/bash"
                 ],
+                "workingDir": "/data",
                 "stdin": true,
                 "stdinOnce": true,
                 "tty": true,
