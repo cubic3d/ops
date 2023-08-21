@@ -104,3 +104,16 @@ tasks:
       - task: volsync:run
         vars:
           CLI_ARGS: unlock --remove-all
+
+  volsync:snapshot:
+    desc: Creates a snapshot for a given ReplicationSource (volsync:snapshot ns=my-ns rsrc=my-rsrc)
+    vars:
+      ns: '{{ default "default" .ns }}'
+      rsrc: '{{ or .rsrc (fail "ReplicationSource `rsrc` is required") }}'
+    preconditions:
+      - sh: kubectl -n {{ .ns }} get replicationsource {{.rsrc}}
+        msg: ReplicationSource "{{ .rsrc }}" or namespace "{{ .ns }}" do not exist
+    cmds:
+      - kubectl -n {{ .ns }} patch replicationsources {{ .rsrc }} --type merge -p '{"spec":{"trigger":{"manual":"{{ now }}"}}}'
+      - kubectl -n {{ .ns }} wait replicationsources {{ .rsrc }} --for condition=Synchronizing=True --timeout=5m
+      - kubectl -n {{ .ns }} wait replicationsources {{ .rsrc }} --for condition=Synchronizing=False --timeout=60m
