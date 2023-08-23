@@ -5,10 +5,12 @@ tasks:
     cmd: go-task -l
 
   k8s:mount:
-    desc: Mounts a PVC to a temporary pod (k8s:mount ns=my-ns pvc=my-pvc)
+    desc: Mounts a PVC to a temporary pod (ns=my-ns pvc=my-pvc)
     vars:
       ns: '{{ default "default" .ns }}'
-      pvc: '{{ or .pvc (fail "PersistentVolumeClaim `pvc` is required") }}'
+    requires:
+      vars:
+        - pvc
     preconditions:
       - sh: kubectl -n {{.ns}} get pvc {{.pvc}}
         msg: PersistentVolumeClaim "{{ .pvc }}" or namespace "{{ .ns }}" do not exist
@@ -50,10 +52,12 @@ tasks:
         }'
 
   volsync:run:
-    desc: Runs an arbitrary restic command for a given ReplicationSource (volsync:list ns=my-ns rsrc=my-rsrc -- snapshots)
+    desc: Runs an arbitrary restic command for a given ReplicationSource (ns=my-ns rsrc=my-rsrc -- snapshots)
     vars:
       ns: '{{ default "default" .ns }}'
-      rsrc: '{{ or .rsrc (fail "ReplicationSource `rsrc` is required") }}'
+    requires:
+      vars:
+        - rsrc
     preconditions:
       - sh: kubectl -n {{.ns}} get replicationsource {{.rsrc}}
         msg: ReplicationSource "{{ .rsrc }}" or namespace "{{ .ns }}" do not exist
@@ -85,31 +89,33 @@ tasks:
         }'
 
   volsync:list:
-    desc: Lists snapshots for a given ReplicationSource (volsync:list ns=my-ns rsrc=my-rsrc)
+    desc: Lists snapshots for a given ReplicationSource (ns=my-ns rsrc=my-rsrc)
     cmds:
       - task: volsync:run
         vars:
           CLI_ARGS: snapshots
 
   volsync:latest:
-    desc: Lists files for latest snapshot for a given ReplicationSource (volsync:latest ns=my-ns rsrc=my-rsrc)
+    desc: Lists files for latest snapshot for a given ReplicationSource (ns=my-ns rsrc=my-rsrc)
     cmds:
       - task: volsync:run
         vars:
           CLI_ARGS: ls latest --long
 
   volsync:unlock:
-    desc: Unlocks a repository of a given ReplicationSource (volsync:unlock ns=my-ns rsrc=my-rsrc)
+    desc: Unlocks a repository of a given ReplicationSource (ns=my-ns rsrc=my-rsrc)
     cmds:
       - task: volsync:run
         vars:
           CLI_ARGS: unlock --remove-all
 
   volsync:snapshot:
-    desc: Creates a snapshot for a given ReplicationSource (volsync:snapshot ns=my-ns rsrc=my-rsrc)
+    desc: Creates a snapshot for a given ReplicationSource (ns=my-ns rsrc=my-rsrc)
     vars:
       ns: '{{ default "default" .ns }}'
-      rsrc: '{{ or .rsrc (fail "ReplicationSource `rsrc` is required") }}'
+    requires:
+      vars:
+        - rsrc
     preconditions:
       - sh: kubectl -n {{ .ns }} get replicationsource {{.rsrc}}
         msg: ReplicationSource "{{ .rsrc }}" or namespace "{{ .ns }}" do not exist
@@ -119,11 +125,12 @@ tasks:
       - kubectl -n {{ .ns }} wait replicationsources {{ .rsrc }} --for condition=Synchronizing=False --timeout=60m
 
   talos:run:
-    desc: Runs an arbitrary talosctl command for a given cluster and node (talos:run cluster=my-cluster node=my-node -- health)
+    desc: Runs an arbitrary talosctl command for a given cluster and node (cluster=my-cluster node=my-node -- health)
     dir: "{{ .ROOT_DIR }}/infrastructure/talos"
-    vars:
-      cluster: '{{ or .cluster (fail "Cluster `cluster` is required") }}'
-      node: '{{ or .node (fail "Node `node` is required") }}'
+    requires:
+      vars:
+        - cluster
+        - node
     preconditions:
       - sh: '[ -d "{{ .cluster }}" ]'
         msg: Cluster "{{ .cluster }}" does not exist
@@ -133,7 +140,7 @@ tasks:
       talosctl --talosconfig "{{ .cluster }}/clusterconfig/talosconfig" -n "{{ .node }}" {{ .CLI_ARGS }}
 
   talos:upgrade:
-    desc: Upgrades talos on a given cluster and node (talos:upgrade cluster=my-cluster node=my-node [version=v1.0.0])
+    desc: Upgrades talos on a given cluster and node (cluster=my-cluster node=my-node [version=v1.0.0])
     vars:
       version_current:
         sh: curl --silent "https://api.github.com/repos/siderolabs/talos/releases/latest" | grep -Po '"tag_name":\ "\K.*?(?=")'
