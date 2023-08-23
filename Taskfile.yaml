@@ -117,3 +117,28 @@ tasks:
       - kubectl -n {{ .ns }} patch replicationsources {{ .rsrc }} --type merge -p '{"spec":{"trigger":{"manual":"{{ now | unixEpoch }}"}}}'
       - kubectl -n {{ .ns }} wait replicationsources {{ .rsrc }} --for condition=Synchronizing=True --timeout=5m
       - kubectl -n {{ .ns }} wait replicationsources {{ .rsrc }} --for condition=Synchronizing=False --timeout=60m
+
+  talos:run:
+    desc: Runs an arbitrary talosctl command for a given cluster and node (talos:run cluster=my-cluster node=my-node -- health)
+    dir: "{{ .ROOT_DIR }}/infrastructure/talos"
+    vars:
+      cluster: '{{ or .cluster (fail "Cluster `cluster` is required") }}'
+      node: '{{ or .node (fail "Node `node` is required") }}'
+    preconditions:
+      - sh: '[ -d "{{ .cluster }}" ]'
+        msg: Cluster "{{ .cluster }}" does not exist
+      - sh: yq -e '.nodes[] | select(.hostname=="{{ .node }}")' {{ .cluster }}/talconfig.yaml
+        msg: Node "{{ .node }}" does not exist in cluster "{{ .cluster }}"
+    cmd: |-
+      talosctl --talosconfig "{{ .cluster }}/clusterconfig/talosconfig" -n "{{ .node }}" {{ .CLI_ARGS }}
+
+  talos:upgrade:
+    desc: Upgrades talos on a given cluster and node (talos:upgrade cluster=my-cluster node=my-node [version=v1.0.0])
+    vars:
+      version_current:
+        sh: curl --silent "https://api.github.com/repos/siderolabs/talos/releases/latest" | grep -Po '"tag_name":\ "\K.*?(?=")'
+    prompt: Upgrade {{ .cluster }}/{{ .node }} to version {{ or .version .version_current }}?
+    cmds:
+      - task: talos:run
+        vars:
+          CLI_ARGS: upgrade -p -i ghcr.io/siderolabs/installer:{{ or .version .version_current }}
