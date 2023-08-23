@@ -142,10 +142,10 @@ tasks:
   talos:upgrade:
     desc: Upgrades talos on a given cluster and node (cluster=my-cluster node=my-node [version=v1.0.0])
     vars:
-      version_current:
+      version_latest:
         sh: curl --silent "https://api.github.com/repos/siderolabs/talos/releases/latest" | grep -Po '"tag_name":\ "\K.*?(?=")'
-    prompt: Upgrade {{ .cluster }}/{{ .node }} to version {{ or .version .version_current }}?
+    prompt: Upgrade {{ .cluster }}/{{ .node }} to version {{ or .version .version_latest }}?
     cmds:
       - task: talos:run
         vars:
-          CLI_ARGS: upgrade -p -i ghcr.io/siderolabs/installer:{{ or .version .version_current }}
+          CLI_ARGS: upgrade -p -i ghcr.io/siderolabs/installer:{{ or .version .version_latest }}
