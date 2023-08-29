@@ -10,6 +10,10 @@ spec:
     repository: volsync-node-red
     copyMethod: Clone
     cacheStorageClassName: local-hostpath
+    moverSecurityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+      fsGroup: 1000
     pruneIntervalDays: 7
     retain:
       daily: 7
