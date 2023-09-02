@@ -33,6 +33,7 @@ spec:
         enabled: true
         size: 1Gi
         accessMode: ReadWriteOnce
+        storageClass: local-hostpath
         retain: true
       config-file:
         enabled: true

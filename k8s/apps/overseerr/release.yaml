@@ -44,4 +44,5 @@ spec:
         mountPath: /app/config
         size: 1Gi
         accessMode: ReadWriteOnce
+        storageClass: local-hostpath
         retain: true
