@@ -85,10 +85,12 @@ spec:
         mountPath: /opt/tplink/EAPController/data
         size: 1Gi
         accessMode: ReadWriteOnce
+        storageClass: local-hostpath
         retain: true
       logs:
         enabled: true
         mountPath: /opt/tplink/EAPController/logs
         size: 1Gi
         accessMode: ReadWriteOnce
+        storageClass: local-hostpath
         retain: true
