@@ -1,0 +1,16 @@
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: recyclarr
+spec:
+  sourcePVC: recyclarr-config
+  trigger:
+    schedule: "0 5 * * *"
+  restic:
+    repository: volsync-recyclarr
+    copyMethod: Clone
+    cacheStorageClassName: local-hostpath
+    pruneIntervalDays: 7
+    retain:
+      daily: 7
+      within: 3d

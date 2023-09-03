@@ -3,6 +3,8 @@ kind: Kustomization
 resources:
   - release.yaml
   - env-secret.yaml
+  - volsync-secret.yaml
+  - volsync.yaml
 configMapGenerator:
   - name: recyclarr-configmap
     files:

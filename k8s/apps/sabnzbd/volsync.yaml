@@ -1,0 +1,20 @@
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: sabnzbd
+spec:
+  sourcePVC: sabnzbd-config
+  trigger:
+    schedule: "0 5 * * *"
+  restic:
+    repository: volsync-sabnzbd
+    copyMethod: Clone
+    cacheStorageClassName: local-hostpath
+    moverSecurityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+    pruneIntervalDays: 7
+    retain:
+      daily: 7
+      within: 3d
