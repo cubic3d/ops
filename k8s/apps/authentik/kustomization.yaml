@@ -3,3 +3,5 @@ kind: Kustomization
 resources:
   - release.yaml
   - values-secret.yaml
+  - volsync-secret.yaml
+  - volsync.yaml
