@@ -39,8 +39,6 @@ spec:
 
     postgresql:
       enabled: true
-      diagnosticMode:
-        enabled: true
 
     redis:
       enabled: true
