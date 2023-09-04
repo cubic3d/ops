@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: authentik
-      version: 2023.6.3
+      version: 2023.8.2
       sourceRef:
         kind: HelmRepository
         name: authentik
@@ -39,19 +39,13 @@ spec:
 
     postgresql:
       enabled: true
-      image:
-        registry: ghcr.io
-        repository: zcube/bitnami-compat/postgresql
-        tag: 11.19.0
+      diagnosticMode:
+        enabled: true
 
     redis:
       enabled: true
       auth:
         enabled: true
-      image:
-        registry: ghcr.io
-        repository: zcube/bitnami-compat/redis
-        tag: 6.2.12
 
     ingress:
       enabled: true
