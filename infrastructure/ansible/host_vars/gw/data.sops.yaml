@@ -389,10 +389,18 @@ settings:
     ip:
         ulaPrefix: fd00:c01d:1ced
     hosts:
-        example:
-            zone: management
-            address: 20
-            mac_enc: ENC[AES256_GCM,data:iKoEwRoyzw3/Fs9yGPAvdJA=,iv:lhf5juKW5iEwDsQrA6URZXrHw+6H7T+Iv9AToMhD3s0=,tag:TvXYL7FOWrHnRABLxJuJbQ==,type:str]
+        zigbee:
+            zone: iot
+            address: 10
+            mac_enc: ENC[AES256_GCM,data:/KBvTpL8yCmLmUa3QL4C5iU=,iv:wwnDzgv7j3vqm9ZN8oyAo4//lpKlRSJ9R2jx4UyczUA=,tag:WsAxE4kkIYm1qdWa6vOPQA==,type:str]
+        nuki:
+            zone: iot
+            address: 11
+            mac_enc: ENC[AES256_GCM,data:o2cB0t02S7xC6ROfhuQSPSI=,iv:kLYw6+x8E2Vw1tuljx5zbkE6EC54hUeB3XW9tZy3MO0=,tag:Tpn5yDuXXAJmPw7TyC9cIA==,type:str]
+        printer:
+            zone: iot
+            address: 12
+            mac_enc: ENC[AES256_GCM,data:8ilLd6wYeqQkDUpjvyeVT3E=,iv:VHEOF0dqbFpqW2pzhRyt6KWbiR/G9FQZVejR2o7fBeY=,tag:ZFQY5v3c6CmogPb7rpIDmA==,type:str]
     services:
         example:
             address: 1.1.1.1
@@ -411,8 +419,8 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-08-06T17:16:53Z"
-    mac: ENC[AES256_GCM,data:UAlTpRoqF3f33J75eIlJc0idqFmrBnPZZZcyJ1FpKzEDwTZTa6SU5tFy4J7XhaC/ujR+vRBZgMwDC1v5ZwzmkXh5Impaf/2KeC6mQT0nOS6b1m3DEUukvYzZXQfLfatBQKmcISyvuoK4hOA6pj4BVmCCDgfO96ijFAACEqUhQLk=,iv:o8ETjJy4Tt5dHKGDqICgWzbajfhT7qBtkycL0jN9Whw=,tag:mhaFbhyOUmJcvWWxQLac1w==,type:str]
+    lastmodified: "2023-09-05T08:58:26Z"
+    mac: ENC[AES256_GCM,data:h1ihWAJnWrobIfZ65BB1dS6c3rYhOmXO0FgGFJWIjrx0voqy9jPi4rIlxpka+N0V7EtbpIv5dPfQCvX9ESjw4wi8WJx58whE9SPi+GQCJTdAKLQgf9usA9QG2QBKmH0oMdHGhrm5ELg2JzQszKOAciS+oChiwNPPCuRrIys1txY=,iv:PcnpDhFTDo/56fwzkGdjdE7///uX/V35Iy0YNa5Vesw=,tag:5PTcUKPFzaPpgNeC7BL4dw==,type:str]
     pgp: []
     encrypted_suffix: _enc
     version: 3.7.3
