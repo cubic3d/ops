@@ -225,6 +225,7 @@ settings:
                         - local
                         - trusted
                         - wireguard
+                        - server
                       default: accept
                       rules:
                         - accept_established: null
@@ -233,6 +234,7 @@ settings:
                         - local
                         - trusted
                         - wireguard
+                        - server
                       default: drop
                       rules:
                         - accept_established: null
@@ -423,8 +425,8 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-09-05T12:07:56Z"
-    mac: ENC[AES256_GCM,data:5EALOL6SSpLLeam0neqyWPdp2zJOWBsaXGCHCFSEXl2qi8M5lhJ0F5wMk7jbvBY4f+ckwchKN6TBanpFB6WP+UoiU/W690zdy5j6tkq5hYjqcsQA//7MQFC4CN3eKgIOSKQtBLjLUNqOq/IIRynQg+CkTNZl8Tm+0ii43sMT500=,iv:sbjBLfq1D9c84PK8LJr3pPccIzZsJSLwE4pi4Y9ucJ0=,tag:biMh4kTSVyamhYSuOfRtEw==,type:str]
+    lastmodified: "2023-09-05T12:35:19Z"
+    mac: ENC[AES256_GCM,data:XJ3fon+SenYFXeDyQgkMLq+q0wxUyvNRevdHOiGjBcq4kI3BRW8l9RJrDlf6YEcqDivv0cDJUkQaFLSeibQmrl1LYVt2j/Rjbztah9MP3I4StMr0LJJ4J5Ka7urzhj9IpJrS8Q49ijVogwkDfbb9N38uiH0Md/Ay0n9/0zKWn3E=,iv:sDeHqI5xeAXBoZY0wrINRHY57gEg5KChuxHctwdh6g8=,tag:EIqqXNw9wNfJnSSMqmrapQ==,type:str]
     pgp: []
     encrypted_suffix: _enc
     version: 3.7.3
