@@ -328,10 +328,20 @@ settings:
                       rules:
                         - accept_established: null
                         - drop_invalid: null
+                    - only:
+                        - iot
+                      default: drop
+                      rules:
+                        - accept_established: null
+                        - drop_invalid: null
+                        - accept_specific_tcp_host_port:
+                            ip: 192.168.40.10
+                            port: 1880
                     - allExcept:
                         - local
                         - trusted
                         - wireguard
+                        - iot
                       default: drop
                       rules:
                         - accept_established: null
@@ -425,8 +435,8 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-09-05T12:35:19Z"
-    mac: ENC[AES256_GCM,data:XJ3fon+SenYFXeDyQgkMLq+q0wxUyvNRevdHOiGjBcq4kI3BRW8l9RJrDlf6YEcqDivv0cDJUkQaFLSeibQmrl1LYVt2j/Rjbztah9MP3I4StMr0LJJ4J5Ka7urzhj9IpJrS8Q49ijVogwkDfbb9N38uiH0Md/Ay0n9/0zKWn3E=,iv:sDeHqI5xeAXBoZY0wrINRHY57gEg5KChuxHctwdh6g8=,tag:EIqqXNw9wNfJnSSMqmrapQ==,type:str]
+    lastmodified: "2023-09-07T11:30:21Z"
+    mac: ENC[AES256_GCM,data:8uvCNcZ3VG5+ogO7OgFesJB7ZBKe3bPFI15q5qbLuuxDA9l8iVQAoEHKQ0iwIeP3suilJxabmn+1KcAc2rQWeNiwoZrY7Gnw2tVi3U4pKxzL57BVPWoryWDsb0/VkG0VCYPkykNDHjSt8SGD52lihwgZHEOQL2GvCvFidTHPs/M=,iv:B+7/Og4Q5K3vGY+9vAYhxz7X+NtfNR+5r5Txx10bLkI=,tag:0s5NuSJvU1RFnIMhrxyGjw==,type:str]
     pgp: []
     encrypted_suffix: _enc
     version: 3.7.3
