@@ -15,7 +15,7 @@ spec:
   values:
     image:
       repository: docker.io/nodered/node-red
-      tag: 3.0.2-14
+      tag: 3.1.0-18
 
     env:
       TZ: Europe/Berlin
