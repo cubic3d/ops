@@ -15,7 +15,7 @@ spec:
   values:
     image:
       repository: ghcr.io/recyclarr/recyclarr
-      tag: 5.4.2
+      tag: 5.4.3
 
     env:
       TZ: Europe/Berlin
