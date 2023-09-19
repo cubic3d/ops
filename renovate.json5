@@ -12,14 +12,17 @@
   suppressNotifications: ["prIgnoreNotification"],
   "helm-values": {
     fileMatch: ["k8s/.+\\.yaml$"],
-    ignorePaths: ["**/_archive/**"],
+    ignorePaths: [
+      "**/gotk-components.yaml",
+      "**/_archive/**",
+    ],
   },
   kubernetes: {
     fileMatch: ["k8s/.+\\.yaml$"],
     ignorePaths: [
       "**/gotk-components.yaml",
       "**/_archive/**",
-      ],
+    ],
   },
   flux: {
     fileMatch: ["k8s/.+\\.yaml$"],
