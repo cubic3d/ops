@@ -15,7 +15,10 @@
   },
   kubernetes: {
     fileMatch: ["k8s/.+\\.yaml$"],
-    ignorePaths: ["**/gotk-components.yaml"],
+    ignorePaths: [
+      "**/gotk-components.yaml",
+      "**/_archive/**"
+      ],
   },
   flux: {
     fileMatch: ["k8s/.+\\.yaml$"],
