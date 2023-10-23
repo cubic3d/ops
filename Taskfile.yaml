@@ -63,13 +63,13 @@ tasks:
         msg: ReplicationSource "{{ .rsrc }}" or namespace "{{ .ns }}" do not exist
     interactive: true
     cmd: |-
-      kubectl run -n {{.ns}} volsync-list-{{.rsrc}} -i --tty --rm --image=null --privileged --overrides='
+      kubectl run -n {{.ns}} volsync-command-{{.rsrc}} -i --tty --rm --image=null --privileged --overrides='
         {
           "apiVersion": "v1",
           "spec": {
             "containers": [
               {
-                "name": "list",
+                "name": "command",
                 "image": "ghcr.io/restic/restic:latest",
                 "args": {{ .CLI_ARGS | splitArgs | mustToJson }},
                 "stdin": true,
