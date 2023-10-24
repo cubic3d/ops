@@ -7,19 +7,23 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.0.3
       sourceRef:
         kind: HelmRepository
         name: template
         namespace: flux-system
   values:
-    image:
-      repository: docker.io/nodered/node-red
-      tag: 3.1.0-18
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: docker.io/nodered/node-red
+              tag: 3.1.0-18
 
-    env:
-      TZ: Europe/Berlin
-      NODE_RED_ENABLE_PROJECTS: "true"
+            env:
+              TZ: Europe/Berlin
+              NODE_RED_ENABLE_PROJECTS: "true"
 
     service:
       main:
@@ -44,7 +48,9 @@ spec:
           - host: "r.${domain}"
             paths:
               - path: /
-                pathType: Prefix
+                service:
+                  name: main
+                  port: http
 
     persistence:
       data:
