@@ -47,6 +47,9 @@ spec:
           - host: "bazarr.${domain}"
             paths:
               - path: /
+                service:
+                  name: main
+                  port: http
 
     persistence:
       config:
