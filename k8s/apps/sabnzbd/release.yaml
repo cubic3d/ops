@@ -72,7 +72,7 @@ spec:
       downloads:
         enabled: true
         existingClaim: media
-        subPath: downloads
         retain: true
         globalMounts:
           - path: /media/downloads
+            subPath: downloads
