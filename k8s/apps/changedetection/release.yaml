@@ -55,8 +55,9 @@ spec:
     persistence:
       data:
         enabled: true
-        mountPath: /datastore
         size: 1Gi
         accessMode: ReadWriteOnce
         storageClass: local-hostpath
         retain: true
+        globalMounts:
+          - path: /datastore
