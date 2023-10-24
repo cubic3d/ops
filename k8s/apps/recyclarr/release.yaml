@@ -7,22 +7,26 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.0.3
       sourceRef:
         kind: HelmRepository
         name: template
         namespace: flux-system
   values:
-    image:
-      repository: ghcr.io/recyclarr/recyclarr
-      tag: 6.0.2
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: ghcr.io/recyclarr/recyclarr
+              tag: 6.0.2
 
-    env:
-      TZ: Europe/Berlin
+            env:
+              TZ: Europe/Berlin
 
-    envFrom:
-      - secretRef:
-          name: recyclarr-config
+            envFrom:
+              - secretRef:
+                  name: recyclarr-config
 
     service:
       main:
@@ -40,5 +44,6 @@ spec:
         type: configMap
         name: recyclarr-configmap
         subPath: recyclarr.yml
-        mountPath: /config/recyclarr.yml
         readOnly: true
+        globalMounts:
+          - path: /config/recyclarr.yml
