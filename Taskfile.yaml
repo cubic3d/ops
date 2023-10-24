@@ -51,6 +51,12 @@ tasks:
           }
         }'
 
+  k8s:cleanup-pods:
+    desc: Removes succeeded and failed pods from all namespaces
+    cmds:
+      - kubectl delete pod -A --field-selector=status.phase==Succeeded
+      - kubectl delete pod -A --field-selector=status.phase==Failed
+
   volsync:run:
     desc: Runs an arbitrary restic command for a given ReplicationSource (ns=my-ns rsrc=my-rsrc -- snapshots)
     vars:
