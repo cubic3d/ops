@@ -21,12 +21,12 @@ spec:
               repository: ghcr.io/onedr0p/prowlarr-develop
               tag: 1.10.0.4047@sha256:f8c30152ed996c1631bbfa0cdebe25b7803d902667acc5dc4475bdb11c0c1f64
 
-    env:
-      TZ: Europe/Berlin
+            env:
+              TZ: Europe/Berlin
 
-    envFrom:
-      - secretRef:
-          name: prowlarr-config
+            envFrom:
+              - secretRef:
+                  name: prowlarr-config
 
     service:
       main:
