@@ -3,7 +3,6 @@ kind: Kustomization
 resources:
   - jetstack.yaml
   - metallb.yaml
-  - ebrianne.yaml
   - metrics-server.yaml
   - template.yaml
   - external-dns.yaml
