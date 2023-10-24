@@ -54,7 +54,8 @@ spec:
         enabled: true
         existingClaim: media
         subPath: media
-        readOnly: true
         retain: true
         globalMounts:
           - path: /media/media
+            subPath: media
+            readOnly: true
