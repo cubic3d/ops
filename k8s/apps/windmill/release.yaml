@@ -22,7 +22,7 @@ spec:
     windmill:
       appReplicas: 1
       lspReplicas: 1
-      baseDomain: windmill.${domain}
+      baseDomain: w.${domain}
       baseProtocol: https
 
       workerGroups:
