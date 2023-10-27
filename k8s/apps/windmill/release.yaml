@@ -16,28 +16,31 @@ spec:
     - kind: Secret
       name: windmill-values
   values:
+    global:
+      storageClass: local-hostpath
+
     windmill:
       appReplicas: 1
       lspReplicas: 1
       baseDomain: windmill.${domain}
       baseProtocol: https
 
-    workerGroups:
-      - name: default
-        replicas: 1
-        resources:
-          requests:
-            memory: 1028Mi
-            cpu: 500m
-          limits:
-            memory: 2048Mi
-            cpu: 1000m
-      - name: native
-        replicas: 1
-        resources:
-          requests:
-            memory: 128Mi
-            cpu: 100m
-          limits:
-            memory: 256Mi
-            cpu: 200m
+      workerGroups:
+        - name: default
+          replicas: 1
+          resources:
+            requests:
+              memory: 1028Mi
+              cpu: 500m
+            limits:
+              memory: 2048Mi
+              cpu: 1000m
+        - name: native
+          replicas: 1
+          resources:
+            requests:
+              memory: 128Mi
+              cpu: 100m
+            limits:
+              memory: 256Mi
+              cpu: 200m
