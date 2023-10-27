@@ -44,3 +44,7 @@ spec:
             limits:
               memory: 256Mi
               cpu: 200m
+
+    ingress:
+      annotations:
+        external-dns.alpha.kubernetes.io/target: "${public_host}"
