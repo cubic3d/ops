@@ -2,7 +2,7 @@ clusterName: island
 
 # renovate: image depName=ghcr.io/siderolabs/installer
 talosVersion: v1.5.5
-# renovate: image depName=registry.k8s.io/kube-apiserver
+# renovate: image depName=ghcr.io/siderolabs/kubelet
 kubernetesVersion: v1.28.3
 
 endpoint: https://${domain}:6443
