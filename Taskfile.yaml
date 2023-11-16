@@ -108,12 +108,25 @@ tasks:
         vars:
           CLI_ARGS: ls latest --long
 
-  volsync:unlock:
+  volsync:unlock-now:
     desc: Unlocks a repository of a given ReplicationSource (ns=my-ns rsrc=my-rsrc)
     cmds:
       - task: volsync:run
         vars:
           CLI_ARGS: unlock --remove-all
+
+  volsync:unlock:
+    desc: Unlocks a repository of a given ReplicationSource on next run (ns=my-ns rsrc=my-rsrc)
+    vars:
+      ns: '{{ default "default" .ns }}'
+    requires:
+      vars:
+        - rsrc
+    preconditions:
+      - sh: kubectl -n {{ .ns }} get replicationsource {{.rsrc}}
+        msg: ReplicationSource "{{ .rsrc }}" or namespace "{{ .ns }}" do not exist
+    cmds:
+      - kubectl -n {{ .ns }} patch replicationsources {{ .rsrc }} --type merge -p '{"spec":{"restic":{"unlock":"{{ now | unixEpoch }}"}}}'
 
   volsync:snapshot:
     desc: Creates a snapshot for a given ReplicationSource (ns=my-ns rsrc=my-rsrc)
