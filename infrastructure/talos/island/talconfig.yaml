@@ -1,7 +1,7 @@
 clusterName: island
 
 # renovate: image depName=ghcr.io/siderolabs/installer
-talosVersion: v1.5.4
+talosVersion: v1.5.5
 # renovate: image depName=registry.k8s.io/kube-apiserver
 kubernetesVersion: v1.28.3
 
