@@ -1,0 +1,56 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: shlink
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: app-template
+      version: 2.2.0
+      sourceRef:
+        kind: HelmRepository
+        name: template
+        namespace: flux-system
+  values:
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: ghcr.io/shlinkio/shlink
+              tag: 3.6.4-non-root
+
+            env:
+              DEFAULT_DOMAIN: "s.${domain}"
+              IS_HTTPS_ENABLED: "true"
+              TIMEZONE: Europe/Berlin
+              AUTO_RESOLVE_TITLES: "true"
+              DEFAULT_SHORT_CODES_LENGTH: 4
+              MULTI_SEGMENT_SLUGS_ENABLED: "true"
+              SHORT_URL_TRAILING_SLASH: "true"
+              DISABLE_TRACKING_FROM: 10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
+              ANONYMIZE_REMOTE_ADDR: "false"
+
+            envFrom:
+              - secretRef:
+                  name: shlink-config
+
+    service:
+      main:
+        ports:
+          http:
+            port: 8080
+
+    ingress:
+      main:
+        enabled: true
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "${public_host}"
+        hosts:
+          - host: "s.${domain}"
+            paths:
+              - path: /
+                service:
+                  name: main
+                  port: http
