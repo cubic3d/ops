@@ -14,3 +14,4 @@ resources:
   - democratic-csi.yaml
   - piraeus.yaml
   - windmill.yaml
+  - cloudnative-pg.yaml
