@@ -52,6 +52,10 @@ spec:
         existingSecret: user-passwords
         existingSecretKey: volsync-island
         policy: volsync-island
+      - accessKey: cnpg-island
+        existingSecret: user-passwords
+        existingSecretKey: cnpg-island
+        policy: cnpg-island
 
     policies:
       - name: volsync-island
@@ -61,6 +65,14 @@ spec:
               - "arn:aws:s3:::volsync-island/*"
             actions:
               - "s3:*"
+      - name: cnpg-island
+        statements:
+          - resources:
+              - "arn:aws:s3:::cnpg-island"
+              - "arn:aws:s3:::cnpg-island/*"
+            actions:
+              - "s3:*"
 
     buckets:
       - name: volsync-island
+      - name: cnpg-island
