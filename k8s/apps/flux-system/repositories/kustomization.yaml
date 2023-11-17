@@ -15,3 +15,4 @@ resources:
   - piraeus.yaml
   - windmill.yaml
   - cloudnative-pg.yaml
+  - bitnami.yaml
