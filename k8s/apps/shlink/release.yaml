@@ -22,7 +22,7 @@ spec:
               tag: 14
             envFrom: &envFrom
               - secretRef:
-                  name: shlink-secret
+                  name: shlink-config
 
         containers:
           main:
