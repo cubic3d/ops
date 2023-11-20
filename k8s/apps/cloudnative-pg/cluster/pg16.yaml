@@ -31,6 +31,7 @@ spec:
     barmanObjectStore:
       destinationPath: s3://cnpg-${cluster_name}/
       endpointURL: http://minio.minio.svc.cluster.local:9000
+      serverName: pg16-v1
       wal:
         compression: bzip2
         maxParallel: 4
@@ -41,6 +42,25 @@ spec:
         secretAccessKey:
           name: cloudnative-pg
           key: aws-secret-access-key
+
+  # bootstrap:
+  #   recovery:
+  #     source: pg16-v1
+  # externalClusters:
+  #   - name: pg16-v1
+  #     barmanObjectStore:
+  #       destinationPath: s3://cnpg-${cluster_name}/
+  #       endpointURL: http://minio.minio.svc.cluster.local:9000
+  #       wal:
+  #         compression: bzip2
+  #         maxParallel: 4
+  #       s3Credentials:
+  #         accessKeyId:
+  #           name: cloudnative-pg
+  #           key: aws-access-key-id
+  #         secretAccessKey:
+  #           name: cloudnative-pg
+  #           key: aws-secret-access-key
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: ScheduledBackup
