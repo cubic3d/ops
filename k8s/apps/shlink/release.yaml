@@ -15,6 +15,15 @@ spec:
   values:
     controllers:
       main:
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: 14
+            envFrom: &envFrom
+              - secretRef:
+                  name: shlink-secret
+
         containers:
           main:
             image:
@@ -38,9 +47,7 @@ spec:
                 redis-node-1.redis-headless.redis.svc.cluster.local:26379,\
                 redis-node-2.redis-headless.redis.svc.cluster.local:26379"
 
-            envFrom:
-              - secretRef:
-                  name: shlink-config
+            envFrom: *envFrom
 
     service:
       main:
