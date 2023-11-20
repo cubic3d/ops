@@ -42,7 +42,7 @@ spec:
               ANONYMIZE_REMOTE_ADDR: "false"
               REDIS_PUB_SUB_ENABLED: "true"
               REDIS_SENTINEL_SERVICE: redis-master
-              REDIS_SERVERS: redis-node-0.redis-headless.redis.svc.cluster.local:26379
+              REDIS_SERVERS: redis-node-0.redis-headless.redis.svc.cluster.local:26379,
 
             envFrom: *envFrom
 
