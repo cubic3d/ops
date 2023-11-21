@@ -89,7 +89,7 @@ spec:
               tag: 3.10.2
 
             env:
-              SHLINK_SERVER_URL: http://shlink.shlink.svc.cluster.local:8080
+              SHLINK_SERVER_URL: "s.${domain}"
 
             envFrom:
               - secretRef:
