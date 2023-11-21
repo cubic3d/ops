@@ -89,7 +89,7 @@ spec:
               tag: 3.10.2
 
             env:
-              SHLINK_SERVER_URL: "s.${domain}"
+              SHLINK_SERVER_URL: https://s.${domain}
 
             envFrom:
               - secretRef:
