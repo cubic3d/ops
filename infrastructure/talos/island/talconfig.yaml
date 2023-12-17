@@ -1,7 +1,7 @@
 clusterName: island
 
 # renovate: image depName=ghcr.io/siderolabs/installer
-talosVersion: v1.5.5
+talosVersion: v1.6.0
 # renovate: image depName=ghcr.io/siderolabs/kubelet
 kubernetesVersion: v1.28.4
 
