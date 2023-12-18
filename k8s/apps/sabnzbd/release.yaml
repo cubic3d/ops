@@ -35,6 +35,13 @@ spec:
               - secretRef:
                   name: sabnzbd-config
 
+            resources:
+              requests:
+                cpu: 200m
+                memory: 2Gi
+              limits:
+                memory: 4Gi
+
     service:
       main:
         ports:
