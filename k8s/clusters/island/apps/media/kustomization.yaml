@@ -13,3 +13,4 @@ resources:
   - ../../../../apps/overseerr
   - ../../../../apps/plex
   - ../../../../apps/recyclarr
+  - ../../../../apps/tautulli
