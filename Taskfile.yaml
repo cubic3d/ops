@@ -173,7 +173,7 @@ tasks:
     desc: Upgrades k8s on a given cluster and node (cluster=my-cluster node=my-node [version=v1.0.0])
     vars:
       version_latest:
-        sh: curl --silent "https://api.github.com/repos/kubernetes/kubernetes/releases/latest" | grep -Po '"tag_name":\ "\K.*?(?=")'
+        sh: curl --silent "https://api.github.com/repos/siderolabs/kubelet/releases/latest" | grep -Po '"tag_name":\ "\K.*?(?=")'
     prompt: Upgrade k8s on {{ .cluster }}/{{ .node }} to version {{ or .version .version_latest }}?
     cmds:
       - task: talos:run
