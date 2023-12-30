@@ -3,7 +3,7 @@ kind: Secret
 metadata:
     name: media-creds
 stringData:
-    mount_flags: ENC[AES256_GCM,data:N4yqjd02HQOpbE6PhdMx+g/6T0GJG9REh7n0DZicO/X1asdf18LxNQgAtNTeJbM=,iv:KV7D6k9KTtPiwrrgtumcF3rbKqH5Vbk7i/qAtHKtRZs=,tag:xZCfCb7xpq9GeNkNSY3/DQ==,type:str]
+    mount_flags: ENC[AES256_GCM,data:4BFFEJexm5Hr5KAGCJeFfSlMrNBezJ5Y7+pqZLMOKf6jkDVWBUOwoFsNP5GIEZE=,iv:MXzrFYsZ7qfMwr8H78JqpPi7xKx03+0hfR0x/qyPxHc=,tag:+px67mxyJe8Otg+8vFM2gw==,type:str]
 sops:
     kms: []
     gcp_kms: []
@@ -19,8 +19,8 @@ sops:
             d2xOOWwvL0I2aXZjRlVXaWxjcEJ3UW8K5QKpWKh2oe6cqNmr42doEu3WFsyz7QxX
             2C3jVBqHUpIMHOU4swJKy27AQ4gr/tim7N2V2Qwy5twepqg9oUU1kQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-08-08T13:52:29Z"
-    mac: ENC[AES256_GCM,data:5i7txg83VRJ0T+a9ZGeiNATKayqGTlg94wJ7S1VOzjkYMsiqJ/8Ezsg7wlU5yf9Bj7XannET6rdHJPgPEZ3RvFFhgZMM2GuAG3QXK6sVBUx87CX6Pklpy10Ur1T2c/3WFiZnH3VYhK4RLgV13V6zvzohaX4YOgRTO4XF4GJ3M2A=,iv:UNs/cRjfL+VzPFBXEmg1zxCnXFUQOUsc/dPGHDDBB2M=,tag:UinywlHatehn6w6mM+xTTA==,type:str]
+    lastmodified: "2023-12-30T19:45:01Z"
+    mac: ENC[AES256_GCM,data:gpebX+J/bk20akkBgyL1UhLAprspBVv7JdHwOWJmL5DA189SvrHzyGsn2Jdxaz09EJPKIYOKveGwK/Hl7dyUjnAikb7dyYwsnB8WJNimJJclmgv3xyOXIPzaAdAR1YG8vfe0UC4d3WEvLu6AzVH0FErL0ZQtIGU8OQmNbRBvVjY=,iv:v6YR0hbJ6xhmdRxaXvkfToGDlMDmcobq7xxA4Q9iqhA=,tag:Zpi3tndPgS7wZSexcOTpGQ==,type:str]
     pgp: []
     encrypted_regex: ((?i)(pass|secret($|[^N])|key|token|^data$|^stringData))
-    version: 3.7.3
+    version: 3.8.1
