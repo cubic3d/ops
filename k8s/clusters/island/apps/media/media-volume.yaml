@@ -10,8 +10,8 @@ spec:
   mountOptions:
     - seal
     - vers=3.0
-    - uid=1000
-    - gid=1000
+    - uid=568
+    - gid=568
     - dir_mode=0777
     - file_mode=0777
   csi:
