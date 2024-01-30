@@ -86,7 +86,7 @@ spec:
           main:
             image:
               repository: ghcr.io/shlinkio/shlink-web-client
-              tag: 4.0.0
+              tag: 3.10.2
 
             env:
               SHLINK_SERVER_URL: https://s.${domain}
@@ -99,7 +99,7 @@ spec:
       main:
         ports:
           http:
-            port: 8080
+            port: 80
 
     ingress:
       main:
