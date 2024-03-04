@@ -26,15 +26,17 @@ spec:
 
     global:
       storageClass: local-hostpath
-      envFrom:
-        AUTHENTIK_BOOTSTRAP_PASSWORD:
-          secretKeyRef:
-            name: authentik-values
-            key: initialPassword
-        AUTHENTIK_BOOTSTRAP_TOKEN:
-          secretKeyRef:
-            name: authentik-values
-            key: initialToken
+      env:
+        - name: AUTHENTIK_BOOTSTRAP_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: authentik-values
+              key: initialPassword
+        - name: AUTHENTIK_BOOTSTRAP_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: authentik-values
+              key: initialToken
 
     postgresql:
       enabled: true
