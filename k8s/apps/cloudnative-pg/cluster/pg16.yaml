@@ -30,7 +30,7 @@ spec:
     retentionPolicy: 30d
     barmanObjectStore:
       destinationPath: s3://cnpg-${cluster_name}/
-      endpointURL: http://minio.minio.svc.cluster.local:9000
+      endpointURL: https://3fd0568f9882d2dceb5677fa18bccf23.eu.r2.cloudflarestorage.com
       serverName: pg16-v1
       wal:
         compression: bzip2
