@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.6.0
+      version: 3.0.2
       sourceRef:
         kind: HelmRepository
         name: template
@@ -24,15 +24,26 @@ spec:
             env:
               TZ: Europe/Berlin
 
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+              startup:
+                enabled: true
+                spec:
+                  failureThreshold: 30
+                  periodSeconds: 5
+
     service:
       main:
+        controller: main
         ports:
           http:
             port: 6767
 
     ingress:
       main:
-        enabled: true
         annotations:
           external-dns.alpha.kubernetes.io/target: "${public_host}"
           nginx.ingress.kubernetes.io/auth-url: |-
@@ -48,17 +59,15 @@ spec:
             paths:
               - path: /
                 service:
-                  name: main
+                  identifier: main
                   port: http
 
     persistence:
       config:
-        enabled: true
         size: 1Gi
         accessMode: ReadWriteOnce
         storageClass: local-hostpath
         retain: true
       media:
-        enabled: true
         existingClaim: media
         retain: true
