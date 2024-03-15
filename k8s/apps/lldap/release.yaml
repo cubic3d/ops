@@ -33,8 +33,6 @@ spec:
 
             env:
               TZ: Europe/Berlin
-              LLDAP_HTTP_PORT: &port 80
-              LLDAP_LDAP_PORT: &ldapPort 389
 
             envFrom: *envFrom
 
@@ -55,9 +53,11 @@ spec:
         ports:
           http:
             primary: true
-            port: *port
+            port: 80
+            targetPort: 17170
           ldap:
-            port: *ldapPort
+            port: 389
+            targetPort: 3890
 
     ingress:
       main:
