@@ -50,10 +50,11 @@ spec:
                   periodSeconds: 5
 
     service:
-      main:
+      app:
         controller: lldap
         ports:
           http:
+            primary: true
             port: *port
           ldap:
             port: *ldapPort
