@@ -33,6 +33,7 @@ spec:
 
             env:
               TZ: Europe/Berlin
+              LLDAP_LDAP_BASE_DN: dc=yachthafen
 
             envFrom: *envFrom
 
