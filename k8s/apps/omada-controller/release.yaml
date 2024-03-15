@@ -55,6 +55,7 @@ spec:
             port: 8043
             nodePort: 8043
             protocol: TCP
+            primary: true
           app-discovery:
             port: 27001
             nodePort: 27001
