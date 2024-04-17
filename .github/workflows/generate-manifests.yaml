@@ -54,7 +54,7 @@ jobs:
           kustomize build ${{ matrix.dir }} --enable-helm -o "${{ matrix.dir }}/deploy.yaml"
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v6.0.3
+        uses: peter-evans/create-pull-request@v6.0.4
         with:
           branch: gen-manifest/${{ steps.build-manifests.outputs.cluster }}/${{ steps.build-manifests.outputs.app }}
           delete-branch: true
