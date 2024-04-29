@@ -3,7 +3,7 @@ clusterName: island
 # renovate: image depName=ghcr.io/siderolabs/installer
 talosVersion: v1.7.0
 # renovate: image depName=ghcr.io/siderolabs/kubelet
-kubernetesVersion: v1.29.4
+kubernetesVersion: v1.30.0
 
 endpoint: https://${domain}:6443
 allowSchedulingOnMasters: true
