@@ -25,6 +25,12 @@ spec:
       baseDomain: w.${domain}
       baseProtocol: https
 
+      app:
+        resources:
+          requests:
+            cpu: 10m
+            memory: 300Mi
+
       workerGroups:
         - name: default
           replicas: 1
