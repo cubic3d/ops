@@ -40,6 +40,10 @@ spec:
 
     postgresql:
       enabled: true
+      primary:
+        resources:
+          requests:
+            cpu: 50m
 
     redis:
       enabled: true

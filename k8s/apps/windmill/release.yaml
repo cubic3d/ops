@@ -45,6 +45,12 @@ spec:
               memory: 256Mi
               cpu: 200m
 
+    postgresql:
+      primary:
+        resources:
+          requests:
+            cpu: 50m
+
     ingress:
       annotations:
         external-dns.alpha.kubernetes.io/target: "${public_host}"
