@@ -4,3 +4,4 @@ namespace: changedetection
 resources:
   - namespace.yaml
   - ../../../../apps/changedetection
+  - ../../../../apps/changedetection/sockpuppetbrowser
