@@ -25,6 +25,7 @@ spec:
             env:
               TZ: Europe/Berlin
               BASE_URL: https://changedetection.${domain}
+              PLAYWRIGHT_DRIVER_URL: ws://changedetection:3000
 
             probes:
               liveness:
