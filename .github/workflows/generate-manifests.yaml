@@ -14,7 +14,7 @@ jobs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - name: Check out code
-        uses: actions/checkout@v4.1.6
+        uses: actions/checkout@v4.1.7
         with:
           fetch-depth: 2
 
@@ -41,7 +41,7 @@ jobs:
       dir: ${{ matrix.dir }}
     steps:
       - name: Check out code
-        uses: actions/checkout@v4.1.6
+        uses: actions/checkout@v4.1.7
 
       - name: Setup Kustomize
         uses: imranismail/setup-kustomize@v2.1.0
