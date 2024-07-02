@@ -7,10 +7,13 @@ sonarr:
     delete_old_custom_formats: true
     replace_existing_custom_formats: true
     media_naming:
-      folder: default
-      movie:
+      series: default
+      season: default
+      episodes:
         rename: true
-        standard: anime
+        standard: default
+        daily: default
+        anime: default
     quality_definition:
       type: series
     quality_profiles:
@@ -81,13 +84,10 @@ radarr:
     delete_old_custom_formats: true
     replace_existing_custom_formats: true
     media_naming:
-      series: default
-      season: default
-      episodes:
+      folder: default
+      movie:
         rename: true
-        standard: default
-        daily: default
-        anime: default
+        standard: anime
     quality_definition:
       type: movie
     quality_profiles:
