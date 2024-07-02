@@ -15,12 +15,17 @@ spec:
         namespace: flux-system
   values:
     controllers:
-      main:
+      recyclarr:
+        type: cronjob
+        cronjob:
+          schedule: "@daily"
         containers:
-          main:
+          app:
             image:
               repository: ghcr.io/recyclarr/recyclarr
               tag: 7.0.0
+
+            args: ["sync"]
 
             env:
               TZ: Europe/Berlin
@@ -28,17 +33,6 @@ spec:
             envFrom:
               - secretRef:
                   name: recyclarr-config
-
-            probes:
-              liveness:
-                enabled: true
-              readiness:
-                enabled: true
-              startup:
-                enabled: true
-                spec:
-                  failureThreshold: 30
-                  periodSeconds: 5
 
     persistence:
       config:
