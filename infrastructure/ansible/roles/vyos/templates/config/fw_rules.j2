@@ -30,6 +30,13 @@
   set firewall {{ path }} log 'enable'
 {% endmacro %}
 
+{% macro accept_mdns(path) %}
+  set firewall {{ path }} action 'accept'
+  set firewall {{ path }} protocol 'udp'
+  set firewall {{ path }} destination port '5353'
+  set firewall {{ path }} log 'enable'
+{% endmacro %}
+
 {% macro drop_icmpv6_hoplimit1(path) %}
   set firewall {{ path }} action 'drop'
   set firewall {{ path }} protocol 'icmpv6'

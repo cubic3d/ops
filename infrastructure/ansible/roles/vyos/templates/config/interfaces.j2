@@ -97,6 +97,10 @@ set service dhcp-server global-parameters 'option capwap code 138 = ip-address;'
     set service router-advert interface {{ interface }} prefix ::/64 valid-lifetime '86400'
     set service router-advert interface {{ interface }} prefix ::/64 deprecate-prefix
     set service router-advert interface {{ interface }} name-server '{{ settings.ip.ulaPrefix }}:{{ zone.vlan }}::1'
+    {# mDNS #}
+    {% if zone.mdns_repeater is defined %}
+      set service mdns repeater interface '{{ interface }}'
+    {% endif %}
     {# DHCP Server #}
     set service dhcp-server shared-network-name {{ zoneName }} authoritative
     set service dhcp-server shared-network-name {{ zoneName }} description '{{ zone.name }}'
