@@ -421,9 +421,13 @@ settings:
             zone: server
             address: 10
             mac_enc: ENC[AES256_GCM,data:HH0/DZ9+BTXxjVG9InzPLlw=,iv:1ZR5/5c9pU9tN7bl90A7yf1/RQM4d6mrYiqtRnUAh+M=,tag:JHnjfVgVtMCDRK6AoQ1etA==,type:str]
+        genma:
+            zone: server
+            address: 11
+            mac_enc: ENC[AES256_GCM,data:M9hZysA0LYSd8aENaktNTnU=,iv:VlEBGkt3ijdX1auHx/u/5E0J5SP/KtW7hQi34OAhYtE=,tag:y+xhnLlvodwlJh+uHEDieg==,type:str]
     services:
-        example:
-            address: 1.1.1.1
+        nas:
+            address: 192.168.40.11
 sops:
     kms: []
     gcp_kms: []
@@ -439,8 +443,8 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-07-14T12:20:02Z"
-    mac: ENC[AES256_GCM,data:3z6J6NQW2y/KHNmdqDiQIKinkud0bb8DG+9CRC0r/kTf040wFs2cyX3e72JWPOdG+/DaOS6a6+Gh3cCARSQ34mJli1dk8cvUHOGURZm541HDkt8hsSsiTAwxPj3NZyqHEimAG0EtWDLJVokqsbaJRAsoSP1WrltTttI1R134QO8=,iv:3SsQzMs1z3FgyniIRpL7KV071s8pWq8lfXU4oEo0N7I=,tag:v9gITL4jVLblNm/x0kliyQ==,type:str]
+    lastmodified: "2024-08-01T20:54:52Z"
+    mac: ENC[AES256_GCM,data:I7/25JuPilarwUxqwerHDHXBcOfpFbs8lmdkjfXEvzKCMR7lFLTFScyMMjndFl8TAlZLAwKqH39BqGhsLaEGwlhbjjyMMNNSYLVM2uvrSRkaLDpYMyF35m8l+QsZ7Aj81IpGbFt2QaFIlLOSPtiMl1I+w1S9XZObKFlW3uHZDUY=,iv:3OqJ9hyMsgBNqQLD4U7VJaoanRlT7osfcq8BhmzPibg=,tag:4yVRcK/91l7MA9YWOb3krA==,type:str]
     pgp: []
     encrypted_suffix: _enc
-    version: 3.8.1
+    version: 3.9.0
