@@ -222,6 +222,7 @@ settings:
             interface: br0
             vlan: 10
             mdns_repeater: true
+            disable_ra: true
             policies:
                 from4:
                     - only:
@@ -443,8 +444,8 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-08-01T20:54:52Z"
-    mac: ENC[AES256_GCM,data:I7/25JuPilarwUxqwerHDHXBcOfpFbs8lmdkjfXEvzKCMR7lFLTFScyMMjndFl8TAlZLAwKqH39BqGhsLaEGwlhbjjyMMNNSYLVM2uvrSRkaLDpYMyF35m8l+QsZ7Aj81IpGbFt2QaFIlLOSPtiMl1I+w1S9XZObKFlW3uHZDUY=,iv:3OqJ9hyMsgBNqQLD4U7VJaoanRlT7osfcq8BhmzPibg=,tag:4yVRcK/91l7MA9YWOb3krA==,type:str]
+    lastmodified: "2024-08-23T08:35:24Z"
+    mac: ENC[AES256_GCM,data:obA8ErMs9ny/pHF/ODH8PjQIewCFnj+QykFrDkr4IEKoLP3Y53XHwujJjDXZUgUqJP4wMXBkE1oZ7Jv7b5Rsf0h7hv0gGflA1kh+qkFN4axbgMETArkv2idQlDV4l+3bfG+xd6BsF4ltUIy+SBDHBoqCHQfMen26wLuj11N8fT8=,iv:X4C0ibWV4hMscijB0f7fWHmFRpB+nvETAprtceFAxPs=,tag:2/bbinHwcKvIhEWybXk1Gw==,type:str]
     pgp: []
     encrypted_suffix: _enc
     version: 3.9.0

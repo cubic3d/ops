@@ -94,6 +94,9 @@ set service dhcp-server global-parameters 'option capwap code 138 = ip-address;'
     {# IPv6 ULA #}
     set interfaces {{ interfaceType }} {{ path }} address '{{ settings.ip.ulaPrefix }}:{{ zone.vlan }}::1/128'
     {# RA #}
+    {% if zone.disable_ra is defined and zone.disable_ra %}
+      set service router-advert interface {{ interface }} no-send-advert
+    {% endif %}
     set service router-advert interface {{ interface }} prefix ::/64 valid-lifetime '86400'
     set service router-advert interface {{ interface }} prefix ::/64 deprecate-prefix
     set service router-advert interface {{ interface }} name-server '{{ settings.ip.ulaPrefix }}:{{ zone.vlan }}::1'
