@@ -14,3 +14,4 @@ resources:
   - ../../../../apps/plex
   - ../../../../apps/recyclarr
   - ../../../../apps/tautulli
+  - ../../../../apps/maintainerr
