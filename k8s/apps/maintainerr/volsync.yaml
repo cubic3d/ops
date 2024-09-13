@@ -3,7 +3,7 @@ kind: ReplicationSource
 metadata:
   name: maintainerr
 spec:
-  sourcePVC: maintainerr-config
+  sourcePVC: maintainerr-data
   trigger:
     schedule: "0 5 * * *"
   restic:
