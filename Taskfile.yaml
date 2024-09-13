@@ -23,9 +23,9 @@ tasks:
             "containers": [
               {
                 "name": "debug",
-                "image": "ghcr.io/onedr0p/alpine:rolling",
+                "image": "docker.io/library/alpine:edge",
                 "command": [
-                  "/bin/bash"
+                  "/bin/sh"
                 ],
                 "workingDir": "/data",
                 "stdin": true,
