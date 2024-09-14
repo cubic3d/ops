@@ -126,3 +126,9 @@ spec:
             main:
               - path: /media/downloads/qbittorrent
                 subPath: downloads/qbittorrent
+      empty-config:
+        type: emptyDir
+        advancedMounts:
+          main:
+            port-forward:
+              - path: /config
