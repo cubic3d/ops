@@ -132,3 +132,12 @@ spec:
           main:
             port-forward:
               - path: /config
+      servers:
+        size: 50Mi
+        accessMode: ReadWriteOnce
+        storageClass: local-hostpath
+        retain: true
+        advancedMounts:
+          main:
+            gluetun:
+              - path: /gluetun
