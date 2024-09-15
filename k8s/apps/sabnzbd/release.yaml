@@ -16,6 +16,11 @@ spec:
   values:
     controllers:
       main:
+        pod:
+          securityContext:
+            runAsUser: 568
+            runAsGroup: 568
+
         containers:
           main:
             image:
