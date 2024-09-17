@@ -20,7 +20,7 @@ spec:
           main:
             image:
               repository: docker.io/nodered/node-red
-              tag: 4.0.2-20
+              tag: 4.0.3-20
 
             env:
               TZ: Europe/Berlin
