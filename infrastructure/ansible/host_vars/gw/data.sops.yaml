@@ -418,14 +418,30 @@ settings:
             zone: iot
             address: 12
             mac_enc: ENC[AES256_GCM,data:8ilLd6wYeqQkDUpjvyeVT3E=,iv:VHEOF0dqbFpqW2pzhRyt6KWbiR/G9FQZVejR2o7fBeY=,tag:ZFQY5v3c6CmogPb7rpIDmA==,type:str]
-        tsrv:
+        kasumi:
             zone: server
             address: 10
-            mac_enc: ENC[AES256_GCM,data:HH0/DZ9+BTXxjVG9InzPLlw=,iv:1ZR5/5c9pU9tN7bl90A7yf1/RQM4d6mrYiqtRnUAh+M=,tag:JHnjfVgVtMCDRK6AoQ1etA==,type:str]
+            mac_enc: ENC[AES256_GCM,data:eQEFiMDQBl36evqasFpLWG4=,iv:rk2yozH5mn94u8D8vJpDXgw5BA0XGO2nqTVaecvO+6Q=,tag:7aLjH17ZyKP9/tVN5oH7Hg==,type:str]
         genma:
             zone: server
             address: 11
             mac_enc: ENC[AES256_GCM,data:M9hZysA0LYSd8aENaktNTnU=,iv:VlEBGkt3ijdX1auHx/u/5E0J5SP/KtW7hQi34OAhYtE=,tag:y+xhnLlvodwlJh+uHEDieg==,type:str]
+        nabiki:
+            zone: server
+            address: 12
+            mac_enc: ENC[AES256_GCM,data:SbJVAI+gKD2mbLPFkOKobrw=,iv:UnaP82xxU1kJPX48i00I7DktZHKtZi+9HNdzuJWgYIo=,tag:ZsItv3mgahvYKVhPVY0qAg==,type:str]
+        ukyo:
+            zone: server
+            address: 13
+            mac_enc: ENC[AES256_GCM,data:LA5c4r8B7yceY/q2SGfyi3g=,iv:bpphwcZgwjbJCvrMldaLkSd6gFlq3mzr5Vh1xMzbw3A=,tag:lFZh4/9auqGPLJJnVaTxBQ==,type:str]
+        ryoga:
+            zone: server
+            address: 14
+            mac_enc: ENC[AES256_GCM,data:AZYIRajvkW8yTvl9bRNQc44=,iv:HNmDhGpp+dQtHcHUUW7CuQqZOJUcV79p4pJkSmykvN8=,tag:vuSplogYTQFk1RtmFRM/xg==,type:str]
+        akane:
+            zone: server
+            address: 15
+            mac_enc: ENC[AES256_GCM,data:lsa4/Oq/PNY3auE5l3kOMVc=,iv:lDeE1S8Ktn5HNn2TfCWynxZwt5JdgImCqG+wxHo71pk=,tag:oDk9fhDj/UArS8Tmd19IqQ==,type:str]
     services:
         nas:
             address: 192.168.40.11
@@ -444,8 +460,8 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-08-23T08:35:24Z"
-    mac: ENC[AES256_GCM,data:obA8ErMs9ny/pHF/ODH8PjQIewCFnj+QykFrDkr4IEKoLP3Y53XHwujJjDXZUgUqJP4wMXBkE1oZ7Jv7b5Rsf0h7hv0gGflA1kh+qkFN4axbgMETArkv2idQlDV4l+3bfG+xd6BsF4ltUIy+SBDHBoqCHQfMen26wLuj11N8fT8=,iv:X4C0ibWV4hMscijB0f7fWHmFRpB+nvETAprtceFAxPs=,tag:2/bbinHwcKvIhEWybXk1Gw==,type:str]
+    lastmodified: "2024-09-26T16:55:25Z"
+    mac: ENC[AES256_GCM,data:G9uZ06mhuw7f2hMlgql/upNAxUnPYENDuM0spFUpn+CTZNIqXSzrP3PpQFHv2GcIRcN3cjYwMDYE9SqPI4+RkV3+hqfgwwWukEfb8Mx62CRSgUCh8QJszxn8X11Rhh/dhWxM83iGn1oy/GAc1f7mZPi/AYhTl1Cl2r14Pz4Jqro=,iv:rbsp1EuhGxuQy/JdV3ITTJ0FbsSgG7A3rTsKtlfAQ+o=,tag:AO6KPfpl4ipC2z+Oj9jxYA==,type:str]
     pgp: []
     encrypted_suffix: _enc
     version: 3.9.0
