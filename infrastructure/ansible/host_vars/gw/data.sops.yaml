@@ -433,11 +433,11 @@ settings:
         ukyo:
             zone: server
             address: 13
-            mac_enc: ENC[AES256_GCM,data:LA5c4r8B7yceY/q2SGfyi3g=,iv:bpphwcZgwjbJCvrMldaLkSd6gFlq3mzr5Vh1xMzbw3A=,tag:lFZh4/9auqGPLJJnVaTxBQ==,type:str]
+            mac_enc: ENC[AES256_GCM,data:y0TIDugWLzmWR2ugufywlLY=,iv:KaViGwbZXvq8OCQL9PnfOnE78eSLAgdYBYyDhWUTR0Y=,tag:x/Tp+AfI4T+XXsRr4TVIBg==,type:str]
         ryoga:
             zone: server
             address: 14
-            mac_enc: ENC[AES256_GCM,data:AZYIRajvkW8yTvl9bRNQc44=,iv:HNmDhGpp+dQtHcHUUW7CuQqZOJUcV79p4pJkSmykvN8=,tag:vuSplogYTQFk1RtmFRM/xg==,type:str]
+            mac_enc: ENC[AES256_GCM,data:TXl61665FZPmXtRVomfvjA8=,iv:m+CE02kYC7NkoT6wErBzgflcdnUt0ICxcOyGXGGHPFU=,tag:gIOKgzP2ChF7nUWWV+QMZA==,type:str]
         akane:
             zone: server
             address: 15
@@ -462,8 +462,8 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-09-27T13:01:39Z"
-    mac: ENC[AES256_GCM,data:TOzOn82aU869/zDxQ7NvOmSDlGDMcZUYK7O9M+W8KBZ5esFutZ8d8MDgyffOEYo1bWRkPj3xVw7UT0gh9lBfD5v6HHBzIPu/dqgDRj4YB3GHArzD18XvkQMWANoN0xveveS7zXXj9XgtovMl74NREfB7SoPAXLKWdnQkNU0OQMg=,iv:oo2gOk6vSNj/yUWRRkaccz+VqPBAtR0Ya1hZgARExQw=,tag:Tgm/eog/pUQNEN7JUXc37w==,type:str]
+    lastmodified: "2024-09-27T13:42:57Z"
+    mac: ENC[AES256_GCM,data:2b5uMUHqnZryMapuUYTbxPOHfYmXzW12F7BkEM+Wg+zc3DlnaJ4an8KeJUpZC2fruqom6ODoFFvCrPIFN9wGo9aRYFidJA0Lk0KDMOQGJM2gdMURLY69XboS/WT+UR0Z7z+UGTQuoNdCflPJy7scchVOq6hV0DhlFnuh3Gm2nB0=,iv:7JjJKyayU6bA4woP6sDCGbIj7OPRgff1e2crSW93ob0=,tag:JMhNnuDpHjGqlDvs4UnhJQ==,type:str]
     pgp: []
     encrypted_suffix: _enc
     version: 3.9.0
