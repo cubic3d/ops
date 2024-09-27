@@ -445,6 +445,8 @@ settings:
     services:
         nas:
             address: 192.168.40.11
+        k8s:
+            address: 192.168.40.90
 sops:
     kms: []
     gcp_kms: []
@@ -460,8 +462,8 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-09-26T16:55:25Z"
-    mac: ENC[AES256_GCM,data:G9uZ06mhuw7f2hMlgql/upNAxUnPYENDuM0spFUpn+CTZNIqXSzrP3PpQFHv2GcIRcN3cjYwMDYE9SqPI4+RkV3+hqfgwwWukEfb8Mx62CRSgUCh8QJszxn8X11Rhh/dhWxM83iGn1oy/GAc1f7mZPi/AYhTl1Cl2r14Pz4Jqro=,iv:rbsp1EuhGxuQy/JdV3ITTJ0FbsSgG7A3rTsKtlfAQ+o=,tag:AO6KPfpl4ipC2z+Oj9jxYA==,type:str]
+    lastmodified: "2024-09-27T13:01:39Z"
+    mac: ENC[AES256_GCM,data:TOzOn82aU869/zDxQ7NvOmSDlGDMcZUYK7O9M+W8KBZ5esFutZ8d8MDgyffOEYo1bWRkPj3xVw7UT0gh9lBfD5v6HHBzIPu/dqgDRj4YB3GHArzD18XvkQMWANoN0xveveS7zXXj9XgtovMl74NREfB7SoPAXLKWdnQkNU0OQMg=,iv:oo2gOk6vSNj/yUWRRkaccz+VqPBAtR0Ya1hZgARExQw=,tag:Tgm/eog/pUQNEN7JUXc37w==,type:str]
     pgp: []
     encrypted_suffix: _enc
     version: 3.9.0
