@@ -1,12 +1,25 @@
 creation_rules:
+  - path_regex: kubernetes/.*/talos/.*\.sops\.ya?ml$
+    age: >-
+      age17pjdz3x48re0ahdw00eqdj0da02ltp3wkxswr755cvaqj3j5938s7put83,
+      age1xehfrre93knutglwzsamhetvk70sh2gcdn4zhdreu8762m4l03tszgh8j6
+
+  - path_regex: kubernetes/.*\.sops\.ya?ml$
+    encrypted_regex: "^(data|stringData)$"
+    age: >-
+      age17pjdz3x48re0ahdw00eqdj0da02ltp3wkxswr755cvaqj3j5938s7put83,
+      age1xehfrre93knutglwzsamhetvk70sh2gcdn4zhdreu8762m4l03tszgh8j6
+
   - path_regex: k8s/.*\.ya?ml
     encrypted_regex: "((?i)(pass|secret($|[^N])|key|token|^data$|^stringData))"
     age: >-
       age17pjdz3x48re0ahdw00eqdj0da02ltp3wkxswr755cvaqj3j5938s7put83
+
   - path_regex: infrastructure/ansible/.*data\.sops\.ya?ml
     encrypted_suffix: _enc
     age: >-
       age1xehfrre93knutglwzsamhetvk70sh2gcdn4zhdreu8762m4l03tszgh8j6
+
   - path_regex: .+\.sops\.ya?ml
     age: >-
       age1xehfrre93knutglwzsamhetvk70sh2gcdn4zhdreu8762m4l03tszgh8j6
