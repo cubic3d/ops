@@ -27,7 +27,7 @@ nodes:
       - deviceSelector:
           hardwareAddr: "*:41:0c"
         dhcp: true
-        vip:
+        vip: &vip
           ip: 192.168.40.90
     nodeLabels:
       topology.kubernetes.io/region: home
@@ -41,8 +41,7 @@ nodes:
       - deviceSelector:
           hardwareAddr: "*:83:a5"
         dhcp: true
-        vip:
-          ip: 192.168.40.90
+        vip: *vip
     nodeLabels:
       topology.kubernetes.io/region: home
 
@@ -55,8 +54,7 @@ nodes:
       - deviceSelector:
           hardwareAddr: "*:85:db"
         dhcp: true
-        vip:
-          ip: 192.168.40.90
+        vip: *vip
     nodeLabels:
       topology.kubernetes.io/region: home
 
