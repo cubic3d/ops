@@ -102,6 +102,17 @@ patches:
       proxy:
         disabled: true
 
+  # https://github.com/siderolabs/talos/issues/8836
+  # Cilium's BPF router redirects traffic to external network
+  - |-
+    machine:
+      features:
+        hostDNS:
+          forwardKubeDNSToHost: false
+    cluster:
+      coreDNS:
+        disabled: true
+
   - |-
     machine:
       files:

@@ -1,0 +1,3 @@
+bypassDnsResolution: true
+providerRegex: |
+  ^(nabiki|ukyo|ryoga|akane)$

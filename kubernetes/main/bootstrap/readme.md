@@ -47,3 +47,25 @@ eval (talhelper gencommand kubeconfig)
 ```bash
 kubectl get nodes
 ```
+
+## Helmfile
+
+### Install dependencies
+
+```bash
+helmfile --file helmfile.yaml apply --skip-diff-on-install --suppress-diff
+```
+
+## Flux
+
+### Install Flux
+
+```bash
+kubectl apply --server-side --kustomize flux
+```
+
+### Install Secrets and Configs
+
+```bash
+sops --decrypt flux/age-key.sops.yaml | kubectl apply -f -
+```
