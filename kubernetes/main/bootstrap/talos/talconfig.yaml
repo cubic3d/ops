@@ -3,7 +3,7 @@ clusterName: main
 endpoint: https://192.168.40.90:6443
 
 # renovate: image depName=ghcr.io/siderolabs/installer
-talosVersion: v1.8.0
+talosVersion: v1.8.1
 # renovate: image depName=ghcr.io/siderolabs/kubelet
 kubernetesVersion: v1.31.1
 
