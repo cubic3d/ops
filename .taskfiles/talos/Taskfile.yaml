@@ -4,124 +4,106 @@ version: "3"
 tasks:
   generate-clusterconfig:
     desc: Generate clusterconfig for Talos
-    vars:
-      cluster: '{{default "main" .cluster}}'
     cmds:
       - talhelper genconfig
-        --env-file {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/talenv.sops.yaml
-        --secret-file {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/talsecret.sops.yaml
-        --config-file {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/talconfig.yaml
-        --out-dir {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/clusterconfig
+        --env-file {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talenv.sops.yaml
+        --secret-file {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talsecret.sops.yaml
+        --config-file {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talconfig.yaml
+        --out-dir {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/clusterconfig
     preconditions:
       - which talhelper
-      - test -f {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/talenv.sops.yaml
-      - test -f {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/talsecret.sops.yaml
-      - test -f {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/talconfig.yaml
+      - test -f {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talenv.sops.yaml
+      - test -f {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talsecret.sops.yaml
+      - test -f {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talconfig.yaml
 
   apply-clusterconfig:
     desc: Apply Talos configs to nodes
-    env:
-      TALOSCONFIG: "{{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/clusterconfig/talosconfig"
     vars:
-      cluster: '{{default "main" .cluster}}'
       dry_run: '{{default "false" .dry_run}}'
       insecure: '{{default "false" .insecure}}'
     cmds:
       - eval $(talhelper gencommand apply
-        --env-file {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/talenv.sops.yaml
-        --config-file {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/talconfig.yaml
-        --out-dir {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/clusterconfig
+        --env-file {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talenv.sops.yaml
+        --config-file {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talconfig.yaml
+        --out-dir {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/clusterconfig
         --extra-flags "--dry-run={{.dry_run}} {{if eq .insecure "true"}}--insecure{{end}}")
     preconditions:
       - which talhelper
-      - talosctl config get-contexts | grep {{.cluster}}
-      - test -f {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/talenv.sops.yaml
-      - test -f {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/talconfig.yaml
-      - test -d {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/clusterconfig
+      - talosctl config get-contexts | grep {{.CLUSTER}}
+      - test -f {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talenv.sops.yaml
+      - test -f {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talconfig.yaml
+      - test -d {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/clusterconfig
 
   bootstrap-etcd:
     desc: Bootstrap etcd
-    env:
-      TALOSCONFIG: "{{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/clusterconfig/talosconfig"
-    vars:
-      cluster: '{{default "main" .cluster}}'
     cmds:
       - eval $(talhelper gencommand bootstrap
-        --env-file {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/talenv.sops.yaml
-        --config-file {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/talconfig.yaml
-        --out-dir {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/clusterconfig)
+        --env-file {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talenv.sops.yaml
+        --config-file {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talconfig.yaml
+        --out-dir {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/clusterconfig)
     preconditions:
       - which talhelper
-      - talosctl config get-contexts | grep {{.cluster}}
-      - test -f {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/talenv.sops.yaml
-      - test -f {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/talconfig.yaml
-      - test -d {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/clusterconfig
+      - talosctl config get-contexts | grep {{.CLUSTER}}
+      - test -f {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talenv.sops.yaml
+      - test -f {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talconfig.yaml
+      - test -d {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/clusterconfig
 
   download-kubeconfig:
     desc: Download kubeconfig
-    env:
-      TALOSCONFIG: "{{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/clusterconfig/talosconfig"
-    vars:
-      cluster: '{{default "main" .cluster}}'
     cmds:
       - eval $(talhelper gencommand kubeconfig
-        --env-file {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/talenv.sops.yaml
-        --config-file {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/talconfig.yaml
-        --out-dir {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/clusterconfig
-        --extra-flags "--force --force-context-name {{.cluster}}")
-      - kubectl get nodes --context {{.cluster}}
+        --env-file {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talenv.sops.yaml
+        --config-file {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talconfig.yaml
+        --out-dir {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/clusterconfig
+        --extra-flags "--force --force-context-name {{.CLUSTER}}")
+      - eval $(talhelper gencommand kubeconfig
+        --env-file {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talenv.sops.yaml
+        --config-file {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talconfig.yaml
+        --out-dir {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/clusterconfig
+        --extra-flags "{{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/clusterconfig --force --force-context-name {{.CLUSTER}}")
+      - kubectl get nodes --context {{.CLUSTER}}
     preconditions:
       - which talhelper
-      - talosctl config get-contexts | grep {{.cluster}}
-      - test -f {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/talenv.sops.yaml
-      - test -f {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/talconfig.yaml
-      - test -d {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/clusterconfig
+      - talosctl config get-contexts | grep {{.CLUSTER}}
+      - test -f {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talenv.sops.yaml
+      - test -f {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talconfig.yaml
+      - test -d {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/clusterconfig
 
   bootstrap-prequisites:
     desc: Bootstrap Talos prerequisites
-    vars:
-      cluster: '{{default "main" .cluster}}'
     cmds:
-      - until kubectl --context {{.cluster}} wait --for=condition=Ready=False nodes --all --timeout=600s; do sleep 10; done
-      - helmfile --kube-context {{.cluster}} --file {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/helmfile.yaml apply --skip-diff-on-install --suppress-diff
-      - until kubectl --context {{.cluster}} wait --for=condition=Ready nodes --all --timeout=600s; do sleep 10; done
+      - until kubectl wait --for=condition=Ready=False nodes --all --timeout=600s; do sleep 10; done
+      - helmfile --kube-context {{.CLUSTER}} --file {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/helmfile.yaml apply --skip-diff-on-install --suppress-diff
+      - until kubectl wait --for=condition=Ready nodes --all --timeout=600s; do sleep 10; done
     preconditions:
       - which helmfile
-      - kubectl config get-contexts {{.cluster}}
-      - test -f {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/helmfile.yaml
+      - kubectl config get-contexts {{.CLUSTER}}
+      - test -f {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/helmfile.yaml
 
   upgrade-os:
     desc: Upgrade Talos version on nodes
-    env:
-      TALOSCONFIG: "{{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/clusterconfig/talosconfig"
-    vars:
-      cluster: '{{default "main" .cluster}}'
     cmds:
       - eval $(talhelper gencommand upgrade
-        --env-file {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/talenv.sops.yaml
-        --config-file {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/talconfig.yaml
-        --out-dir {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/clusterconfig)
+        --env-file {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talenv.sops.yaml
+        --config-file {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talconfig.yaml
+        --out-dir {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/clusterconfig)
     preconditions:
       - which talhelper
-      - talosctl config get-contexts | grep {{.cluster}}
-      - test -f {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/talenv.sops.yaml
-      - test -f {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/talconfig.yaml
-      - test -d {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/clusterconfig
+      - talosctl config get-contexts | grep {{.CLUSTER}}
+      - test -f {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talenv.sops.yaml
+      - test -f {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talconfig.yaml
+      - test -d {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/clusterconfig
 
   upgrade-k8s:
     desc: Upgrade Kubernetes version on nodes
-    env:
-      TALOSCONFIG: "{{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/clusterconfig/talosconfig"
-    vars:
-      cluster: '{{default "main" .cluster}}'
     cmds:
       - eval $(talhelper gencommand upgrade-k8s
-        --env-file {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/talenv.sops.yaml
-        --config-file {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/talconfig.yaml
-        --out-dir {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/clusterconfig)
+        --env-file {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talenv.sops.yaml
+        --config-file {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talconfig.yaml
+        --out-dir {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/clusterconfig)
     preconditions:
       - which talhelper
-      - talosctl config get-contexts | grep {{.cluster}}
-      - test -f {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/talenv.sops.yaml
-      - test -f {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/talconfig.yaml
-      - test -d {{.KUBERNETES_DIR}}/{{.cluster}}/bootstrap/talos/clusterconfig
+      - talosctl config get-contexts | grep {{.CLUSTER}}
+      - test -f {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talenv.sops.yaml
+      - test -f {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talconfig.yaml
+      - test -d {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/clusterconfig
