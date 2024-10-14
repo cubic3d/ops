@@ -1,0 +1,181 @@
+version: "3"
+
+tasks:
+  default:
+    cmd: go-task -l
+
+  k8s:mount:
+    desc: Mounts a PVC to a temporary pod (ns=my-ns pvc=my-pvc)
+    vars:
+      ns: '{{ default "default" .ns }}'
+    requires:
+      vars:
+        - pvc
+    preconditions:
+      - sh: kubectl -n {{.ns}} get pvc {{.pvc}}
+        msg: PersistentVolumeClaim "{{ .pvc }}" or namespace "{{ .ns }}" do not exist
+    interactive: true
+    cmd: |-
+      kubectl run -n {{.ns}} debug-{{.pvc}} -i --tty --rm --image=null --privileged --overrides='
+        {
+          "apiVersion": "v1",
+          "spec": {
+            "containers": [
+              {
+                "name": "debug",
+                "image": "docker.io/library/alpine:edge",
+                "command": [
+                  "/bin/sh"
+                ],
+                "workingDir": "/data",
+                "stdin": true,
+                "stdinOnce": true,
+                "tty": true,
+                "volumeMounts": [
+                  {
+                    "name": "data",
+                    "mountPath": "/data"
+                  }
+                ]
+              }
+            ],
+            "volumes": [
+              {
+                "name": "data",
+                "persistentVolumeClaim": {
+                  "claimName": "{{.pvc}}"
+                }
+              }
+            ],
+            "restartPolicy": "Never"
+          }
+        }'
+
+  k8s:cleanup-pods:
+    desc: Removes succeeded and failed pods from all namespaces
+    cmds:
+      - kubectl delete pod -A --field-selector=status.phase==Succeeded
+      - kubectl delete pod -A --field-selector=status.phase==Failed
+
+  volsync:run:
+    desc: Runs an arbitrary restic command for a given ReplicationSource (ns=my-ns rsrc=my-rsrc -- snapshots)
+    vars:
+      ns: '{{ default "default" .ns }}'
+    requires:
+      vars:
+        - rsrc
+    preconditions:
+      - sh: kubectl -n {{.ns}} get replicationsource {{.rsrc}}
+        msg: ReplicationSource "{{ .rsrc }}" or namespace "{{ .ns }}" do not exist
+    interactive: true
+    cmd: |-
+      kubectl run -n {{.ns}} volsync-command-{{.rsrc}} -i --tty --rm --image=null --privileged --overrides='
+        {
+          "apiVersion": "v1",
+          "spec": {
+            "containers": [
+              {
+                "name": "command",
+                "image": "ghcr.io/restic/restic:latest",
+                "args": {{ .CLI_ARGS | splitArgs | mustToJson }},
+                "stdin": true,
+                "stdinOnce": true,
+                "tty": true,
+                "envFrom": [
+                  {
+                    "secretRef": {
+                      "name": "volsync-{{.rsrc}}"
+                    }
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Never"
+          }
+        }'
+
+  volsync:list:
+    desc: Lists snapshots for a given ReplicationSource (ns=my-ns rsrc=my-rsrc)
+    cmds:
+      - task: volsync:run
+        vars:
+          CLI_ARGS: snapshots
+
+  volsync:latest:
+    desc: Lists files for latest snapshot for a given ReplicationSource (ns=my-ns rsrc=my-rsrc)
+    cmds:
+      - task: volsync:run
+        vars:
+          CLI_ARGS: ls latest --long
+
+  volsync:unlock-now:
+    desc: Unlocks a repository of a given ReplicationSource (ns=my-ns rsrc=my-rsrc)
+    cmds:
+      - task: volsync:run
+        vars:
+          CLI_ARGS: unlock --remove-all
+
+  volsync:unlock:
+    desc: Unlocks a repository of a given ReplicationSource on next run (ns=my-ns rsrc=my-rsrc)
+    vars:
+      ns: '{{ default "default" .ns }}'
+    requires:
+      vars:
+        - rsrc
+    preconditions:
+      - sh: kubectl -n {{ .ns }} get replicationsource {{.rsrc}}
+        msg: ReplicationSource "{{ .rsrc }}" or namespace "{{ .ns }}" do not exist
+    cmds:
+      - kubectl -n {{ .ns }} patch replicationsources {{ .rsrc }} --type merge -p '{"spec":{"restic":{"unlock":"{{ now | unixEpoch }}"}}}'
+
+  volsync:snapshot:
+    desc: Creates a snapshot for a given ReplicationSource (ns=my-ns rsrc=my-rsrc)
+    vars:
+      ns: '{{ default "default" .ns }}'
+    requires:
+      vars:
+        - rsrc
+    preconditions:
+      - sh: kubectl -n {{ .ns }} get replicationsource {{.rsrc}}
+        msg: ReplicationSource "{{ .rsrc }}" or namespace "{{ .ns }}" do not exist
+    cmds:
+      - kubectl -n {{ .ns }} patch replicationsources {{ .rsrc }} --type merge -p '{"spec":{"trigger":{"manual":"{{ now | unixEpoch }}"}}}'
+      - kubectl -n {{ .ns }} wait replicationsources {{ .rsrc }} --for condition=Synchronizing=True --timeout=5m
+      - kubectl -n {{ .ns }} wait replicationsources {{ .rsrc }} --for condition=Synchronizing=False --timeout=60m
+
+  talos:run:
+    desc: Runs an arbitrary talosctl command for a given cluster and node (cluster=my-cluster node=my-node -- health)
+    dir: "{{ .ROOT_DIR }}/infrastructure/talos"
+    requires:
+      vars:
+        - cluster
+        - node
+    preconditions:
+      - sh: '[ -d "{{ .cluster }}" ]'
+        msg: Cluster "{{ .cluster }}" does not exist
+      - sh: yq -e '.nodes[] | select(.hostname=="{{ .node }}")' {{ .cluster }}/talconfig.yaml
+        msg: Node "{{ .node }}" does not exist in cluster "{{ .cluster }}"
+    cmd: |-
+      talosctl --talosconfig "{{ .cluster }}/clusterconfig/talosconfig" -n "{{ .node }}" {{ .CLI_ARGS }}
+
+  talos:upgrade-os:
+    desc: Upgrades talos on a given cluster and node (cluster=my-cluster node=my-node [version=v1.0.0])
+    vars:
+      version_latest:
+        sh: curl --silent "https://api.github.com/repos/siderolabs/talos/releases/latest" | grep -Po '"tag_name":\ "\K.*?(?=")'
+    prompt: Upgrade OS on {{ .cluster }}/{{ .node }} to version {{ or .version .version_latest }}?
+    cmds:
+      - task: talos:run
+        vars:
+          CLI_ARGS: upgrade -p -i ghcr.io/siderolabs/installer:{{ or .version .version_latest }}
+
+  talos:upgrade-k8s:
+    desc: Upgrades k8s on a given cluster and node (cluster=my-cluster node=my-node [version=v1.0.0])
+    vars:
+      version_latest:
+        sh: curl --silent "https://api.github.com/repos/siderolabs/kubelet/releases/latest" | grep -Po '"tag_name":\ "\K.*?(?=")'
+    prompt: Upgrade k8s on {{ .cluster }}/{{ .node }} to version {{ or .version .version_latest }}?
+    cmds:
+      - task: talos:run
+        vars:
+          CLI_ARGS: upgrade-k8s --to {{ or .version .version_latest }}
