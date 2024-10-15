@@ -3,7 +3,7 @@ version: "3"
 
 vars:
   KUBERNETES_DIR: "{{.ROOT_DIR}}/kubernetes"
-  CLUSTER: '{{.CLUSTER | default "main"}}'
+  CLUSTER: '{{default "main" .CLUSTER}}'
 
 env:
   KUBECONFIG: "{{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/clusterconfig/kubeconfig"

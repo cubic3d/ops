@@ -23,3 +23,49 @@ tasks:
       - sops --decrypt {{.KUBERNETES_DIR}}/{{.CLUSTER}}/flux/vars/cluster-secrets.sops.yaml
       - kustomize build {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/flux
       - kustomize build {{.KUBERNETES_DIR}}/{{.CLUSTER}}/flux/config
+
+  apply-ks:
+    desc: Apply a Flux Kustomization resource for a cluster
+    vars:
+      NS: '{{default "flux-system" .NS}}'
+      KUSTOMIZATION_PATH: "{{.KUBERNETES_DIR}}/{{.CLUSTER}}/apps/{{.APP}}"
+      KUSTOMIZATION_FILE: "{{.KUSTOMIZATION_PATH}}/ks.yaml"
+      KS_NAME: '{{default (base (default "" .APP)) .KS_NAME}}'
+      KUSTOMIZATION_FOUND:
+        sh: flux --namespace {{.NS}} get kustomization {{.KS_NAME}} 2>&1
+    requires:
+      vars:
+        - APP
+    cmds:
+      - flux build ks {{.KS_NAME}}
+        --namespace {{.NS}}
+        --kustomization-file {{.KUSTOMIZATION_FILE}}
+        --path {{.KUSTOMIZATION_PATH}}
+        {{if contains "not found" .KUSTOMIZATION_FOUND}}--dry-run{{end}}
+        |
+        kubectl apply --server-side --field-manager=kustomize-controller -f -
+    preconditions:
+      - test -f {{.KUSTOMIZATION_FILE}}
+
+  delete-ks:
+    desc: Delete a Flux Kustomization resource for a cluster
+    vars:
+      NS: '{{default "flux-system" .NS}}'
+      KUSTOMIZATION_PATH: "{{.KUBERNETES_DIR}}/{{.CLUSTER}}/apps/{{.APP}}"
+      KUSTOMIZATION_FILE: "{{.KUSTOMIZATION_PATH}}/ks.yaml"
+      KS_NAME: '{{default (splitList "/" .APP | last) .KS_NAME}}'
+      KUSTOMIZATION_FOUND:
+        sh: flux --namespace {{.NS}} get kustomization {{.KS_NAME}} 2>&1
+    requires:
+      vars:
+        - APP
+    cmds:
+      - flux build ks {{.KS_NAME}}
+        --namespace {{.NS}}
+        --kustomization-file {{.KUSTOMIZATION_FILE}}
+        --path {{.KUSTOMIZATION_PATH}}
+        --dry-run
+        |
+        kubectl delete -f -
+    preconditions:
+      - test -f {{.KUSTOMIZATION_FILE}}
