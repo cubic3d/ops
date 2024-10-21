@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: reloader
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: reloader
+      version: 1.1.0
+      sourceRef:
+        kind: HelmRepository
+        name: reloader
+        namespace: flux-system
+
+  values:
+    fullnameOverride: reloader
+
+    reloader:
+      readOnlyRootFileSystem: true
+      # TODO: Enable additional values after deploying some more dependencies
+      # podMonitor:
+      #   enabled: true
+      #   namespace: "{{ .Release.Namespace }}"
