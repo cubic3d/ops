@@ -29,7 +29,7 @@ spec:
           main:
             image:
               repository: ghcr.io/shlinkio/shlink
-              tag: 4.2.3
+              tag: 4.2.4
 
             env:
               DEFAULT_DOMAIN: "s.${domain}"
