@@ -4,7 +4,6 @@
     "config:recommended",
     ":disableRateLimiting",
     ":timezone(Europe/Berlin)",
-    ":separatePatchReleases",
     "docker:enableMajor",
     ":enablePreCommit",
     "github>cubic3d/ops//.github/renovate/allowedVersions.json5",
