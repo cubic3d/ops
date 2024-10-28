@@ -10,6 +10,3 @@ area/kubernetes:
 cluster/main:
   - changed-files:
       - any-glob-to-any-file: kubernetes/main/**/*
-cluster/legacy:
-  - changed-files:
-      - any-glob-to-any-file: k8s/**/*

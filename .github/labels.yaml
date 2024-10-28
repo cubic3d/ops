@@ -33,5 +33,3 @@
 # Clusters
 - name: cluster/main
   color: "ffc300"
-- name: cluster/legacy
-  color: "ffc300"
