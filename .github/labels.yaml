@@ -1,15 +1,25 @@
-- name: version/major
-  color: "d93f0b"
-  description: Major update
+# Semantic Types
+- name: type/digest
+  color: "ffeC19"
+- name: type/patch
+  color: "ffeC19"
+- name: type/minor
+  color: "ff9800"
+- name: type/major
+  color: "f6412d"
 
-- name: version/minor
-  color: "fbca04"
-  description: Minor update
-
-- name: version/patch
-  color: "0e8a16"
-  description: Patch update
-
-- name: infrastructure/manifests
-  color: "1d76db"
-  description: Generated manifests
+  # Renovate Types
+- name: renovate/helm
+  color: "027fa0"
+- name: renovate/container
+  color: "027fa0"
+- name: renovate/ansible
+  color: "027fa0"
+- name: renovate/terraform
+  color: "027fa0"
+- name: renovate/github-release
+  color: "027fa0"
+- name: renovate/github-action
+  color: "027fa0"
+- name: renovate/grafana-dashboard
+  color: "027fa0"
