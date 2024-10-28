@@ -23,3 +23,13 @@
   color: "027fa0"
 - name: renovate/grafana-dashboard
   color: "027fa0"
+
+# Areas
+- name: area/ci
+  color: "0e8a16"
+- name: area/kubernetes
+  color: "0e8a16"
+
+# Clusters
+- name: cluster/main
+  color: "ffc300"
