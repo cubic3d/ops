@@ -38,7 +38,7 @@
 
   kubernetes: {
     fileMatch: [
-      "(^|/)kubernetes/.+\\.ya?ml$"
+      "(^|/)kubernetes/.+\\.ya?ml$",
       "k8s/.+\\.yaml$",
     ],
   },
