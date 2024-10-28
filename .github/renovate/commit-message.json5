@@ -3,7 +3,7 @@
   commitMessageTopic: "{{depName}}",
   commitMessageExtra: "to {{newVersion}}",
   commitMessageSuffix: "",
-  packageRules": [
+  packageRules: [
     {
       matchDatasources: ["helm"],
       commitMessageTopic: "chart {{depName}}"
