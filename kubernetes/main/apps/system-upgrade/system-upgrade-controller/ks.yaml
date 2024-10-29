@@ -5,11 +5,11 @@ metadata:
   name: &appname system-upgrade-controller
   namespace: flux-system
 spec:
-  targetNamespace: system
+  targetNamespace: system-upgrade
   commonMetadata:
     labels:
       app.kubernetes.io/name: *appname
-  path: kubernetes/main/apps/system/system-upgrade-controller/app
+  path: kubernetes/main/apps/system-upgrade/system-upgrade-controller/app
   interval: 10m
   prune: true
   wait: true
@@ -24,12 +24,12 @@ metadata:
   name: &appname system-upgrade-controller-plans
   namespace: flux-system
 spec:
-  targetNamespace: system
+  targetNamespace: system-upgrade
   commonMetadata:
     labels:
       app.kubernetes.io/name: *appname
       app.kubernetes.io/component: plans
-  path: kubernetes/main/apps/system/system-upgrade-controller/plans
+  path: kubernetes/main/apps/system-upgrade/system-upgrade-controller/plans
   interval: 10m
   prune: true
   wait: false
