@@ -22,3 +22,7 @@ includes:
   flux:
     taskfile: ".taskfiles/flux"
     dir: .taskfiles/flux
+
+  k8s:
+    taskfile: ".taskfiles/k8s"
+    dir: .taskfiles/k8s
