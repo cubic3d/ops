@@ -7,3 +7,4 @@ resources:
   - spegel/ks.yaml
   - reloader/ks.yaml
   - node-feature-discovery/ks.yaml
+  - descheduler/ks.yaml
