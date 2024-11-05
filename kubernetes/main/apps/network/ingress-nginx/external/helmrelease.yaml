@@ -45,7 +45,7 @@ spec:
                 - ingress-nginx-external
 
       config:
-        block-user-agents: "AI2Bot,Ai2Bot-Dolma,Amazonbot,anthropic-ai,Applebot,Applebot-Extended,Bytespider,CCBot,ChatGPT-User,Claude-Web,ClaudeBot,cohere-ai,Diffbot,DuckAssistBot,FacebookBot,facebookexternalhit,FriendlyCrawler,Google-Extended,GoogleOther,GoogleOther-Image,GoogleOther-Video,GPTBot,iaskspider/2.0,ICC-Crawler,ImagesiftBot,img2dataset,ISSCyberRiskCrawler,Kangaroo Bot,Meta-ExternalAgent,Meta-ExternalFetcher,OAI-SearchBot,omgili,omgilibot,PerplexityBot,PetalBot,Scrapy,Sidetrade indexer bot,Timpibot,VelenPublicWebCrawler,Webzio-Extended,YouBot," # taken from https://github.com/ai-robots-txt/ai.robots.txt
+        #block-user-agents: "AI2Bot,Ai2Bot-Dolma,Amazonbot,anthropic-ai,Applebot,Applebot-Extended,Bytespider,CCBot,ChatGPT-User,Claude-Web,ClaudeBot,cohere-ai,Diffbot,DuckAssistBot,FacebookBot,facebookexternalhit,FriendlyCrawler,Google-Extended,GoogleOther,GoogleOther-Image,GoogleOther-Video,GPTBot,iaskspider/2.0,ICC-Crawler,ImagesiftBot,img2dataset,ISSCyberRiskCrawler,Kangaroo Bot,Meta-ExternalAgent,Meta-ExternalFetcher,OAI-SearchBot,omgili,omgilibot,PerplexityBot,PetalBot,Scrapy,Sidetrade indexer bot,Timpibot,VelenPublicWebCrawler,Webzio-Extended,YouBot" # taken from https://github.com/ai-robots-txt/ai.robots.txt
         client-body-buffer-size: 100M
         client-body-timeout: 120
         client-header-timeout: 120
@@ -79,7 +79,7 @@ spec:
       #       any: true
 
       extraArgs:
-        default-ssl-certificate: "network/main-domain-tls"
+        default-ssl-certificate: network/main-domain-tls
 
       topologySpreadConstraints:
         - maxSkew: 1
