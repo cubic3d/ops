@@ -14,7 +14,7 @@ spec:
         name: ingress-nginx
         namespace: flux-system
   values:
-    fullnameOverride: ingress-nginx-external
+    fullnameOverride: &name ingress-nginx-external
 
     controller:
       replicaCount: 2
@@ -32,9 +32,9 @@ spec:
           lbipam.cilium.io/ips: "192.168.40.60"
 
       ingressClassResource:
-        name: ingress-nginx-external
+        name: &class external
         default: false
-        controllerValue: k8s.io/ingress-nginx-external
+        controllerValue: k8s.io/ingress-external
 
       admissionWebhooks:
         objectSelector:
@@ -42,7 +42,7 @@ spec:
             - key: ingress-class
               operator: In
               values:
-                - ingress-nginx-external
+                - *class
 
       config:
         block-user-agents: "AdsBot-Google,Amazonbot,anthropic-ai,Applebot-Extended,Bytespider,CCBot,ChatGPT-User,ClaudeBot,Claude-Web,cohere-ai,Diffbot,FacebookBot,FriendlyCrawler,Google-Extended,GoogleOther,GPTBot,img2dataset,omgili,omgilibot,peer39_crawler,peer39_crawler/1.0,PerplexityBot,YouBot" # taken from https://github.com/ai-robots-txt/ai.robots.txt
@@ -87,7 +87,7 @@ spec:
           whenUnsatisfiable: DoNotSchedule
           labelSelector:
             matchLabels:
-              app.kubernetes.io/instance: nginx-external
+              app.kubernetes.io/instance: *name
               app.kubernetes.io/component: controller
 
       resources:
