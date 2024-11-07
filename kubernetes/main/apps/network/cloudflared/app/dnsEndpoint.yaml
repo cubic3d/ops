@@ -6,4 +6,4 @@ spec:
   endpoints:
     - dnsName: ingress-ext.${domain}
       recordType: CNAME
-      targets: ["a3848611-13c4-49fb-8bf3-5358111b8886.cfargotunnel.com"]
+      targets: ["${cloudflare_tunnel_id}.cfargotunnel.com"]
