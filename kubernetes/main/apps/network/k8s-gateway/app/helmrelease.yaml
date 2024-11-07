@@ -15,6 +15,7 @@ spec:
         namespace: flux-system
 
   values:
+    replicaCount: 2
     domain: ${domain}
     ttl: 1
 
