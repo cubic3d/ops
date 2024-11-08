@@ -40,7 +40,6 @@ spec:
       - --events
       - --ignore-ingress-tls-spec
       - --ingress-class=external
-      - --default-targets=ingress-ext.${domain}
 
     podAnnotations:
       secret.reloader.stakater.com/reload: external-dns-external
