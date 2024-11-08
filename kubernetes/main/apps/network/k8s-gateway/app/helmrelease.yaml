@@ -26,3 +26,7 @@ spec:
     watchedResources:
       - Ingress
       - Service
+
+    # TODO: Disable after rebuilding CoreDNS on router with "alternative" plugin
+    fallthrough:
+      enabled: true
