@@ -18,49 +18,49 @@ spec:
     - kind: ConfigMap
       name: cilium-values
 
-  # TODO: Enable additional values after deploying some more dependencies
-  # values:
-  #   hubble:
-  #     serviceMonitor:
-  #       enabled: true
+  values:
+    # TODO: Enable additional values after deploying some more dependencies
+    #   hubble:
+    #     serviceMonitor:
+    #       enabled: true
 
-  #     dashboards:
-  #       enabled: true
-  #       annotations:
-  #         grafana_folder: Cilium
+    #     dashboards:
+    #       enabled: true
+    #       annotations:
+    #         grafana_folder: Cilium
 
-  #     relay:
-  #       prometheus:
-  #         enabled: true
-  #         serviceMonitor:
-  #           enabled: true
+    #     relay:
+    #       prometheus:
+    #         enabled: true
+    #         serviceMonitor:
+    #           enabled: true
 
-  #     ui:
-  #       ingress:
-  #         enabled: true
-  #         className: "internal-nginx"
-  #         annotations:
-  #           external-dns.alpha.kubernetes.io/target: int
-  #         hosts:
-  #           - hubble.int
+    #   operator:
+    #     prometheus:
+    #       enabled: true
+    #       serviceMonitor:
+    #         enabled: true
+    #     dashboards:
+    #       enabled: true
+    #       annotations:
+    #         grafana_folder: Cilium
 
-  #   operator:
-  #     prometheus:
-  #       enabled: true
-  #       serviceMonitor:
-  #         enabled: true
-  #     dashboards:
-  #       enabled: true
-  #       annotations:
-  #         grafana_folder: Cilium
+    #   prometheus:
+    #     enabled: true
+    #     serviceMonitor:
+    #       enabled: true
+    #       trustCRDsExist: true
 
-  #   prometheus:
-  #     enabled: true
-  #     serviceMonitor:
-  #       enabled: true
-  #       trustCRDsExist: true
+    #   dashboards:
+    #     enabled: true
+    #     annotations:
+    #       grafana_folder: Cilium
 
-  #   dashboards:
-  #     enabled: true
-  #     annotations:
-  #       grafana_folder: Cilium
+    ui:
+      ingress:
+        enabled: true
+        className: internal
+        annotations:
+          external-dns.alpha.kubernetes.io/target: ingress-int.${domain}
+        hosts:
+          - hubble.${domain}
