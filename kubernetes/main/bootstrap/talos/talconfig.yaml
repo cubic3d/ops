@@ -31,6 +31,7 @@ nodes:
           ip: 192.168.40.90
     nodeLabels:
       topology.kubernetes.io/region: home
+      node.longhorn.io/create-default-disk: "true"
 
   - hostname: ukyo.h.${domain}
     ipAddress: 192.168.40.13
@@ -44,6 +45,7 @@ nodes:
         vip: *vip
     nodeLabels:
       topology.kubernetes.io/region: home
+      node.longhorn.io/create-default-disk: "true"
 
   - hostname: ryoga.h.${domain}
     ipAddress: 192.168.40.14
@@ -68,6 +70,7 @@ nodes:
         dhcp: true
     nodeLabels:
       topology.kubernetes.io/region: home
+      node.longhorn.io/create-default-disk: "true"
 
 controlPlane:
   disableSearchDomain: true
