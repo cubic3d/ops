@@ -16,3 +16,5 @@ spec:
   sourceRef:
     kind: GitRepository
     name: ops
+  dependsOn:
+    - name: snapshot-controller
