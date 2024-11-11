@@ -77,6 +77,8 @@ controlPlane:
         officialExtensions:
           - siderolabs/intel-ucode
           - siderolabs/i915-ucode
+          - siderolabs/iscsi-tools
+          - siderolabs/util-linux-tools
   patches:
     - |-
       - op: remove
@@ -131,6 +133,25 @@ patches:
           rotate-server-certificates: true
         extraConfig:
           maxPods: 150
+
+  - |-
+    machine:
+      kubelet:
+        extraMounts:
+          - destination: /var/openebs/local
+            type: bind
+            source: /var/openebs/local
+            options:
+              - bind
+              - rshared
+              - rw
+          - destination: /var/lib/longhorn
+            type: bind
+            source: /var/lib/longhorn
+            options:
+              - bind
+              - rshared
+              - rw
 
   - |-
     machine:
