@@ -19,48 +19,48 @@ spec:
       name: cilium-values
 
   values:
-    # TODO: Enable additional values after deploying some more dependencies
-    #   hubble:
-    #     serviceMonitor:
-    #       enabled: true
+    hubble:
+      ui:
+        ingress:
+          enabled: true
+          className: internal
+          annotations:
+            external-dns.alpha.kubernetes.io/target: ingress-int.${domain}
+          hosts:
+            - hubble.${domain}
 
-    #     dashboards:
-    #       enabled: true
-    #       annotations:
-    #         grafana_folder: Cilium
+  # TODO: Enable additional values after deploying some more dependencies
+  #     serviceMonitor:
+  #       enabled: true
 
-    #     relay:
-    #       prometheus:
-    #         enabled: true
-    #         serviceMonitor:
-    #           enabled: true
+  #     dashboards:
+  #       enabled: true
+  #       annotations:
+  #         grafana_folder: Cilium
 
-    #   operator:
-    #     prometheus:
-    #       enabled: true
-    #       serviceMonitor:
-    #         enabled: true
-    #     dashboards:
-    #       enabled: true
-    #       annotations:
-    #         grafana_folder: Cilium
+  #     relay:
+  #       prometheus:
+  #         enabled: true
+  #         serviceMonitor:
+  #           enabled: true
 
-    #   prometheus:
-    #     enabled: true
-    #     serviceMonitor:
-    #       enabled: true
-    #       trustCRDsExist: true
+  #   operator:
+  #     prometheus:
+  #       enabled: true
+  #       serviceMonitor:
+  #         enabled: true
+  #     dashboards:
+  #       enabled: true
+  #       annotations:
+  #         grafana_folder: Cilium
 
-    #   dashboards:
-    #     enabled: true
-    #     annotations:
-    #       grafana_folder: Cilium
+  #   prometheus:
+  #     enabled: true
+  #     serviceMonitor:
+  #       enabled: true
+  #       trustCRDsExist: true
 
-    ui:
-      ingress:
-        enabled: true
-        className: internal
-        annotations:
-          external-dns.alpha.kubernetes.io/target: ingress-int.${domain}
-        hosts:
-          - hubble.${domain}
+  #   dashboards:
+  #     enabled: true
+  #     annotations:
+  #       grafana_folder: Cilium
