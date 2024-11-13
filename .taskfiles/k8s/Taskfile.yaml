@@ -15,7 +15,7 @@ tasks:
     silent: true
     vars:
       NS: '{{default "default" .NS}}'
-      NAME: '{{default "" .ESNAME}}'
+      ESNAME: '{{default "" .ESNAME}}'
     cmds:
       - |
         {{if eq .ESNAME ""}}
