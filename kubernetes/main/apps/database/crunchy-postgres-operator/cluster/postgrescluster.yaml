@@ -74,8 +74,8 @@ spec:
           app.kubernetes.io/name: crunchy-postgres-backup
       repos:
         # TODO: Decide on storage provider for backups
-        - name: repo1 # Hetzner
-          s3:
+        - name: repo1
+          s3: &hetzner
             endpoint: ${cpgo_s3_endpoint}
             bucket: cpgo
             region: eu-central
@@ -90,6 +90,7 @@ spec:
       global: *backupGlobal
       repo:
         name: repo1
+        s3: *hetzner
 
   # TODO: Add Podmonitor after deploying monitoring stack
   monitoring:
