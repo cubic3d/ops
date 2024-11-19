@@ -62,7 +62,7 @@ spec:
         # Hetzner
         repo1-block: "y"
         repo1-bundle: "y"
-        repo1-path: /
+        repo1-path: /cpgo
         repo1-retention-full: "30" # days
         repo1-retention-full-type: time
       manual:
