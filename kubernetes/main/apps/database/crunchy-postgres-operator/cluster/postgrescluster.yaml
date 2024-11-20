@@ -5,6 +5,7 @@ metadata:
   name: &name postgres
 spec:
   postgresVersion: 17
+  disableDefaultPodScheduling: true
 
   metadata:
     labels:
@@ -82,6 +83,15 @@ spec:
           schedules:
             full: "0 2 * * 0" # Sunday at 02:00
             differential: "0 2 * * 1-6" # Mon-Sat at 02:00
+      repoHost:
+        topologySpreadConstraints:
+          - maxSkew: 1
+            topologyKey: kubernetes.io/hostname
+            whenUnsatisfiable: DoNotSchedule
+            labelSelector:
+              matchLabels:
+                postgres-operator.crunchydata.com/cluster: *name
+                postgres-operator.crunchydata.com/data: pgbackrest
 
   dataSource:
     pgbackrest:
