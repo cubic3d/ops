@@ -129,6 +129,7 @@ spec:
         global:
           pool_mode: transaction
           client_tls_sslmode: prefer
+          ignore_startup_parameters: search_path
       topologySpreadConstraints:
         - maxSkew: 1
           topologyKey: kubernetes.io/hostname
