@@ -3,6 +3,32 @@ module.exports = {
   credentialSecret: process.env.NODE_RED_CREDENTIAL_SECRET,
   flowFilePretty: true,
 
+  adminAuth: {
+    type: "strategy",
+    strategy: {
+      name: "openidconnect",
+      autoLogin: true,
+      label: "Sign in",
+      icon: "fa-cloud",
+      strategy: require("passport-openidconnect").Strategy,
+      options: {
+        issuer: "https://auth.${domain}",
+        authorizationURL: "https://auth.${domain}/api/oidc/authorization",
+        tokenURL: "https://auth.${domain}/api/oidc/token",
+        userInfoURL: "https://auth.${domain}/api/oidc/userinfo",
+        clientID: "node-red",
+        clientSecret: process.env.NODE_RED_OIDC_CLIENT_SECRET,
+        callbackURL: "https://r.${domain}/auth/strategy/callback",
+        scope: ["openid", "email", "profile", "groups"],
+        proxy: true,
+        verify: function (issuer, profile, done) {
+          done(null, profile);
+        },
+      },
+    },
+    users: [{ username: "cubic", permissions: ["*"] }],
+  },
+
   uiPort: process.env.PORT || 1880,
 
   diagnostics: {
