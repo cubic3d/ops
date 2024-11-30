@@ -1,0 +1,184 @@
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: authelia
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: authelia
+      version: 0.9.10
+      sourceRef:
+        kind: HelmRepository
+        name: authelia
+        namespace: flux-system
+
+  values:
+    ingress:
+      enabled: true
+      annotations:
+        external-dns.alpha.kubernetes.io/target: ingress-ext.${domain}
+      className: external
+
+    pod:
+      kind: Deployment
+      replicas: 1
+      strategy:
+        type: RollingUpdate
+
+      securityContext:
+        container:
+          runAsUser: 2000
+          runAsGroup: 2000
+          fsGroup: 2000
+        pod:
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          privileged: false
+
+      env:
+        - name: TZ
+          value: Europe/Berlin
+
+    configMap:
+      telemetry:
+        metrics:
+          enabled: true
+          # TODO: Enable after deploying monitoring
+          # serviceMonitor:
+          #   enabled: false
+          #   annotations: {}
+          #   labels: {}
+
+      default_2fa_method: totp
+      theme: auto
+
+      identity_validation:
+        reset_password:
+          secret:
+            path: jwt_hmac_key
+
+      totp:
+        issuer: Yachthafen ID
+
+      webauthn:
+        display_name: Yachthafen ID
+
+      authentication_backend:
+        password_reset:
+          disable: true
+          custom_url: https://youtu.be/dQw4w9WgXcQ
+        file:
+          enabled: true
+          path: /secrets/authelia/users_database.yaml
+          watch: true
+          search:
+            email: true
+
+      access_control:
+        default_policy: two_factor
+
+        networks:
+          - name: lan
+            networks:
+              - 10.0.0.0/8
+              - 172.16.0.0/12
+              - 192.168.0.0/16
+
+        rules:
+          - domain: "*"
+            policy: one_factor
+            networks:
+              - lan
+
+      session:
+        name: yachthafen_session
+        encryption_key:
+          path: session_encryption_key
+        cookies:
+          - domain: ${domain}
+            subdomain: auth
+
+        # TODO: Configure redis when deployed
+        redis:
+          enabled: false
+
+      storage:
+        encryption_key:
+          path: storage_encryption_key
+
+        postgres:
+          enabled: true
+          # PgBouncer not used (creates problems with prepared statements)
+          address: tcp://postgres-primary.database.svc.cluster.local:5432
+          database: authelia
+          username: authelia
+          password:
+            path: postgres_password
+
+      notifier:
+        smtp:
+          enabled: true
+          enabledSecret: true
+          address: smtp://smtp.gmail.com:587
+          sender: Yachthafen ID <noreply@${domain}>
+          subject: "{title}"
+          username: noreply@${mail_domain}
+          password:
+            path: smtp_password
+
+      identity_providers:
+        oidc:
+          enabled: true
+          hmac_secret:
+            path: oidc_hmac_key
+          jwks:
+            - key:
+                path: /secrets/authelia/jwks_rsa_4096.pem
+
+          authorization_policies: {}
+
+          clients:
+            - client_name: Cloudflare
+              client_id: cloudflare
+              client_secret:
+                path: /secrets/authelia/oidc_secret_cloudflare
+              consent_mode: implicit
+              scopes:
+                - openid
+                - profile
+                - email
+                - groups
+              redirect_uris:
+                - https://${cloudflare_team_name}.cloudflareaccess.com/cdn-cgi/access/callback
+              pkce_challenge_method: S256
+
+            - client_name: Node-RED
+              client_id: node-red
+              client_secret:
+                path: /secrets/authelia/oidc_secret_nodered
+              consent_mode: implicit
+              scopes:
+                - openid
+                - profile
+                - email
+                - groups
+              redirect_uris:
+                - https://r.${domain}/auth/strategy/callback
+              token_endpoint_auth_method: client_secret_post
+
+    secret:
+      existingSecret: authelia
+
+      additionalSecrets:
+        authelia:
+          items:
+            - key: jwks_rsa_4096.pem
+              path: jwks_rsa_4096.pem
+            - key: notesPlain
+              path: users_database.yaml
+            - key: oidc_secret_cloudflare
+              path: oidc_secret_cloudflare
+            - key: oidc_secret_nodered
+              path: oidc_secret_nodered
