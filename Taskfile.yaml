@@ -26,3 +26,7 @@ includes:
   k8s:
     taskfile: ".taskfiles/k8s"
     dir: .taskfiles/k8s
+
+  postgres:
+    taskfile: ".taskfiles/postgres"
+    dir: .taskfiles/postgres
