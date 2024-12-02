@@ -99,7 +99,7 @@ spec:
           main:
             image:
               repository: ghcr.io/shlinkio/shlink-web-client
-              tag: 4.2.2
+              tag: 4.3.0
 
             env:
               SHLINK_SERVER_URL: https://s.${domain}
