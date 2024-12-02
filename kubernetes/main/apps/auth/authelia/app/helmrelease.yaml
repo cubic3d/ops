@@ -99,10 +99,12 @@ spec:
         cookies:
           - domain: ${domain}
             subdomain: auth
-
-        # TODO: Configure redis when deployed
         redis:
-          enabled: false
+          enabled: true
+          host: dragonfly.database.svc.cluster.local
+          password:
+            disabled: true
+          database_index: 1
 
       storage:
         encryption_key:
