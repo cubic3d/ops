@@ -77,20 +77,15 @@ spec:
             email: true
 
       access_control:
-        default_policy: two_factor
+        default_policy: deny
 
-        networks:
-          - name: lan
-            networks:
-              - 10.0.0.0/8
-              - 172.16.0.0/12
-              - 192.168.0.0/16
+        networks: []
 
         rules:
-          - domain: "*"
-            policy: one_factor
-            networks:
-              - lan
+          - domain_regex: .*
+            policy: two_factor
+            subject:
+              - group:admins
 
       session:
         name: yachthafen_session
