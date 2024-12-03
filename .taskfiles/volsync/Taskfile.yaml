@@ -31,7 +31,8 @@ tasks:
             "containers": [
               {
                 "name": "command",
-                "image": "ghcr.io/restic/restic:latest",
+                "image": "quay.io/backube/volsync:latest",
+                "command": ["restic"],
                 "args": {{ .CLI_ARGS | splitArgs | mustToJson }},
                 "stdin": true,
                 "stdinOnce": true,
