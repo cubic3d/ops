@@ -1,0 +1,67 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
+
+tasks:
+  unlock:
+    desc: Unlock all restic source repos
+    preconditions:
+      - which kubectl
+    vars:
+      SOURCES:
+        sh: kubectl get replicationsources --all-namespaces --no-headers --output=jsonpath='{range .items[*]}{.metadata.namespace},{.metadata.name}{"\n"}{end}'
+    cmds:
+      - for:
+          var: SOURCES
+          split: "\n"
+        cmd: kubectl --namespace {{splitList "," .ITEM | first}} patch --field-manager=flux-client-side-apply replicationsources {{splitList "," .ITEM | last}} --type merge --patch "{\"spec\":{\"restic\":{\"unlock\":\"{{now | unixEpoch}}\"}}}"
+
+  restic-cmd:
+    desc: Runs an arbitrary restic command for a given app [NS=default] APP=node-red -- command
+    interactive: true
+    vars:
+      NS: '{{default "default" .NS}}'
+    requires:
+      vars:
+        - APP
+    cmd: |-
+      kubectl run -n {{.NS}} volsync-restic-cmd-{{.APP}} -i --tty --rm --image=null --privileged --overrides='
+        {
+          "apiVersion": "v1",
+          "spec": {
+            "containers": [
+              {
+                "name": "command",
+                "image": "ghcr.io/restic/restic:latest",
+                "args": {{ .CLI_ARGS | splitArgs | mustToJson }},
+                "stdin": true,
+                "stdinOnce": true,
+                "tty": true,
+                "envFrom": [
+                  {
+                    "secretRef": {
+                      "name": "{{.APP}}-volsync-box"
+                    }
+                  }
+                ]
+              }
+            ],
+            "restartPolicy": "Never"
+          }
+        }'
+    preconditions:
+      - kubectl -n {{.NS}} get replicationsource {{.APP}}
+
+  snapshot:
+    desc: Snapshot an app [NS=default] APP=node-red
+    vars:
+      NS: '{{.NS | default "default"}}'
+      JOB: volsync-src-{{.APP}}
+    requires:
+      vars:
+        - APP
+    cmds:
+      - kubectl --namespace {{.NS}} patch replicationsources {{.APP}} --type merge -p '{"spec":{"trigger":{"manual":"{{now | unixEpoch}}"}}}'
+      - until kubectl --namespace {{.NS}} get job/{{.JOB}} &>/dev/null; do sleep 5; done
+      - kubectl --namespace {{.NS}} wait job/{{.JOB}} --for=condition=complete --timeout=120m
+    preconditions:
+      - kubectl --namespace {{.NS}} get replicationsources {{.APP}}

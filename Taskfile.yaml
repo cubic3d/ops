@@ -30,3 +30,7 @@ includes:
   postgres:
     taskfile: ".taskfiles/postgres"
     dir: .taskfiles/postgres
+
+  volsync:
+    taskfile: ".taskfiles/volsync"
+    dir: .taskfiles/volsync
