@@ -66,3 +66,62 @@ tasks:
       - kubectl --namespace {{.NS}} wait job/{{.JOB}} --for=condition=complete --timeout=120m
     preconditions:
       - kubectl --namespace {{.NS}} get replicationsources {{.APP}}
+
+  restore:
+    desc: Restore an app [NS=default] APP=node-red PREVIOUS=2
+    vars:
+      NS: '{{.NS | default "default"}}'
+      CONTROLLER:
+        sh: kubectl --namespace {{.NS}} get deployment {{.APP}} &>/dev/null && echo deployment || echo statefulset
+      CLAIM:
+        sh: kubectl --namespace {{.NS}} get replicationsources/{{.APP}} --output=jsonpath="{.spec.sourcePVC}"
+      ACCESS_MODES:
+        sh: kubectl --namespace {{.NS}} get replicationsources/{{.APP}} --output=jsonpath="{.spec.restic.accessModes}"
+      STORAGE_CLASS_NAME:
+        sh: kubectl --namespace {{.NS}} get replicationsources/{{.APP}} --output=jsonpath="{.spec.restic.storageClassName}"
+      PUID:
+        sh: kubectl --namespace {{.NS}} get replicationsources/{{.APP}} --output=jsonpath="{.spec.restic.moverSecurityContext.runAsUser}"
+      PGID:
+        sh: kubectl --namespace {{.NS}} get replicationsources/{{.APP}} --output=jsonpath="{.spec.restic.moverSecurityContext.runAsGroup}"
+    requires:
+      vars:
+        - APP
+        - PREVIOUS
+    cmds:
+      # Suspend
+      - flux --namespace flux-system suspend kustomization {{.APP}}
+      - flux --namespace {{.NS}} suspend helmrelease {{.APP}}
+      - kubectl --namespace {{.NS}} scale {{.CONTROLLER}}/{{.APP}} --replicas 0
+      - kubectl --namespace {{.NS}} wait pod --for=delete --selector="app.kubernetes.io/name={{.APP}}" --timeout=5m
+      # Restore
+      - |-
+        kubectl apply -n {{.NS}} --server-side --filename - <<EOF
+        apiVersion: volsync.backube/v1alpha1
+        kind: ReplicationDestination
+        metadata:
+          name: {{.APP}}-manual
+        spec:
+          trigger:
+            manual: restore-once
+          restic:
+            repository: {{.APP}}-volsync-box
+            destinationPVC: {{.CLAIM}}
+            copyMethod: Direct
+            storageClassName: {{.STORAGE_CLASS_NAME}}
+            accessModes: {{.ACCESS_MODES}}
+            moverSecurityContext:
+              runAsUser: {{.PUID}}
+              runAsGroup: {{.PGID}}
+              fsGroup: {{.PGID}}
+            enableFileDeletion: true
+            cleanupCachePVC: true
+            cleanupTempPVC: true
+        EOF
+      - until kubectl --namespace {{.NS}} get job/volsync-dst-{{.APP}}-manual &>/dev/null; do sleep 5; done
+      - kubectl --namespace {{.NS}} wait job/volsync-dst-{{.APP}}-manual --for=condition=complete --timeout=120m
+      - kubectl --namespace {{.NS}} delete replicationdestination {{.APP}}-manual
+      # Resume
+      - flux --namespace flux-system resume kustomization {{.APP}}
+      - flux --namespace {{.NS}} resume helmrelease {{.APP}}
+      - flux --namespace {{.NS}} reconcile helmrelease {{.APP}} --force
+      - kubectl --namespace {{.NS}} wait pod --for=condition=ready --selector="app.kubernetes.io/name={{.APP}}" --timeout=5m
