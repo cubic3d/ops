@@ -26,3 +26,49 @@ tasks:
         {{end}}
     preconditions:
       - '{{if ne .ESNAME ""}}kubectl --namespace {{.NS}} get externalsecret {{.ESNAME}}{{end}}'
+
+  mount:
+    desc: Mounts a PVC to a temporary pod [ns=default] pvc=my-pvc
+    interactive: true
+    vars:
+      NS: '{{default "default" .NS}}'
+    requires:
+      vars:
+        - APP
+    cmd: |-
+      kubectl run -n {{.NS}} mount-{{.APP}} -i --tty --rm --image=null --privileged --overrides='
+        {
+          "apiVersion": "v1",
+          "spec": {
+            "containers": [
+              {
+                "name": "mount",
+                "image": "docker.io/library/alpine:edge",
+                "command": [
+                  "/bin/sh"
+                ],
+                "workingDir": "/data",
+                "stdin": true,
+                "stdinOnce": true,
+                "tty": true,
+                "volumeMounts": [
+                  {
+                    "name": "data",
+                    "mountPath": "/data"
+                  }
+                ]
+              }
+            ],
+            "volumes": [
+              {
+                "name": "data",
+                "persistentVolumeClaim": {
+                  "claimName": "{{.APP}}"
+                }
+              }
+            ],
+            "restartPolicy": "Never"
+          }
+        }'
+    preconditions:
+      - kubectl -n {{.NS}} get pvc {{.APP}}
