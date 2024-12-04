@@ -68,9 +68,10 @@ spec:
         # Hetzner
         repo1-block: "y"
         repo1-bundle: "y"
-        repo1-path: /cpgo
+        repo1-path: /
         repo1-retention-full: "30" # days
         repo1-retention-full-type: time
+        repo1-s3-uri-style: path
       manual:
         repoName: repo1
         options:
@@ -82,7 +83,7 @@ spec:
         # TODO: Decide on storage provider for backups
         - name: repo1
           s3: &hetzner
-            endpoint: ${cpgo_s3_endpoint}
+            endpoint: s3-gateway.network.svc.cluster.local
             bucket: cpgo
             region: eu-central
           schedules:
