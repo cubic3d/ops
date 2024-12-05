@@ -23,6 +23,8 @@ spec:
 
     pod:
       kind: Deployment
+      annotations:
+        reloader.stakater.com/auto: "true"
       replicas: 1
       strategy:
         type: RollingUpdate
