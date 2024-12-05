@@ -73,6 +73,7 @@ spec:
         ports:
           http:
             enabled: false
+            port: 80
           https:
             primary: true
             port: 443
