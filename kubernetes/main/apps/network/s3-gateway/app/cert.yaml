@@ -1,0 +1,21 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: s3-gateway-selfsign
+spec:
+  selfSigned: {}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: s3-gateway-ca
+spec:
+  secretName: s3-gateway-tls
+  dnsNames:
+    - s3-gateway.network.svc.cluster.local
+    - s3-gateway.network
+    - s3-gateway
+  duration: 87600h # 10y
+  issuerRef:
+    name: s3-gateway-selfsign
+    kind: Issuer

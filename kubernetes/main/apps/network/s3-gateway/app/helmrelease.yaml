@@ -34,8 +34,10 @@ spec:
               - "box:"
 
             env:
-              RCLONE_ADDR: :80
+              RCLONE_ADDR: :443
               RCLONE_CONFIG: /config/rclone.conf
+              RCLONE_CERT: /cert/tls.crt
+              RCLONE_KEY: /cert/tls.key
 
             envFrom:
               - secretRef:
@@ -70,8 +72,14 @@ spec:
         controller: s3-gateway
         ports:
           http:
-            port: 80
+            enabled: false
+          https:
+            primary: true
+            port: 443
 
     persistence:
       config:
         type: emptyDir
+      cert:
+        type: secret
+        name: s3-gateway-tls
