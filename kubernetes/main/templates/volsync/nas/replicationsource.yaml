@@ -2,13 +2,13 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
-  name: ${app}
+  name: ${app}-nas
 spec:
   sourcePVC: ${volsync_claim:-${app}}
   trigger:
-    schedule: "0 3 * * *"
+    schedule: "0 * * * *"
   restic:
-    repository: ${app}-volsync-box
+    repository: ${app}-volsync-nas
     copyMethod: ${volsync_copymethod:-Snapshot}
     cacheCapacity: ${volsync_cache_capacity:-1Gi}
     cacheStorageClassName: ${volsync_cache_storageclass:-openebs-hostpath}
@@ -24,4 +24,17 @@ spec:
       fsGroup: ${volsync_pgid:-2000}
     pruneIntervalDays: 7
     retain:
+      hourly: 24
       daily: 7
+      weekly: 4
+    moverAffinity:
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          - topologyKey: kubernetes.io/hostname
+            labelSelector:
+              matchLabels:
+                app.kubernetes.io/created-by: volsync
+            namespaceSelector:
+              matchExpressions:
+                - key: kubernetes.io/metadata.name
+                  operator: Exists

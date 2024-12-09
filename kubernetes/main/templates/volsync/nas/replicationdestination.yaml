@@ -2,12 +2,12 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationDestination
 metadata:
-  name: ${app}
+  name: ${app}-nas
 spec:
   trigger:
     manual: restore-once
   restic:
-    repository: ${app}-volsync-box
+    repository: ${app}-volsync-nas
     copyMethod: Snapshot
     cacheCapacity: ${volsync_cache_capacity:-1Gi}
     cacheStorageClassName: ${volsync_cache_storageclass:-openebs-hostpath}
