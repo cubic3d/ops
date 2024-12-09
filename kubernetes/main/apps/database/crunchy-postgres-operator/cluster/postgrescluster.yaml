@@ -65,14 +65,21 @@ spec:
             name: crunchy-postgres
       global: &backupGlobal
         compress-type: bz2
-        # Hetzner
+        # NAS
         repo1-block: "y"
         repo1-bundle: "y"
         repo1-path: /
         repo1-retention-full: "30" # days
         repo1-retention-full-type: time
         repo1-s3-uri-style: path
-        repo1-storage-verify-tls: "n"
+        # Cloud
+        repo2-block: "y"
+        repo2-bundle: "y"
+        repo2-path: /
+        repo2-retention-full: "30" # days
+        repo2-retention-full-type: time
+        repo2-s3-uri-style: path
+        repo2-storage-verify-tls: "n"
       manual:
         repoName: repo1
         options:
@@ -81,9 +88,17 @@ spec:
         labels:
           app.kubernetes.io/name: crunchy-postgres-backup
       repos:
-        # TODO: Decide on storage provider for backups
         - name: repo1
-          s3: &hetzner
+          s3: &nas
+            endpoint: nas.${domain}:9000
+            bucket: cpgo
+            region: eu-central
+          schedules:
+            full: "0 1 * * 0" # Sunday at 01:00
+            differential: "0 1 * * 1-6" # Mon-Sat at 01:00
+            incremental: "0 2-23 * * *" # Every hour except 01:00
+        - name: repo2
+          s3: &cloud
             endpoint: s3-gateway.network.svc.cluster.local
             bucket: cpgo
             region: eu-central
@@ -107,7 +122,7 @@ spec:
       global: *backupGlobal
       repo:
         name: repo1
-        s3: *hetzner
+        s3: *nas
 
   # TODO: Add Podmonitor after deploying monitoring stack
   monitoring:
