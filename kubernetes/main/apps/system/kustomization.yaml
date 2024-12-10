@@ -5,6 +5,7 @@ resources:
   - namespace.yaml
   - kubelet-csr-approver/ks.yaml
   - spegel/ks.yaml
+  - reflector/ks.yaml
   - reloader/ks.yaml
   - node-feature-discovery/ks.yaml
   - descheduler/ks.yaml
