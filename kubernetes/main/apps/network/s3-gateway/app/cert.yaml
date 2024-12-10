@@ -8,7 +8,7 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: s3-gateway-ca
+  name: s3-gateway
 spec:
   secretName: s3-gateway-tls
   dnsNames:
