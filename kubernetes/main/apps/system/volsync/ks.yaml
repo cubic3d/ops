@@ -18,3 +18,4 @@ spec:
     name: ops
   dependsOn:
     - name: snapshot-controller
+    - name: external-secrets-stores
