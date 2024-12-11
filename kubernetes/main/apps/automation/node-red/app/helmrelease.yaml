@@ -68,8 +68,6 @@ spec:
     ingress:
       app:
         className: internal
-        annotations:
-          external-dns.alpha.kubernetes.io/target: ingress-int.${domain}
         hosts:
           - host: r.${domain}
             paths:

@@ -17,8 +17,6 @@ spec:
   values:
     ingress:
       enabled: true
-      annotations:
-        external-dns.alpha.kubernetes.io/target: ingress-ext.${domain}
       className: external
 
     pod:

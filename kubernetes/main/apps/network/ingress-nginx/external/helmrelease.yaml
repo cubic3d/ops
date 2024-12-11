@@ -28,8 +28,11 @@ spec:
         enabled: true
         type: LoadBalancer
         annotations:
-          external-dns.alpha.kubernetes.io/hostname: ingress-ext.${domain}
+          external-dns.alpha.kubernetes.io/hostname: &hostname ingress-ext.${domain}
           lbipam.cilium.io/ips: "192.168.40.60"
+
+      publishService:
+        enabled: false
 
       ingressClassResource:
         name: &class external
@@ -80,6 +83,7 @@ spec:
 
       extraArgs:
         default-ssl-certificate: network/main-domain-tls
+        publish-status-address: *hostname
 
       topologySpreadConstraints:
         - maxSkew: 1
