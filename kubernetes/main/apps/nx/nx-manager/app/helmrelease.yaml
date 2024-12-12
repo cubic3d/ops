@@ -1,0 +1,140 @@
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: nx-manager
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.5.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+
+  values:
+    controllers:
+      manager:
+        pod:
+          imagePullSecrets:
+            - name: nx-manager-pull
+
+        containers:
+          app:
+            image:
+              repository: ghcr.io/cubic3d/nx-manager
+              tag: main@sha256:e2cee85c6246ef3c8295106294089042ff9ccf32c04ce1ba653feadf412c2019
+
+            env:
+              TZ: Europe/Berlin
+              NX_MANAGER_KEYS_FILE: /storage/import/keys.txt
+              NX_MANAGER_IMPORT_PATH: /storage/import
+              NX_MANAGER_ROMS_PATH: /storage/roms
+              NX_MANAGER_OUTPUT_PATH: /storage/output
+              NX_MANAGER_CACHE_PATH: /cache
+
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities:
+                drop:
+                  - ALL
+              seccompProfile:
+                type: RuntimeDefault
+
+      frontend:
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        containers:
+          app:
+            image:
+              repository: docker.io/library/caddy
+              tag: 2.8.4@sha256:07417b42b03b8929ec80240d1a83e27a9c1346ddbff65988608fd1757269c1eb
+
+            probes:
+              liveness: &probe
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /livez
+                    port: 80
+              readiness: *probe
+              startup: *probe
+
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              # capabilities:
+              #   drop:
+              #     - ALL
+              seccompProfile:
+                type: RuntimeDefault
+
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 2000
+        runAsGroup: 2000
+        fsGroup: 2000
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile:
+          type: RuntimeDefault
+
+    service:
+      app:
+        controller: frontend
+        ports:
+          http:
+            port: 80
+
+    ingress:
+      app:
+        className: internal
+        hosts:
+          - host: nx.${domain}
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+
+    persistence:
+      config-file:
+        type: configMap
+        name: caddyfile
+        advancedMounts:
+          frontend:
+            app:
+              - path: /etc/caddy/Caddyfile
+                subPath: Caddyfile
+                readOnly: true
+
+      cache:
+        type: emptyDir
+        advancedMounts:
+          manager:
+            app:
+              - path: /cache
+
+      config:
+        type: emptyDir
+        advancedMounts:
+          frontend:
+            app:
+              - path: /config
+
+      data:
+        type: emptyDir
+        advancedMounts:
+          frontend:
+            app:
+              - path: /data
+
+      storage:
+        type: nfs
+        server: nas.${domain}
+        path: /mnt/fast/nx
