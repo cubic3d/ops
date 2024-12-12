@@ -52,7 +52,7 @@ spec:
           app:
             image:
               repository: docker.io/library/caddy
-              tag: 2.8.4@sha256:07417b42b03b8929ec80240d1a83e27a9c1346ddbff65988608fd1757269c1eb
+              tag: 2.8.4
 
             probes:
               liveness: &probe
