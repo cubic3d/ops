@@ -18,3 +18,4 @@ spec:
     name: ops
   dependsOn:
     - name: external-secrets-stores
+    - name: cert-manager
