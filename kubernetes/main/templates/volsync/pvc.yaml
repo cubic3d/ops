@@ -10,7 +10,7 @@ spec:
   dataSourceRef:
     kind: ReplicationDestination
     apiGroup: volsync.backube
-    name: ${app}
+    name: ${app}-nas
   resources:
     requests:
       storage: ${volsync_capacity:-1Gi}
