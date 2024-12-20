@@ -72,6 +72,14 @@ spec:
               seccompProfile:
                 type: RuntimeDefault
 
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+              startup:
+                enabled: true
+
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
