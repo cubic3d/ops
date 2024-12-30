@@ -36,8 +36,6 @@ spec:
               MULTI_SEGMENT_SLUGS_ENABLED: "true"
               SHORT_URL_TRAILING_SLASH: "true"
               ANONYMIZE_REMOTE_ADDR: "false"
-              REDIS_PUB_SUB_ENABLED: "true"
-              REDIS_SERVERS: dragonfly.database.svc.cluster.local:6379/2,
               DB_DRIVER: postgres
 
             resources:
