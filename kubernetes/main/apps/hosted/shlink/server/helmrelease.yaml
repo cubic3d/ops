@@ -1,0 +1,96 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: shlink
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.6.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+
+  values:
+    controllers:
+      shlink:
+        containers:
+          app:
+            image:
+              repository: ghcr.io/shlinkio/shlink
+              tag: 4.4.0
+
+            envFrom:
+              - secretRef:
+                  name: shlink
+
+            env:
+              DEFAULT_DOMAIN: s.${domain}
+              IS_HTTPS_ENABLED: "true"
+              TIMEZONE: Europe/Berlin
+              AUTO_RESOLVE_TITLES: "true"
+              DEFAULT_SHORT_CODES_LENGTH: 4
+              MULTI_SEGMENT_SLUGS_ENABLED: "true"
+              SHORT_URL_TRAILING_SLASH: "true"
+              ANONYMIZE_REMOTE_ADDR: "false"
+              REDIS_PUB_SUB_ENABLED: "true"
+              REDIS_SERVERS: dragonfly.database.svc.cluster.local:6379/2,
+              DB_DRIVER: postgres
+
+            resources:
+              requests:
+                cpu: 10m
+                memory: 200Mi
+              limits:
+                memory: 400Mi
+
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities:
+                drop:
+                  - ALL
+              seccompProfile:
+                type: RuntimeDefault
+
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /rest/health
+                    port: 8080
+              readiness: *probes
+              startup: *probes
+
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 2000
+        runAsGroup: 2000
+        fsGroup: 2000
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile:
+          type: RuntimeDefault
+
+    service:
+      app:
+        controller: shlink
+        ports:
+          http:
+            port: 8080
+
+    ingress:
+      app:
+        className: external
+        hosts:
+          - host: s.${domain}
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http

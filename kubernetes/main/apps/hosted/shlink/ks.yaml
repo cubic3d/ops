@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: &appname shlink
+  namespace: flux-system
+spec:
+  targetNamespace: hosted
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *appname
+  path: kubernetes/main/apps/hosted/shlink/server
+  interval: 10m
+  prune: true
+  wait: true
+  sourceRef:
+    kind: GitRepository
+    name: ops
+  dependsOn:
+    - name: external-secrets-stores
+    - name: emqx-cluster
+    - name: crunchy-postgres-operator-cluster
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: &appname shlink-frontend
+  namespace: flux-system
+spec:
+  targetNamespace: hosted
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *appname
+  path: kubernetes/main/apps/hosted/shlink/frontend
+  interval: 10m
+  prune: true
+  wait: true
+  sourceRef:
+    kind: GitRepository
+    name: ops
+  dependsOn:
+    - name: external-secrets-stores
