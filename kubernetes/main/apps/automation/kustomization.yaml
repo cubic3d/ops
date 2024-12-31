@@ -4,4 +4,5 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - node-red/ks.yaml
+  - windmill/ks.yaml
   - zigbee2mqtt/ks.yaml

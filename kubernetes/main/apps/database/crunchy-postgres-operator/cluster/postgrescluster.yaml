@@ -62,6 +62,11 @@ spec:
         - shlink
       password:
         type: AlphaNumeric
+    - name: windmill
+      databases:
+        - windmill
+      password:
+        type: AlphaNumeric
 
   backups:
     pgbackrest:
