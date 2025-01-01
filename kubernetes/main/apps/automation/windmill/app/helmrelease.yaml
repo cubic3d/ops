@@ -34,21 +34,25 @@ spec:
           requests:
             cpu: 10m
             memory: 300Mi
+        affinity:
+          podAntiAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              - topologyKey: kubernetes.io/hostname
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/name: windmill-app
 
       lsp:
         podSecurityContext:
           runAsUser: 2000
           runAsNonRoot: true
-
-      multiplayer:
-        podSecurityContext:
-          runAsUser: 2000
-          runAsNonRoot: true
-
-      indexer:
-        podSecurityContext:
-          runAsUser: 2000
-          runAsNonRoot: true
+        affinity:
+          podAntiAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              - topologyKey: kubernetes.io/hostname
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/name: windmill-lsp
 
       workerGroups:
         - name: default
@@ -63,6 +67,14 @@ spec:
             limits:
               memory: 2048Mi
               cpu: 1000m
+            affinity:
+              podAntiAffinity:
+                requiredDuringSchedulingIgnoredDuringExecution:
+                  - topologyKey: kubernetes.io/hostname
+                    labelSelector:
+                      matchLabels:
+                        app.kubernetes.io/name: windmill-workers
+                        workerGroup: default
         - name: native
           replicas: 2
           podSecurityContext:
@@ -75,6 +87,14 @@ spec:
             limits:
               memory: 256Mi
               cpu: 200m
+            affinity:
+              podAntiAffinity:
+                requiredDuringSchedulingIgnoredDuringExecution:
+                  - topologyKey: kubernetes.io/hostname
+                    labelSelector:
+                      matchLabels:
+                        app.kubernetes.io/name: windmill-workers
+                        workerGroup: native
 
     ingress:
       className: internal
