@@ -67,18 +67,6 @@ spec:
         - windmill
       password:
         type: AlphaNumeric
-    - name: windmill_user
-      databases:
-        - windmill
-      options: NOLOGIN
-      password:
-        type: AlphaNumeric
-    - name: windmill_admin
-      databases:
-        - windmill
-      options: NOLOGIN BYPASSRLS
-      password:
-        type: AlphaNumeric
 
   backups:
     pgbackrest:
