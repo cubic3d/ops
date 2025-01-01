@@ -165,6 +165,20 @@ spec:
                 - https://r.${domain}/auth/strategy/callback
               token_endpoint_auth_method: client_secret_post
 
+            - client_name: Windmill
+              client_id: windmill
+              client_secret:
+                path: /secrets/authelia/oidc_secret_windmill
+              consent_mode: implicit
+              scopes:
+                - openid
+                - profile
+                - email
+                - groups
+              redirect_uris:
+                - https://w.${domain}/user/login_callback/authelia
+              pkce_challenge_method: S256
+
     secret:
       existingSecret: authelia
 
@@ -179,3 +193,5 @@ spec:
               path: oidc_secret_cloudflare
             - key: oidc_secret_nodered
               path: oidc_secret_nodered
+            - key: oidc_secret_windmill
+              path: oidc_secret_windmill
