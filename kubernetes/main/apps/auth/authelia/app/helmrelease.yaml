@@ -177,7 +177,6 @@ spec:
                 - groups
               redirect_uris:
                 - https://w.${domain}/user/login_callback/authelia
-              pkce_challenge_method: S256
 
     secret:
       existingSecret: authelia
