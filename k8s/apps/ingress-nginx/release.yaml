@@ -34,3 +34,4 @@ spec:
         large-client-header-buffers: 4 256k
         proxy-body-size: 100m
         force-ssl-redirect: "true"
+        annotations-risk-level: Critical
