@@ -80,3 +80,5 @@ spec:
     persistence:
       datastore:
         existingClaim: changedetection
+      tmp:
+        type: emptyDir
