@@ -28,7 +28,7 @@ tasks:
       - '{{if ne .ESNAME ""}}kubectl --namespace {{.NS}} get externalsecret {{.ESNAME}}{{end}}'
 
   mount:
-    desc: Mounts a PVC to a temporary pod [ns=default] pvc=my-pvc
+    desc: Mounts a PVC to a temporary pod [NS=default] APP=my-app
     interactive: true
     vars:
       NS: '{{default "default" .NS}}'
