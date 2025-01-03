@@ -27,6 +27,8 @@ spec:
       baseProtocol: https
 
       app:
+        annotations:
+          reloader.stakater.com/auto: "true"
         podSecurityContext:
           runAsUser: 2000
           runAsNonRoot: true
@@ -43,6 +45,8 @@ spec:
                     app.kubernetes.io/name: windmill-app
 
       lsp:
+        annotations:
+          reloader.stakater.com/auto: "true"
         podSecurityContext:
           runAsUser: 2000
           runAsNonRoot: true
@@ -57,6 +61,8 @@ spec:
       workerGroups:
         - name: default
           replicas: 2
+          annotations:
+            reloader.stakater.com/auto: "true"
           podSecurityContext:
             runAsUser: 2000
             runAsNonRoot: true
@@ -77,6 +83,8 @@ spec:
                         workerGroup: default
         - name: native
           replicas: 2
+          annotations:
+            reloader.stakater.com/auto: "true"
           podSecurityContext:
             runAsUser: 2000
             runAsNonRoot: true
