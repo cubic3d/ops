@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: &appname changedetection
+  namespace: flux-system
+spec:
+  targetNamespace: hosted
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *appname
+  path: kubernetes/main/apps/hosted/changedetection/app
+  interval: 10m
+  prune: true
+  wait: true
+  sourceRef:
+    kind: GitRepository
+    name: ops
+  dependsOn:
+    - name: longhorn
+    - name: volsync
+  postBuild:
+    substitute:
+      app: *appname
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: &appname sockpuppetbrowser
+  namespace: flux-system
+spec:
+  targetNamespace: hosted
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *appname
+  path: kubernetes/main/apps/hosted/changedetection/sockpuppetbrowser
+  interval: 10m
+  prune: true
+  wait: true
+  sourceRef:
+    kind: GitRepository
+    name: ops
