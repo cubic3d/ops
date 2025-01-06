@@ -29,12 +29,12 @@ spec:
             env:
               TZ: Europe/Berlin
               COMPlus_EnableDiagnostics: "0"
-              PROWLARR__INSTANCE_NAME: Prowlarr
-              PROWLARR__PORT: &port 9696
-              PROWLARR__LOG_LEVEL: info
-              PROWLARR__ANALYTICS_ENABLED: "False"
-              PROWLARR__AUTHENTICATION_METHOD: External
-              PROWLARR__API_KEY:
+              PROWLARR__APP__INSTANCENAME: Prowlarr
+              PROWLARR__SERVER__PORT: &port 9696
+              PROWLARR__LOG__LEVEL: info
+              PROWLARR__LOG__ANALYTICSENABLED: "False"
+              PROWLARR__AUTH__METHOD: External
+              PROWLARR__AUTH__APIKEY:
                 valueFrom:
                   secretKeyRef:
                     name: prowlarr
