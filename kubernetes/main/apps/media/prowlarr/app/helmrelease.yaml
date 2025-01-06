@@ -43,6 +43,11 @@ spec:
             probes:
               liveness: &probes
                 enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /ping
+                    port: *port
               readiness: *probes
               startup: *probes
 
