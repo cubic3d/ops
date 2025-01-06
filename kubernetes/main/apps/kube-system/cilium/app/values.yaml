@@ -36,6 +36,7 @@ loadBalancer:
   acceleration: best-effort
   algorithm: maglev
   mode: dsr
+enableIPv4BIGTCP: true
 localRedirectPolicy: true
 operator:
   rollOutPods: true
