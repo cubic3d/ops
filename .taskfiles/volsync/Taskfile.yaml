@@ -125,3 +125,22 @@ tasks:
       - flux --namespace {{.NS}} resume helmrelease {{.APP}}
       - flux --namespace {{.NS}} reconcile helmrelease {{.APP}} --force
       - kubectl --namespace {{.NS}} wait pod --for=condition=ready --selector="app.kubernetes.io/name={{.APP}}" --timeout=5m
+
+  cleanup:
+    desc: Delete volume populator PVCs in all namespaces
+    vars:
+      dest:
+        sh: kubectl get pvc --all-namespaces --no-headers | grep "volsync-.*-dest" | awk '{print $1 "/" $2}'
+      snaps:
+        sh: kubectl get volumesnapshot --all-namespaces --no-headers | grep "volsync-.*-dest" | awk '{print $1 "/" $2}'
+    cmds:
+      - for:
+          var: dest
+        cmd: |
+          {{- $items := (split "/" .ITEM) }}
+          kubectl delete pvc -n {{$items._0}} {{$items._1}}
+      - for:
+          var: snaps
+        cmd: |
+          {{- $items := (split "/" .ITEM) }}
+          kubectl delete volumesnapshot -n {{$items._0}} {{$items._1}}
