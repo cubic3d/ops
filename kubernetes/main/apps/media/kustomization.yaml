@@ -6,6 +6,7 @@ resources:
   - bazarr/ks.yaml
   - jellyseerr/ks.yaml
   - maintainerr/ks.yaml
+  - plex/ks.yaml
   - prowlarr/ks.yaml
   - radarr/ks.yaml
   - recyclarr/ks.yaml
