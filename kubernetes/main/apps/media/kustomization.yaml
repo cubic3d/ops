@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - bazarr/ks.yaml
+  - jellyseerr/ks.yaml
   - maintainerr/ks.yaml
   - prowlarr/ks.yaml
   - radarr/ks.yaml
