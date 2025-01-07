@@ -28,7 +28,7 @@ spec:
 
             env:
               TZ: Europe/Berlin
-              PLEX_ADVERTISE_URL: https://plex.${domain}:443
+              PLEX_ADVERTISE_URL: https://192.168.40.64:32400,https://plex.${domain}:443
               PLEX_NO_AUTH_NETWORKS: 10.244.0.0/16
 
             probes:
@@ -38,7 +38,7 @@ spec:
                 spec:
                   httpGet:
                     path: /identity
-                    port: &port 32400
+                    port: 32400
               readiness: *probes
               startup: *probes
 
@@ -72,9 +72,12 @@ spec:
     service:
       app:
         controller: plex
+        type: LoadBalancer
+        annotations:
+          lbipam.cilium.io/ips: 192.168.40.64
         ports:
           http:
-            port: *port
+            port: 32400
 
     ingress:
       app:
