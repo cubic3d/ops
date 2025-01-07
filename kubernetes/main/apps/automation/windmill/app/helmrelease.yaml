@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: windmill
-      version: 2.0.334
+      version: 2.0.337
       sourceRef:
         kind: HelmRepository
         name: windmill
@@ -30,7 +30,7 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
         podSecurityContext:
-          runAsUser: 2000
+          runAsUser: 1000
           runAsNonRoot: true
         resources:
           requests:
@@ -48,7 +48,7 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
         podSecurityContext:
-          runAsUser: 2000
+          runAsUser: 1000
           runAsNonRoot: true
         affinity:
           podAntiAffinity:
@@ -64,7 +64,7 @@ spec:
           annotations:
             reloader.stakater.com/auto: "true"
           podSecurityContext:
-            runAsUser: 2000
+            runAsUser: 1000
             runAsNonRoot: true
           resources:
             requests:
@@ -86,7 +86,7 @@ spec:
           annotations:
             reloader.stakater.com/auto: "true"
           podSecurityContext:
-            runAsUser: 2000
+            runAsUser: 1000
             runAsNonRoot: true
           resources:
             requests:
