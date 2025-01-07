@@ -28,6 +28,7 @@ spec:
 
             env:
               TZ: Europe/Berlin
+              # No support for those global settings yet in bazarr
               COMPlus_EnableDiagnostics: "0"
               BAZARR__APP__INSTANCENAME: Bazarr
               BAZARR__SERVER__PORT: &port 6767
