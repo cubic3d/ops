@@ -116,7 +116,7 @@ spec:
       media:
         type: nfs
         server: nas.${domain}
-        path: /mnt/slow/media/downloads/sabnzbd
+        path: /mnt/slow/media
         globalMounts:
           - path: /media/downloads/sabnzbd
             subPath: downloads/sabnzbd
