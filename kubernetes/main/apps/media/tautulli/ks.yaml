@@ -22,3 +22,5 @@ spec:
   postBuild:
     substitute:
       app: *appname
+      volsync_puid: "1000"
+      volsync_pgid: "1000"
