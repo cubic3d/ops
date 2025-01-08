@@ -47,8 +47,8 @@ spec:
                 cpu: 100m
                 memory: 300Mi
               limits:
-                # TODO: Add GPU limits
                 memory: 10Gi
+                gpu.intel.com/i915: 1
 
             securityContext:
               allowPrivilegeEscalation: false
@@ -68,6 +68,19 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
         seccompProfile:
           type: RuntimeDefault
+        affinity:
+          nodeAffinity:
+            preferredDuringSchedulingIgnoredDuringExecution:
+              - weight: 100
+                preference:
+                  labelSelector:
+                    matchLabels:
+                      gpu.intel.com/device-id.0300-3ea5.present: "true"
+              - weight: 50
+                preference:
+                  labelSelector:
+                    matchLabels:
+                      gpu.intel.com/device-id.0300-1916.present: "true"
 
     service:
       app:
