@@ -7,7 +7,7 @@ tasks:
     cmds:
       - for:
           matrix:
-            PHASE: [Failed, Succeeded, Pending]
+            PHASE: [Failed, Succeeded]
         cmd: kubectl delete pods --field-selector status.phase={{.ITEM.PHASE}} -A --ignore-not-found=true
 
   sync-externalsecret:
