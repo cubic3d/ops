@@ -25,9 +25,8 @@ spec:
         containers:
           app:
             image:
-              # TODO: Revert to official when https://github.com/rclone/rclone/issues/8277 is fixed
-              repository: docker.io/cubic3d/rclone
-              tag: test
+              repository: docker.io/rclone/rclone
+              tag: 1.69.0
 
             args:
               - serve
