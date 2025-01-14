@@ -82,6 +82,7 @@ controlPlane:
           - siderolabs/i915
           - siderolabs/iscsi-tools
           - siderolabs/util-linux-tools
+          - siderolabs/zfs
   patches:
     - |-
       - op: remove
@@ -155,6 +156,13 @@ patches:
             hard=True
             noatime=True
             nconnect=16
+
+  # Enable ZFS module
+  - |-
+    machine:
+      kernel:
+        modules:
+          - name: zfs
 
   # Increase max pods, rotate server certificates
   - |-
