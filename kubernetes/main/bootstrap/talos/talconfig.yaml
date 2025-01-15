@@ -173,7 +173,7 @@ patches:
         extraConfig:
           maxPods: 150
 
-  # Mount CSI directories for kubelet
+  # Mount storage directories for kubelet
   - |-
     machine:
       kubelet:
@@ -188,6 +188,13 @@ patches:
           - destination: /var/lib/longhorn
             type: bind
             source: /var/lib/longhorn
+            options:
+              - bind
+              - rshared
+              - rw
+          - destination: /var/mnt/slow
+            type: bind
+            source: /var/mnt/slow
             options:
               - bind
               - rshared
