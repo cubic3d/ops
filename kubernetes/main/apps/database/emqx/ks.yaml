@@ -40,3 +40,4 @@ spec:
     name: ops
   dependsOn:
     - name: emqx-operator
+    - name: external-secrets-stores
