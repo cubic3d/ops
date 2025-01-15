@@ -113,10 +113,21 @@ spec:
       tmp:
         type: emptyDir
 
-      media:
-        type: nfs
-        server: nas.${domain}
-        path: /mnt/slow/media
+      complete:
+        existingClaim: media
         globalMounts:
-          - path: /media/downloads/sabnzbd
-            subPath: downloads/sabnzbd
+          - path: /media/downloads/sabnzbd/complete
+            subPath: downloads/sabnzbd/complete
+
+      incomplete:
+        type: custom
+        volumeSpec:
+          ephemeral:
+            volumeClaimTemplate:
+              spec:
+                storageClassName: openebs-hostpath
+                accessModes:
+                  - ReadWriteOnce
+                resources:
+                  requests:
+                    storage: 100Gi
