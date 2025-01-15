@@ -2,14 +2,14 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &appname media-volume
+  name: &appname volume-media
   namespace: flux-system
 spec:
   targetNamespace: media
   commonMetadata:
     labels:
       app.kubernetes.io/name: *appname
-  path: kubernetes/main/apps/media/media-volume/volume
+  path: kubernetes/main/apps/media/volume/media
   interval: 10m
   prune: true
   wait: true
