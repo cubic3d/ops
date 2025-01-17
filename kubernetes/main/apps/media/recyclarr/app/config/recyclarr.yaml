@@ -42,11 +42,11 @@ sonarr:
           - name: WEB-1080p
           - name: WEB-2160p
 
-      # Allow DV and HDR10+
+      # Allow DV and disable HDR10+
       - trash_ids:
           # - 9b27ab6498ec0f31a3353992e19434ca # DV (WEBDL)
-          - 0dad0a507451acddd754fe6dc3a7f5e7 # HDR10+ Boost
-          - 385e9e8581d33133c3961bdcdeffb7b4 # DV HDR10+ Boost
+          # - 0dad0a507451acddd754fe6dc3a7f5e7 # HDR10+ Boost
+          # - 385e9e8581d33133c3961bdcdeffb7b4 # DV HDR10+ Boost
         assign_scores_to:
           - name: WEB-2160p
 
@@ -88,10 +88,10 @@ radarr:
         assign_scores_to:
           - name: SQP-1 (2160p)
 
-      # Allow HDR10+
+      # Disallow HDR10+
       - trash_ids:
-          - b17886cb4158d9fea189859409975758 # HDR10+ Boost
-          - 55a5b50cb416dea5a50c4955896217ab # DV HDR10+ Boost
+          # - b17886cb4158d9fea189859409975758 # HDR10+ Boost
+          # - 55a5b50cb416dea5a50c4955896217ab # DV HDR10+ Boost
         assign_scores_to:
           - name: SQP-1 (2160p)
 
