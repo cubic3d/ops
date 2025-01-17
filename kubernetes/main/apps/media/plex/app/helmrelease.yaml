@@ -98,9 +98,9 @@ spec:
 
     ingress:
       app:
-        className: external
+        className: internal
         hosts:
-          - host: play.${domain}
+          - host: plex.${domain}
             paths:
               - path: /
                 service:
@@ -130,9 +130,7 @@ spec:
         type: emptyDir
 
       media:
-        type: nfs
-        server: nas.${domain}
-        path: /mnt/slow/media
+        existingClaim: plex
         globalMounts:
           - path: /media/library
             subPath: library
