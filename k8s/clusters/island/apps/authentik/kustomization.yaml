@@ -3,4 +3,4 @@ kind: Kustomization
 namespace: authentik
 resources:
   - namespace.yaml
-  - ../../../../apps/authentik
+  # - ../../../../apps/authentik
