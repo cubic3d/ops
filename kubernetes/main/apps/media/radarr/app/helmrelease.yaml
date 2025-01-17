@@ -112,6 +112,4 @@ spec:
         type: emptyDir
 
       media:
-        type: nfs
-        server: nas.${domain}
-        path: /mnt/slow/media
+        existingClaim: media
