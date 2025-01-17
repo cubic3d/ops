@@ -342,6 +342,9 @@ settings:
                         - accept_specific_tcp_host_port:
                             ip: 192.168.40.10
                             port: 1880
+                        - accept_specific_tcp_host_port:
+                            ip: 192.168.40.64
+                            port: 32400
                     - allExcept:
                         - local
                         - trusted
@@ -462,8 +465,8 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-09-27T13:42:57Z"
-    mac: ENC[AES256_GCM,data:2b5uMUHqnZryMapuUYTbxPOHfYmXzW12F7BkEM+Wg+zc3DlnaJ4an8KeJUpZC2fruqom6ODoFFvCrPIFN9wGo9aRYFidJA0Lk0KDMOQGJM2gdMURLY69XboS/WT+UR0Z7z+UGTQuoNdCflPJy7scchVOq6hV0DhlFnuh3Gm2nB0=,iv:7JjJKyayU6bA4woP6sDCGbIj7OPRgff1e2crSW93ob0=,tag:JMhNnuDpHjGqlDvs4UnhJQ==,type:str]
+    lastmodified: "2025-01-17T18:18:19Z"
+    mac: ENC[AES256_GCM,data:yWCtnuuIkUvM3ED4uu3e2PvqWsf6nv5R4kskH+cU/IIEsfyQaIZtQ3UIMN5JLJGnVzV2y8+YlfuhqVrZGCHRIGXDrjrinYD89kE6IboParxK8GAOfBvoMtnqFyh+UliplWA32MSFXofbtjzavubNGyovNNnucFuE7RYAC+LUiJE=,iv:2ciYYDye7mN3Le3VSDTb14hEmTKoFz5xlU8HeKP1oac=,tag:QBYpSJjHJz1hn/lyEWPlOw==,type:str]
     pgp: []
     encrypted_suffix: _enc
-    version: 3.9.0
+    version: 3.9.1
