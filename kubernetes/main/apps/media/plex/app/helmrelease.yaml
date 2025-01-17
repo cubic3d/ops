@@ -98,7 +98,7 @@ spec:
 
     ingress:
       app:
-        className: internal
+        className: external
         hosts:
           - host: plex.${domain}
             paths:
