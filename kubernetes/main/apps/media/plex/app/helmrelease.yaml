@@ -130,7 +130,7 @@ spec:
         type: emptyDir
 
       media:
-        existingClaim: plex
+        existingClaim: media
         globalMounts:
           - path: /media/library
             subPath: library
