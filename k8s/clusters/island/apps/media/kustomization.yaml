@@ -3,15 +3,15 @@ kind: Kustomization
 namespace: media
 resources:
   - namespace.yaml
-  - media-volume.yaml
-  - media-creds.yaml
-  - ../../../../apps/sabnzbd
-  - ../../../../apps/prowlarr
-  - ../../../../apps/radarr
-  - ../../../../apps/sonarr
-  - ../../../../apps/bazarr
-  - ../../../../apps/overseerr
-  - ../../../../apps/plex
-  - ../../../../apps/recyclarr
-  - ../../../../apps/tautulli
-  - ../../../../apps/maintainerr
+  # - media-volume.yaml
+  # - media-creds.yaml
+  # - ../../../../apps/sabnzbd
+  # - ../../../../apps/prowlarr
+  # - ../../../../apps/radarr
+  # - ../../../../apps/sonarr
+  # - ../../../../apps/bazarr
+  # - ../../../../apps/overseerr
+  # - ../../../../apps/plex
+  # - ../../../../apps/recyclarr
+  # - ../../../../apps/tautulli
+  # - ../../../../apps/maintainerr
