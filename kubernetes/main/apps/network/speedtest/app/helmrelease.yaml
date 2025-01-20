@@ -22,8 +22,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/librespeed/speedtest
-              tag: latest@sha256:b277f9c4b05e6ed70a7563187e7c5e0b5b78f3f09d35e3e018cfb3872cfe3667
+              repository: ghcr.io/librespeed/speedtest-rust
+              tag: v1.3.6
 
             env:
               MODE: standalone
