@@ -27,6 +27,7 @@ spec:
 
             command: ["/bin/bash", "-c"]
 
+            # Mitigating issues: https://github.com/siderolabs/talos/issues/8935
             args:
               - |
                 find /sys/class/net/*/device/driver/module/drivers -maxdepth 1 -path "*e1000e*" | \
