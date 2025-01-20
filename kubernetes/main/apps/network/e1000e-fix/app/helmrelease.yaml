@@ -17,7 +17,7 @@ spec:
   values:
     controllers:
       e1000e-fix:
-        type: DaemonSet
+        type: daemonset
 
         containers:
           app:
