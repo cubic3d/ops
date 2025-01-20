@@ -36,6 +36,8 @@ loadBalancer:
   acceleration: best-effort
   algorithm: maglev
   mode: dsr
+socketLB:
+  enabled: true
 enableIPv4BIGTCP: true
 localRedirectPolicy: true
 operator:
