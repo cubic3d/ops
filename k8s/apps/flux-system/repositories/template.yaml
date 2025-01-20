@@ -1,8 +1,0 @@
-apiVersion: source.toolkit.fluxcd.io/v1
-kind: HelmRepository
-metadata:
-  name: template
-  namespace: flux-system
-spec:
-  url: https://bjw-s.github.io/helm-charts/
-  interval: 10m

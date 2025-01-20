@@ -6,7 +6,3 @@
 
 # Terraform
 .terraform
-
-# Talos generated files
-/infrastructure/talos/**/clusterconfig/
-/infrastructure/talos/**/charts/

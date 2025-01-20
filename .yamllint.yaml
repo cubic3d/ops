@@ -1,8 +1,6 @@
 extends: default
 ignore: |-
-  gotk-components.yaml
   *.sops.*
-  infrastructure/talos/**/deploy.yaml
 rules:
   line-length: disable
   document-start: disable
