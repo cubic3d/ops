@@ -31,10 +31,11 @@ spec:
               repository: docker.io/library/alpine
               tag: 3.21
 
-            args: -|
-              nsenter -t $(pidof /zfs-service) -m zpool scrub -w slow
-              nsenter -t $(pidof /zfs-service) -m zpool status slow
-              nsenter -t $(pidof /zfs-service) -m zpool status slow | grep -q "with 0 errors"
+            args:
+              - |
+                nsenter -t $(pidof /zfs-service) -m zpool scrub -w slow
+                nsenter -t $(pidof /zfs-service) -m zpool status slow
+                nsenter -t $(pidof /zfs-service) -m zpool status slow | grep -q "with 0 errors"
 
             resources:
               requests:
