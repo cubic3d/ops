@@ -29,7 +29,7 @@ spec:
           app:
             image:
               repository: docker.io/library/alpine
-              tag: 3
+              tag: 3.21
 
             args: -|
               nsenter -t $(pidof /zfs-service) -m zpool scrub -w slow
@@ -48,3 +48,5 @@ spec:
 
     defaultPodOptions:
       hostPID: true
+      nodeSelector:
+        feature.node.kubernetes.io/slow-pool: true
