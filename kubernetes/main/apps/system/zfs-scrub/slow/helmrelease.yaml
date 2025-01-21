@@ -49,4 +49,4 @@ spec:
     defaultPodOptions:
       hostPID: true
       nodeSelector:
-        feature.node.kubernetes.io/slow-pool: true
+        feature.node.kubernetes.io/slow-pool: "true"
