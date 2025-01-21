@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: zfs-scrub-slow
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.6.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+
+  values:
+    controllers:
+      zfs-scrub-slow:
+        type: cronjob
+
+        cronjob:
+          schedule: "@monthly"
+          backoffLimit: 0
+          concurrencyPolicy: Forbid
+          successfulJobsHistory: 1
+
+        containers:
+          app:
+            image:
+              repository: docker.io/library/alpine
+              tag: 3
+
+            args: -|
+              nsenter -t $(pidof /zfs-service) -m zpool scrub -w slow
+              nsenter -t $(pidof /zfs-service) -m zpool status slow
+              nsenter -t $(pidof /zfs-service) -m zpool status slow | grep -q "with 0 errors"
+
+            resources:
+              requests:
+                cpu: 5m
+                memory: 10Mi
+              limits:
+                memory: 100Mi
+
+            securityContext:
+              privileged: true
+
+    defaultPodOptions:
+      hostPID: true
