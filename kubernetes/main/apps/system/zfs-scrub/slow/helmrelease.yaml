@@ -29,7 +29,7 @@ spec:
           app:
             image:
               repository: docker.io/library/alpine
-              tag: 3
+              tag: 20250108
 
             args: -|
               nsenter -t $(pidof /zfs-service) -m zpool scrub -w slow
