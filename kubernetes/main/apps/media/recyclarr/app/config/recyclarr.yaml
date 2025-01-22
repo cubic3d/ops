@@ -16,9 +16,6 @@ sonarr:
         daily: default
         anime: default
 
-    quality_definition:
-      type: series
-
     include:
       - template: sonarr-quality-definition-series
       - template: sonarr-v4-quality-profile-web-1080p
@@ -63,9 +60,6 @@ radarr:
       movie:
         rename: true
         standard: anime
-
-    quality_definition:
-      type: movie
 
     include:
       - template: radarr-quality-definition-sqp-streaming
