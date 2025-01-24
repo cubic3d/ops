@@ -119,6 +119,7 @@ spec:
                   - ALL
 
     defaultPodOptions:
+      terminationGracePeriodSeconds: 120
       securityContext:
         fsGroup: 2000
         fsGroupChangePolicy: OnRootMismatch
