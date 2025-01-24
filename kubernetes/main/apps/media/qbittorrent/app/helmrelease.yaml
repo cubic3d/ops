@@ -29,6 +29,9 @@ spec:
             restartPolicy: Always
 
           gluetun:
+            dependsOn:
+              - dnsdist
+
             image:
               repository: ghcr.io/qdm12/gluetun
               tag: v3.40.0
@@ -36,6 +39,8 @@ spec:
             restartPolicy: Always
 
             env:
+              DOT: "off"
+              DNS_ADDRESS: "127.0.0.2"
               VPN_SERVICE_PROVIDER: protonvpn
               VPN_TYPE: wireguard
               PORT_FORWARD_ONLY: on
