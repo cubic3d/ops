@@ -21,6 +21,13 @@ spec:
           reloader.stakater.com/auto: "true"
 
         initContainers:
+          dnsdist:
+            image:
+              repository: docker.io/powerdns/dnsdist-19
+              tag: 1.9.8
+
+            restartPolicy: Always
+
           gluetun:
             image:
               repository: ghcr.io/qdm12/gluetun
@@ -157,6 +164,16 @@ spec:
           qbittorrent:
             port-forward:
               - path: /config
+
+      dnsdist:
+        type: configMap
+        name: qbittorrent-dnsdist
+        advancedMounts:
+          qbittorrent:
+            dnsdist:
+              - path: /etc/dnsdist/dnsdist.conf
+                subPath: dnsdist.conf
+                readOnly: true
 
       tmp:
         type: emptyDir
