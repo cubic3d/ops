@@ -149,7 +149,7 @@ spec:
               - path: /config
             gluetun:
               - path: /gluetun
-              - subPath: gluetun
+                subPath: gluetun
 
       empty-config:
         type: emptyDir
