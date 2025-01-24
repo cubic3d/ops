@@ -160,3 +160,22 @@ spec:
 
       tmp:
         type: emptyDir
+
+      complete:
+        existingClaim: media
+        globalMounts:
+          - path: /media/downloads/qbittorrent/complete
+            subPath: downloads/qbittorrent/complete
+
+      incomplete:
+        type: custom
+        volumeSpec:
+          ephemeral:
+            volumeClaimTemplate:
+              spec:
+                storageClassName: openebs-hostpath
+                accessModes:
+                  - ReadWriteOnce
+                resources:
+                  requests:
+                    storage: 100Gi
