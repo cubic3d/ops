@@ -50,8 +50,6 @@ spec:
               UPDATER_PERIOD: 12h
               FIREWALL_INPUT_PORTS: 8080
               FIREWALL_OUTBOUND_SUBNETS: 10.96.0.0/12,10.244.0.0/16 # k8s
-              VPN_PORT_FORWARDING_UP_COMMAND: |
-                /bin/sh -c 'wget -qO- --header="cookie: $TRACKER_ONE_SESSION" $TRACKER_ONE_URL'
 
             envFrom:
               - secretRef:
