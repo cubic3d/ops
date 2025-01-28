@@ -116,16 +116,24 @@ spec:
     ingress:
       app:
         className: internal
-        annotations:
-          nginx.ingress.kubernetes.io/rewrite-target: /$1
         hosts:
           - host: hass.${domain}
             paths:
-              - path: /(.*)
+              - path: /
                 service:
                   identifier: app
                   port: http
-              - path: /code/(.*)
+
+      code-server:
+        className: internal
+        annotations:
+          nginx.ingress.kubernetes.io/auth-url: http://authelia.auth.svc.cluster.local/api/authz/auth-request
+          nginx.ingress.kubernetes.io/auth-signin: https://auth.${domain}?rm=$request_method
+          nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
+        hosts:
+          - host: hass-config.${domain}
+            paths:
+              - path: /
                 service:
                   identifier: app
                   port: code-server
