@@ -76,13 +76,6 @@ spec:
               limits:
                 memory: 1Gi
 
-            securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-              capabilities:
-                drop:
-                  - ALL
-
             probes:
               liveness:
                 enabled: true
