@@ -323,6 +323,7 @@ settings:
             name: Server
             interface: br0
             vlan: 40
+            mdns_repeater: true
             policies:
                 from4:
                     - only:
@@ -409,6 +410,10 @@ settings:
     ip:
         ulaPrefix: fd00:c01d:1ced
     hosts:
+        ap:
+            zone: management
+            address: 10
+            mac_enc: ENC[AES256_GCM,data:vIc/pr5vj5i79kg1ukN62tg=,iv:Kdwf2CkwX+BXb4DQ3oW3cso0GajzJy3o2puCNwskZbI=,tag:zcIW0tRmmoauPjdQnak5yQ==,type:str]
         zigbee:
             zone: iot
             address: 10
@@ -446,6 +451,10 @@ settings:
             address: 15
             mac_enc: ENC[AES256_GCM,data:lsa4/Oq/PNY3auE5l3kOMVc=,iv:lDeE1S8Ktn5HNn2TfCWynxZwt5JdgImCqG+wxHo71pk=,tag:oDk9fhDj/UArS8Tmd19IqQ==,type:str]
     services:
+        modem:
+            address: 192.168.178.1
+        ruckus:
+            address: 192.168.0.10
         nas:
             address: 192.168.40.11
         k8s:
@@ -465,8 +474,8 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-01-17T18:18:19Z"
-    mac: ENC[AES256_GCM,data:yWCtnuuIkUvM3ED4uu3e2PvqWsf6nv5R4kskH+cU/IIEsfyQaIZtQ3UIMN5JLJGnVzV2y8+YlfuhqVrZGCHRIGXDrjrinYD89kE6IboParxK8GAOfBvoMtnqFyh+UliplWA32MSFXofbtjzavubNGyovNNnucFuE7RYAC+LUiJE=,iv:2ciYYDye7mN3Le3VSDTb14hEmTKoFz5xlU8HeKP1oac=,tag:QBYpSJjHJz1hn/lyEWPlOw==,type:str]
+    lastmodified: "2025-01-29T14:03:26Z"
+    mac: ENC[AES256_GCM,data:Onyx7QUtBJXTRmBrDau1gTiFkhtDaae5Vrv9AL3pERtW01DjjQPuCQFMusxu2OPs4rvLStS5Wn9EACzK4MzMKBDTkEOT3ExRuiD6ecMlE7dAVShNJB+4DPDaWF18kH6uG8GABPKrfUVqFkVTqCkgdQEUcR/3o6QSvNTeW8FF5cM=,iv:3T2nMhGEsHzTaIzf28My3YO/ecJdcxuwGdGGbpmEF1o=,tag:B5fsZJZQF+EgQ1tWqh1LSw==,type:str]
     pgp: []
     encrypted_suffix: _enc
     version: 3.9.1
