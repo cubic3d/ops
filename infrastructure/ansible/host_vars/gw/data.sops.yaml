@@ -435,6 +435,10 @@ settings:
             zone: iot
             address: 12
             mac_enc: ENC[AES256_GCM,data:8ilLd6wYeqQkDUpjvyeVT3E=,iv:VHEOF0dqbFpqW2pzhRyt6KWbiR/G9FQZVejR2o7fBeY=,tag:ZFQY5v3c6CmogPb7rpIDmA==,type:str]
+        tv:
+            zone: iot
+            address: 13
+            mac_enc: ENC[AES256_GCM,data:pGM0lt9/rW8tjuryXiqUJpY=,iv:R04F9yEu9x0CVAFmCitHPx5TyM/nvlwYAvrQclG1TEY=,tag:gNWJ8FlKLcLXe8bR+HweEw==,type:str]
         kasumi:
             zone: server
             address: 10
@@ -483,8 +487,8 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-01-29T14:39:29Z"
-    mac: ENC[AES256_GCM,data:07d3bkSSDMQV3lrRheALlviigSZemVTXuTwyrhRPGhuAx9Tz47aJ6UtsS7xE0QXvk/a8sBJSTWWj7uPNK6GzbTbo6hHiDFRUSTwTxDsVVbUNIfTYJYJvW/NIjujh86kjZumAbMRW+4cFqRb5+jb3gQcL2AbvKYVBxNGkQLX7i0Q=,iv:jZ1iE8wwybdZzC71YRw+ahi3UvAe+skp859yljLZ73I=,tag:XviwCgc0xSXRSwo8UmrPgA==,type:str]
+    lastmodified: "2025-01-29T22:24:23Z"
+    mac: ENC[AES256_GCM,data:W/+Pzd6/OdOgMQho6Idg6atoBPiUZOZ12JKEu6hPvtebB2Rm8TQh9nx+NzaBEZEQjtaZLAkjus1pLXlHSeuz2d4s/1GMdLdQlZHsYs/OuTW5w0t4TkBXhWYj8wPH02PyPOL4gEwP4J0dbWfuhQZQp5nApqRr5lhQbp1u4dtcIyc=,iv:C0ApRArwBp3RRumMI2mbvzBGEDN4wh/pRaH5DzSteyQ=,tag:cKld64d4aihn/QzEZNFs4A==,type:str]
     pgp: []
     encrypted_suffix: _enc
     version: 3.9.1
