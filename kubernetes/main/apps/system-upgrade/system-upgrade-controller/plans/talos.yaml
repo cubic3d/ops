@@ -37,7 +37,7 @@ spec:
             fieldPath: spec.nodeName
 
     args:
-      - --nodes=$(NODE)
+      - --nodes=$(NODE).h.${domain}
       - health
       - --server=false
 
@@ -47,5 +47,5 @@ spec:
     envs: *envs
 
     args:
-      - --node=$(NODE)
+      - --node=$(NODE).h.${domain}
       - --tag=$(SYSTEM_UPGRADE_PLAN_LATEST_VERSION)
