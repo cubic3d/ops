@@ -57,10 +57,11 @@ spec:
               VPN_PORT_FORWARDING_PROVIDER: protonvpn
               SERVER_COUNTRIES: Switzerland
               UPDATER_PERIOD: 12h
-              FIREWALL_INPUT_PORTS: 8080
+              FIREWALL_INPUT_PORTS: 8080,8888
               FIREWALL_OUTBOUND_SUBNETS: 10.96.0.0/12,10.244.0.0/16 # k8s
               HTTP_CONTROL_SERVER_AUTH_CONFIG_FILEPATH: &gluetunAuthPath /gluetun/auth.toml
-              SHADOWSOCKS: on
+              HTTPPROXY: on
+              HTTPPROXY_USER: user
 
             envFrom:
               - secretRef:
@@ -153,19 +154,15 @@ spec:
         ports:
           http:
             port: *port
-      shadowsocks:
+
+      proxy:
         controller: qbittorrent
         type: LoadBalancer
         annotations:
           lbipam.cilium.io/ips: 192.168.40.65
         ports:
-          tcp:
-            primary: true
-            port: 8388
-            protocol: TCP
-          udp:
-            port: 8388
-            protocol: UDP
+          http:
+            port: 8888
 
     ingress:
       app:
