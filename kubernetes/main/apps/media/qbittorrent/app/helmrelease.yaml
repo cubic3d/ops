@@ -153,9 +153,7 @@ spec:
         ports:
           http:
             port: *port
-
-      # FIXME: Separate services for cilium's inability to handle mixed protocols
-      shadowsocks-tcp:
+      shadowsocks:
         controller: qbittorrent
         annotations:
           lbipam.cilium.io/ips: 192.168.40.65
@@ -164,14 +162,7 @@ spec:
             primary: true
             port: 8388
             protocol: TCP
-
-      shadowsocks-udp:
-        controller: qbittorrent
-        annotations:
-          lbipam.cilium.io/ips: 192.168.40.65
-        ports:
           udp:
-            primary: true
             port: 8388
             protocol: UDP
 
