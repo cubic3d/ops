@@ -5,5 +5,6 @@ metadata:
   name: coredns
   namespace: flux-system
 spec:
-  url: https://coredns.github.io/helm
+  type: oci
+  url: oci://ghcr.io/coredns/charts
   interval: 30m

@@ -11,8 +11,6 @@ repositories:
     url: https://helm.cilium.io
   - name: postfinance
     url: https://postfinance.github.io/kubelet-csr-approver
-  - name: coredns
-    url: https://coredns.github.io/helm
 
 releases:
   - name: cilium
@@ -24,7 +22,7 @@ releases:
 
   - name: coredns
     namespace: kube-system
-    chart: coredns/coredns
+    chart: oci://ghcr.io/coredns/charts/coredns
     version: 1.39.0
     values:
       - ../apps/kube-system/coredns/app/values.yaml
