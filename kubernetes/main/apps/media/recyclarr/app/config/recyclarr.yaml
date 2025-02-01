@@ -74,13 +74,6 @@ radarr:
         assign_scores_to:
           - name: SQP-1 (2160p)
 
-      # Disallow HDR10+
-      - trash_ids:
-          # - b17886cb4158d9fea189859409975758 # HDR10+ Boost
-          # - 55a5b50cb416dea5a50c4955896217ab # DV HDR10+ Boost
-        assign_scores_to:
-          - name: SQP-1 (2160p)
-
       # Prefered versions
       - trash_ids:
           - 570bc9ebecd92723d2d21500f4be314c # Remaster
