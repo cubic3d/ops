@@ -115,6 +115,7 @@ patches:
     machine:
       features:
         hostDNS:
+          resolveMemberNames: true
           forwardKubeDNSToHost: false
     cluster:
       coreDNS:
