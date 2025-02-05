@@ -494,8 +494,6 @@ settings:
             address: 192.168.40.90
         http-proxy:
             address: 192.168.40.65
-        hass-lb:
-            address: 192.168.40.66
 sops:
     kms: []
     gcp_kms: []
@@ -511,8 +509,8 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-02-05T10:15:04Z"
-    mac: ENC[AES256_GCM,data:r002IKyhW5Si1kxfjw2RveHSufKOaOS3La27CNNwJpTZ6HLpPe43zCAj4gsMyNu5Gpd1ehfSqNf+66F0UxjTsfaykQleoDGg5wF9GlfQgexu3oMDHrffaC88qBKfUJxbx9NaH9Mt8QGlOLgKSICNojHGWu46DU3Nd8jpDkKDmK8=,iv:zkmMRZQS5lAz/rVEtc4498ncUOTzM8g84TN5yCHJOFs=,tag:xuqKBKz5ZvPln2CEGAEgnQ==,type:str]
+    lastmodified: "2025-02-05T10:19:31Z"
+    mac: ENC[AES256_GCM,data:gR3lwLjglLnkj1DFAlCYNgfW8lOGUtG6opLEKTjfgI+d3QNRc1MH/ReLOKRaSD1Kt6a1YydGENNTjvIc/+/q90dxOyiIoh0rayRGuq2opuKLVQm+a1uK/ny9hUJtUwdwpSp8q3ywqGCDrJ1yNCUN8aKUWDQOK0lPszJ6MwTiwkU=,iv:o9G9WpcM8qc2E4FbVjclhqt+EtRr5jux/2yglRwVgtM=,tag:gyhAGH1az0XqZN0a10/EKQ==,type:str]
     pgp: []
     encrypted_suffix: _enc
     version: 3.9.1
