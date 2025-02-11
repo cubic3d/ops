@@ -106,7 +106,8 @@ spec:
 
     ingress:
       app:
-        className: internal
+        # Requires mTLS externally
+        className: external
         hosts:
           - host: hass.${domain}
             paths:
