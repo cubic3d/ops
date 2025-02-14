@@ -16,3 +16,17 @@
     {% set i.value = i.value + 1 %}
   {% endfor %}
 {% endfor %}
+
+{# Destination NAT #}
+{% set i = namespace(value=1) %}
+{% for zoneName, zone in settings.zones.items() if zone.port_forward is defined %}
+  {% for rule in zone.port_forward %}
+    set nat destination rule {{ i.value }} inbound-interface '{{ zone.interface }}'
+    set nat destination rule {{ i.value }} description '{{ rule.description }}'
+    set nat destination rule {{ i.value }} destination port '{{ rule.port_from }}'
+    set nat destination rule {{ i.value }} translation port '{{ rule.port_to }}'
+    set nat destination rule {{ i.value }} translation address '{{ rule.address }}'
+    set nat destination rule {{ i.value }} protocol '{{ rule.protocol }}'
+    {% set i.value = i.value + 1 %}
+  {% endfor %}
+{% endfor %}
