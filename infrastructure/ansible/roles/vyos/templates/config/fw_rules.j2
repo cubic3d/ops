@@ -80,3 +80,11 @@
   set firewall {{ path }} destination port '{{ port }}'
   set firewall {{ path }} log 'enable'
 {% endmacro %}
+
+{% macro accept_specific_udp_host_port(path, ip, port) %}
+  set firewall {{ path }} action 'accept'
+  set firewall {{ path }} protocol 'udp'
+  set firewall {{ path }} destination address '{{ ip }}'
+  set firewall {{ path }} destination port '{{ port }}'
+  set firewall {{ path }} log 'enable'
+{% endmacro %}

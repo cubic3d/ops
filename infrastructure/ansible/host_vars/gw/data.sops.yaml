@@ -366,11 +366,24 @@ settings:
                         - accept_specific_tcp_host_port:
                             ip: 192.168.40.66
                             port: 8123
+                    - only:
+                        - wan
+                      default: drop
+                      rules:
+                        - accept_established: null
+                        - drop_invalid: null
+                        - accept_specific_udp_host_port:
+                            ip: 192.168.40.10
+                            port: 8211
+                        - accept_specific_udp_host_port:
+                            ip: 192.168.40.10
+                            port: 27015
                     - allExcept:
                         - local
                         - trusted
                         - wireguard
                         - iot
+                        - wan
                       default: drop
                       rules:
                         - accept_established: null
@@ -502,8 +515,8 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-02-14T20:16:15Z"
-    mac: ENC[AES256_GCM,data:VARQlS8Qz9CmFcbgLzS8tgUT+L0ZYyztaBburjrS1+ZRAguyRds8cp84jnwM6RRskTsW7I6c/hf+frUI+j3i26gpiYorRa6OUvNePNs56swa+kYrewAFXqcs2azUvQHj8cLZJ9Ut8p/TjbB0FvCn1idWqz6yyADJBoEpJUogYg0=,iv:+3K7Ze10T4bnGlnaHkYeWFEBFD5q01ZrSqDUUNTqHL8=,tag:WxtK/lHF10onzWsyxl7clw==,type:str]
+    lastmodified: "2025-02-14T20:34:09Z"
+    mac: ENC[AES256_GCM,data:AQ5OymxBzb3A7CBrCeflobG0mhMUp9IHtCZANAqC86WPa5+3HTWek3qxXltYJmialaua5YINBP/FEuov5pIHQXrvoLO1KIuPlnJiz0vkb3wkhWjduDlaoPQ7uiruU5OzK4yrFFSdk0BDTPpf/RUhniz4hbDffRxvDkKYL3BQ4BQ=,iv:9ueFTdmSLgOHlDo3BVuiD4s2b3czP38waLE8LuMGzjY=,tag:VqyGet4xlxMPCGgViqQx5Q==,type:str]
     pgp: []
     encrypted_suffix: _enc
     version: 3.9.1
