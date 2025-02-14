@@ -75,8 +75,6 @@ spec:
         runAsGroup: 2000
         fsGroup: 2000
         fsGroupChangePolicy: OnRootMismatch
-        seccompProfile:
-          type: RuntimeDefault
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:

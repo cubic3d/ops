@@ -175,6 +175,12 @@ patches:
           - mitigations=off
           - security=none
 
+  # Enable defaultRuntime Profile
+  - |-
+    machine:
+      kubelet:
+        defaultRuntimeSeccompProfileEnabled: true
+
   # NFS mount options
   - |
     machine:
