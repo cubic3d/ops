@@ -439,26 +439,6 @@ settings:
             zone: iot
             address: 13
             mac_enc: ENC[AES256_GCM,data:pGM0lt9/rW8tjuryXiqUJpY=,iv:R04F9yEu9x0CVAFmCitHPx5TyM/nvlwYAvrQclG1TEY=,tag:gNWJ8FlKLcLXe8bR+HweEw==,type:str]
-        gh-livingroom:
-            zone: iot
-            address: 14
-            mac_enc: ENC[AES256_GCM,data:1yInd0OgRACyBi+42CsYjE8=,iv:S9KJooZxqRm8pNpH62lyS51LBSeG2buNVXoSP0dyaWQ=,tag:ei5HCwqExgAzdzdAiTlh3g==,type:str]
-        gh-bedroom:
-            zone: iot
-            address: 15
-            mac_enc: ENC[AES256_GCM,data:qwR+cLM8XTgpc8QJy7/EJyc=,iv:keY3ZjtTLS+Xzpr9lWKlymaNPywagCeXluNC4ZxSL9E=,tag:yQfZoMPXvu42Hhp1IkHlzw==,type:str]
-        gh-bathroom:
-            zone: iot
-            address: 16
-            mac_enc: ENC[AES256_GCM,data:quJbjdMjdKCrlUUHPgkgM00=,iv:XQwjFSpuMQP+bf0nT2flXhA3pBHh9noNKGRCXXjEnU8=,tag:PLWTdPTK6EhkhdZCBvIFtg==,type:str]
-        gh-office:
-            zone: iot
-            address: 17
-            mac_enc: ENC[AES256_GCM,data:l7ee1b4wkGRH9WyaNpEP/C0=,iv:GTnH+t0XBBfefcuLW3WcJ/Dsz2hCf/zMTg0ZW8d+nCc=,tag:RwYhYKko09X/S3TWQqxbvw==,type:str]
-        gh-kitchen:
-            zone: iot
-            address: 18
-            mac_enc: ENC[AES256_GCM,data:IB/naXAZmUBjAea/8h7GvbE=,iv:F+D+kQX7a9MkLBZKsLbworciuxc4FU92Q43FWwHBxUA=,tag:ezg11hhMg/DV56HhvoWnnw==,type:str]
         kasumi:
             zone: server
             address: 10
@@ -509,8 +489,8 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-02-05T10:19:31Z"
-    mac: ENC[AES256_GCM,data:gR3lwLjglLnkj1DFAlCYNgfW8lOGUtG6opLEKTjfgI+d3QNRc1MH/ReLOKRaSD1Kt6a1YydGENNTjvIc/+/q90dxOyiIoh0rayRGuq2opuKLVQm+a1uK/ny9hUJtUwdwpSp8q3ywqGCDrJ1yNCUN8aKUWDQOK0lPszJ6MwTiwkU=,iv:o9G9WpcM8qc2E4FbVjclhqt+EtRr5jux/2yglRwVgtM=,tag:gyhAGH1az0XqZN0a10/EKQ==,type:str]
+    lastmodified: "2025-02-14T15:28:23Z"
+    mac: ENC[AES256_GCM,data:dL5HScEwDISKHc9CbKxktIwXO1xik3h9OE80rsnyDkSveMZUglR5zG2Q8gd17kJvRBFeHpkNyLySJvXbbJQQz9MiNPNf3UgQ04pmOSsJNUz6pjnpA7eyOe3Z1wUXAm2Ya8soY38vvr7QRjSmfzq3CriaIMSWSz9dnl8IKzbgIeE=,iv:x6rV/3epiqJfC1IAl6xo1vV0HeN//1Ayy0FnzE9BFFE=,tag:V1Zm5KogTiVapGHTdZIkRg==,type:str]
     pgp: []
     encrypted_suffix: _enc
     version: 3.9.1
