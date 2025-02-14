@@ -12,6 +12,7 @@ spec:
 
   concurrency: 1
   exclusive: true
+  postCompleteDelay: 2m
 
   nodeSelector:
     matchExpressions:
@@ -21,14 +22,8 @@ spec:
           - linux
 
   upgrade:
-    image: ghcr.io/jfroy/tnu:0.3.0
-
-    envs:
-      - name: NODE
-        valueFrom:
-          fieldRef:
-            fieldPath: status.hostIP
+    image: ghcr.io/jfroy/tnu:0.4.0
 
     args:
-      - --node=$(NODE)
+      - --node=$(SYSTEM_UPGRADE_NODE_NAME)
       - --tag=$(SYSTEM_UPGRADE_PLAN_LATEST_VERSION)
