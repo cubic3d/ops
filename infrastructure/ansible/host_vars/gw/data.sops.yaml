@@ -127,6 +127,17 @@ settings:
             nat: true
             nat66_from:
                 - fd00:c01d:1ced:99::/64
+            port_forward:
+                - description: Palworld server
+                  port_from: 8211
+                  port_to: 8211
+                  address: 192.168.40.10
+                  protocol: udp
+                - description: Palworld steam services
+                  port_from: 27015
+                  port_to: 27015
+                  address: 192.168.40.10
+                  protocol: udp
             policies:
                 from4:
                     - default: accept
@@ -474,6 +485,8 @@ settings:
             address: 192.168.40.90
         http-proxy:
             address: 192.168.40.65
+        pal:
+            address: 192.168.40.10
 sops:
     kms: []
     gcp_kms: []
@@ -489,8 +502,8 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-02-14T15:28:23Z"
-    mac: ENC[AES256_GCM,data:dL5HScEwDISKHc9CbKxktIwXO1xik3h9OE80rsnyDkSveMZUglR5zG2Q8gd17kJvRBFeHpkNyLySJvXbbJQQz9MiNPNf3UgQ04pmOSsJNUz6pjnpA7eyOe3Z1wUXAm2Ya8soY38vvr7QRjSmfzq3CriaIMSWSz9dnl8IKzbgIeE=,iv:x6rV/3epiqJfC1IAl6xo1vV0HeN//1Ayy0FnzE9BFFE=,tag:V1Zm5KogTiVapGHTdZIkRg==,type:str]
+    lastmodified: "2025-02-14T20:16:15Z"
+    mac: ENC[AES256_GCM,data:VARQlS8Qz9CmFcbgLzS8tgUT+L0ZYyztaBburjrS1+ZRAguyRds8cp84jnwM6RRskTsW7I6c/hf+frUI+j3i26gpiYorRa6OUvNePNs56swa+kYrewAFXqcs2azUvQHj8cLZJ9Ut8p/TjbB0FvCn1idWqz6yyADJBoEpJUogYg0=,iv:+3K7Ze10T4bnGlnaHkYeWFEBFD5q01ZrSqDUUNTqHL8=,tag:WxtK/lHF10onzWsyxl7clw==,type:str]
     pgp: []
     encrypted_suffix: _enc
     version: 3.9.1
