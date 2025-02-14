@@ -30,6 +30,7 @@ nodes:
           mode: active-backup
           deviceSelectors:
             - hardwareAddr: "*:41:0c"
+              driver: e1000e # Avoids selecting vlan bond interfaces
         dhcp: true
         vip: &vip
           ip: 192.168.40.90
@@ -56,6 +57,7 @@ nodes:
           mode: active-backup
           deviceSelectors:
             - hardwareAddr: "*:83:a5"
+              driver: e1000e
         dhcp: true
         vip: *vip
         vlans:
@@ -75,6 +77,7 @@ nodes:
           mode: active-backup
           deviceSelectors:
             - hardwareAddr: "*:85:db"
+              driver: e1000e
         dhcp: true
         vip: *vip
         vlans:
@@ -92,6 +95,7 @@ nodes:
           mode: active-backup
           deviceSelectors:
             - hardwareAddr: "*:cb:2d"
+              driver: e1000e
         dhcp: true
         vlans:
           - *iot-vlan
