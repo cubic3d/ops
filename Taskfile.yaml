@@ -16,21 +16,25 @@ tasks:
 
 includes:
   talos:
-    taskfile: ".taskfiles/talos"
+    taskfile: .taskfiles/talos
     dir: .taskfiles/talos
 
   flux:
-    taskfile: ".taskfiles/flux"
+    taskfile: .taskfiles/flux
     dir: .taskfiles/flux
 
   k8s:
-    taskfile: ".taskfiles/k8s"
+    taskfile: .taskfiles/k8s
     dir: .taskfiles/k8s
 
   postgres:
-    taskfile: ".taskfiles/postgres"
+    taskfile: .taskfiles/postgres
     dir: .taskfiles/postgres
 
   volsync:
-    taskfile: ".taskfiles/volsync"
+    taskfile: .taskfiles/volsync
     dir: .taskfiles/volsync
+
+  vyos:
+    taskfile: .taskfiles/vyos
+    dir: .taskfiles/vyos
