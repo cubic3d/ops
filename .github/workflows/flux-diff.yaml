@@ -108,10 +108,10 @@ jobs:
   flux-diff-success:
     needs:
       - flux-diff
-    if: ${{ always() }}
+    if: ${{ !cancelled() }}
     name: Flux Diff successful
     runs-on: ubuntu-latest
     steps:
       - name: Check matrix status
-        if: ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') }}
+        if: ${{ contains(needs.*.result, 'failure') }}
         run: exit 1
