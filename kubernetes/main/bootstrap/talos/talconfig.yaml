@@ -39,7 +39,7 @@ nodes:
           - &iot-vlan
             vlanId: 10
             mtu: 1500
-            dhcp: true
+            dhcp: false
             dhcpOptions:
               routeMetric: 4096
     nodeLabels:
