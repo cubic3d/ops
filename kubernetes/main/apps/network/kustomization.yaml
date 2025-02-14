@@ -8,5 +8,6 @@ resources:
   - cloudflared/ks.yaml
   - e1000e-fix/ks.yaml
   - k8s-gateway/ks.yaml
+  - multus/ks.yaml
   - speedtest/ks.yaml
   - s3-gateway/ks.yaml
