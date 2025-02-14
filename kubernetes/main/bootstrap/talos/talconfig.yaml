@@ -24,11 +24,23 @@ nodes:
     installDiskSelector:
       model: KINGSTON SUV500M
     networkInterfaces:
-      - deviceSelector:
-          hardwareAddr: "*:41:0c"
+      # Bonding with single interface for unified name
+      - interface: bond0
+        bond:
+          mode: active-backup
+          deviceSelectors:
+            - hardwareAddr: "*:41:0c"
         dhcp: true
         vip: &vip
           ip: 192.168.40.90
+        vlans:
+          # Used by multus for pods to access mDNS on IoT network
+          - &iot-vlan
+            vlanId: 10
+            mtu: 1500
+            dhcp: true
+            dhcpOptions:
+              routeMetric: 4096
     nodeLabels:
       topology.kubernetes.io/region: home
       node.longhorn.io/create-default-disk: "true"
@@ -39,10 +51,15 @@ nodes:
     installDiskSelector:
       model: SanDisk Extreme Pro 500GB
     networkInterfaces:
-      - deviceSelector:
-          hardwareAddr: "*:83:a5"
+      - interface: bond0
+        bond:
+          mode: active-backup
+          deviceSelectors:
+            - hardwareAddr: "*:83:a5"
         dhcp: true
         vip: *vip
+        vlans:
+          - *iot-vlan
     nodeLabels:
       topology.kubernetes.io/region: home
       node.longhorn.io/create-default-disk: "true"
@@ -53,10 +70,15 @@ nodes:
     installDiskSelector:
       model: INTEL SSDSCKJW12
     networkInterfaces:
-      - deviceSelector:
-          hardwareAddr: "*:85:db"
+      - interface: bond0
+        bond:
+          mode: active-backup
+          deviceSelectors:
+            - hardwareAddr: "*:85:db"
         dhcp: true
         vip: *vip
+        vlans:
+          - *iot-vlan
     nodeLabels:
       topology.kubernetes.io/region: home
 
@@ -65,9 +87,14 @@ nodes:
     installDiskSelector:
       model: Samsung SSD 970 EVO Plus 500GB
     networkInterfaces:
-      - deviceSelector:
-          hardwareAddr: "*:cb:2d"
+      - interface: bond0
+        bond:
+          mode: active-backup
+          deviceSelectors:
+            - hardwareAddr: "*:cb:2d"
         dhcp: true
+        vlans:
+          - *iot-vlan
     nodeLabels:
       topology.kubernetes.io/region: home
       node.longhorn.io/create-default-disk: "true"
