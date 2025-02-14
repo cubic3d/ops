@@ -16,7 +16,7 @@ cluster:
   id: 1
 cni:
   exclusive: false
-devices: eno+,ens+,enp+,bond+
+devices: bond+
 endpointRoutes:
   enabled: true
 envoy:
