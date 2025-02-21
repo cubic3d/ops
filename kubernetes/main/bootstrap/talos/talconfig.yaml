@@ -118,8 +118,15 @@ nodes:
         dhcp: true
     nodeLabels:
       topology.kubernetes.io/region: home
-    nodeTaints:
-      dedicated: gameserver:NoSchedule
+    patches:
+      - |-
+        machine:
+          kubelet:
+            extraConfig:
+              registerWithTaints:
+                - key: dedicated
+                  value: gameserver
+                  effect: NoSchedule
 
 controlPlane:
   disableSearchDomain: true
