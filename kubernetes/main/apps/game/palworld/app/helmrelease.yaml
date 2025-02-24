@@ -94,6 +94,3 @@ spec:
         existingClaim: palworld
         globalMounts:
           - path: /palworld/Pal/Saved
-
-      tmp:
-        type: emptyDir
