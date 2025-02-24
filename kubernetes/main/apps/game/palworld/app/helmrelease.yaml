@@ -28,8 +28,8 @@ spec:
 
             env:
               TZ: Europe/Berlin
-              PUID: 2000
-              PGID: 2000
+              PUID: 1000
+              PGID: 1000
               PLAYERS: 16
               PORT: 8211
               MULTITHREADING: true

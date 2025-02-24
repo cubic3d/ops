@@ -25,3 +25,5 @@ spec:
     substitute:
       app: *appname
       volsync_capacity: 2Gi
+      volsync_puid: "1000"
+      volsync_pgid: "1000"
