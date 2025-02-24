@@ -41,6 +41,13 @@ spec:
       allowCollectingLonghornUsageMetrics: false
       taintToleration: dedicated=gameserver:NoSchedule
 
+    longhornManager:
+      tolerations:
+        - key: dedicated
+          operator: Equal
+          value: gameserver
+          effect: NoSchedule
+
     longhornUI:
       replicas: 1
 
