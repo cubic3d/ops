@@ -28,6 +28,8 @@ spec:
 
             env:
               TZ: Europe/Berlin
+              PUID: 2000
+              PGID: 2000
               PLAYERS: 16
               PORT: 8211
               MULTITHREADING: true
@@ -95,8 +97,3 @@ spec:
 
       tmp:
         type: emptyDir
-
-      steam:
-        type: emptyDir
-        globalMounts:
-          - path: /home/steam/.local
