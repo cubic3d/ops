@@ -71,6 +71,7 @@ spec:
         controller: palworld
         type: LoadBalancer
         annotations:
+          external-dns.alpha.kubernetes.io/hostname: pal.${domain}
           lbipam.cilium.io/ips: 192.168.40.67
         ports:
           http:
