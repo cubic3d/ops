@@ -95,3 +95,8 @@ spec:
 
       tmp:
         type: emptyDir
+
+      steam:
+        type: emptyDir
+        globalMounts:
+          - path: /home/steam/.local
