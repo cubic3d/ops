@@ -131,12 +131,12 @@ settings:
                 - description: Palworld server
                   port_from: 8211
                   port_to: 8211
-                  address: 192.168.40.10
+                  address: 192.168.40.67
                   protocol: udp
                 - description: Palworld steam services
                   port_from: 27015
                   port_to: 27015
-                  address: 192.168.40.10
+                  address: 192.168.40.67
                   protocol: udp
             policies:
                 from4:
@@ -373,10 +373,10 @@ settings:
                         - accept_established: null
                         - drop_invalid: null
                         - accept_specific_udp_host_port:
-                            ip: 192.168.40.10
+                            ip: 192.168.40.67
                             port: 8211
                         - accept_specific_udp_host_port:
-                            ip: 192.168.40.10
+                            ip: 192.168.40.67
                             port: 27015
                     - allExcept:
                         - local
@@ -513,8 +513,8 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-02-21T13:40:19Z"
-    mac: ENC[AES256_GCM,data:ES7EY8/IEaLKIEDkBAZY12l2Tx9ZVZVzyJJwtoloyQlv/KC0ORtaejLvcQR+PZpyaHsPmFhmnwkgjnylIjDXYjbyuuxZOKR/bIXlZ0K9WQt/ZwLQ3NqDveQcm15a1Jv7Y91kVjuY7v1ajMDKEw2t8mlVTZQPrMZV6Gck90l6R/Y=,iv:pVMYsTcHlwC3mFn0A9wRjGq5GJMGt/dG9u65BNcvIvs=,tag:LRy31xYlYm77HdTucbkG6g==,type:str]
+    lastmodified: "2025-02-24T21:24:07Z"
+    mac: ENC[AES256_GCM,data:rEUbPhI2Q2x+crThYJocFribIUiLDBDh3Bjl+VSnLKDXQVHzO/4rZBjVUrPk+DAfQRk+QOYSYh2wqMwBb4e1/B/0ZpVs8WIADB+EN32PPWZXOebKl6zXggaXcGRamS3c50elcnYb0cESvcDkndtBb8bKhjjob68T295CZCJhVOA=,iv:3PHFzJjChItxGUmdu8iSK8XgsquLMZajPZ3b6PC51wU=,tag:I3z6+wHYsgxpjlFzBAgVXw==,type:str]
     pgp: []
     encrypted_suffix: _enc
     version: 3.9.1
