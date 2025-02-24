@@ -18,10 +18,10 @@ spec:
     name: ops
   dependsOn:
     - name: external-secrets-stores
+    - name: longhorn
     - name: openebs
     - name: volsync
   postBuild:
     substitute:
       app: *appname
       volsync_capacity: 2Gi
-      volsync_storageclass: openebs-hostpath
