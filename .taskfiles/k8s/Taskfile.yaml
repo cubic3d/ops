@@ -67,6 +67,12 @@ tasks:
                 }
               }
             ],
+            "tolerations": [
+              {
+                "operator": "Exists",
+                "effect": "NoSchedule"
+              }
+            ],
             "restartPolicy": "Never"
           }
         }'
