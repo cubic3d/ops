@@ -39,6 +39,7 @@ spec:
       orphanAutoDeletion: true
       removeSnapshotsDuringFilesystemTrim: true
       allowCollectingLonghornUsageMetrics: false
+      taintToleration: dedicated=gameserver:NoSchedule
 
     longhornUI:
       replicas: 1
