@@ -41,6 +41,9 @@ spec:
               PAL_EGG_DEFAULT_HATCHING_TIME: 2.00000
               ENABLE_NON_LOGIN_PENALTY: False
 
+              # Disable raids temporarily, because of bug that prohibits pals from rendering while no player is online
+              ENABLE_INVADER_ENEMY: False
+
             envFrom:
               - secretRef:
                   name: palworld
