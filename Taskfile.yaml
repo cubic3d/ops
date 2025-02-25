@@ -1,40 +1,30 @@
 # yaml-language-server: $schema=https://taskfile.dev/schema.json
 version: "3"
 
+set:
+  - pipefail
+shopt:
+  - globstar
+
 vars:
   KUBERNETES_DIR: "{{.ROOT_DIR}}/kubernetes"
   CLUSTER: '{{default "main" .CLUSTER}}'
-
-env:
   KUBECONFIG: "{{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/clusterconfig/kubeconfig"
   TALOSCONFIG: "{{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/clusterconfig/talosconfig"
+
+env:
+  KUBECONFIG: "{{.KUBECONFIG}}"
+  TALOSCONFIG: "{{.TALOSCONFIG}}"
+
+includes:
+  talos: .taskfiles/talos/Taskfile.yaml
+  flux: .taskfiles/flux/Taskfile.yaml
+  k8s: .taskfiles/k8s/Taskfile.yaml
+  postgres: .taskfiles/postgres/Taskfile.yaml
+  volsync: .taskfiles/volsync/Taskfile.yaml
+  vyos: .taskfiles/vyos/Taskfile.yaml
 
 tasks:
   default:
     silent: true
-    cmd: go-task -l
-
-includes:
-  talos:
-    taskfile: .taskfiles/talos
-    dir: .taskfiles/talos
-
-  flux:
-    taskfile: .taskfiles/flux
-    dir: .taskfiles/flux
-
-  k8s:
-    taskfile: .taskfiles/k8s
-    dir: .taskfiles/k8s
-
-  postgres:
-    taskfile: .taskfiles/postgres
-    dir: .taskfiles/postgres
-
-  volsync:
-    taskfile: .taskfiles/volsync
-    dir: .taskfiles/volsync
-
-  vyos:
-    taskfile: .taskfiles/vyos
-    dir: .taskfiles/vyos
+    cmd: go-task --list
