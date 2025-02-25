@@ -154,6 +154,14 @@ controlPlane:
             allowedKubernetesNamespaces:
               - system-upgrade
 
+    # Enable MutatingAdmissionPolicy feature gate
+    - |-
+      cluster:
+        apiServer:
+          extraArgs:
+            runtime-config: admissionregistration.k8s.io/v1alpha1=true
+            feature-gates: MutatingAdmissionPolicy=true
+
 worker:
   disableSearchDomain: true
   schematic: *schematic
