@@ -18,7 +18,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local-storage
   local:
-    path: /var/mnt/slow/media
+    path: /var/mnt/media
   nodeAffinity:
     required:
       nodeSelectorTerms:

@@ -263,9 +263,9 @@ patches:
               - bind
               - rshared
               - rw
-          - destination: /var/mnt/slow
+          - destination: /var/mnt/media
             type: bind
-            source: /var/mnt/slow
+            source: /var/mnt/media
             options:
               - bind
               - rshared
