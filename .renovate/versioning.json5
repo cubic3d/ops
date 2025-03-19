@@ -5,7 +5,7 @@
       description: "Loose versioning for non-semver packages",
       matchDatasources: ["docker"],
       matchPackageNames: [
-        "ghcr.io/onedr0p/plex",
+        "ghcr.io/home-operations/plex",
       ],
       versioning: "loose",
     },

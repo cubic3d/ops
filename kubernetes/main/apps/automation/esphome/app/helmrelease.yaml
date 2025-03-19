@@ -29,8 +29,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/bjw-s-labs/esphome
-              tag: 2025.2.2@sha256:2864e888c7c4e9997ab6193da9a0616e0cd00e0215866675ffa6b1fc3167241e
+              repository: ghcr.io/home-operations/esphome
+              tag: 2025.2.2
 
             env:
               TZ: Europe/Berlin
@@ -52,7 +52,7 @@ spec:
           code-server:
             image:
               repository: ghcr.io/coder/code-server
-              tag: 4.98.2@sha256:9ed588a05d4e81aa464e753a409bc3b2b93267323d1c3975fbddf6f9aef84c26
+              tag: 4.98.2
 
             args:
               - --auth

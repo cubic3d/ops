@@ -26,8 +26,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/onedr0p/home-assistant
-              tag: 2025.3.3@sha256:9e2a7177b4600653d6cb46dff01b1598189a5ae93be0b99242fbc039d32d79f1
+              repository: ghcr.io/home-operations/home-assistant
+              tag: 2025.3.3
 
             env:
               TZ: Europe/Berlin
@@ -49,7 +49,7 @@ spec:
           code-server:
             image:
               repository: ghcr.io/coder/code-server
-              tag: 4.98.2@sha256:9ed588a05d4e81aa464e753a409bc3b2b93267323d1c3975fbddf6f9aef84c26
+              tag: 4.98.2
 
             args:
               - --auth
