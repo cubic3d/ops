@@ -140,6 +140,16 @@ spec:
             - key:
                 path: /secrets/authelia/jwks_rsa_4096.pem
 
+          claims_policies:
+            default:
+              id_token:
+                - groups
+                - email
+                - email_verified
+                - alt_emails
+                - preferred_username
+                - name
+
           authorization_policies: {}
 
           clients:
@@ -162,6 +172,7 @@ spec:
               client_secret:
                 path: /secrets/authelia/oidc_secret_nodered
               consent_mode: implicit
+              claims_policy: default
               scopes:
                 - openid
                 - profile
