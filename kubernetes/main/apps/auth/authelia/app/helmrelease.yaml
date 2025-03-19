@@ -158,6 +158,7 @@ spec:
               client_secret:
                 path: /secrets/authelia/oidc_secret_cloudflare
               consent_mode: implicit
+              claims_policy: default
               scopes:
                 - openid
                 - profile
