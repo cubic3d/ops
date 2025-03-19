@@ -12,4 +12,3 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: crunchy-userinit-controller
-        namespace: flux-system

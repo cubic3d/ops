@@ -12,7 +12,6 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: authelia
-        namespace: flux-system
 
   values:
     ingress:

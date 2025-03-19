@@ -2,8 +2,7 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: postfinance
-  namespace: flux-system
+  name: crunchy-userinit-controller
 spec:
-  url: https://postfinance.github.io/kubelet-csr-approver
+  url: https://ramblurr.github.io/crunchy-userinit-controller
   interval: 30m

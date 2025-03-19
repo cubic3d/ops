@@ -5,14 +5,9 @@ metadata:
   name: ingress-nginx-external
 spec:
   interval: 30m
-  chart:
-    spec:
-      chart: ingress-nginx
-      version: 4.12.0
-      sourceRef:
-        kind: HelmRepository
-        name: ingress-nginx
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: ingress-nginx-external
   values:
     fullnameOverride: &name ingress-nginx-external
 

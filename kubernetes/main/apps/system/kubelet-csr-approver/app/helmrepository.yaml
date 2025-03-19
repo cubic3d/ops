@@ -2,9 +2,7 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: coredns
-  namespace: flux-system
+  name: postfinance
 spec:
-  type: oci
-  url: oci://ghcr.io/coredns/charts
+  url: https://postfinance.github.io/kubelet-csr-approver
   interval: 30m

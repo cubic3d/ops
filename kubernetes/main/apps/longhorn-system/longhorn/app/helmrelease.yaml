@@ -12,7 +12,6 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: longhorn
-        namespace: flux-system
 
   values:
     persistence:
