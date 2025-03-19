@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: authelia
-      version: 0.9.16
+      version: 0.10.4
       sourceRef:
         kind: HelmRepository
         name: authelia
@@ -63,11 +63,14 @@ spec:
 
       webauthn:
         display_name: Yachthafen ID
+        enable_passkey_login: true
 
       authentication_backend:
         password_reset:
           disable: true
           custom_url: https://youtu.be/dQw4w9WgXcQ
+        password_change:
+          disable: true
         file:
           enabled: true
           path: /secrets/authelia/users_database.yaml
@@ -99,6 +102,10 @@ spec:
           password:
             disabled: true
           database_index: 1
+
+      regulation:
+        modes:
+          - ip
 
       storage:
         encryption_key:
