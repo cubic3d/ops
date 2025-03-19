@@ -9,6 +9,12 @@ spec:
     kind: OCIRepository
     name: openebs
 
+  # FIXME: Workaround for: Invalid value: "openebs-4.2.0+d5b87916bb5a": a valid label must be an empty string or consist of alphanumeric characters
+  install:
+    disableHooks: true
+  upgrade:
+    disableHooks: true
+
   values:
     engines:
       local:
