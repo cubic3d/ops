@@ -19,15 +19,6 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
 
-        pod:
-          topologySpreadConstraints:
-            - maxSkew: 1
-              topologyKey: kubernetes.io/hostname
-              whenUnsatisfiable: DoNotSchedule
-              labelSelector:
-                matchLabels:
-                  app.kubernetes.io/name: cloudflared
-
         containers:
           app:
             image:
@@ -35,22 +26,18 @@ spec:
               tag: 2025.2.1
             args:
               - tunnel
-              - --config
-              - /etc/cloudflared/config/config.yaml
               - run
-              - "$(TUNNEL_ID)"
             env:
               NO_AUTOUPDATE: "true"
-              TUNNEL_CRED_FILE: /etc/cloudflared/creds/credentials.json
               TUNNEL_METRICS: 0.0.0.0:8080
               TUNNEL_ORIGIN_ENABLE_HTTP2: true
               TUNNEL_POST_QUANTUM: true
               TUNNEL_TRANSPORT_PROTOCOL: quic
-              TUNNEL_ID:
-                valueFrom:
-                  secretKeyRef:
-                    name: cloudflared
-                    key: TunnelID
+
+            envFrom:
+              - secretRef:
+                  name: cloudflared
+
             probes:
               liveness: &probe
                 enabled: true
@@ -58,22 +45,23 @@ spec:
                 spec:
                   httpGet:
                     path: /ready
-                    port: 8080
-                  periodSeconds: 30
+                    port: &port 8080
               readiness: *probe
               startup: *probe
+
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
               capabilities:
                 drop:
                   - ALL
+
             resources:
               requests:
-                cpu: 6m
-                memory: 105Mi
+                cpu: 10m
+                memory: 120Mi
               limits:
-                memory: 105Mi
+                memory: 120Mi
 
     defaultPodOptions:
       securityContext:
@@ -83,12 +71,20 @@ spec:
         fsGroup: 65534
         fsGroupChangePolicy: OnRootMismatch
 
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/name: cloudflared
+
     service:
       app:
         controller: cloudflared
         ports:
           http:
-            port: 8080
+            port: *port
 
     # TODO: Enable additional values after deploying some more dependencies
     # serviceMonitor:
@@ -106,13 +102,6 @@ spec:
         type: configMap
         name: cloudflared
         globalMounts:
-          - path: /etc/cloudflared/config/config.yaml
+          - path: /etc/cloudflared/config.yaml
             subPath: config.yaml
-            readOnly: true
-      creds:
-        type: secret
-        name: cloudflared
-        globalMounts:
-          - path: /etc/cloudflared/creds/credentials.json
-            subPath: credentials.json
             readOnly: true
