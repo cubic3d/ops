@@ -6,7 +6,7 @@ metadata:
 spec:
   url: oci://ghcr.io/home-operations/charts-mirror/snapshot-controller
   ref:
-    tag: 4.0.1
+    tag: 4.0.2
   interval: 1h
   layerSelector:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
