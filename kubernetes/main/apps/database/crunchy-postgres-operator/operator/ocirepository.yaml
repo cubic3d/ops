@@ -7,7 +7,7 @@ spec:
   url: oci://registry.developers.crunchydata.com/crunchydata/pgo
   ref:
     tag: 5.8.0
-  interval: 1h
+  interval: 10m
   layerSelector:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
     operation: copy
