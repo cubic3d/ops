@@ -4,12 +4,10 @@ kind: OCIRepository
 metadata:
   name: snapshot-controller
 spec:
-  url: oci://ghcr.io/home-operations/charts-mirror/snapshot-controller
+  url: oci://ghcr.io/piraeusdatastore/helm-charts/snapshot-controller
   ref:
     tag: 4.0.2
   interval: 1h
   layerSelector:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
     operation: copy
-  verify:
-    provider: cosign
