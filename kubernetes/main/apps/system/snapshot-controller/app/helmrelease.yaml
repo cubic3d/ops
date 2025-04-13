@@ -15,7 +15,8 @@ spec:
     crds: CreateReplace
 
   values:
+    controller:
+      replicaCount: 2
     # TODO: Enable additional values after deploying some more dependencies
-    # controller:
     #   serviceMonitor:
     #     create: true
