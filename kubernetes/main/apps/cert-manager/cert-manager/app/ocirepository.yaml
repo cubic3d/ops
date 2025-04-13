@@ -4,12 +4,10 @@ kind: OCIRepository
 metadata:
   name: cert-manager
 spec:
-  url: oci://ghcr.io/home-operations/charts-mirror/cert-manager
+  url: oci://quay.io/jetstack/charts/cert-manager
   ref:
     tag: v1.17.1
   interval: 1h
   layerSelector:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
     operation: copy
-  verify:
-    provider: cosign
