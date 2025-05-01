@@ -25,7 +25,7 @@ spec:
       effect: NoSchedule
 
   upgrade:
-    image: ghcr.io/jfroy/tnu:0.4.1
+    image: ghcr.io/jfroy/tnu:0.4.2
 
     args:
       - --node=$(SYSTEM_UPGRADE_NODE_NAME)
