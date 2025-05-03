@@ -21,7 +21,7 @@ spec:
           app:
             image:
               repository: ghcr.io/cubic3d/nx-manager
-              tag: main@sha256:e2cee85c6246ef3c8295106294089042ff9ccf32c04ce1ba653feadf412c2019
+              tag: main@sha256:d88f57d47b46d805606954d993c622eb0cc958ca88a30f74bf72007fa82d095c
 
             env:
               TZ: Europe/Berlin
