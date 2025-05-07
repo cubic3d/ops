@@ -12,7 +12,6 @@ spec:
 
   concurrency: 1
   exclusive: true
-  postCompleteDelay: 2m
 
   nodeSelector:
     matchExpressions:
