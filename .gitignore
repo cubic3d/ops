@@ -6,3 +6,7 @@
 
 # Terraform
 .terraform
+
+# Ansible
+.ansible/
+__pycache__/
