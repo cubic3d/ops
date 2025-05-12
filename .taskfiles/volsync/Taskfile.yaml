@@ -16,22 +16,23 @@ tasks:
         cmd: kubectl --namespace {{splitList "," .ITEM | first}} patch --field-manager=flux-client-side-apply replicationsources {{splitList "," .ITEM | last}} --type merge --patch "{\"spec\":{\"restic\":{\"unlock\":\"{{now | unixEpoch}}\"}}}"
 
   restic-cmd:
-    desc: Runs an arbitrary restic command for a given app [NS=default] APP=node-red -- command
+    desc: Runs an arbitrary restic command for a given app [NS=default] [STORAGE=cloud] APP=node-red -- command
     interactive: true
     vars:
       NS: '{{default "default" .NS}}'
+      STORAGE: '{{default "cloud" .STORAGE}}'
     requires:
       vars:
         - APP
     cmd: |-
-      kubectl run -n {{.NS}} volsync-restic-cmd-{{.APP}} -i --tty --rm --image=null --privileged --overrides='
+      kubectl run -n {{.NS}} volsync-restic-cmd-{{.APP}}-{{.STORAGE}} -i --tty --rm --image=null --privileged --overrides='
         {
           "apiVersion": "v1",
           "spec": {
             "containers": [
               {
                 "name": "command",
-                "image": "quay.io/backube/volsync:latest",
+                "image": "quay.io/backube/volsync-mover-restic:latest",
                 "command": ["restic"],
                 "args": {{ .CLI_ARGS | splitArgs | mustToJson }},
                 "stdin": true,
@@ -40,7 +41,7 @@ tasks:
                 "envFrom": [
                   {
                     "secretRef": {
-                      "name": "{{.APP}}-volsync-box"
+                      "name": "{{.APP}}-volsync-{{.STORAGE}}"
                     }
                   }
                 ]
@@ -50,7 +51,7 @@ tasks:
           }
         }'
     preconditions:
-      - kubectl -n {{.NS}} get replicationsource {{.APP}}
+      - kubectl -n {{.NS}} get replicationsource {{.APP}}-{{.STORAGE}}
 
   snapshot:
     desc: Snapshot an app [NS=default] APP=node-red
