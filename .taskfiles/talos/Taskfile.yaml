@@ -21,12 +21,13 @@ tasks:
     vars:
       dry_run: '{{default "false" .dry_run}}'
       insecure: '{{default "false" .insecure}}'
+      filter: '{{default "" .filter}}'
     cmds:
       - eval $(talhelper gencommand apply
         --env-file {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talenv.sops.yaml
         --config-file {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talconfig.yaml
         --out-dir {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/clusterconfig
-        --extra-flags "--dry-run={{.dry_run}} {{if eq .insecure "true"}}--insecure{{end}}")
+        --extra-flags "--dry-run={{.dry_run}} {{if eq .insecure "true"}}--insecure{{end}}" | grep "{{.filter}}")
     preconditions:
       - which talhelper
       - talosctl config get-contexts | grep {{.CLUSTER}}
@@ -82,11 +83,13 @@ tasks:
 
   upgrade-os:
     desc: Upgrade Talos version on nodes
+    vars:
+      filter: '{{default "" .filter}}'
     cmds:
       - eval $(talhelper gencommand upgrade
         --env-file {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talenv.sops.yaml
         --config-file {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talconfig.yaml
-        --out-dir {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/clusterconfig)
+        --out-dir {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/clusterconfig | grep "{{.filter}}")
     preconditions:
       - which talhelper
       - talosctl config get-contexts | grep {{.CLUSTER}}
