@@ -5,7 +5,7 @@ metadata:
   name: app-template
   namespace: flux-system
 spec:
-  url: oci://ghcr.io/bjw-s/helm/app-template
+  url: oci://ghcr.io/bjw-s-labs/helm/app-template
   ref:
     tag: 3.7.3
   interval: 10m
