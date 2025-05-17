@@ -42,7 +42,7 @@ spec:
                   - ALL
 
         serviceAccount:
-          identifier: system-upgrade
+          identifier: system-upgrade-controller
 
     defaultPodOptions:
       securityContext:
@@ -51,4 +51,4 @@ spec:
         runAsGroup: 65534
 
     serviceAccount:
-      system-upgrade: {}
+      system-upgrade-controller: {}
