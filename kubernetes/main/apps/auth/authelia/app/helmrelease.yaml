@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: authelia
-      version: 0.10.4
+      version: 0.10.10
       sourceRef:
         kind: HelmRepository
         name: authelia
@@ -84,8 +84,6 @@ spec:
 
       access_control:
         default_policy: deny
-
-        networks: []
 
         rules:
           - domain_regex: .*
