@@ -20,6 +20,7 @@ spec:
     windmill:
       appReplicas: 2
       lspReplicas: 2
+      mcpEnabled: false
       databaseUrlSecretName: windmill
       databaseUrlSecretKey: databaseUrl
       baseDomain: w.${domain}
