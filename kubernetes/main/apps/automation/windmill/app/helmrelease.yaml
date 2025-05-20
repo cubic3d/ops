@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: windmill
-      version: 2.0.399
+      version: 2.0.418
       sourceRef:
         kind: HelmRepository
         name: windmill
@@ -20,6 +20,7 @@ spec:
     windmill:
       appReplicas: 2
       lspReplicas: 2
+      mcpEnabled: false
       databaseUrlSecretName: windmill
       databaseUrlSecretKey: databaseUrl
       baseDomain: w.${domain}
