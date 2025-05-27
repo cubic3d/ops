@@ -66,5 +66,14 @@
         commitMessageTopic: "{{{groupName}}} group",
       },
     },
+    {
+      description: "kubelet-csr-approver Group",
+      groupName: "kubelet-csr-approver",
+      matchDatasources: ["docker"],
+      matchPackageNames: ["/kubelet-csr-approver/"],
+      group: {
+        commitMessageTopic: "{{{groupName}}} group",
+      },
+    },
   ],
 }
