@@ -19,6 +19,10 @@ spec:
               repository: ghcr.io/silverbulletmd/silverbullet
               tag: v2@sha256:1fbe4c8419053609686221670193326da886ac0139cb0446cc3d5e50babbc311
 
+            envFrom:
+              - secretRef:
+                  name: silverbullet
+
             env:
               TZ: Europe/Berlin
 
