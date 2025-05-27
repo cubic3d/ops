@@ -28,6 +28,7 @@ spec:
 
             env:
               TZ: Europe/Berlin
+              SB_INDEX_PAGE: Home
 
             probes:
               liveness: &probes
