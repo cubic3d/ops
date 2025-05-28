@@ -32,6 +32,7 @@ spec:
               COMMUNITY: false
               BACKUP_ENABLED: false
               AUTO_UPDATE_ENABLED: true
+              AUTO_PAUSE_ENABLED: true
 
               DEATH_PENALTY: ItemAndEquipment
               PAL_EGG_DEFAULT_HATCHING_TIME: 2.00000
