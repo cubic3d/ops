@@ -57,15 +57,10 @@ tasks:
         --config-file {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talconfig.yaml
         --out-dir {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/clusterconfig
         --extra-flags "--force --force-context-name {{.CLUSTER}}")
-      - eval $(talhelper gencommand kubeconfig
-        --env-file {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talenv.sops.yaml
-        --config-file {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talconfig.yaml
-        --out-dir {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/clusterconfig
-        --extra-flags "{{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/clusterconfig --force --force-context-name {{.CLUSTER}}")
       - kubectl get nodes --context {{.CLUSTER}}
     preconditions:
       - which talhelper
-      - talosctl config get-contexts | grep {{.CLUSTER}}
+      - talosctl --talosconfig {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/clusterconfig/talosconfig config get-contexts | grep {{.CLUSTER}}
       - test -f {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talenv.sops.yaml
       - test -f {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talconfig.yaml
       - test -d {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/clusterconfig
