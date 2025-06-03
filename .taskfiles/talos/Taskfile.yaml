@@ -60,7 +60,7 @@ tasks:
       - kubectl get nodes --context {{.CLUSTER}}
     preconditions:
       - which talhelper
-      - talosctl --talosconfig {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/clusterconfig/talosconfig config get-contexts | grep {{.CLUSTER}}
+      - talosctl config get-contexts | grep {{.CLUSTER}}
       - test -f {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talenv.sops.yaml
       - test -f {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/talconfig.yaml
       - test -d {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/clusterconfig
