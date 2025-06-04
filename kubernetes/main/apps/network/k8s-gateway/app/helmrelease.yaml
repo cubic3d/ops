@@ -17,4 +17,3 @@ spec:
     service:
       annotations:
         lbipam.cilium.io/ips: "192.168.40.62"
-      useTcp: true
