@@ -10,7 +10,6 @@
     fallthrough
   }
   forward {{ settings.domain_enc }} 192.168.40.62 {
-    prefer_udp
     next SERVFAIL NXDOMAIN
   }
   forward . tls://1.1.1.1 tls://1.0.0.1 tls://2606:4700:4700::1111 tls://2606:4700:4700::1001 {
