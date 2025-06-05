@@ -4,7 +4,7 @@
   reload
   loadbalance
   prometheus :9153
-  cache
+  cache 30
   local
   hosts /etc/hosts h.{{ settings.domain_enc }} {{ settings.domain_enc }} {
     fallthrough
