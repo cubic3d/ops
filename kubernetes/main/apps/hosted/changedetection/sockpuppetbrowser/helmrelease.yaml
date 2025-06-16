@@ -48,7 +48,6 @@ spec:
 
     service:
       app:
-        controller: sockpuppetbrowser
         ports:
           http:
             port: 3000

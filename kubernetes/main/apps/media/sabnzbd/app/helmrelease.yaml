@@ -78,7 +78,6 @@ spec:
 
     service:
       app:
-        controller: sabnzbd
         ports:
           http:
             port: *port

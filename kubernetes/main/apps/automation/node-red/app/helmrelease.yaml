@@ -70,7 +70,6 @@ spec:
 
     service:
       app:
-        controller: node-red
         ports:
           http:
             port: 1880
