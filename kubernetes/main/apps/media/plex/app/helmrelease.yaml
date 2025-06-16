@@ -80,7 +80,6 @@ spec:
 
     service:
       app:
-        controller: plex
         type: LoadBalancer
         annotations:
           lbipam.cilium.io/ips: 192.168.40.64

@@ -68,7 +68,6 @@ spec:
 
     service:
       app:
-        controller: silverbullet
         ports:
           http:
             port: *port

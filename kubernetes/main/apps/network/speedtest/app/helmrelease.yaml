@@ -39,7 +39,6 @@ spec:
 
     service:
       app:
-        controller: speedtest
         ports:
           http:
             port: 8080

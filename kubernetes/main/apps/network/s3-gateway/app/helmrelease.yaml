@@ -63,7 +63,6 @@ spec:
 
     service:
       app:
-        controller: s3-gateway
         ports:
           http:
             enabled: false

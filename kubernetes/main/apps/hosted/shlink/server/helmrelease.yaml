@@ -68,7 +68,6 @@ spec:
 
     service:
       app:
-        controller: shlink
         ports:
           http:
             port: 8080
