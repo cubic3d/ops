@@ -467,6 +467,10 @@ settings:
             zone: iot
             address: 14
             mac_enc: ENC[AES256_GCM,data:E65C4AgCwvsc21hRFlN+khk=,iv:1sSl+Wh2/QxKFevlDNzYAjSe5k2Nv4/+W45/3CphhR8=,tag:JxUqGMJI4I0Jq4aun5nPrA==,type:str]
+        gaggimate:
+            zone: iot
+            address: 15
+            mac_enc: ENC[AES256_GCM,data:XhHXeHKS44XKghA/ZLVjQAc=,iv:2c3NadolF1PH6jgPwX0HtRojTSFMfRB+jfIeU2gckr4=,tag:31mYTLQ+s7ciErVgpCbAiw==,type:str]
         kasumi:
             zone: server
             address: 10
@@ -504,6 +508,8 @@ settings:
             address: 192.168.40.65
         fluidd:
             address: 192.168.10.14
+        coffee:
+            address: 192.168.10.15
 sops:
     age:
         - recipient: age1xehfrre93knutglwzsamhetvk70sh2gcdn4zhdreu8762m4l03tszgh8j6
@@ -515,7 +521,7 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-05-07T08:29:12Z"
-    mac: ENC[AES256_GCM,data:x/UBTIQkAYIEMb6E0JiMzeVsv4rhys4nrP2tAWcCS/DbjniiKtKb7j9nGT7fNRjM9Ebm5e0cLWku2Z83ERYeT9FnqwzxBuflESSCaJQXxLxjBwCTP3LG2ewmXHapoeNLjZB96sa15eIytfU/rMNqa3LcvJSCoWWYTNOC9Z8iqDM=,iv:th17S3LAiTfMI0A73R0wXRH7E+Zcuv5B31uHgF013Z0=,tag:gB0qlR4u0jjGOAiJ7WBJuQ==,type:str]
+    lastmodified: "2025-06-16T11:20:18Z"
+    mac: ENC[AES256_GCM,data:IPt/zZDZrG0An/rJ2vVU+LUUMERDsJQFDAgOFFpuBtEP6nchoVZAprCIFfxYyfuj364M3Zjs2TlnNruJ/Y4PiLipnHiFTpRK8WFeZmSBb//WeA6Jc2h5YgU/K/A5hBkzZW7H53TRImbBvdRgt5Inku/3IO6TyW4QUKjV7b5GSXU=,iv:kOE64y41ynU5/8RW1h/KTiH5pW1epUO03EB9H1toohg=,tag:U8UzW39ZGKsiXDSKEAfrwQ==,type:str]
     encrypted_suffix: _enc
     version: 3.10.2
