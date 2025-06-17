@@ -22,7 +22,7 @@ spec:
           app:
             image:
               repository: docker.io/rclone/rclone
-              tag: 1.69.3
+              tag: 1.70.0
 
             args:
               - serve
