@@ -1,5 +1,5 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
   extends: [
     "config:recommended",
     ":disableRateLimiting",
@@ -27,19 +27,19 @@
 
   "helm-values": {
     managerFilePatterns: [
-      "(^|/)kubernetes/.+\\.ya?ml$",
+      "/(^|/)kubernetes/.+\\.ya?ml$/",
     ],
   },
 
   kubernetes: {
     managerFilePatterns: [
-      "(^|/)kubernetes/.+\\.ya?ml$",
+      "/(^|/)kubernetes/.+\\.ya?ml$/",
     ],
   },
 
   flux: {
     managerFilePatterns: [
-      "(^|/)kubernetes/.+\\.ya?ml$",
+      "/(^|/)kubernetes/.+\\.ya?ml$/",
     ],
   },
 }
