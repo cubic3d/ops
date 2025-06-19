@@ -20,7 +20,7 @@ spec:
           app:
             image:
               repository: ghcr.io/silverbulletmd/silverbullet
-              tag: v2@sha256:253eec33012dc89b82e5316410fac6c0e51698eec51bf8f99ca64584d425b911
+              tag: v2@sha256:b9761ed1fac62f98fab301080b36f0c295c87e189b6ae5a6a5d4f5e6786acf34
 
             envFrom:
               - secretRef:
