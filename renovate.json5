@@ -26,19 +26,19 @@
   ],
 
   "helm-values": {
-    fileMatch: [
+    managerFilePatterns: [
       "(^|/)kubernetes/.+\\.ya?ml$",
     ],
   },
 
   kubernetes: {
-    fileMatch: [
+    managerFilePatterns: [
       "(^|/)kubernetes/.+\\.ya?ml$",
     ],
   },
 
   flux: {
-    fileMatch: [
+    managerFilePatterns: [
       "(^|/)kubernetes/.+\\.ya?ml$",
     ],
   },
