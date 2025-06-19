@@ -1,45 +1,43 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
   extends: [
-    "config:recommended",
-    ":disableRateLimiting",
-    ":timezone(Europe/Berlin)",
-    "docker:enableMajor",
-    ":enablePreCommit",
-    "github>cubic3d/ops//.renovate/allowedVersions.json5",
-    "github>cubic3d/ops//.renovate/autoMerge.json5",
-    "github>cubic3d/ops//.renovate/clusters.json5",
-    "github>cubic3d/ops//.renovate/commit-message.json5",
-    "github>cubic3d/ops//.renovate/custom-managers.json5",
-    "github>cubic3d/ops//.renovate/grafanaDashboards.json5",
-    "github>cubic3d/ops//.renovate/groups.json5",
-    "github>cubic3d/ops//.renovate/pr-labels.json5",
-    "github>cubic3d/ops//.renovate/semantic-commits.json5",
-    "github>cubic3d/ops//.renovate/versioning.json5",
+    'config:recommended',
+    ':disableRateLimiting',
+    ':timezone(Europe/Berlin)',
+    'docker:enableMajor',
+    ':enablePreCommit',
+    'github>cubic3d/ops//.renovate/allowedVersions.json5',
+    'github>cubic3d/ops//.renovate/autoMerge.json5',
+    'github>cubic3d/ops//.renovate/clusters.json5',
+    'github>cubic3d/ops//.renovate/commit-message.json5',
+    'github>cubic3d/ops//.renovate/custom-managers.json5',
+    'github>cubic3d/ops//.renovate/grafanaDashboards.json5',
+    'github>cubic3d/ops//.renovate/groups.json5',
+    'github>cubic3d/ops//.renovate/pr-labels.json5',
+    'github>cubic3d/ops//.renovate/semantic-commits.json5',
+    'github>cubic3d/ops//.renovate/versioning.json5',
   ],
-
-  dependencyDashboardTitle: "🤖 Renovate Dashboard 🤖",
-  suppressNotifications: ["prIgnoreNotification", "prEditedNotification"],
-
+  dependencyDashboardTitle: '🤖 Renovate Dashboard 🤖',
+  suppressNotifications: [
+    'prIgnoreNotification',
+    'prEditedNotification',
+  ],
   ignorePaths: [
-    "**/*.sops.*",
+    '**/*.sops.*',
   ],
-
-  "helm-values": {
-    fileMatch: [
-      "(^|/)kubernetes/.+\\.ya?ml$",
+  'helm-values': {
+    managerFilePatterns: [
+      '/(^|/)kubernetes/.+\\.ya?ml$/',
     ],
   },
-
   kubernetes: {
-    fileMatch: [
-      "(^|/)kubernetes/.+\\.ya?ml$",
+    managerFilePatterns: [
+      '/(^|/)kubernetes/.+\\.ya?ml$/',
     ],
   },
-
   flux: {
-    fileMatch: [
-      "(^|/)kubernetes/.+\\.ya?ml$",
+    managerFilePatterns: [
+      '/(^|/)kubernetes/.+\\.ya?ml$/',
     ],
   },
 }
