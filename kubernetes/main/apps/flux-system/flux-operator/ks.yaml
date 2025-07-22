@@ -2,41 +2,36 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &appname longhorn
+  name: &appname flux-operator
   namespace: flux-system
 spec:
-  targetNamespace: longhorn-system
+  targetNamespace: flux-system
   commonMetadata:
     labels:
       app.kubernetes.io/name: *appname
-  path: kubernetes/main/apps/longhorn-system/longhorn/app
+  path: kubernetes/main/apps/flux-system/flux-operator/app
   interval: 10m
-  prune: false # revert to true
+  prune: false
   wait: true
   sourceRef:
     kind: GitRepository
     name: flux-system
-  dependsOn:
-    - name: snapshot-controller
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &appname longhorn-jobs
+  name: &appname flux-instance
   namespace: flux-system
 spec:
-  targetNamespace: longhorn-system
+  targetNamespace: flux-system
   commonMetadata:
     labels:
       app.kubernetes.io/name: *appname
-      app.kubernetes.io/component: jobs
-  path: kubernetes/main/apps/longhorn-system/longhorn/jobs
+  path: kubernetes/main/apps/flux-system/flux-instance/app
   interval: 10m
-  prune: false # revert to true
+  prune: false
   wait: true
   sourceRef:
     kind: GitRepository
     name: flux-system
-  dependsOn:
-    - name: longhorn

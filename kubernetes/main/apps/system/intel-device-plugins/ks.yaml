@@ -15,7 +15,7 @@ spec:
   wait: true
   sourceRef:
     kind: GitRepository
-    name: ops
+    name: flux-system
   dependsOn:
     - name: cert-manager
 ---
@@ -36,7 +36,7 @@ spec:
   wait: true
   sourceRef:
     kind: GitRepository
-    name: ops
+    name: flux-system
   dependsOn:
     - name: intel-device-plugins-operator
     - name: node-feature-discovery

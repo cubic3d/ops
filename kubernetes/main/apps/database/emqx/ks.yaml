@@ -15,7 +15,7 @@ spec:
   wait: true
   sourceRef:
     kind: GitRepository
-    name: ops
+    name: flux-system
   dependsOn:
     - name: external-secrets-stores
     - name: cert-manager
@@ -37,7 +37,7 @@ spec:
   wait: true
   sourceRef:
     kind: GitRepository
-    name: ops
+    name: flux-system
   dependsOn:
     - name: emqx-operator
     - name: external-secrets-stores

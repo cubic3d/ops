@@ -34,7 +34,6 @@ releases:
     values:
       - ../apps/system/kubelet-csr-approver/app/values.yaml
     needs:
-      - kube-system/cilium
       - kube-system/coredns
 
   - name: spegel
@@ -45,6 +44,25 @@ releases:
     values:
       - ../apps/system/spegel/app/values.yaml
     needs:
-      - kube-system/cilium
-      - kube-system/coredns
       - system/kubelet-csr-approver
+
+  - name: flux-operator
+    namespace: flux-system
+    chart: oci://ghcr.io/controlplaneio-fluxcd/charts/flux-operator
+    version: 0.24.1
+    atomic: true
+    values:
+      - ../apps/flux-system/flux-operator/app/values.yaml
+    needs:
+      - system/spegel
+
+  - name: flux-instance
+    namespace: flux-system
+    chart: oci://ghcr.io/controlplaneio-fluxcd/charts/flux-instance
+    version: 0.24.1
+    atomic: true
+    wait: false
+    values:
+      - ../apps/flux-system/flux-operator/instance/values.yaml
+    needs:
+      - flux-system/flux-operator

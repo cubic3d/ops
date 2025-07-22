@@ -15,7 +15,7 @@ spec:
   wait: true
   sourceRef:
     kind: GitRepository
-    name: ops
+    name: flux-system
   dependsOn:
     - name: longhorn
     - name: volsync
@@ -40,4 +40,4 @@ spec:
   wait: true
   sourceRef:
     kind: GitRepository
-    name: ops
+    name: flux-system
