@@ -28,7 +28,7 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *appname
-  path: kubernetes/main/apps/flux-system/flux-instance/app
+  path: kubernetes/main/apps/flux-system/flux-operator/instance
   interval: 10m
   prune: false
   wait: true
