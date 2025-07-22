@@ -11,7 +11,7 @@ spec:
       app.kubernetes.io/name: *appname
   path: kubernetes/main/apps/system/spegel/app
   interval: 10m
-  prune: true
+  prune: false # revert to true
   wait: true
   sourceRef:
     kind: GitRepository
