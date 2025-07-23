@@ -19,6 +19,8 @@ spec:
   dependsOn:
     - name: longhorn
     - name: volsync
+  components:
+    - ../../../../components/volsync
   postBuild:
     substitute:
       app: *appname

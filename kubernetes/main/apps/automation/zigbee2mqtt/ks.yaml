@@ -21,6 +21,8 @@ spec:
     - name: volsync
     - name: external-secrets-stores
     - name: emqx-cluster
+  components:
+    - ../../../../components/volsync
   postBuild:
     substitute:
       app: *appname

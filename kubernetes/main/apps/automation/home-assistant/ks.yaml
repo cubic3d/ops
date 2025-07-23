@@ -20,6 +20,8 @@ spec:
     - name: longhorn
     - name: volsync
     - name: emqx-cluster
+  components:
+    - ../../../../components/volsync
   postBuild:
     substitute:
       app: *appname

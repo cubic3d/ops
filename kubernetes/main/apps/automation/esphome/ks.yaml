@@ -20,6 +20,8 @@ spec:
     - name: longhorn
     - name: volsync
     - name: external-secrets-stores
+  components:
+    - ../../../../components/volsync
   postBuild:
     substitute:
       app: *appname
