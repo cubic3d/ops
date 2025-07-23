@@ -48,11 +48,10 @@ eval (talhelper gencommand kubeconfig)
 kubectl get nodes
 ```
 
-### Install Secrets
+### Install Secrets and Configs
 
 ```bash
-kubectl create namespace flux-system
-sops --decrypt ../components/flux/secrets/age.sops.yaml | kubectl apply -n flux-system -f -
+sops --decrypt flux/age-key.sops.yaml | kubectl apply -f -
 ```
 
 ## Helmfile
