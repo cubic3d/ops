@@ -33,16 +33,6 @@ spec:
       name: sops-age
   dependsOn:
     - name: flux-repositories
-  postBuild:
-    substituteFrom:
-      - kind: ConfigMap
-        name: cluster-settings
-        optional: false
-      - kind: Secret
-        name: cluster-secrets
-        optional: false
-  components:
-    - ../components/namespace
   patches:
     - patch: |-
         apiVersion: kustomize.toolkit.fluxcd.io/v1
