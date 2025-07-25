@@ -4,5 +4,3 @@ kind: Kustomization
 namespace: flux-system
 resources:
   - flux-operator/ks.yaml
-components:
-  - ../../components/namespace
