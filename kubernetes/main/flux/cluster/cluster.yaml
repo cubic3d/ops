@@ -42,7 +42,7 @@ spec:
         name: cluster-secrets
         optional: false
   components:
-    - ../../components/namespace
+    - ../components/namespace
   patches:
     - patch: |-
         apiVersion: kustomize.toolkit.fluxcd.io/v1
