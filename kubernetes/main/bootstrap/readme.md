@@ -51,7 +51,10 @@ kubectl get nodes
 ### Install Secrets and Configs
 
 ```bash
-sops --decrypt flux/age-key.sops.yaml | kubectl apply -f -
+kubectl apply -n flux-system -f ../components/namespace/namespace.yaml
+sops --decrypt ../components/namespace/age.sops.yaml | kubectl apply -n flux-system -f -
+sops --decrypt ../components/namespace/cluster-secrets.sops.yaml | kubectl apply -n flux-system -f -
+kubectl apply -n flux-system -f ../components/namespace/cluster-settings.yaml
 ```
 
 ## Helmfile
