@@ -19,8 +19,11 @@ spec:
     namespace: flux-system
   dependsOn:
     - name: longhorn
+      namespace: longhorn-system
     - name: volsync
+      namespace: system
     - name: external-secrets-stores
+      namespace: secrets
   components:
     - ../../../../components/volsync
   postBuild:

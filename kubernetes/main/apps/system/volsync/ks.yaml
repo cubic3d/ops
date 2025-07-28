@@ -20,3 +20,4 @@ spec:
   dependsOn:
     - name: snapshot-controller
     - name: external-secrets-stores
+      namespace: secrets
