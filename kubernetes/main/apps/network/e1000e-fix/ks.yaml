@@ -19,3 +19,4 @@ spec:
     namespace: flux-system
   dependsOn:
     - name: node-feature-discovery-rules
+      namespace: system

@@ -21,3 +21,4 @@ spec:
     - name: external-secrets-stores
       namespace: secrets
     - name: cert-manager
+      namespace: cert-manager
