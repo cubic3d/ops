@@ -11,7 +11,7 @@ spec:
       app.kubernetes.io/name: *appname
   path: kubernetes/main/apps/longhorn-system/longhorn/app
   interval: 10m
-  prune: false # revert to true
+  prune: true
   wait: true
   sourceRef:
     kind: GitRepository
@@ -35,7 +35,7 @@ spec:
       app.kubernetes.io/component: jobs
   path: kubernetes/main/apps/longhorn-system/longhorn/jobs
   interval: 10m
-  prune: false # revert to true
+  prune: true
   wait: true
   sourceRef:
     kind: GitRepository

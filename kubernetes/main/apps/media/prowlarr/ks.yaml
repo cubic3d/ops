@@ -11,7 +11,7 @@ spec:
       app.kubernetes.io/name: *appname
   path: kubernetes/main/apps/media/prowlarr/app
   interval: 10m
-  prune: false # revert to true
+  prune: true
   wait: true
   sourceRef:
     kind: GitRepository
