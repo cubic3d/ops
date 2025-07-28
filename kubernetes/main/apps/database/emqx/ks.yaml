@@ -16,6 +16,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
+    namespace: flux-system
   dependsOn:
     - name: external-secrets-stores
     - name: cert-manager
@@ -38,6 +39,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
+    namespace: flux-system
   dependsOn:
     - name: emqx-operator
     - name: external-secrets-stores
