@@ -38,7 +38,7 @@ spec:
     name: flux-system
     namespace: flux-system
   dependsOn:
-    - name: crunchy-postgres-operator
+    - name: crunchy-postgres-operator-cluster
     - name: external-secrets-stores
       namespace: secrets
 ---
@@ -62,7 +62,7 @@ spec:
     name: flux-system
     namespace: flux-system
   dependsOn:
-    - name: crunchy-postgres-operator
+    - name: crunchy-postgres-operator-cluster
     - name: external-secrets
       namespace: secrets
 ---
