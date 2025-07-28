@@ -25,6 +25,7 @@ spec:
     - name: external-secrets-stores
       namespace: secrets
     - name: emqx-cluster
+      namespace: database
   components:
     - ../../../../components/volsync
   postBuild:
