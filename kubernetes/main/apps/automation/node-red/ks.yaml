@@ -3,9 +3,9 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &appname node-red
-  namespace: flux-system
+  namespace: &namespace automation
 spec:
-  targetNamespace: automation
+  targetNamespace: *namespace
   commonMetadata:
     labels:
       app.kubernetes.io/name: *appname
@@ -16,10 +16,14 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
+    namespace: flux-system
   dependsOn:
     - name: longhorn
+      namespace: longhorn-system
     - name: volsync
+      namespace: system
     - name: external-secrets-stores
+      namespace: secrets
   components:
     - ../../../../components/volsync
   postBuild:

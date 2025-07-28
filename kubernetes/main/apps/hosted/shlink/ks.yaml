@@ -3,9 +3,9 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &appname shlink
-  namespace: flux-system
+  namespace: &namespace hosted
 spec:
-  targetNamespace: hosted
+  targetNamespace: *namespace
   commonMetadata:
     labels:
       app.kubernetes.io/name: *appname
@@ -16,20 +16,25 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
+    namespace: flux-system
   dependsOn:
     - name: external-secrets-stores
+      namespace: secrets
     - name: emqx-cluster
+      namespace: database
     - name: crunchy-postgres-operator-cluster
+      namespace: database
     - name: crunchy-postgres-operator-secretstore
+      namespace: database
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &appname shlink-frontend
-  namespace: flux-system
+  namespace: &namespace hosted
 spec:
-  targetNamespace: hosted
+  targetNamespace: *namespace
   commonMetadata:
     labels:
       app.kubernetes.io/name: *appname
@@ -40,5 +45,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
+    namespace: flux-system
   dependsOn:
     - name: external-secrets-stores
+      namespace: secrets

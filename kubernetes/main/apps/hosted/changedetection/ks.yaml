@@ -3,9 +3,9 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &appname changedetection
-  namespace: flux-system
+  namespace: &namespace hosted
 spec:
-  targetNamespace: hosted
+  targetNamespace: *namespace
   commonMetadata:
     labels:
       app.kubernetes.io/name: *appname
@@ -16,9 +16,12 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
+    namespace: flux-system
   dependsOn:
     - name: longhorn
+      namespace: longhorn-system
     - name: volsync
+      namespace: system
   components:
     - ../../../../components/volsync
   postBuild:
@@ -30,9 +33,9 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &appname sockpuppetbrowser
-  namespace: flux-system
+  namespace: &namespace hosted
 spec:
-  targetNamespace: hosted
+  targetNamespace: *namespace
   commonMetadata:
     labels:
       app.kubernetes.io/name: *appname
@@ -43,3 +46,4 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
+    namespace: flux-system
