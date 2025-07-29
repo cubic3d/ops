@@ -1,0 +1,11 @@
+[tools]
+ansible = "latest"
+flux2 = "latest"
+helmfile = "latest"
+kubectl = "latest"
+"pipx:flux-local" = "latest"
+sops = "latest"
+talhelper = "latest"
+task = "latest"
+uv = "latest"
+yq = "latest"
