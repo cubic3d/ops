@@ -1,3 +1,7 @@
+[env]
+KUBECONFIG = "{{config_root}}/kubernetes/{{env.CLUSTER | default(value = 'main')}}/bootstrap/talos/clusterconfig/kubeconfig"
+TALOSCONFIG = "{{config_root}}/kubernetes/{{env.CLUSTER | default(value = 'main')}}/bootstrap/talos/clusterconfig/talosconfig"
+
 [tools]
 ansible = "latest"
 flux2 = "latest"
