@@ -27,4 +27,4 @@ includes:
 tasks:
   default:
     silent: true
-    cmd: go-task --list
+    cmd: task --list
