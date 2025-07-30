@@ -21,29 +21,19 @@ tasks:
       - test -f {{.KUBERNETES_DIR}}/{{.CLUSTER}}/components/namespace/cluster-settings.yaml
       - test -f {{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/helmfile.yaml
 
-  ks-*:
-    desc: Perform an action on a Flux Kustomization resource for a cluster
-    summary: |
-      Args:
-        APP: Path to the Flux Kustomization resource (required)
-        KS_NAME: Name of the Flux Kustomization to apply (default: last segment of <PATH> variable)
-        SRC: Path to the manifests location (default: Same as <PATH> variable)
-        NS: Namespace the Flux Kustomization exists in (default: flux-system)
+  ks:*:*:
+    desc: Render a Kustomization
     vars:
       OPERATION: "{{index .MATCH 0}}"
-      NS: '{{default "flux-system" .NS}}'
-      KS:
-        sh: flux --namespace {{.NS}} get kustomizations {{base .APP}} 2>&1
-    cmd: >
-      flux build --namespace {{.NS}} ks {{if .KS_NAME}}{{.KS_NAME}}{{ else }}{{base .APP}}{{end}}
-      --kustomization-file {{.KUBERNETES_DIR}}/{{.CLUSTER}}/apps/{{.APP}}/ks.yaml
-      --path {{.KUBERNETES_DIR}}/{{.CLUSTER}}/apps/{{.APP}}{{- if .SRC}}/{{.SRC}}{{end}}
-      {{if contains "not found" .KS}}--dry-run \{{end}}
-      | yq 'with(select(.apiVersion == "kustomize.toolkit.fluxcd.io/v1" and .kind == "Kustomization"); .metadata.namespace = "{{.NS}}")' -
-      | kubectl {{.OPERATION}} {{if eq .OPERATION "apply"}}--server-side  --field-manager=kustomize-controller{{end}} --filename -
-    requires:
-      vars:
-        - APP
+      OPERATION_ARGS: |-
+        {{if eq .OPERATION "apply"}} --server-side --field-manager=kustomize-controller{{end}}
+      KS: "{{index .MATCH 1}}"
+    cmds:
+      - >
+        flux-local build ks --all-namespaces --path {{.KUBERNETES_DIR}}/{{.CLUSTER}} {{.KS}}
+        | yq
+        {{ if or (eq .OPERATION "apply") (eq .OPERATION "delete") -}}
+        | kubectl {{.OPERATION}} {{- .OPERATION_ARGS}} --filename -
+        {{ end }}
     preconditions:
-      - test -f {{.KUBERNETES_DIR}}/{{.CLUSTER}}/apps/{{.APP}}/ks.yaml
-      - which flux kubectl yq
+      - '[[ "{{.OPERATION}}" == "build" || "{{.OPERATION}}" == "apply" || "{{.OPERATION}}" == "delete" ]]'
