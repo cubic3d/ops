@@ -22,7 +22,7 @@ spec:
       namespace: longhorn-system
     - name: volsync
       namespace: system
-    - name: emqx-cluster
+    - name: mosquitto
       namespace: database
   components:
     - ../../../../components/volsync
