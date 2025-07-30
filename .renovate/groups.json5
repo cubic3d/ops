@@ -75,5 +75,14 @@
         commitMessageTopic: "{{{groupName}}} group",
       },
     },
+    {
+      description: "1Password Connect Group",
+      groupName: "1Password Connect",
+      matchDatasources: ["docker"],
+      matchPackageNames: ["/1password/"],
+      group: {
+        commitMessageTopic: "{{{groupName}}} group",
+      },
+    },
   ],
 }
