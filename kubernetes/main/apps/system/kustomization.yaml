@@ -8,6 +8,7 @@ resources:
   - intel-device-plugins/ks.yaml
   - kubelet-csr-approver/ks.yaml
   - node-feature-discovery/ks.yaml
+  - publish-k8s-schemas/ks.yaml
   - reloader/ks.yaml
   - snapshot-controller/ks.yaml
   - spegel/ks.yaml
