@@ -17,6 +17,10 @@ spec:
 
         pod:
           hostNetwork: true
+          priorityClassName: system-node-critical
+          tolerations:
+            - key: CriticalAddonsOnly
+              operator: Exists
 
         initContainers:
           cni-plugins:
@@ -31,7 +35,8 @@ spec:
               tag: v4.2.2
 
             args:
-              - --cleanup-config-on-exit=true
+              - --cleanup-config-on-exit
+              - --multus-cni-conf-dir=/tmp
 
             resources:
               requests:
@@ -39,8 +44,14 @@ spec:
               limits:
                 memory: 500Mi
 
-        serviceAccount:
-          identifier: multus
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities:
+                add:
+                  - NET_ADMIN
+                drop:
+                  - ALL
 
     persistence:
       etc-cni-net-d:
@@ -53,6 +64,8 @@ spec:
         hostPath: /opt/cni/bin
         globalMounts:
           - path: /host/opt/cni/bin
+      tmp:
+        type: emptyDir
 
     serviceAccount:
       multus: {}
