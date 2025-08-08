@@ -30,7 +30,7 @@ tasks:
       KS: "{{index .MATCH 1}}"
     cmds:
       - >
-        flux-local build ks --all-namespaces --path {{.KUBERNETES_DIR}}/{{.CLUSTER}} {{.KS}}
+        flux-local build ks --all-namespaces --path {{.KUBERNETES_DIR}}/{{.CLUSTER}}/flux/cluster {{.KS}}
         | yq
         {{ if or (eq .OPERATION "apply") (eq .OPERATION "delete") -}}
         | kubectl {{.OPERATION}} {{- .OPERATION_ARGS}} --filename -
