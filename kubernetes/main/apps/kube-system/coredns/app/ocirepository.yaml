@@ -6,7 +6,7 @@ metadata:
 spec:
   url: oci://ghcr.io/coredns/charts/coredns
   ref:
-    tag: 1.43.1
+    tag: 1.43.2
   interval: 10m
   layerSelector:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
