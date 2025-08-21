@@ -6,7 +6,7 @@ metadata:
 spec:
   url: oci://ghcr.io/k8s-gateway/charts/k8s-gateway
   ref:
-    tag: 3.2.3
+    tag: 3.2.6
   interval: 10m
   layerSelector:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
