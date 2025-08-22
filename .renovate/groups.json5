@@ -4,6 +4,7 @@
     {
       description: "Flux Group",
       groupName: "Flux",
+      minimumGroupSize: 2,
       matchPackagePatterns: ["^flux", "^ghcr.io/fluxcd/"],
       matchDatasources: ["docker", "github-tags"],
       versioning: "semver",
@@ -15,6 +16,7 @@
     {
       "description": "Cert-Manager Group",
       "groupName": "Cert-Manager",
+      minimumGroupSize: 2,
       "matchDatasources": ["docker"],
       "matchPackageNames": ["/cert-manager/"],
       "group": {
@@ -24,6 +26,7 @@
     {
       "description": "Cilium Group",
       "groupName": "Cilium",
+      minimumGroupSize: 2,
       "matchDatasources": ["docker"],
       "matchPackageNames": ["/cilium/"],
       "group": {
@@ -33,6 +36,7 @@
     {
       description: "CoreDNS Group",
       groupName: "CoreDNS",
+      minimumGroupSize: 2,
       matchDatasources: ["docker"],
       matchPackageNames: ["/coredns/"],
       group: {
@@ -42,6 +46,7 @@
     {
       description: "Spegel Group",
       groupName: "Spegel",
+      minimumGroupSize: 2,
       matchDatasources: ["docker"],
       matchPackageNames: ["/spegel/"],
       group: {
@@ -51,6 +56,7 @@
     {
       description: "External Secrets Operator Group",
       groupName: "External Secrets Operator",
+      minimumGroupSize: 2,
       matchDatasources: ["docker"],
       matchPackageNames: ["/external-secrets/"],
       group: {
@@ -60,6 +66,7 @@
     {
       description: "Flux Operator Group",
       groupName: "Flux Operator",
+      minimumGroupSize: 2,
       matchDatasources: ["docker"],
       matchPackageNames: ["/flux-operator/", "/flux-instance/"],
       group: {
@@ -69,6 +76,7 @@
     {
       description: "kubelet-csr-approver Group",
       groupName: "kubelet-csr-approver",
+      minimumGroupSize: 2,
       matchDatasources: ["docker"],
       matchPackageNames: ["/kubelet-csr-approver/"],
       group: {
@@ -78,6 +86,7 @@
     {
       description: "1Password Connect Group",
       groupName: "1Password Connect",
+      minimumGroupSize: 2,
       matchDatasources: ["docker"],
       matchPackageNames: ["/1password/"],
       group: {
