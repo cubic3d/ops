@@ -6,7 +6,6 @@ resources:
   - descheduler/ks.yaml
   - generic-device-plugin/ks.yaml
   - intel-device-plugins/ks.yaml
-  - kopia/ks.yaml
   - kubelet-csr-approver/ks.yaml
   - node-feature-discovery/ks.yaml
   - publish-k8s-schemas/ks.yaml
