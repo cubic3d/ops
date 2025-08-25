@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: media
 resources:
   - bazarr/ks.yaml
+  - jellyfin/ks.yaml
   - jellyseerr/ks.yaml
   - maintainerr/ks.yaml
   - plex/ks.yaml
