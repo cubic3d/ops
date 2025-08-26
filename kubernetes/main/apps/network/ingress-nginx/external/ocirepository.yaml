@@ -4,9 +4,9 @@ kind: OCIRepository
 metadata:
   name: ingress-nginx-external
 spec:
-  url: oci://ghcr.io/home-operations/charts-mirror/ingress-nginx
+  url: oci://registry.k8s.io/ingress-nginx/charts/ingress-nginx
   ref:
-    tag: 4.12.3
+    tag: v4.12.5
   interval: 10m
   layerSelector:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
