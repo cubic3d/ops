@@ -93,5 +93,15 @@
         commitMessageTopic: "{{{groupName}}} group",
       },
     },
+    {
+      description: "Talos Group",
+      groupName: "Talos",
+      minimumGroupSize: 2,
+      matchDatasources: ["docker"],
+      matchPackageNames: ["/siderolabs/"],
+      group: {
+        commitMessageTopic: "{{{groupName}}} group",
+      },
+    },
   ],
 }
