@@ -6,7 +6,7 @@ metadata:
 spec:
   url: oci://registry.k8s.io/ingress-nginx/charts/ingress-nginx
   ref:
-    tag: v4.12.5
+    tag: v4.13.2
   interval: 10m
   layerSelector:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
