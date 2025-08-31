@@ -471,6 +471,10 @@ settings:
             zone: iot
             address: 15
             mac_enc: ENC[AES256_GCM,data:XhHXeHKS44XKghA/ZLVjQAc=,iv:2c3NadolF1PH6jgPwX0HtRojTSFMfRB+jfIeU2gckr4=,tag:31mYTLQ+s7ciErVgpCbAiw==,type:str]
+        denon:
+            zone: iot
+            address: 16
+            mac_enc: ENC[AES256_GCM,data:PXzQVvbe3w46RvJFQZMywYw=,iv:I0Q4rkgxdqqT4Csbwh/U3pQoYW2onYXVbstQqhgVJ0c=,tag:lr9cVoPFFJSD33rcy+8ceA==,type:str]
         kasumi:
             zone: server
             address: 10
@@ -521,7 +525,7 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-06-16T11:20:18Z"
-    mac: ENC[AES256_GCM,data:IPt/zZDZrG0An/rJ2vVU+LUUMERDsJQFDAgOFFpuBtEP6nchoVZAprCIFfxYyfuj364M3Zjs2TlnNruJ/Y4PiLipnHiFTpRK8WFeZmSBb//WeA6Jc2h5YgU/K/A5hBkzZW7H53TRImbBvdRgt5Inku/3IO6TyW4QUKjV7b5GSXU=,iv:kOE64y41ynU5/8RW1h/KTiH5pW1epUO03EB9H1toohg=,tag:U8UzW39ZGKsiXDSKEAfrwQ==,type:str]
+    lastmodified: "2025-08-31T13:21:59Z"
+    mac: ENC[AES256_GCM,data:gH++jx064crt8XrbKmAZoo/Y7mKTO2VMvXcPkVYWkxeFc80Wjm+pTZQAEuITxS8OhOj+mqJrpP74L7tcR3UB0AtW5RItSZKz5r/OxlIKcgIFPUA/BtP4xtyMLF5ZzZmDMWBvfGsxEVuLuWHnhhN1lR8ZUAhjGXoPn7HKlHMEXN0=,iv:4fOk9mrIBjztUG3l6xm/5JygmDAIUrCrg0xuSbHOXNc=,tag:E31Cy/wTqcXUkGth4p3B2w==,type:str]
     encrypted_suffix: _enc
     version: 3.10.2
