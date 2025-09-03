@@ -10,7 +10,7 @@ spec:
   dataSourceRef:
     kind: ReplicationDestination
     apiGroup: volsync.backube
-    name: ${app}-nas # rename to -bootstrap after redeploying cluster
+    name: ${app}-nas
   resources:
     requests:
       storage: ${volsync_capacity:=1Gi}
