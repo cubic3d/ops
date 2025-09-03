@@ -6,5 +6,5 @@ resources:
   - nas/externalsecret.yaml
   - nas/replicationdestination.yaml
   - nas/replicationsource.yaml
-  - cloud/externalsecret.yaml
-  - cloud/replicationsource.yaml
+  # - cloud/externalsecret.yaml
+  # - cloud/replicationsource.yaml
