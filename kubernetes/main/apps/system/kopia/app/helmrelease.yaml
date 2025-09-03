@@ -29,6 +29,11 @@ spec:
               TZ: Europe/Berlin
               KOPIA_WEB_ENABLED: true
               KOPIA_WEB_PORT: &port 8080
+              KOPIA_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: kopia
+                    key: repo_key
 
             envFrom:
               - secretRef:
@@ -90,19 +95,12 @@ spec:
 
     persistence:
       config-file:
-        type: configMap
-        name: kopia-repository
+        type: secret
+        name: kopia
         globalMounts:
           - path: /config/repository.config
             subPath: repository.config
             readOnly: true
-
-      repository:
-        type: nfs
-        server: nas.${domain}
-        path: /mnt/fast/kopia
-        globalMounts:
-          - path: /repository
 
       tmp:
         type: emptyDir
