@@ -1,17 +1,17 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: ${volsync_claim:-${app}}
+  name: ${volsync_claim:=${app}}
   labels:
     app.kubernetes.io/name: ${app}
 spec:
   accessModes:
-    - ${volsync_accessmodes:-ReadWriteOnce}
+    - ${volsync_accessmodes:=ReadWriteOnce}
   dataSourceRef:
     kind: ReplicationDestination
     apiGroup: volsync.backube
-    name: ${app}-nas
+    name: ${app}-nas # rename to -bootstrap after redeploying cluster
   resources:
     requests:
-      storage: ${volsync_capacity:-1Gi}
-  storageClassName: ${volsync_storageclass:-longhorn}
+      storage: ${volsync_capacity:=1Gi}
+  storageClassName: ${volsync_storageclass:=longhorn}
