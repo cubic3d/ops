@@ -2,57 +2,6 @@
 version: "3"
 
 tasks:
-  unlock:
-    desc: Unlock all restic source repos
-    preconditions:
-      - which kubectl
-    vars:
-      SOURCES:
-        sh: kubectl get replicationsources --all-namespaces --no-headers --output=jsonpath='{range .items[*]}{.metadata.namespace},{.metadata.name}{"\n"}{end}'
-    cmds:
-      - for:
-          var: SOURCES
-          split: "\n"
-        cmd: kubectl --namespace {{splitList "," .ITEM | first}} patch --field-manager=flux-client-side-apply replicationsources {{splitList "," .ITEM | last}} --type merge --patch "{\"spec\":{\"restic\":{\"unlock\":\"{{now | unixEpoch}}\"}}}"
-
-  restic-cmd:
-    desc: Runs an arbitrary restic command for a given app [NS=default] [STORAGE=cloud] APP=node-red -- command
-    interactive: true
-    vars:
-      NS: '{{default "default" .NS}}'
-      STORAGE: '{{default "cloud" .STORAGE}}'
-    requires:
-      vars:
-        - APP
-    cmd: |-
-      kubectl run -n {{.NS}} volsync-restic-cmd-{{.APP}}-{{.STORAGE}} -i --tty --rm --image=null --privileged --overrides='
-        {
-          "apiVersion": "v1",
-          "spec": {
-            "containers": [
-              {
-                "name": "command",
-                "image": "quay.io/backube/volsync-mover-restic:latest",
-                "command": ["restic"],
-                "args": {{ .CLI_ARGS | splitArgs | mustToJson }},
-                "stdin": true,
-                "stdinOnce": true,
-                "tty": true,
-                "envFrom": [
-                  {
-                    "secretRef": {
-                      "name": "{{.APP}}-volsync-{{.STORAGE}}"
-                    }
-                  }
-                ]
-              }
-            ],
-            "restartPolicy": "Never"
-          }
-        }'
-    preconditions:
-      - kubectl -n {{.NS}} get replicationsource {{.APP}}-{{.STORAGE}}
-
   snapshot:
     desc: Snapshot an app [NS=default] APP=node-red
     vars:
@@ -77,13 +26,13 @@ tasks:
       CLAIM:
         sh: kubectl --namespace {{.NS}} get replicationsources/{{.APP}} --output=jsonpath="{.spec.sourcePVC}"
       ACCESS_MODES:
-        sh: kubectl --namespace {{.NS}} get replicationsources/{{.APP}} --output=jsonpath="{.spec.restic.accessModes}"
+        sh: kubectl --namespace {{.NS}} get replicationsources/{{.APP}} --output=jsonpath="{.spec.kopia.accessModes}"
       STORAGE_CLASS_NAME:
-        sh: kubectl --namespace {{.NS}} get replicationsources/{{.APP}} --output=jsonpath="{.spec.restic.storageClassName}"
+        sh: kubectl --namespace {{.NS}} get replicationsources/{{.APP}} --output=jsonpath="{.spec.kopia.storageClassName}"
       PUID:
-        sh: kubectl --namespace {{.NS}} get replicationsources/{{.APP}} --output=jsonpath="{.spec.restic.moverSecurityContext.runAsUser}"
+        sh: kubectl --namespace {{.NS}} get replicationsources/{{.APP}} --output=jsonpath="{.spec.kopia.moverSecurityContext.runAsUser}"
       PGID:
-        sh: kubectl --namespace {{.NS}} get replicationsources/{{.APP}} --output=jsonpath="{.spec.restic.moverSecurityContext.runAsGroup}"
+        sh: kubectl --namespace {{.NS}} get replicationsources/{{.APP}} --output=jsonpath="{.spec.kopia.moverSecurityContext.runAsGroup}"
     requires:
       vars:
         - APP
@@ -104,8 +53,9 @@ tasks:
         spec:
           trigger:
             manual: restore-once
-          restic:
-            repository: {{.APP}}-volsync-box
+          kopia:
+            repository: {{.APP}}-volsync
+            previous: {{.PREVIOUS}}
             destinationPVC: {{.CLAIM}}
             copyMethod: Direct
             storageClassName: {{.STORAGE_CLASS_NAME}}
@@ -117,6 +67,8 @@ tasks:
             enableFileDeletion: true
             cleanupCachePVC: true
             cleanupTempPVC: true
+            sourceIdentity:
+              sourceName: {{.APP}}
         EOF
       - until kubectl --namespace {{.NS}} get job/volsync-dst-{{.APP}}-manual &>/dev/null; do sleep 5; done
       - kubectl --namespace {{.NS}} wait job/volsync-dst-{{.APP}}-manual --for=condition=complete --timeout=120m
