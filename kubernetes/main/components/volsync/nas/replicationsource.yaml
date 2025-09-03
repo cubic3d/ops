@@ -27,3 +27,4 @@ spec:
       daily: 7
       weekly: 4
     compression: zstd-fastest
+    username: ${app}

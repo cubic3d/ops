@@ -28,4 +28,4 @@ spec:
     cleanupCachePVC: true
     cleanupTempPVC: false
     sourceIdentity:
-      sourceName: ${app}
+      sourceName: ${app}-nas
