@@ -9,11 +9,16 @@ spec:
     kind: OCIRepository
     name: volsync
 
+  install:
+    crds: CreateReplace
+  upgrade:
+    crds: CreateReplace
+
   values:
     fullnameOverride: volsync # Required for volsync-perfectra1n fork
     image: &image
       repository: ghcr.io/perfectra1n/volsync
-      tag: v0.15.40
+      tag: v0.15.41
     kopia: *image
     rclone: *image
     restic: *image
