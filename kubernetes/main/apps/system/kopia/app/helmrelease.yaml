@@ -12,7 +12,7 @@ spec:
 
   values:
     controllers:
-      kopia:
+      kopia-nas:
         annotations:
           reloader.stakater.com/auto: "true"
 
@@ -34,10 +34,6 @@ spec:
                   secretKeyRef:
                     name: kopia
                     key: repo_key
-
-            envFrom:
-              - secretRef:
-                  name: kopia
 
             probes:
               liveness: &probes
@@ -64,6 +60,53 @@ spec:
                 drop:
                   - ALL
 
+      kopia-cloud:
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        containers:
+          app:
+            image:
+              repository: ghcr.io/home-operations/kopia
+              tag: 0.21.1@sha256:f666b5f2c1ea4649cd2bd703507d4b81c2b515782e8476ba4a145b091a704a53
+
+            args:
+              - --without-password
+
+            env:
+              TZ: Europe/Berlin
+              KOPIA_WEB_ENABLED: true
+              KOPIA_WEB_PORT: *port
+              KOPIA_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: kopia
+                    key: repo_key
+              ROOT_CA_PEM_BASE64:
+                valueFrom:
+                  secretKeyRef:
+                    name: kopia
+                    key: ca
+
+            probes:
+              liveness: *probes
+              readiness: *probes
+              startup: *probes
+
+            resources:
+              requests:
+                cpu: 15m
+                memory: 50Mi
+              limits:
+                memory: 500Gi
+
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities:
+                drop:
+                  - ALL
+
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
@@ -73,7 +116,11 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
 
     service:
-      app:
+      nas:
+        ports:
+          http:
+            port: *port
+      cloud:
         ports:
           http:
             port: *port
@@ -86,28 +133,47 @@ spec:
           nginx.ingress.kubernetes.io/auth-signin: https://auth.${domain}?rm=$request_method
           nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
         hosts:
-          - host: kopia.${domain}
+          - host: kopia-nas.${domain}
             paths:
               - path: /
                 service:
-                  identifier: app
+                  identifier: nas
+                  port: http
+          - host: kopia-cloud.${domain}
+            paths:
+              - path: /
+                service:
+                  identifier: cloud
                   port: http
 
     persistence:
       config-file:
         type: secret
         name: kopia
-        globalMounts:
-          - path: /config/repository.config
-            subPath: repository.config
-            readOnly: true
+        advancedMounts:
+          kopia-nas:
+            app:
+              - path: /config/repository.config
+                subPath: repository.config.nas
+                readOnly: true
+          kopia-cloud:
+            app:
+              - path: /config/repository.config
+                subPath: repository.config.cloud
+                readOnly: true
 
       tmp:
         type: emptyDir
         advancedMounts:
-          kopia:
+          kopia-nas:
             app:
               - path: /config/cache
-                subPath: cache
+                subPath: cache/nas
               - path: /config/logs
-                subPath: logs
+                subPath: logs/nas
+          kopia-cloud:
+            app:
+              - path: /config/cache
+                subPath: cache/cloud
+              - path: /config/logs
+                subPath: logs/cloud
