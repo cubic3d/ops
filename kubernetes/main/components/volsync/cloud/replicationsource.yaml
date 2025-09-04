@@ -12,6 +12,9 @@ spec:
     customCA:
       secretName: ${app}-volsync-cloud
       key: ca.crt
+    # FIXME: workaround for kopia ignoring customCA
+    additionalArgs:
+      - --disable-tls-verification
     copyMethod: ${volsync_copymethod:=Snapshot}
     cacheCapacity: ${volsync_cache_capacity:=1Gi}
     cacheStorageClassName: ${volsync_cache_storageclass:=openebs-hostpath}
