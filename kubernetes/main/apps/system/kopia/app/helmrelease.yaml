@@ -72,6 +72,7 @@ spec:
 
             args:
               - --without-password
+              - --root-ca-pem-path=/config/ca.crt
 
             env:
               TZ: Europe/Berlin
@@ -82,11 +83,6 @@ spec:
                   secretKeyRef:
                     name: kopia
                     key: repo_key
-              ROOT_CA_PEM_BASE64:
-                valueFrom:
-                  secretKeyRef:
-                    name: kopia
-                    key: ca
 
             probes:
               liveness: *probes
@@ -162,6 +158,16 @@ spec:
             app:
               - path: /config/repository.config
                 subPath: repository.config.cloud
+                readOnly: true
+
+      ca-cert:
+        type: secret
+        name: kopia
+        advancedMounts:
+          kopia-cloud:
+            app:
+              - path: /config/ca.crt
+                subPath: ca.crt
                 readOnly: true
 
       tmp:
