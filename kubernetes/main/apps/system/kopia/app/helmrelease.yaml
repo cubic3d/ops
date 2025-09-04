@@ -117,10 +117,12 @@ spec:
 
     service:
       nas:
+        controller: kopia-nas
         ports:
           http:
             port: *port
       cloud:
+        controller: kopia-cloud
         ports:
           http:
             port: *port
