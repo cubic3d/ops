@@ -98,7 +98,7 @@
       groupName: "Talos",
       minimumGroupSize: 2,
       matchDatasources: ["docker"],
-      matchPackageNames: ["/siderolabs/"],
+      matchPackageNames: ["/installer/", "/talosctl/"],
       group: {
         commitMessageTopic: "{{{groupName}}} group",
       },
