@@ -6,7 +6,7 @@ metadata:
 spec:
   url: oci://ghcr.io/postfinance/charts/kubelet-csr-approver
   ref:
-    tag: 1.2.10
+    tag: 1.2.11
   interval: 10m
   layerSelector:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
