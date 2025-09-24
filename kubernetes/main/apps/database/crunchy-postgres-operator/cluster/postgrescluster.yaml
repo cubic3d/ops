@@ -100,7 +100,7 @@ spec:
       repos:
         - name: repo1
           s3: &nas
-            endpoint: nas.${domain}:9000
+            endpoint: nas.${domain}:3000
             bucket: cpgo
             region: eu-central
           schedules:
