@@ -109,7 +109,7 @@ spec:
             incremental: "0 2-23 * * *" # Every hour except 01:00
         - name: repo2
           s3: &cloud
-            endpoint: s3-gateway.network.svc.cluster.local
+            endpoint: t3u7.fra3.idrivee2-58.com
             bucket: cpgo
             region: eu-central
           schedules:
