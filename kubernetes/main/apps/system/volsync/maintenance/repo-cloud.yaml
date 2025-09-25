@@ -2,7 +2,7 @@
 apiVersion: external-secrets.io/v1
 kind: ExternalSecret
 metadata:
-  name: volsync-repo-cloud
+  name: kopia-repo-cloud
 spec:
   refreshInterval: 5m
   secretStoreRef:

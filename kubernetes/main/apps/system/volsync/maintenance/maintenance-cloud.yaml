@@ -2,10 +2,10 @@
 apiVersion: volsync.backube/v1alpha1
 kind: KopiaMaintenance
 metadata:
-  name: volsync-maintenance-cloud
+  name: kopia-maintenance-cloud
 spec:
   repository:
-    repository: volsync-repo-nas
+    repository: kopia-repo-nas
   trigger:
     schedule: "30 3 * * *"
   successfulJobsHistoryLimit: 1
