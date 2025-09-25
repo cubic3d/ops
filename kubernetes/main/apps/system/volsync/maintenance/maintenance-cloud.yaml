@@ -6,6 +6,6 @@ metadata:
 spec:
   repository:
     repository: volsync-repo-nas
-    trigger:
-      schedule: "30 3 * * *"
-    successfulJobsHistoryLimit: 1
+  trigger:
+    schedule: "30 3 * * *"
+  successfulJobsHistoryLimit: 1
