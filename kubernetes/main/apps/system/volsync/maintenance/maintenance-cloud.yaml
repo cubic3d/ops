@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://schemaz.pages.dev/volsync.backube/kopiamaintenance_v1alpha1.json
+apiVersion: volsync.backube/v1alpha1
+kind: KopiaMaintenance
+metadata:
+  name: volsync-maintenance-nas
+spec:
+  repository:
+    repository: volsync-repo-nas
+    trigger:
+      schedule: "30 3 * * *"
+    successfulJobsHistoryLimit: 1
