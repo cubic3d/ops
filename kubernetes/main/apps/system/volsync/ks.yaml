@@ -36,7 +36,7 @@ spec:
   path: kubernetes/main/apps/system/volsync/maintenance
   interval: 10m
   prune: true
-  wait: true
+  wait: false
   sourceRef:
     kind: GitRepository
     name: flux-system
