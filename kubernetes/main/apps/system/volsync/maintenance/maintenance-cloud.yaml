@@ -2,7 +2,7 @@
 apiVersion: volsync.backube/v1alpha1
 kind: KopiaMaintenance
 metadata:
-  name: volsync-maintenance-nas
+  name: volsync-maintenance-cloud
 spec:
   repository:
     repository: volsync-repo-nas
