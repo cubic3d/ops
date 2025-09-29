@@ -16,10 +16,10 @@ spec:
       migratable: true
 
     csi:
-      attacherReplicaCount: 1
-      provisionerReplicaCount: 1
-      resizerReplicaCount: 1
-      snapshotterReplicaCount: 1
+      attacherReplicaCount: 2
+      provisionerReplicaCount: 2
+      resizerReplicaCount: 2
+      snapshotterReplicaCount: 2
 
     defaultSettings:
       createDefaultDiskLabeledNodes: true
@@ -54,8 +54,3 @@ spec:
         nginx.ingress.kubernetes.io/auth-url: http://authelia.auth.svc.cluster.local/api/authz/auth-request
         nginx.ingress.kubernetes.io/auth-signin: https://auth.${domain}?rm=$request_method
         nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
-
-    # TODO: Enable additional values after deploying some more dependencies
-    # metrics:
-    #   serviceMonitor:
-    #     enabled: true
