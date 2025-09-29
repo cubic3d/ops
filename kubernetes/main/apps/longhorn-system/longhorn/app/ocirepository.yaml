@@ -6,7 +6,7 @@ metadata:
 spec:
   url: oci://ghcr.io/home-operations/charts-mirror/longhorn
   ref:
-    tag: 1.9.2
+    tag: 1.10.0
   interval: 10m
   layerSelector:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
