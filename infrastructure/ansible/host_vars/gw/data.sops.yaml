@@ -350,6 +350,7 @@ settings:
                         - local
                         - trusted
                         - wireguard
+                        - gaming
                       default: accept
                       rules:
                         - accept_established: null
@@ -382,6 +383,7 @@ settings:
                         - local
                         - trusted
                         - wireguard
+                        - gaming
                         - iot
                         - wan
                       default: drop
@@ -525,7 +527,7 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-08-31T13:21:59Z"
-    mac: ENC[AES256_GCM,data:gH++jx064crt8XrbKmAZoo/Y7mKTO2VMvXcPkVYWkxeFc80Wjm+pTZQAEuITxS8OhOj+mqJrpP74L7tcR3UB0AtW5RItSZKz5r/OxlIKcgIFPUA/BtP4xtyMLF5ZzZmDMWBvfGsxEVuLuWHnhhN1lR8ZUAhjGXoPn7HKlHMEXN0=,iv:4fOk9mrIBjztUG3l6xm/5JygmDAIUrCrg0xuSbHOXNc=,tag:E31Cy/wTqcXUkGth4p3B2w==,type:str]
+    lastmodified: "2025-09-30T15:20:21Z"
+    mac: ENC[AES256_GCM,data:4oHUZJ6d76VHNvNUxHz6/04nS2ayhE0l2fxwghdhlZQ+MM1SJxsSiIsN+mr6n+aWSPWI+stZZmOpdhyN1w8q+9Cs9lPlEeUyICu/0NQZlMsdPHS546nVGjDxEPzh20Bgs4Kq99kFchTTlf+hri+x/kG2xpKgLZY8rrgcwYMc+o8=,iv:ItCi9N4GrKpY0nol5JIYzNtm87Df5rlcnvmzeW8ssU8=,tag:E1zAqJaAFGYcJqAwqeurjw==,type:str]
     encrypted_suffix: _enc
-    version: 3.10.2
+    version: 3.11.0
