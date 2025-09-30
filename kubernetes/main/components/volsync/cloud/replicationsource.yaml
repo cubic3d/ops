@@ -25,5 +25,6 @@ spec:
     retain:
       daily: 7
       weekly: 4
+    parallelism: 2
     compression: zstd-fastest
     username: ${app}
