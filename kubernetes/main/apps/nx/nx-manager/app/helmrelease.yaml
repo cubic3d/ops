@@ -77,6 +77,9 @@ spec:
     service:
       app:
         controller: frontend
+        type: LoadBalancer
+        annotations:
+          lbipam.cilium.io/ips: 192.168.40.68
         ports:
           http:
             port: 80
