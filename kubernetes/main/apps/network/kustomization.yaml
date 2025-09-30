@@ -10,6 +10,5 @@ resources:
   - k8s-gateway/ks.yaml
   - multus/ks.yaml
   - speedtest/ks.yaml
-  - s3-gateway/ks.yaml
 components:
   - ../../components/namespace
