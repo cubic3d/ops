@@ -4,12 +4,10 @@ kind: OCIRepository
 metadata:
   name: node-feature-discovery
 spec:
-  url: oci://ghcr.io/home-operations/charts-mirror/node-feature-discovery
+  url: oci://registry.k8s.io/nfd/charts/node-feature-discovery
   ref:
-    tag: 0.17.4
+    tag: 0.18.0
   interval: 10m
   layerSelector:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
     operation: copy
-  verify:
-    provider: cosign
