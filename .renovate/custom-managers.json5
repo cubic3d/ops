@@ -40,6 +40,14 @@
         "set container name .+ image '?(?<depName>.+?):(?<currentValue>[^\"'\n ]+)",
       ],
       datasourceTemplate: "docker",
-    }
+    },
+
+    {
+      customType: "regex",
+      description: "OCI dependencies",
+      managerFilePatterns: ["kubernetes/.+\\.ya?ml(?:\\.j2)?$"],
+      matchStrings: ["oci://(?<depName>[^:]+):(?<currentValue>\\S+)"],
+      datasourceTemplate: "docker",
+    },
   ],
 }

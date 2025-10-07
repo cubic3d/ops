@@ -61,7 +61,7 @@
     {
       description: "Flux Operator Group",
       groupName: "Flux Operator",
-      minimumGroupSize: 2,
+      minimumGroupSize: 3,
       matchDatasources: ["docker"],
       matchPackageNames: ["/flux-operator/", "/flux-instance/", "/flux-operator-manifests/"],
       group: {
