@@ -9,11 +9,6 @@ spec:
     kind: OCIRepository
     name: intel-device-plugins-operator
 
-  install:
-    crds: CreateReplace
-  upgrade:
-    crds: CreateReplace
-
   values:
     controllerExtraArgs: |
       - --devices=gpu

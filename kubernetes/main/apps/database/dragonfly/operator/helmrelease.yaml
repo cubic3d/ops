@@ -8,8 +8,3 @@ spec:
   chartRef:
     kind: OCIRepository
     name: dragonfly-operator
-
-  install:
-    crds: CreateReplace
-  upgrade:
-    crds: CreateReplace

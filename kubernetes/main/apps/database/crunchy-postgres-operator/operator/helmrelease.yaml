@@ -9,11 +9,6 @@ spec:
     kind: OCIRepository
     name: crunchy-postgres-operator
 
-  install:
-    crds: CreateReplace
-  upgrade:
-    crds: CreateReplace
-
   values:
     install:
       clusterLabels:

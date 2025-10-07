@@ -9,10 +9,5 @@ spec:
     kind: OCIRepository
     name: tuppr
 
-  install:
-    crds: CreateReplace
-  upgrade:
-    crds: CreateReplace
-
   values:
     replicaCount: 2

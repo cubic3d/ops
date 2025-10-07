@@ -9,11 +9,6 @@ spec:
     kind: OCIRepository
     name: volsync
 
-  install:
-    crds: CreateReplace
-  upgrade:
-    crds: CreateReplace
-
   values:
     fullnameOverride: volsync # Required for volsync-perfectra1n fork
     image: &image

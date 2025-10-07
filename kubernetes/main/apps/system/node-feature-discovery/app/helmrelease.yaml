@@ -9,11 +9,6 @@ spec:
     kind: OCIRepository
     name: node-feature-discovery
 
-  install:
-    crds: CreateReplace
-  upgrade:
-    crds: CreateReplace
-
   values:
     # TODO: Enable additional values after deploying some more dependencies
     # prometheus:
