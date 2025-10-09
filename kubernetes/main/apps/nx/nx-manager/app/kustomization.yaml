@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - pullsecret.yaml
   - helmrelease.yaml
+  - ocirepository.yaml
 configMapGenerator:
   - name: caddyfile
     files:

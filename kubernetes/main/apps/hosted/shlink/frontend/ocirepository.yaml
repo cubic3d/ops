@@ -2,8 +2,7 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: OCIRepository
 metadata:
-  name: app-template
-  namespace: flux-system
+  name: shlink-frontend
 spec:
   url: oci://ghcr.io/bjw-s-labs/helm/app-template
   ref:
