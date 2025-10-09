@@ -2,12 +2,12 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: metrics-server
+  name: &app metrics-server
 spec:
   interval: 30m
   chartRef:
     kind: OCIRepository
-    name: metrics-server
+    name: *app
 
   values:
     # TODO: Enable additional values after deploying some more dependencies

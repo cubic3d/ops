@@ -2,12 +2,12 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: crunchy-postgres-operator
+  name: &app crunchy-postgres-operator
 spec:
   interval: 30m
   chartRef:
     kind: OCIRepository
-    name: crunchy-postgres-operator
+    name: *app
 
   values:
     install:

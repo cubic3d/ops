@@ -2,12 +2,12 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: longhorn
+  name: &app longhorn
 spec:
   interval: 30m
   chartRef:
     kind: OCIRepository
-    name: longhorn
+    name: *app
 
   values:
     persistence:

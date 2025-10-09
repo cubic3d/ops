@@ -2,12 +2,12 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: descheduler
+  name: &app descheduler
 spec:
   interval: 30m
   chartRef:
     kind: OCIRepository
-    name: descheduler
+    name: *app
   values:
     kind: Deployment
     deschedulerPolicyAPIVersion: descheduler/v1alpha2

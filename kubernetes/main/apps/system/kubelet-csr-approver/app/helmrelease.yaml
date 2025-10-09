@@ -2,12 +2,12 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: kubelet-csr-approver
+  name: &app kubelet-csr-approver
 spec:
   interval: 30m
   chartRef:
     kind: OCIRepository
-    name: kubelet-csr-approver
+    name: *app
 
   valuesFrom:
     - kind: ConfigMap

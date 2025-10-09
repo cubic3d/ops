@@ -2,12 +2,12 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: snapshot-controller
+  name: &app snapshot-controller
 spec:
   interval: 30m
   chartRef:
     kind: OCIRepository
-    name: snapshot-controller
+    name: *app
 
   values:
     controller:

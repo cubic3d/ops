@@ -2,12 +2,12 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: ingress-nginx-external
+  name: &app ingress-nginx-external
 spec:
   interval: 30m
   chartRef:
     kind: OCIRepository
-    name: ingress-nginx-external
+    name: *app
   values:
     fullnameOverride: &name ingress-nginx-external
 
