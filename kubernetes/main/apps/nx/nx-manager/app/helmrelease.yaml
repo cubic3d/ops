@@ -94,7 +94,7 @@ spec:
     persistence:
       config-file:
         type: configMap
-        name: caddyfile
+        identifier: config
         advancedMounts:
           frontend:
             app:
@@ -127,3 +127,43 @@ spec:
         type: nfs
         server: nas.${domain}
         path: /mnt/fast/nx
+
+    configMaps:
+      config:
+        data:
+          Caddyfile: |-
+            :80 {
+              log
+
+              handle /livez {
+                respond "OK" 200
+              }
+
+              handle / {
+                root /storage/output
+
+                @dbi header user-agent DBI
+                file_server @dbi {
+                  index dbi.html
+                }
+
+                @tinfoil {
+                  header theme *
+                  header hauth *
+                  header uauth *
+                }
+                file_server @tinfoil {
+                  index tinfoil.json
+                }
+
+                file_server {
+                  index list.html
+                }
+              }
+
+              handle /* {
+                root /storage/roms
+
+                file_server
+              }
+            }

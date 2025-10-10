@@ -98,8 +98,22 @@ spec:
     persistence:
       config:
         type: configMap
-        name: cloudflared
+        identifier: config
         globalMounts:
           - path: /etc/cloudflared/config.yaml
             subPath: config.yaml
             readOnly: true
+
+    configMaps:
+      config:
+        data:
+          config.yaml: |-
+            originRequest:
+              originServerName: ingress-ext.${domain}
+
+            ingress:
+              - hostname: ${domain}
+                service: https://ingress-nginx-external-controller.network.svc.cluster.local:443
+              - hostname: "*.${domain}"
+                service: https://ingress-nginx-external-controller.network.svc.cluster.local:443
+              - service: http_status:404

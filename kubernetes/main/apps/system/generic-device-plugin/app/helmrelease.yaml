@@ -14,9 +14,6 @@ spec:
       generic-device-plugin:
         type: daemonset
 
-        annotations:
-          reloader.stakater.com/auto: "true"
-
         containers:
           app:
             image:
@@ -46,7 +43,7 @@ spec:
     persistence:
       config-file:
         type: configMap
-        name: generic-device-plugin
+        identifier: config
         globalMounts:
           - path: /config/config.yaml
             subPath: config.yaml
@@ -69,3 +66,14 @@ spec:
         hostPath: /var/lib/kubelet/device-plugins
         globalMounts:
           - path: /var/lib/kubelet/device-plugins
+
+    configMaps:
+      config:
+        data:
+          config.yaml: |-
+            devices:
+              - name: tun
+                groups:
+                  - count: 1000
+                    paths:
+                      - path: /dev/net/tun
