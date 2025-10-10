@@ -9,10 +9,6 @@ spec:
     kind: OCIRepository
     name: *app
 
-  valuesFrom:
-    - kind: ConfigMap
-      name: cilium-values
-
   values:
     autoDirectNodeRoutes: true
     bandwidthManager:
