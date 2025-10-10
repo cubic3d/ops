@@ -9,6 +9,7 @@ spec:
     kind: OCIRepository
     name: *app
 
-  valuesFrom:
-    - kind: ConfigMap
-      name: kubelet-csr-approver-values
+  values:
+    bypassDnsResolution: true
+    providerRegex: |
+      ^(nabiki|ukyo|ryoga|akane|kasumi)$

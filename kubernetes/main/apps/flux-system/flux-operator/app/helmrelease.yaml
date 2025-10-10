@@ -9,6 +9,4 @@ spec:
     kind: OCIRepository
     name: *app
 
-  valuesFrom:
-    - kind: ConfigMap
-      name: flux-operator-values
+  values:

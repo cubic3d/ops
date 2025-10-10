@@ -9,6 +9,11 @@ spec:
     kind: OCIRepository
     name: *app
 
-  valuesFrom:
-    - kind: ConfigMap
-      name: spegel-values
+  values:
+    spegel:
+      prependExisting: true
+      containerdSock: /run/containerd/containerd.sock
+      containerdRegistryConfigPath: /etc/cri/conf.d/hosts
+    service:
+      registry:
+        hostPort: 29999
