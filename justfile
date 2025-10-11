@@ -3,6 +3,8 @@
 set quiet
 set shell := ['bash', '-euo', 'pipefail', '-c']
 
+mod vyos "infrastructure/vyos"
+
 [private]
 default:
   just -l
