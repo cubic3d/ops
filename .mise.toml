@@ -15,3 +15,7 @@ task = "latest"
 uv = "latest"
 yq = "latest"
 k9s = "latest"
+just = "latest"
+"ubi:mitsuhiko/minijinja" = "latest"
+gum = "latest"
+# 1password is provided by system
