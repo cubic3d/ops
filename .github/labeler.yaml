@@ -5,8 +5,6 @@ area/ci:
 area/kubernetes:
   - changed-files:
       - any-glob-to-any-file: "kubernetes/**/*"
-
-# Cluster
-cluster/main:
+area/infratructure:
   - changed-files:
-      - any-glob-to-any-file: kubernetes/main/**/*
+      - any-glob-to-any-file: "infrastructure/**/*"

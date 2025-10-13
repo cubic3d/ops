@@ -1,5 +1,5 @@
 creation_rules:
-  - path_regex: kubernetes/.*/talos/.*\.sops\.ya?ml$
+  - path_regex: kubernetes/talos/.*\.sops\.ya?ml$
     age: >-
       age17pjdz3x48re0ahdw00eqdj0da02ltp3wkxswr755cvaqj3j5938s7put83,
       age1xehfrre93knutglwzsamhetvk70sh2gcdn4zhdreu8762m4l03tszgh8j6

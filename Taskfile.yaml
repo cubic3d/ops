@@ -8,9 +8,8 @@ shopt:
 
 vars:
   KUBERNETES_DIR: "{{.ROOT_DIR}}/kubernetes"
-  CLUSTER: '{{default "main" .CLUSTER}}'
-  KUBECONFIG: "{{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/clusterconfig/kubeconfig"
-  TALOSCONFIG: "{{.KUBERNETES_DIR}}/{{.CLUSTER}}/bootstrap/talos/clusterconfig/talosconfig"
+  KUBECONFIG: "{{.KUBERNETES_DIR}}/talos/clusterconfig/kubeconfig"
+  TALOSCONFIG: "{{.KUBERNETES_DIR}}/talos/clusterconfig/talosconfig"
 
 env:
   KUBECONFIG: "{{.KUBECONFIG}}"

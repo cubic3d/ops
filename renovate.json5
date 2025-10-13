@@ -8,7 +8,6 @@
     ":enablePreCommit",
     "github>cubic3d/ops//.renovate/allowedVersions.json5",
     "github>cubic3d/ops//.renovate/autoMerge.json5",
-    "github>cubic3d/ops//.renovate/clusters.json5",
     "github>cubic3d/ops//.renovate/commit-message.json5",
     "github>cubic3d/ops//.renovate/custom-managers.json5",
     "github>cubic3d/ops//.renovate/grafanaDashboards.json5",

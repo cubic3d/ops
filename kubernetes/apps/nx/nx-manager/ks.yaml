@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=https://schemaz.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: &appname nx-manager
+  namespace: &namespace nx
+spec:
+  targetNamespace: *namespace
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *appname
+  path: kubernetes/apps/nx/nx-manager/app
+  interval: 10m
+  prune: true
+  wait: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  dependsOn:
+    - name: external-secrets-stores
+      namespace: secrets
