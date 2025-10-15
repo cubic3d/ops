@@ -29,7 +29,6 @@ spec:
             env:
               NO_AUTOUPDATE: "true"
               TUNNEL_METRICS: 0.0.0.0:8080
-              TUNNEL_ORIGIN_ENABLE_HTTP2: true
               TUNNEL_POST_QUANTUM: true
               TUNNEL_TRANSPORT_PROTOCOL: quic
 
@@ -84,17 +83,6 @@ spec:
           http:
             port: *port
 
-    # TODO: Enable additional values after deploying some more dependencies
-    # serviceMonitor:
-    #   app:
-    #     serviceName: cloudflared
-    #     endpoints:
-    #       - port: http
-    #         scheme: http
-    #         path: /metrics
-    #         interval: 1m
-    #         scrapeTimeout: 30s
-
     persistence:
       config:
         type: configMap
@@ -108,12 +96,10 @@ spec:
       config:
         data:
           config.yaml: |-
-            originRequest:
-              originServerName: ingress-ext.${domain}
-
             ingress:
-              - hostname: ${domain}
-                service: https://ingress-nginx-external-controller.network.svc.cluster.local:443
               - hostname: "*.${domain}"
+                originRequest:
+                  http2Origin: true
+                  originServerName: ingress-ext.${domain}
                 service: https://ingress-nginx-external-controller.network.svc.cluster.local:443
               - service: http_status:404
