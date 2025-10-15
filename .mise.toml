@@ -1,5 +1,5 @@
 [env]
-KUBECONFIG = "{{config_root}}/kubernetes/talos/clusterconfig/kubeconfig"
+KUBECONFIG = "{{config_root}}/kubeconfig"
 TALOSCONFIG = "{{config_root}}/kubernetes/talos/clusterconfig/talosconfig"
 JUST_UNSTABLE = 1
 MINIJINJA_CONFIG_FILE = "{{config_root}}/.minijinja.toml"
