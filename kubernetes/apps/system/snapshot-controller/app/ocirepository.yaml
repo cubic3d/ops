@@ -6,7 +6,7 @@ metadata:
 spec:
   url: oci://ghcr.io/piraeusdatastore/helm-charts/snapshot-controller
   ref:
-    tag: 4.1.0
+    tag: 4.1.1
   interval: 10m
   layerSelector:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
