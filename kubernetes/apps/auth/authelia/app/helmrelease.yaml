@@ -48,11 +48,6 @@ spec:
       telemetry:
         metrics:
           enabled: true
-          # TODO: Enable after deploying monitoring
-          # serviceMonitor:
-          #   enabled: false
-          #   annotations: {}
-          #   labels: {}
 
       default_2fa_method: totp
       theme: auto
@@ -197,6 +192,19 @@ spec:
               redirect_uris:
                 - https://w.${domain}/user/login_callback/authelia
 
+            - client_name: Vikunja
+              client_id: vikunja
+              client_secret:
+                path: /secrets/authelia/oidc_secret_vikunja
+              consent_mode: implicit
+              scopes:
+                - openid
+                - profile
+                - email
+              redirect_uris:
+                - https://tasks.${domain}/auth/openid/yh
+              pkce_challenge_method: S256
+
     secret:
       existingSecret: authelia
 
@@ -213,3 +221,5 @@ spec:
               path: oidc_secret_nodered
             - key: oidc_secret_windmill
               path: oidc_secret_windmill
+            - key: oidc_secret_vikunja
+              path: oidc_secret_vikunja

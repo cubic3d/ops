@@ -6,5 +6,6 @@ resources:
   - changedetection/ks.yaml
   - shlink/ks.yaml
   - silverbullet/ks.yaml
+  - vikunja/ks.yaml
 components:
   - ../../components/namespace
