@@ -202,7 +202,7 @@ spec:
                 - profile
                 - email
               redirect_uris:
-                - https://tasks.${domain}/auth/openid/yh
+                - https://tasks.${domain}/auth/openid/yachthafenid
               pkce_challenge_method: S256
 
     secret:
