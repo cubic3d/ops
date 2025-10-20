@@ -6,7 +6,7 @@ metadata:
 spec:
   url: oci://registry.k8s.io/nfd/charts/node-feature-discovery
   ref:
-    tag: 0.18.1
+    tag: 0.18.2
   interval: 10m
   layerSelector:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
