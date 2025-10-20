@@ -32,18 +32,19 @@ spec:
               VIKUNJA_SERVICE_ROOTPATH: /app/vikunja/
               VIKUNJA_FILES_BASEPATH: ./files
               VIKUNJA_DATABASE_PATH: /db/vikunja.db
-              VIKUNJA_MAILER_ENABLED: true
+              VIKUNJA_MAILER_ENABLED: "true"
               VIKUNJA_MAILER_FROMEMAIL: Vikunja <noreply@${domain}>
-              VIKUNJA_AUTH_LOCAL_ENABLED: false
-              VIKUNJA_AUTH_OPENID_ENABLED: true
+              VIKUNJA_LOG_HTTP: "off"
+              VIKUNJA_AUTH_LOCAL_ENABLED: "false"
+              VIKUNJA_AUTH_OPENID_ENABLED: "true"
               VIKUNJA_AUTH_OPENID_PROVIDERS_YH_NAME: Yachthafen ID
               VIKUNJA_AUTH_OPENID_PROVIDERS_YH_AUTHURL: https://auth.${domain}
               VIKUNJA_AUTH_OPENID_PROVIDERS_YH_CLIENTID: vikunja
-              VIKUNJA_METRICS_ENABLED: true
+              VIKUNJA_METRICS_ENABLED: "true"
               VIKUNJA_DEFAULTSETTINGS_AVATAR_PROVIDER: gravatar
-              VIKUNJA_DEFAULTSETTINGS_EMAIL_REMINDERS_ENABLED: true
-              VIKUNJA_DEFAULTSETTINGS_DISCOVERABLE_BY_NAME: true
-              VIKUNJA_DEFAULTSETTINGS_DISCOVERABLE_BY_EMAIL: true
+              VIKUNJA_DEFAULTSETTINGS_EMAIL_REMINDERS_ENABLED: "true"
+              VIKUNJA_DEFAULTSETTINGS_DISCOVERABLE_BY_NAME: "true"
+              VIKUNJA_DEFAULTSETTINGS_DISCOVERABLE_BY_EMAIL: "true"
               VIKUNJA_DEFAULTSETTINGS_WEEK_START: 1
 
             probes:
