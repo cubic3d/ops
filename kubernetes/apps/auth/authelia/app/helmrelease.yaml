@@ -203,7 +203,6 @@ spec:
                 - email
               redirect_uris:
                 - https://tasks.${domain}/auth/openid/yachthafenid
-              pkce_challenge_method: S256
 
     secret:
       existingSecret: authelia
