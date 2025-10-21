@@ -19,7 +19,7 @@ spec:
           app:
             image:
               repository: docker.io/vikunja/vikunja
-              tag: 0.24.6
+              tag: 1.0.0-rc2
 
             env:
               TZ: Europe/Berlin
