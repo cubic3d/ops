@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: hosted
 resources:
   - changedetection/ks.yaml
+  - n8n/ks.yaml
   - shlink/ks.yaml
   - silverbullet/ks.yaml
   - vikunja/ks.yaml

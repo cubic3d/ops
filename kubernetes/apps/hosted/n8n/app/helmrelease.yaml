@@ -1,0 +1,110 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app n8n
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: *app
+
+  values:
+    controllers:
+      n8n:
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        containers:
+          app:
+            image:
+              repository: ghcr.io/n8n-io/n8n
+              tag: 1.117.0
+
+            envFrom:
+              - secretRef:
+                  name: n8n
+
+            env:
+              TZ: Europe/Berlin
+              DB_SQLITE_VACUUM_ON_STARTUP: true
+              N8N_HOST: &host n.${domain}
+              N8N_PORT: &port 8080
+              N8N_PROTOCOL: https
+              N8N_PROXY_HOPS: 1
+              WEBHOOK_URL: https://n.${domain}/
+              EXECUTIONS_DATA_PRUNE_MAX_COUNT: 50000
+              GENERIC_TIMEZONE: Europe/Berlin
+              N8N_SMTP_SENDER: n8n <noreply@${domain}>
+
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /healthz
+                    port: *port
+              readiness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /healthz/readiness
+                    port: *port
+              startup: *probes
+
+            resources:
+              requests:
+                cpu: 5m
+                memory: 128Mi
+              limits:
+                memory: 2Gi
+
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities:
+                drop:
+                  - ALL
+
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 2000
+        runAsGroup: 2000
+        fsGroup: 2000
+        fsGroupChangePolicy: OnRootMismatch
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: node.longhorn.io/create-default-disk
+                    operator: In
+                    values:
+                      - "true"
+                      - config
+
+    service:
+      app:
+        ports:
+          http:
+            port: *port
+
+    ingress:
+      app:
+        className: internal
+        hosts:
+          - host: *host
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+
+    persistence:
+      data:
+        existingClaim: n8n
+        globalMounts:
+          - path: /home/node/.n8n
