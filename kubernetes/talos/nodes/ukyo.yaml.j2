@@ -1,0 +1,25 @@
+machine:
+  type: controlplane
+  install:
+    diskSelector:
+      model: SanDisk Extreme Pro 500GB
+  network:
+    hostname: ukyo.h.{{ '{{ op://cluster/env/domain }}' }}
+    interfaces:
+      - interface: bond0
+        bond:
+          deviceSelectors:
+            - hardwareAddr: "*:83:a5"
+              driver: e1000e
+          mode: active-backup
+        dhcp: true
+        vlans:
+          - vlanId: 10
+            mtu: 1500
+            dhcp: false
+            dhcpOptions:
+              routeMetric: 4096
+        vip:
+          ip: 192.168.40.90
+  nodeLabels:
+    node.longhorn.io/create-default-disk: "true"

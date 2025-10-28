@@ -9,6 +9,66 @@ controller := `talosctl config info --output json | jq --raw-output '.endpoints[
 default:
     just -l talos
 
+# Apply Talos machine configuration to a given node
+apply-node node *args:
+  just talos render-config "{{ node }}" | talosctl -n "{{ node }}" apply-config -f /dev/stdin {{ args }}
+
+# Apply Talos machine configuration to all nodes in the cluster
+apply-cluster *args:
+  kubectl get nodes --no-headers | while read -r node _; do \
+    just log info "Applying Talos config to node ${node}"; \
+    just talos apply-node ${node} {{ args }}; \
+  done
+
+# Render Talos machine configuration for a given node
+render-config node:
+  export IS_CONTROLPLANE="$(just talos machine-controller {{ node }})"; \
+  talosctl machineconfig patch <(just template "{{ talos_dir }}/machineconfig.yaml.j2") \
+    -p @<(just template "{{ talos_dir }}/nodes/{{ node }}.yaml.j2")
+
 # Generate schematic ID from Talos schematic
 gen-schematic-id:
     curl -sX POST --data-binary @<(just template "{{ talos_dir }}/schematic.yaml.j2") "https://factory.talos.dev/schematics" | jq -r '.id'
+
+# Check if a node is a control plane node
+[private]
+machine-controller node:
+  just template "{{ talos_dir }}/nodes/{{ node }}.yaml.j2" | yq -e 'select(.machine) | (.machine.type == "controlplane") // ""'
+
+# Get the machine image for a given Talos node
+[private]
+machine-image node:
+  talosctl --nodes {{ node }} get machineconfig --output=jsonpath='{.spec}' | yq -e 'select(.machine) | .machine.install.image'
+
+# Reboot a given Talos node
+reboot-node node:
+  gum confirm "Reboot node {{ node }}?" && \
+    talosctl -n {{ node }} reboot -m powercycle || exit 0
+
+# Reset a given Talos node
+reset-node node mode="reboot":
+  gum confirm "Reset node {{ node }}?" && \
+    talosctl -n "{{ node }}" reset --graceful=false {{ if mode == "reboot" { "--reboot" } else { "" } }} || exit 0
+
+# Reset all Talos nodes in the cluster
+reset-cluster mode="reboot":
+  kubectl get nodes --no-headers | while read -r node _; do \
+    just log info "Resetting Talos node ${node}";\
+    just talos reset-node ${node} {{ mode }};\
+  done
+
+# Upgrade Kubernetes version on the Talos cluster
+upgrade-k8s version:
+  talosctl -n "{{ controller }}" upgrade-k8s --to {{ version }}
+
+# Upgrade the machine image on a given Talos node
+upgrade-node node:
+  talosctl -n "{{ node }}" upgrade -i "$(just talos machine-image {{ node }})" -m powercycle --timeout=10m
+
+# Download Talos machine image
+download-image version schematic:
+  gum spin --title "Downloading Talos {{ version }} ..." -- \
+  curl -sfL --remove-on-error --retry 5 --retry-delay 5 --retry-all-errors \
+      -o "{{ talos_dir }}/talos-{{ version }}-{{ replace_regex(schematic, '^(.{8}).*', '$1') }}.iso" \
+      "https://factory.talos.dev/image/{{ schematic }}/{{ version }}/metal-amd64.iso"
+  just log info "Downloaded Talos" version "{{ version }}" schematic "{{ schematic }}"

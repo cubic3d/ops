@@ -1,0 +1,22 @@
+machine:
+  type: worker
+  install:
+    diskSelector:
+      model: GIM128
+  network:
+    hostname: kasumi.h.{{ '{{ op://cluster/env/domain }}' }}
+    interfaces:
+      - interface: bond0
+        bond:
+          deviceSelectors:
+            # Port 1
+            - hardwareAddr: "*:16:4c"
+              driver: igb
+          mode: active-backup
+        dhcp: true
+  kubelet:
+    extraConfig:
+      registerWithTaints:
+        - key: dedicated
+          value: gameserver
+          effect: NoSchedule
