@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app intel-device-plugins-gpu
+  name: &app intel-gpu-resource-driver
 spec:
   interval: 30m
   chartRef:
@@ -10,5 +10,6 @@ spec:
     name: *app
 
   values:
-    name: intel-gpu-plugin
-    sharedDevNum: 3
+    cdi:
+      staticPath: /var/cdi/static
+      dynamicPath: /var/cdi/dynamic

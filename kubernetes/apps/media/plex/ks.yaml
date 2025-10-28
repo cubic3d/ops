@@ -22,8 +22,11 @@ spec:
       namespace: longhorn-system
     - name: volsync
       namespace: system
+    - name: intel-gpu-resource-driver
+      namespace: kube-system
   components:
     - ../../../../components/volsync
+    - ../../../../components/gpu
   postBuild:
     substitute:
       app: *appname

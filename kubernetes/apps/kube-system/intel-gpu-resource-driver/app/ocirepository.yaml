@@ -2,14 +2,12 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: OCIRepository
 metadata:
-  name: intel-device-plugins-operator
+  name: intel-gpu-resource-driver
 spec:
-  url: oci://ghcr.io/home-operations/charts-mirror/intel-device-plugins-operator
+  url: oci://ghcr.io/intel/intel-resource-drivers-for-kubernetes/intel-gpu-resource-driver-chart
   ref:
-    tag: 0.34.0
+    tag: 0.9.0
   interval: 10m
   layerSelector:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
     operation: copy
-  verify:
-    provider: cosign
