@@ -40,6 +40,9 @@ machine:
           - rw
     extraConfig:
       maxPods: 150
+      featureGates:
+        ResourceHealthStatus: true
+      serializeImagePulls: false
     defaultRuntimeSeccompProfileEnabled: true
     disableManifestsDirectory: true
   network:
@@ -58,6 +61,7 @@ machine:
         [plugins."io.containerd.cri.v1.images"]
           discard_unpacked_layers = false
         [plugins."io.containerd.cri.v1.runtime"]
+          cdi_spec_dirs = ["/var/cdi/static", "/var/cdi/dynamic"]
           device_ownership_from_security_context = true
     - op: overwrite
       path: /etc/nfsmount.conf
@@ -142,7 +146,8 @@ cluster:
   apiServer:
     image: registry.k8s.io/kube-apiserver:v1.34.1
     extraArgs:
-      feature-gates: MutatingAdmissionPolicy=true
+      enable-aggregator-routing: "true"
+      feature-gates: MutatingAdmissionPolicy=true,ResourceHealthStatus=true
       runtime-config: admissionregistration.k8s.io/v1beta1=true
     certSANs:
       - 127.0.0.1
@@ -161,6 +166,23 @@ cluster:
     image: registry.k8s.io/kube-proxy:v1.34.1
   scheduler:
     image: registry.k8s.io/kube-scheduler:v1.34.1
+    config:
+      apiVersion: kubescheduler.config.k8s.io/v1
+      kind: KubeSchedulerConfiguration
+      profiles:
+        - pluginConfig:
+            - args:
+                defaultConstraints:
+                  - maxSkew: 1
+                    topologyKey: kubernetes.io/hostname
+                    whenUnsatisfiable: ScheduleAnyway
+                defaultingType: List
+              name: PodTopologySpread
+          plugins:
+            score:
+              disabled:
+                - name: ImageLocality
+          schedulerName: default-scheduler
   etcd:
     ca:
       crt: op://cluster/talos/cluster_etcd_ca_crt
@@ -169,3 +191,8 @@ cluster:
     disabled: true
   allowSchedulingOnControlPlanes: true
   {% endif %}
+---
+apiVersion: v1alpha1
+kind: WatchdogTimerConfig
+device: /dev/watchdog0
+timeout: 5m
