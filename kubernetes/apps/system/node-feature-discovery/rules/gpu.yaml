@@ -5,7 +5,7 @@ metadata:
 spec:
   rules:
     - labels:
-        node.kubernetes.io/gpu: "true"
+        intel.feature.node.kubernetes.io/gpu: "true"
       matchAny:
         - matchFeatures:
             - feature: kernel.loadedmodule
