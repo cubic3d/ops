@@ -4,6 +4,7 @@ set shell := ['bash', '-euo', 'pipefail', '-c']
 kubernetes_dir := justfile_dir() + '/kubernetes'
 talos_dir := kubernetes_dir + '/talos'
 controller := `talosctl config info --output json | jq --raw-output '.endpoints[]' | shuf -n 1`
+nodes := `talosctl config info -o yaml | yq -e '.nodes | join (",")'`
 
 [private]
 default:
@@ -48,14 +49,11 @@ reboot-node node:
 # Reset a given Talos node
 reset-node node mode="reboot":
   gum confirm "Reset node {{ node }}?" && \
-    talosctl -n "{{ node }}" reset --graceful=false {{ if mode == "reboot" { "--reboot" } else { "" } }} || exit 0
+    talosctl -n "{{ node }}" reset --system-labels-to-wipe STATE --system-labels-to-wipe EPHEMERAL --graceful=false {{ if mode == "reboot" { "--reboot" } else { "" } }} || exit 0
 
 # Reset all Talos nodes in the cluster
 reset-cluster mode="reboot":
-  kubectl get nodes --no-headers | while read -r node _; do \
-    just log info "Resetting Talos node ${node}";\
-    just talos reset-node ${node} {{ mode }};\
-  done
+  just talos reset-node {{ nodes }} {{ mode }}
 
 # Upgrade Kubernetes version on the Talos cluster
 upgrade-k8s version:
