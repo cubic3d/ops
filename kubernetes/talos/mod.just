@@ -12,12 +12,12 @@ default:
 
 # Apply Talos machine configuration to a given node
 apply-node node *args:
+  just log info "Applying Talos configuration to node {{ node }}"
   just talos render-config "{{ node }}" | talosctl -n "{{ node }}" apply-config -f /dev/stdin {{ args }}
 
 # Apply Talos machine configuration to all nodes in the cluster
 apply-cluster *args:
   kubectl get nodes --no-headers | while read -r node _; do \
-    just log info "Applying Talos config to node ${node}"; \
     just talos apply-node ${node} {{ args }}; \
   done
 
