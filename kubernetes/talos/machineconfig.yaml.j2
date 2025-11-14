@@ -40,8 +40,6 @@ machine:
           - rw
     extraConfig:
       maxPods: 150
-      featureGates:
-        ResourceHealthStatus: true
       serializeImagePulls: false
     defaultRuntimeSeccompProfileEnabled: true
     disableManifestsDirectory: true
@@ -147,7 +145,7 @@ cluster:
     image: registry.k8s.io/kube-apiserver:v1.34.1
     extraArgs:
       enable-aggregator-routing: "true"
-      feature-gates: MutatingAdmissionPolicy=true,ResourceHealthStatus=true
+      feature-gates: MutatingAdmissionPolicy=true
       runtime-config: admissionregistration.k8s.io/v1beta1=true
     certSANs:
       - 127.0.0.1
