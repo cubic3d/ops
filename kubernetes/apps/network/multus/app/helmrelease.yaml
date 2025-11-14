@@ -10,97 +10,21 @@ spec:
     name: *app
 
   values:
-    controllers:
-      multus:
-        type: daemonset
+    cni-plugins:
+      image:
+        repository: ghcr.io/home-operations/cni-plugins
+        tag: 1.8.0
 
-        pod:
-          hostNetwork: true
-          priorityClassName: system-node-critical
-          tolerations:
-            - key: CriticalAddonsOnly
-              operator: Exists
+    multus:
+      image:
+        repository: ghcr.io/k8snetworkplumbingwg/multus-cni
+        tag: v4.2.3
+      resources:
+        requests:
+          cpu: 10m
+        limits:
+          memory: 32Mi
 
-        initContainers:
-          cni-plugins:
-            image:
-              repository: ghcr.io/home-operations/cni-plugins
-              tag: 1.8.0
-
-        containers:
-          multus:
-            image:
-              repository: ghcr.io/k8snetworkplumbingwg/multus-cni
-              tag: v4.2.3
-
-            args:
-              - --cleanup-config-on-exit
-              - --multus-cni-conf-dir=/tmp
-
-            resources:
-              requests:
-                cpu: 10m
-              limits:
-                memory: 500Mi
-
-            securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-              capabilities:
-                add:
-                  - NET_ADMIN
-                drop:
-                  - ALL
-
-    persistence:
-      etc-cni-net-d:
-        type: hostPath
-        hostPath: /etc/cni/net.d
-        globalMounts:
-          - path: /host/etc/cni/net.d
-      opt-cni-bin:
-        type: hostPath
-        hostPath: /opt/cni/bin
-        globalMounts:
-          - path: /host/opt/cni/bin
-      tmp:
-        type: emptyDir
-
-    serviceAccount:
-      multus: {}
-
-    rbac:
-      roles:
-        multus:
-          type: ClusterRole
-          rules:
-            - apiGroups:
-                - k8s.cni.cncf.io
-              resources:
-                - "*"
-              verbs:
-                - "*"
-            - apiGroups:
-                - ""
-              resources:
-                - pods
-                - pods/status
-              verbs:
-                - get
-                - update
-            - apiGroups:
-                - ""
-                - events.k8s.io
-              resources:
-                - events
-              verbs:
-                - create
-                - patch
-                - update
-      bindings:
-        multus:
-          type: ClusterRoleBinding
-          roleRef:
-            identifier: multus
-          subjects:
-            - identifier: multus
+    cni:
+      netPath: /etc/cni/net.d
+      binPath: /opt/cni/bin
