@@ -84,7 +84,6 @@ spec:
             probes:
               liveness: *probes
               readiness: *probes
-              startup: *probes
 
             resources:
               requests:
