@@ -43,7 +43,6 @@ spec:
                     path: /
                     port: *port
               readiness: *probes
-              startup: *probes
 
             resources:
               requests:
