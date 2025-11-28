@@ -477,10 +477,6 @@ settings:
             zone: iot
             address: 16
             mac_enc: ENC[AES256_GCM,data:PXzQVvbe3w46RvJFQZMywYw=,iv:I0Q4rkgxdqqT4Csbwh/U3pQoYW2onYXVbstQqhgVJ0c=,tag:lr9cVoPFFJSD33rcy+8ceA==,type:str]
-        kitchen-tablet:
-            zone: iot
-            address: 17
-            mac_enc: ENC[AES256_GCM,data:aKU5tykLHmtW96AjDdxeZAo=,iv:6QzzFAKNNab2YWfJlVzau1L/Y6ZfibQ+T6oT/0CkF2U=,tag:psD/zrG58EQginCUsn5png==,type:str]
         kasumi:
             zone: server
             address: 10
@@ -531,7 +527,7 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-11-27T21:43:18Z"
-    mac: ENC[AES256_GCM,data:0S713SQy4fXlpnFOxYVybQLwiQ7KUlbHuB3hvl5XpAcID4puYjF8lqCVcgt4odZtNYlb5CrvMz3lK/LyyY9pjYU3fsvqho3oWS9r1TdR+xKAenqHlxvuEjH62qZKyDYPQABHrxqKilT+sF2gBwcg+GgB1ZTIx/JX3c91IfoFYMk=,iv:NaIGadXaAV+ZnRfYCKLNYATrh+tOAUxyF7OylW2+r70=,tag:UadaewFNkR2So18vDkP4Aw==,type:str]
+    lastmodified: "2025-11-28T11:16:59Z"
+    mac: ENC[AES256_GCM,data:ISJp1F5aWj8c3LTl4P/NROvrLJZtYAVtif6UpJaTr/c4kW7p92tn0b2FWsC0B3PbgKbi4xHYw7KTr5Q3CNgRGIxMrkeZFljo6QAxMuvZD3JUP/rrFw0ki9MVBK4dFhqnktM/BWHpWCSo8myrc9OmiB1q/PaIgcY1dZah2R6qRlg=,iv:/FJ0WM4l0FHbjGZKhZF7HWugqeumQWiXrpSHoKRc5gc=,tag:FwFG25N2b//q2z9pFB3VZQ==,type:str]
     encrypted_suffix: _enc
     version: 3.11.0
