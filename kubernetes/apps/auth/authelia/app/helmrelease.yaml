@@ -87,8 +87,6 @@ spec:
               - radarr.${domain}
               - prowlarr.${domain}
               - bazarr.${domain}
-              - tautulli.${domain}
-              - request.${domain}
             resources:
               - "^/api(?:[/?].*)?$"
             policy: bypass
