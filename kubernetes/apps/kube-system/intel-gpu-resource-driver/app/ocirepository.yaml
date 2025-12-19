@@ -6,7 +6,7 @@ metadata:
 spec:
   url: oci://ghcr.io/intel/intel-resource-drivers-for-kubernetes/intel-gpu-resource-driver-chart
   ref:
-    tag: 0.9.0
+    tag: 0.9.1
   interval: 10m
   layerSelector:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
