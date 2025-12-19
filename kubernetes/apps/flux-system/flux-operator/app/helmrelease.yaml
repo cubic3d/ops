@@ -10,3 +10,6 @@ spec:
     name: *app
 
   values:
+    web:
+      networkPolicy:
+        create: false
