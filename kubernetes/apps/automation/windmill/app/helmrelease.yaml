@@ -63,6 +63,7 @@ spec:
           replicas: 2
           annotations:
             reloader.stakater.com/auto: "true"
+          privileged: false
           podSecurityContext:
             runAsUser: 1000
             runAsNonRoot: true
@@ -85,6 +86,7 @@ spec:
           replicas: 2
           annotations:
             reloader.stakater.com/auto: "true"
+          privileged: false
           podSecurityContext:
             runAsUser: 1000
             runAsNonRoot: true
