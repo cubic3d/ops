@@ -90,7 +90,7 @@
     {
       description: "Talos Group",
       groupName: "Talos",
-      minimumGroupSize: 2,
+      // minimumGroupSize: 2,
       matchDatasources: ["docker"],
       matchPackageNames: ["/installer/", "/talosctl/"],
       group: {
