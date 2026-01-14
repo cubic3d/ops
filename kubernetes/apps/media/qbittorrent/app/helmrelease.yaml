@@ -16,20 +16,10 @@ spec:
           reloader.stakater.com/auto: "true"
 
         initContainers:
-          dnsdist:
-            image:
-              repository: docker.io/powerdns/dnsdist-19
-              tag: 1.9.11
-
-            restartPolicy: Always
-
           gluetun:
-            dependsOn:
-              - dnsdist
-
             image:
               repository: ghcr.io/qdm12/gluetun
-              tag: v3.40.3
+              tag: v3.41.0
 
             restartPolicy: Always
 
@@ -43,8 +33,6 @@ spec:
                     - "(ip rule del table 51820; ip -6 rule del table 51820) || true"
 
             env:
-              DOT: "off"
-              DNS_ADDRESS: "127.0.0.2"
               VPN_SERVICE_PROVIDER: protonvpn
               VPN_TYPE: wireguard
               PORT_FORWARD_ONLY: on
@@ -197,16 +185,6 @@ spec:
               - path: *gluetunAuthPath
                 subPath: auth.toml
 
-      dnsdist:
-        type: configMap
-        identifier: config
-        advancedMounts:
-          qbittorrent:
-            dnsdist:
-              - path: /etc/dnsdist/dnsdist.conf
-                subPath: dnsdist.conf
-                readOnly: true
-
       tmp:
         type: emptyDir
 
@@ -228,39 +206,3 @@ spec:
                 resources:
                   requests:
                     storage: 100Gi
-
-    configMaps:
-      config:
-        data:
-          dnsdist.conf: |-
-            -- udp/tcp dns listening
-            setLocal("127.0.0.2:53", {})
-
-            -- K8S DNS
-            newServer({
-              address = "10.96.0.10",
-              pool = "k8s",
-              healthCheckMode = "lazy",
-              lazyHealthCheckMode = 'TimeoutOnly',
-            })
-
-            -- CloudFlare DNS over TLS
-            newServer({
-              address = "1.1.1.1:853",
-              tls = "openssl",
-              subjectName = "cloudflare-dns.com",
-              validateCertificates = true,
-              healthCheckMode = "lazy",
-              lazyHealthCheckMode = 'TimeoutOnly',
-            })
-            newServer({
-              address = "1.0.0.1:853",
-              tls = "openssl",
-              subjectName = "cloudflare-dns.com",
-              validateCertificates = true,
-              healthCheckMode = "lazy",
-              lazyHealthCheckMode = 'TimeoutOnly',
-            })
-
-            -- Routing rules
-            addAction('cluster.local', PoolAction('k8s'))
