@@ -3,13 +3,13 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &appname n8n
-  namespace: &namespace hosted
+  namespace: &namespace automation
 spec:
   targetNamespace: *namespace
   commonMetadata:
     labels:
       app.kubernetes.io/name: *appname
-  path: kubernetes/apps/hosted/n8n/app
+  path: kubernetes/apps/automation/n8n/app
   interval: 10m
   prune: true
   wait: true

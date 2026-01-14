@@ -5,6 +5,7 @@ namespace: automation
 resources:
   - esphome/ks.yaml
   - home-assistant/ks.yaml
+  - n8n/ks.yaml
   - node-red/ks.yaml
   - windmill/ks.yaml
   - zigbee2mqtt/ks.yaml
