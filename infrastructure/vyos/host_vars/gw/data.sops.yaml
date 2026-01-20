@@ -96,7 +96,7 @@ settings:
                     ips:
                         - 192.168.99.3/32
                         - fd00:c01d:1ced:99::3/128
-                    publicKey: U4N/8KqCwnUppLxpc/6da6GXswi3OSZuuUpBlgg0bjI=
+                    publicKey: PnQvFc92VEs2es3InLdMcRGZlpMYkLWkWhsNHWxyjhw=
             policies:
                 from4:
                     - default: drop
@@ -527,7 +527,7 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-11-28T11:16:59Z"
-    mac: ENC[AES256_GCM,data:ISJp1F5aWj8c3LTl4P/NROvrLJZtYAVtif6UpJaTr/c4kW7p92tn0b2FWsC0B3PbgKbi4xHYw7KTr5Q3CNgRGIxMrkeZFljo6QAxMuvZD3JUP/rrFw0ki9MVBK4dFhqnktM/BWHpWCSo8myrc9OmiB1q/PaIgcY1dZah2R6qRlg=,iv:/FJ0WM4l0FHbjGZKhZF7HWugqeumQWiXrpSHoKRc5gc=,tag:FwFG25N2b//q2z9pFB3VZQ==,type:str]
+    lastmodified: "2026-01-19T16:54:24Z"
+    mac: ENC[AES256_GCM,data:dD7hnVWpJk09m7EkNirbZraTnKmfDJ0gj+xBtyiOw2CAx5zvLHTBUk3hIp5Xn7pbdPMpQr3+7lnyb2lHgb4Fg/iPyvYu8gfVkTWi4s3QFXRVyR6jTitbM8Y9sAb5RSi+sQeiQpPhzPyVeGhsYu3Tyz3+p01h3bgic8hjqpvZwZE=,iv:WFiMnA+kkuJI4j3eq6YPPU2hhogF93fdrm3/+KasSBM=,tag:eR4ILpO8p6Ae6s4MNHE2hA==,type:str]
     encrypted_suffix: _enc
     version: 3.11.0
