@@ -18,4 +18,4 @@ log lvl msg *args:
 
 [private]
 template file *args:
-  minijinja "{{ file }}" {{ args }} | op.exe inject
+  minijinja "{{ file }}" {{ args }} | op inject
