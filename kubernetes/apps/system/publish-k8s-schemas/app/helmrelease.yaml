@@ -44,7 +44,7 @@ spec:
           app:
             image:
               repository: ghcr.io/bjw-s-labs/wrangler
-              tag: 4.59.1@sha256:5ac301abc91dd8d6486794b074f671b1a7a393cdcdcebc6f8a84daf70e680c6a
+              tag: 4.61.0@sha256:2e1e803a1b423e01a3da49b30a67d5564818eb1dacf6bbbe3806f7c4875fe19b
 
             envFrom:
               - secretRef:
