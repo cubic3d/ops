@@ -163,17 +163,13 @@ spec:
         advancedMounts:
           kopia-nas:
             app:
-              - path: /config/cache
-                subPath: cache/nas
-              - path: /config/logs
-                subPath: logs/nas
+              - path: /config
+                subPath: config/nas
               - path: /tmp
                 subPath: tmp/nas
           kopia-cloud:
             app:
-              - path: /config/cache
-                subPath: cache/cloud
-              - path: /config/logs
-                subPath: logs/cloud
+              - path: /config
+                subPath: config/cloud
               - path: /tmp
                 subPath: tmp/cloud
