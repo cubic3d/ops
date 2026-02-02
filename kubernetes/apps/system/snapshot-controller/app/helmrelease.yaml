@@ -12,6 +12,5 @@ spec:
   values:
     controller:
       replicaCount: 2
-    # TODO: Enable additional values after deploying some more dependencies
-    #   serviceMonitor:
-    #     create: true
+    webhook:
+      enabled: false
