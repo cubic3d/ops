@@ -26,19 +26,19 @@
 
   "helm-values": {
     managerFilePatterns: [
-      "/(^|/)kubernetes/.+\\.ya?ml$/",
+      "/(^|/)kubernetes/.+\\.ya?ml(?:\\.j2)?$/",
     ],
   },
 
   kubernetes: {
     managerFilePatterns: [
-      "/(^|/)kubernetes/.+\\.ya?ml$/",
+      "/(^|/)kubernetes/.+\\.ya?ml(?:\\.j2)?$/",
     ],
   },
 
   flux: {
     managerFilePatterns: [
-      "/(^|/)kubernetes/.+\\.ya?ml$/",
+      "/(^|/)kubernetes/.+\\.ya?ml(?:\\.j2)?$/",
     ],
   },
 }
