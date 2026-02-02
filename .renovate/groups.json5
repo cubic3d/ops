@@ -97,5 +97,21 @@
         commitMessageTopic: "{{{groupName}}} group",
       },
     },
+    {
+      description: "Kubernetes Group",
+      groupName: "Kubernetes",
+      minimumGroupSize: 5,
+      matchDatasources: ["docker"],
+      matchPackageNames: [
+        "/kube-apiserver/",
+        "/kube-controller-manager/",
+        "/kube-proxy/",
+        "/kube-scheduler/",
+        "/kubelet/",
+      ],
+      group: {
+        commitMessageTopic: "{{{groupName}}} group",
+      },
+    },
   ],
 }
