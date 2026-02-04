@@ -2,63 +2,6 @@
   $schema: "https://docs.renovatebot.com/renovate-schema.json",
   packageRules: [
     {
-      description: "Flux Group",
-      groupName: "Flux",
-      minimumGroupSize: 2,
-      matchPackagePatterns: ["^flux", "^ghcr.io/fluxcd/"],
-      matchDatasources: ["docker", "github-tags"],
-      versioning: "semver",
-      group: {
-        commitMessageTopic: "{{{groupName}}} group",
-      },
-      separateMinorPatch: true,
-    },
-    {
-      "description": "Cert-Manager Group",
-      "groupName": "Cert-Manager",
-      "matchDatasources": ["docker"],
-      "matchPackageNames": ["/cert-manager/"],
-      "group": {
-        "commitMessageTopic": "{{{groupName}}} group"
-      },
-    },
-    {
-      "description": "Cilium Group",
-      "groupName": "Cilium",
-      "matchDatasources": ["docker"],
-      "matchPackageNames": ["/cilium/"],
-      "group": {
-        "commitMessageTopic": "{{{groupName}}} group"
-      },
-    },
-    {
-      description: "CoreDNS Group",
-      groupName: "CoreDNS",
-      matchDatasources: ["docker"],
-      matchPackageNames: ["/coredns/"],
-      group: {
-        commitMessageTopic: "{{{groupName}}} group",
-      },
-    },
-    {
-      description: "Spegel Group",
-      groupName: "Spegel",
-      matchDatasources: ["docker"],
-      matchPackageNames: ["/spegel/"],
-      group: {
-        commitMessageTopic: "{{{groupName}}} group",
-      },
-    },
-    {
-      description: "External Secrets Operator Group",
-      groupName: "External Secrets Operator",
-      matchDatasources: ["docker"],
-      matchPackageNames: ["/external-secrets/"],
-      group: {
-        commitMessageTopic: "{{{groupName}}} group",
-      },
-    },
-    {
       description: "Flux Operator Group",
       groupName: "Flux Operator",
       minimumGroupSize: 3,
@@ -69,30 +12,11 @@
       },
     },
     {
-      description: "kubelet-csr-approver Group",
-      groupName: "kubelet-csr-approver",
-      matchDatasources: ["docker"],
-      matchPackageNames: ["/kubelet-csr-approver/"],
-      group: {
-        commitMessageTopic: "{{{groupName}}} group",
-      },
-    },
-    {
       description: "1Password Connect Group",
       groupName: "1Password Connect",
       minimumGroupSize: 2,
       matchDatasources: ["docker"],
       matchPackageNames: ["/1password/"],
-      group: {
-        commitMessageTopic: "{{{groupName}}} group",
-      },
-    },
-    {
-      description: "Talos Group",
-      groupName: "Talos",
-      // minimumGroupSize: 2,
-      matchDatasources: ["docker"],
-      matchPackageNames: ["/installer/", "/talosctl/"],
       group: {
         commitMessageTopic: "{{{groupName}}} group",
       },

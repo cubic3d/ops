@@ -15,6 +15,7 @@
     "github>cubic3d/ops//.renovate/pr-labels.json5",
     "github>cubic3d/ops//.renovate/semantic-commits.json5",
     "github>cubic3d/ops//.renovate/versioning.json5",
+    "github>cubic3d/ops//.renovate/overrides.json5",
   ],
 
   dependencyDashboardTitle: "🤖 Renovate Dashboard 🤖",
