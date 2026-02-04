@@ -31,7 +31,7 @@
         "/kube-controller-manager/",
         "/kube-proxy/",
         "/kube-scheduler/",
-        "/kubelet/",
+        "/kubelet$/",
       ],
       group: {
         commitMessageTopic: "{{{groupName}}} group",
