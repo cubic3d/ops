@@ -452,7 +452,7 @@ settings:
         zigbee:
             zone: iot
             address: 10
-            mac_enc: ENC[AES256_GCM,data:/KBvTpL8yCmLmUa3QL4C5iU=,iv:wwnDzgv7j3vqm9ZN8oyAo4//lpKlRSJ9R2jx4UyczUA=,tag:WsAxE4kkIYm1qdWa6vOPQA==,type:str]
+            mac_enc: ENC[AES256_GCM,data:ELzWHHWjj0cqP+KI0xVTL90=,iv:mUy51UhrkKwIAEI1uTmSS9n877R9koUswb3jOi6DbZY=,tag:xRtFNncxm7kjPYdK3Ex31A==,type:str]
         nuki:
             zone: iot
             address: 11
@@ -527,7 +527,7 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2026-01-19T16:54:24Z"
-    mac: ENC[AES256_GCM,data:dD7hnVWpJk09m7EkNirbZraTnKmfDJ0gj+xBtyiOw2CAx5zvLHTBUk3hIp5Xn7pbdPMpQr3+7lnyb2lHgb4Fg/iPyvYu8gfVkTWi4s3QFXRVyR6jTitbM8Y9sAb5RSi+sQeiQpPhzPyVeGhsYu3Tyz3+p01h3bgic8hjqpvZwZE=,iv:WFiMnA+kkuJI4j3eq6YPPU2hhogF93fdrm3/+KasSBM=,tag:eR4ILpO8p6Ae6s4MNHE2hA==,type:str]
+    lastmodified: "2026-02-05T15:44:59Z"
+    mac: ENC[AES256_GCM,data:MJDBe46CLxBB9CGtg5eSiYiPMywLUymJrI5HVZfTrzXabr0gbS0zzr0yixa5LO0O7rMiBcoPtokR55EkdTZM8/PM6E/dPG7J5yoAgBKo2aaVdvpUJtFB8450SKxNMztaB4vMNcZbAH2TdqcGehf8ngLUC/hgfGvlN2NCRIEkB9U=,iv:Ybgp2XVG+5NhkRISckvcIest4PWd4TiNkyrFolCVUnU=,tag:xZdl+0w31TJ145ZHT0vKKA==,type:str]
     encrypted_suffix: _enc
     version: 3.11.0
