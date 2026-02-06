@@ -18,7 +18,8 @@ spec:
       datapathMode: netkit
       masquerade: true
       preallocateMaps: true
-      tproxy: true
+      # FIXME: temporary workaround for https://github.com/cilium/cilium/issues/39892
+      tproxy: false
     bpfClockProbe: true
     cgroup:
       autoMount:
