@@ -19,7 +19,7 @@ spec:
           app:
             image:
               repository: ghcr.io/n8n-io/n8n
-              tag: 2.7.2
+              tag: 2.7.3
 
             envFrom:
               - secretRef:
