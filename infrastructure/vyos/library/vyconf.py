@@ -76,18 +76,34 @@ from ansible.module_utils.basic import AnsibleModule
 from bisect import bisect_right
 from shlex import split
 import re
+import tempfile
 
 
 def run_commands(commands: list[str]) -> list[str]:
-    command_str = "\n".join(commands)
+    run = []
+    run.append("source /opt/vyatta/etc/functions/script-template")
+    run.append("set -eu")
 
-    r = module.run_command(
-        "/bin/vbash",
-        data=f"source /opt/vyatta/etc/functions/script-template\n{command_str}\nexit\n",
-    )
+    # Replace cli bindings with direct calls to wrappers to allow correct return status codes and access to output
+    for command in commands:
+        if command.startswith("run "):
+            run.append(
+                command.replace("run ", "/opt/vyatta/bin/vyatta-op-cmd-wrapper ", 1)
+            )
+        else:
+            run.append(f"/opt/vyatta/sbin/my_{command}")
+
+    run.append("exit")
+
+    command_str = "\n".join(run) + "\n"
+
+    with tempfile.NamedTemporaryFile("w", suffix=".sh") as f:
+        f.write(command_str)
+        f.flush()
+        r = module.run_command(["/bin/vbash", f.name])
 
     if r[0] != 0 or r[2] != "":
-        module.fail_json(msg=r[2], **{"code": r[0]})
+        module.fail_json(msg=r[1], **{"code": r[0], "error": r[2]})
 
     return [line for line in r[1].split("\n") if line]
 
