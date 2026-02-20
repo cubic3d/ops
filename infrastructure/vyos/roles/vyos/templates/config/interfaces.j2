@@ -106,6 +106,13 @@ set interfaces loopback lo
     {# DHCP Server #}
     set service dhcp-server shared-network-name {{ zoneName }} authoritative
     set service dhcp-server shared-network-name {{ zoneName }} description '{{ zone.name }}'
+    {% if interface == "br0" %}
+      {# FIXME: Disable DHCP management pool on br0, because Kea DHCP is full of shit. Track:
+      https://gitlab.isc.org/isc-projects/kea/-/issues/1117
+      https://gitlab.isc.org/isc-projects/kea/-/issues/1738
+      https://github.com/isc-projects/kea/pull/119 #}
+      set service dhcp-server shared-network-name {{ zoneName }} subnet 192.168.{{ zone.vlan }}.0/24 disable
+    {% endif %}
     set service dhcp-server shared-network-name {{ zoneName }} subnet 192.168.{{ zone.vlan }}.0/24 subnet-id '{{ zone.vlan + 1}}'
     set service dhcp-server shared-network-name {{ zoneName }} subnet 192.168.{{ zone.vlan }}.0/24 option default-router '192.168.{{ zone.vlan }}.1'
     set service dhcp-server shared-network-name {{ zoneName }} subnet 192.168.{{ zone.vlan }}.0/24 option name-server '192.168.{{ zone.vlan }}.1'
