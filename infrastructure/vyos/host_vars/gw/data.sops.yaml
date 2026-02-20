@@ -5,9 +5,9 @@ settings:
     ssh:
         password_enc: ENC[AES256_GCM,data:/+HMeZlPVqAG8mrd/3Xqd8S1rSmvGQV2ZYFmcnotOEFusxDVolgikJ4Rxb/8XK5pLEoIuBn+wGl37O7Gz8PMUl4LV64rSZFq4nkUNIopydVP6Y6RVdp/k198Y0DCOuE8U0Qu,iv:IkCBUMhfMfSgkpD/Oq0JpOn51HvNXFd84EmCOLGZoi8=,tag:lXyHRrDjiNninGi3qU8X0Q==,type:str]
     ddns:
-        host_enc: ENC[AES256_GCM,data:P1xBNU2P4w==,iv:ZhTv6WgCrJrv1AGHBt0v+lpqkHt8NRNFD+LQOalzvyE=,tag:HNewyXg6jUVnHD9wheGO0g==,type:str]
-        user_enc: ENC[AES256_GCM,data:2wykeA==,iv:xnLq4Od5tEGbPKeaZZpzQgDEEd+GfS8fwZ7qB4+4Zz4=,tag:oJXh7TYy5fVYf4KJRy2PaA==,type:str]
-        password_enc: ENC[AES256_GCM,data:+OaVo+ZLye2qFfpy127yIhZmvEo1juiZ0eDD6sRcFIDbErBN,iv:5dlP17f180LCZdwQ/C3gZD+WeOaWREUU5995Obxx4U8=,tag:Uz+sNTX9YJBNXEymYtjrPQ==,type:str]
+        host_enc: ENC[AES256_GCM,data:hvVgApr90w==,iv:pRphRLwSmQUJKkJbycM7LU2eszJpqJhyW88WH/pKOcI=,tag:AL7K3fhzEeubac/wWOu13g==,type:str]
+        password_enc: ENC[AES256_GCM,data:7g3zjA7IV6EZJpNG3n8uvs8wBh2kIzTTHaNQsEu4W9/MERLHoDjTBg==,iv:MTaTe5Qd3M8fpk6+mCpi5Lu0p/qcKY3Gm4SCRqer1KA=,tag:sJiZhkW+vkLZXUgXEZ6rCg==,type:str]
+        zone_enc: ENC[AES256_GCM,data:+X/b/TQ=,iv:m8mDhGvH7f4F4YQzVGHJRAOOowYCZaPvhO8yPl9KUZQ=,tag:Tf8zr8oDg/KVWjCbpys/eQ==,type:str]
     bonds:
         - hash: layer3+4
           interfaces:
@@ -192,9 +192,6 @@ settings:
             name: Management
             interface: br0
             vlan: 0
-            dhcpOptions:
-                - name: capwap
-                  value_enc: ENC[AES256_GCM,data:L6nfyQFdSWJ/vK0=,iv:Vit7oE1TbS/D2SYxUkr1NroZXKx3B7AVnAOQgTtKcQc=,tag:m9NP91leMjgzh66N5c8pdg==,type:str]
             policies:
                 from4:
                     - only:
@@ -527,7 +524,7 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2026-02-05T15:44:59Z"
-    mac: ENC[AES256_GCM,data:MJDBe46CLxBB9CGtg5eSiYiPMywLUymJrI5HVZfTrzXabr0gbS0zzr0yixa5LO0O7rMiBcoPtokR55EkdTZM8/PM6E/dPG7J5yoAgBKo2aaVdvpUJtFB8450SKxNMztaB4vMNcZbAH2TdqcGehf8ngLUC/hgfGvlN2NCRIEkB9U=,iv:Ybgp2XVG+5NhkRISckvcIest4PWd4TiNkyrFolCVUnU=,tag:xZdl+0w31TJ145ZHT0vKKA==,type:str]
+    lastmodified: "2026-02-20T15:19:57Z"
+    mac: ENC[AES256_GCM,data:iIRDJiu3jqgziefj0Q9sDSRd6/Bu2t9GF/AvkdIbxVU61TULzgfD/+zQTr2rF/rdzQU9FI4xXP++ILqKEDqIFgjs00EoPUrYA4sLZtpMRYE/Dx1YA+hnZFyx6o5Ftz1tOC15+fC2gOg1wFN9BB4VYIETO7fXpN6B5VrpBYBCZL8=,iv:a73h25r0YddWABtGT/yQSEwbOA0WxeQ4DrxWnX7F75s=,tag:wqKwYLZ/Ilj5kZoUiMWcow==,type:str]
     encrypted_suffix: _enc
     version: 3.11.0

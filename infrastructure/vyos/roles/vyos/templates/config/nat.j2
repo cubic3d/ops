@@ -1,7 +1,7 @@
 {# Source NAT #}
 {% for zoneName, zone in settings.zones.items() if zone.nat is defined and zone.nat %}
   set nat source rule {{ loop.index }} description '{{ zone.name }}'
-  set nat source rule {{ loop.index }} outbound-interface '{{ zone.interface }}'
+  set nat source rule {{ loop.index }} outbound-interface name '{{ zone.interface }}'
   set nat source rule {{ loop.index }} translation address 'masquerade'
 {% endfor %}
 
@@ -10,7 +10,7 @@
 {% for zoneName, zone in settings.zones.items() if zone.nat66_from is defined %}
   {% for prefix in zone.nat66_from %}
     set nat66 source rule {{ i.value }} description '{{ zone.name }} for {{ prefix }}'
-    set nat66 source rule {{ i.value }} outbound-interface '{{ zone.interface }}'
+    set nat66 source rule {{ i.value }} outbound-interface name '{{ zone.interface }}'
     set nat66 source rule {{ i.value }} source prefix '{{ prefix }}'
     set nat66 source rule {{ i.value }} translation address 'masquerade'
     {% set i.value = i.value + 1 %}
@@ -21,7 +21,7 @@
 {% set i = namespace(value=1) %}
 {% for zoneName, zone in settings.zones.items() if zone.port_forward is defined %}
   {% for rule in zone.port_forward %}
-    set nat destination rule {{ i.value }} inbound-interface '{{ zone.interface }}'
+    set nat destination rule {{ i.value }} inbound-interface name '{{ zone.interface }}'
     set nat destination rule {{ i.value }} description '{{ rule.description }}'
     set nat destination rule {{ i.value }} destination port '{{ rule.port_from }}'
     set nat destination rule {{ i.value }} translation port '{{ rule.port_to }}'

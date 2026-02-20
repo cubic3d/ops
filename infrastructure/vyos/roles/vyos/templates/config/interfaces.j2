@@ -8,7 +8,7 @@ set interfaces loopback lo
   {% for interface in bond.interfaces %}
     set interfaces bonding {{ name }} member interface '{{ interface }}'
     {% if interface.startswith("eth") %}
-      set interfaces ethernet {{ interface }}
+      set interfaces ethernet {{ interface }} description 'Member of {{ name }}'
     {% endif %}
   {% endfor %}
 {% endfor %}
@@ -24,7 +24,7 @@ set interfaces loopback lo
 
   {% for interface in bridge.interfaces %}
     {% if interface.name.startswith("eth") %}
-      set interfaces ethernet {{ interface.name }}
+      set interfaces ethernet {{ interface.name }} description 'Member of {{ name }}'
     {% endif %}
 
     {% if interface.trunk is not defined and interface.access is not defined%}
@@ -42,9 +42,6 @@ set interfaces loopback lo
     {% endif %}
   {% endfor %}
 {% endfor %}
-
-{# Define DHCP option 138 for SDN controller #}
-set service dhcp-server global-parameters 'option capwap code 138 = ip-address;'
 
 {# Generate zone interfaces #}
 {% for zoneName, zone in settings.zones.items() if zone.interface is defined %}
@@ -97,8 +94,10 @@ set service dhcp-server global-parameters 'option capwap code 138 = ip-address;'
     {% if zone.disable_ra is defined and zone.disable_ra %}
       set service router-advert interface {{ interface }} no-send-advert
     {% endif %}
-    set service router-advert interface {{ interface }} prefix ::/64 valid-lifetime '86400'
     set service router-advert interface {{ interface }} prefix ::/64 deprecate-prefix
+    set service router-advert interface {{ interface }} prefix ::/64 decrement-lifetime
+    set service router-advert interface {{ interface }} prefix ::/64 preferred-lifetime '600'
+    set service router-advert interface {{ interface }} prefix ::/64 valid-lifetime '3600'
     set service router-advert interface {{ interface }} name-server '{{ settings.ip.ulaPrefix }}:{{ zone.vlan }}::1'
     {# mDNS #}
     {% if zone.mdns_repeater is defined %}
@@ -107,16 +106,12 @@ set service dhcp-server global-parameters 'option capwap code 138 = ip-address;'
     {# DHCP Server #}
     set service dhcp-server shared-network-name {{ zoneName }} authoritative
     set service dhcp-server shared-network-name {{ zoneName }} description '{{ zone.name }}'
-    set service dhcp-server shared-network-name {{ zoneName }} subnet 192.168.{{ zone.vlan }}.0/24 default-router '192.168.{{ zone.vlan }}.1'
-    set service dhcp-server shared-network-name {{ zoneName }} subnet 192.168.{{ zone.vlan }}.0/24 name-server '192.168.{{ zone.vlan }}.1'
-    set service dhcp-server shared-network-name {{ zoneName }} subnet 192.168.{{ zone.vlan }}.0/24 domain-name 'h.{{ settings.domain_enc }}'
+    set service dhcp-server shared-network-name {{ zoneName }} subnet 192.168.{{ zone.vlan }}.0/24 subnet-id '{{ zone.vlan + 1}}'
+    set service dhcp-server shared-network-name {{ zoneName }} subnet 192.168.{{ zone.vlan }}.0/24 option default-router '192.168.{{ zone.vlan }}.1'
+    set service dhcp-server shared-network-name {{ zoneName }} subnet 192.168.{{ zone.vlan }}.0/24 option name-server '192.168.{{ zone.vlan }}.1'
+    set service dhcp-server shared-network-name {{ zoneName }} subnet 192.168.{{ zone.vlan }}.0/24 option domain-name 'h.{{ settings.domain_enc }}'
     set service dhcp-server shared-network-name {{ zoneName }} subnet 192.168.{{ zone.vlan }}.0/24 range default start '192.168.{{ zone.vlan }}.100'
     set service dhcp-server shared-network-name {{ zoneName }} subnet 192.168.{{ zone.vlan }}.0/24 range default stop '192.168.{{ zone.vlan }}.254'
-    {% if zone.dhcpOptions is defined %}
-      {% for option in zone.dhcpOptions %}
-        set service dhcp-server shared-network-name {{ zoneName }} subnet 192.168.{{ zone.vlan }}.0/24 subnet-parameters 'option {{ option.name }} {{ option.value_enc }};'
-      {% endfor %}
-    {% endif %}
   {% endif %}
 {% endfor %}
 

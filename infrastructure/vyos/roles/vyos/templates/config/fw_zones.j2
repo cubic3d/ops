@@ -5,9 +5,9 @@
   {% if zoneName == "local" %}
     set firewall zone {{ zoneName }} local-zone
   {% elif zone.vlan is defined and zone.vlan != 0 %}
-    set firewall zone {{ zoneName }} interface '{{ zone.interface }}.{{ zone.vlan }}'
+    set firewall zone {{ zoneName }} member interface '{{ zone.interface }}.{{ zone.vlan }}'
   {% else %}
-    set firewall zone {{ zoneName }} interface '{{ zone.interface }}'
+    set firewall zone {{ zoneName }} member interface '{{ zone.interface }}'
   {% endif %}
 
   {# Rules #}
@@ -29,10 +29,10 @@
 
           {# Distinguish IPv4/6 rules #}
           {% if policyName == "from4" %}
-            {% set path = "name "~fromZone~"-"~zoneName %}
+            {% set path = "ipv4 name "~fromZone~"-"~zoneName %}
             {% set pathQuoted = "name '"~fromZone~"-"~zoneName~"'" %}
           {% elif policyName == "from6" %}
-            {% set path = "ipv6-name "~fromZone~"-"~zoneName~"-6" %}
+            {% set path = "ipv6 name "~fromZone~"-"~zoneName~"-6" %}
             {% set pathQuoted = "ipv6-name '"~fromZone~"-"~zoneName~"-6'" %}
           {% endif %}
 
@@ -42,7 +42,7 @@
           {# Create rule set #}
           set firewall {{ path }} description 'From {{ settings.zones[fromZone].name }} to {{ zone.name }}'
           set firewall {{ path }} default-action '{{ ruleSet.default }}'
-          set firewall {{ path }} enable-default-log
+          set firewall {{ path }} default-log
 
           {% if ruleSet.rules is defined %}
             {% for rule in ruleSet.rules %}
