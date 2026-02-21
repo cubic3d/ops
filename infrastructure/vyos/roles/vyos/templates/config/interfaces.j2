@@ -123,3 +123,4 @@ set interfaces loopback lo
 
 {# IPv6 public prefix #}
 set interfaces ethernet {{ settings.zones.wan.interface }} dhcpv6-options pd 0 length '56'
+set interfaces ethernet {{ settings.zones.wan.interface }} ipv6 address autoconf
