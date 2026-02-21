@@ -23,5 +23,6 @@ spec:
     enableFileDeletion: true
     cleanupCachePVC: true
     cleanupTempPVC: false
+    username: ${app}
     sourceIdentity:
       sourceName: ${app}-nas
