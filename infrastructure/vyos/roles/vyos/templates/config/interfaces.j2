@@ -95,9 +95,8 @@ set interfaces loopback lo
       set service router-advert interface {{ interface }} no-send-advert
     {% endif %}
     set service router-advert interface {{ interface }} prefix ::/64 deprecate-prefix
-    set service router-advert interface {{ interface }} prefix ::/64 decrement-lifetime
     set service router-advert interface {{ interface }} prefix ::/64 preferred-lifetime '600'
-    set service router-advert interface {{ interface }} prefix ::/64 valid-lifetime '3600'
+    set service router-advert interface {{ interface }} prefix ::/64 valid-lifetime '7200'
     set service router-advert interface {{ interface }} name-server '{{ settings.ip.ulaPrefix }}:{{ zone.vlan }}::1'
     {# mDNS #}
     {% if zone.mdns_repeater is defined %}
