@@ -91,7 +91,7 @@ def run_commands(commands: list[str]) -> list[str]:
                 command.replace("run ", "/opt/vyatta/bin/vyatta-op-cmd-wrapper ", 1)
             )
         elif command.startswith("save"):
-            run.append(command)
+            run.append("/usr/libexec/vyos/vyos-save-config.py")
         else:
             run.append(f"/opt/vyatta/sbin/my_{command}")
 
