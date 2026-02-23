@@ -2,13 +2,13 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
-  name: ${app}-nas
+  name: ${app}
 spec:
   sourcePVC: ${volsync_claim:=${app}}
   trigger:
     schedule: "0 * * * *"
   kopia:
-    repository: ${app}-volsync-nas
+    repository: ${app}-volsync
     copyMethod: ${volsync_copymethod:=Snapshot}
     storageClassName: ${volsync_storageclass:=longhorn}
     volumeSnapshotClassName: ${volsync_snapshotclass:=longhorn}
@@ -24,4 +24,3 @@ spec:
       weekly: 4
     parallelism: 2
     compression: zstd-fastest
-    username: ${app}

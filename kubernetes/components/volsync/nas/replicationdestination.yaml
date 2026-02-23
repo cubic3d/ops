@@ -2,14 +2,14 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationDestination
 metadata:
-  name: ${app}-nas
+  name: ${app}
   labels:
     kustomize.toolkit.fluxcd.io/ssa: IfNotPresent
 spec:
   trigger:
     manual: restore-once
   kopia:
-    repository: ${app}-volsync-nas
+    repository: ${app}-volsync
     copyMethod: Snapshot
     storageClassName: ${volsync_storageclass:=longhorn}
     volumeSnapshotClassName: ${volsync_snapshotclass:=longhorn}
@@ -24,4 +24,4 @@ spec:
     cleanupCachePVC: true
     cleanupTempPVC: false
     sourceIdentity:
-      sourceName: ${app}-nas
+      sourceName: ${app}
