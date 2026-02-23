@@ -19,7 +19,7 @@ spec:
           app:
             image:
               repository: ghcr.io/thijsvanloef/palworld-server-docker
-              tag: v2.3.0
+              tag: v2.3.1
 
             env:
               TZ: Europe/Berlin
