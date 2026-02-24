@@ -29,4 +29,3 @@ spec:
   postBuild:
     substitute:
       app: *appname
-      volsync_copymethod: Clone

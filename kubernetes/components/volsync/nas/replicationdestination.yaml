@@ -11,7 +11,7 @@ spec:
   kopia:
     repository: ${app}-volsync
     copyMethod: Snapshot
-    storageClassName: ${volsync_storageclass:=longhorn}
+    storageClassName: ${volsync_storageclass:=longhorn-tmp}
     volumeSnapshotClassName: ${volsync_snapshotclass:=longhorn}
     accessModes:
       - ${volsync_accessmodes:=ReadWriteOnce}
