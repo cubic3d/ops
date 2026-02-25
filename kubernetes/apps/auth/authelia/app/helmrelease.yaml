@@ -214,25 +214,6 @@ spec:
               redirect_uris:
                 - https://tasks.${domain}/auth/openid/yachthafenid
 
-            - client_name: Booklore
-              client_id: booklore
-              public: true
-              consent_mode: implicit
-              claims_policy: default
-              scopes:
-                - offline_access
-                - openid
-                - profile
-                - email
-              redirect_uris:
-                - https://books.${domain}/oauth2-callback
-                - https://books.${domain}/*
-              require_pkce: true
-              pkce_challenge_method: S256
-              grant_types:
-                - authorization_code
-                - refresh_token
-
     secret:
       existingSecret: authelia
 
