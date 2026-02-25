@@ -166,6 +166,7 @@ spec:
             app:
               - path: /app/data
                 subPath: app
+            mariadb:
               - path: /var/lib/mysql
                 subPath: mysql
 
