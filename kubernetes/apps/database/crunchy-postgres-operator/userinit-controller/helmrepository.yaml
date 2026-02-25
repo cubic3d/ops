@@ -4,5 +4,5 @@ kind: HelmRepository
 metadata:
   name: crunchy-userinit-controller
 spec:
-  url: https://ramblurr.github.io/crunchy-userinit-controller
+  url: https://drummyfloyd.github.io/crunchy-userinit-controller
   interval: 30m
