@@ -24,8 +24,6 @@ spec:
             restartPolicy: Always
 
             env:
-              PGID: 2000
-              PUID: 2000
               MARIADB_DATABASE: booklore
               MARIADB_USER: booklore
               MARIADB_PASSWORD:
