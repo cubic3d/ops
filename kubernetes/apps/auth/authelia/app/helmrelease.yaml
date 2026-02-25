@@ -216,8 +216,7 @@ spec:
 
             - client_name: Booklore
               client_id: booklore
-              client_secret:
-                path: /secrets/authelia/oidc_secret_booklore
+              public: true
               consent_mode: implicit
               claims_policy: default
               scopes:
@@ -230,6 +229,9 @@ spec:
                 - https://books.${domain}/oauth2-callback
                 - https://books.${domain}/*
               pkce_challenge_method: S256
+              grant_types:
+                - authorization_code
+                - refresh_token
 
     secret:
       existingSecret: authelia
@@ -249,5 +251,3 @@ spec:
               path: oidc_secret_windmill
             - key: oidc_secret_vikunja
               path: oidc_secret_vikunja
-            - key: oidc_secret_booklore
-              path: oidc_secret_booklore
