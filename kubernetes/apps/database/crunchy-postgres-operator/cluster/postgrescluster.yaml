@@ -67,11 +67,6 @@ spec:
         - windmill
       password:
         type: AlphaNumeric
-    - name: booklore
-      databases:
-        - booklore
-      password:
-        type: AlphaNumeric
 
   backups:
     pgbackrest:

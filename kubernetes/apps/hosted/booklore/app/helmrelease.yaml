@@ -15,6 +15,67 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
 
+        initContainers:
+          mariadb:
+            image:
+              repository: docker.io/library/mariadb
+              tag: 12.2.2-noble
+
+            restartPolicy: Always
+
+            env:
+              PGID: 2000
+              PUID: 2000
+              MARIADB_DATABASE: booklore
+              MARIADB_USER: booklore
+              MARIADB_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: booklore
+                    key: mariadb_password
+              MARIADB_ROOT_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: booklore
+                    key: mariadb_root_password
+
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  exec:
+                    command:
+                      - bash
+                      - -c
+                      - |-
+                        mariadb-admin ping --socket=/run/mysqld/mysqld.sock --user=root --password=$${MARIADB_ROOT_PASSWORD}
+
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities:
+                drop:
+                  - ALL
+              seccompProfile:
+                type: Unconfined
+
+          wait-for-mariadb:
+            image:
+              repository: wait4x/wait4x
+              tag: 3.6.0
+
+            args:
+              - mysql
+              - booklore:$(MARIADB_PASSWORD)@tcp(localhost:3306)/booklore
+
+            env:
+              MARIADB_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: booklore
+                    key: mariadb_password
+
         containers:
           app:
             image:
@@ -27,12 +88,15 @@ spec:
               - -jar
               - /app/app.jar
 
-            envFrom:
-              - secretRef:
-                  name: booklore
-
             env:
               TZ: Europe/Berlin
+              DATABASE_URL: jdbc:mariadb://localhost:3306/booklore
+              DATABASE_USERNAME: booklore
+              DATABASE_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: booklore
+                    key: mariadb_password
 
             probes:
               liveness: &probes
@@ -97,18 +161,42 @@ spec:
     persistence:
       data:
         existingClaim: booklore
-        globalMounts:
-          - path: /app/data
+        advancedMounts:
+          booklore:
+            app:
+              - path: /app/data
+                subPath: app
+              - path: /var/lib/mysql
+                subPath: mysql
 
       books:
         type: nfs
         server: nas.${domain}
         path: /mnt/fast/books
-        globalMounts:
-          - path: /books
-            subPath: books
-          - path: /bookdrop
-            subPath: bookdrop
+        advancedMounts:
+          booklore:
+            app:
+              - path: /books
+                subPath: books
+              - path: /bookdrop
+                subPath: bookdrop
+
+      mysqld:
+        type: emptyDir
+        medium: Memory
+        sizeLimit: 1Mi
+        advancedMounts:
+          booklore:
+            mariadb:
+              - path: /run/mysqld
 
       tmp:
         type: emptyDir
+        advancedMounts:
+          booklore:
+            app:
+              - path: /tmp
+                subPath: app
+            mariadb:
+              - path: /tmp
+                subPath: mysql
