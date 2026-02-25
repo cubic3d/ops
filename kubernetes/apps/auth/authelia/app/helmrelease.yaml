@@ -227,8 +227,8 @@ spec:
                 - email
                 - groups
               redirect_uris:
-                - https://booklore.${domain}/oauth2-callback
-                - https://booklore.${domain}/*
+                - https://books.${domain}/oauth2-callback
+                - https://books.${domain}/*
               pkce_challenge_method: S256
 
     secret:
