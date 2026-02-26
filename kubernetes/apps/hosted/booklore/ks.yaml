@@ -22,10 +22,6 @@ spec:
       namespace: longhorn-system
     - name: volsync
       namespace: system
-    - name: crunchy-postgres-operator-cluster
-      namespace: database
-    - name: crunchy-postgres-operator-secretstore
-      namespace: database
   components:
     - ../../../../components/volsync
   postBuild:
