@@ -16,7 +16,7 @@ spec:
 
         cronjob:
           schedule: "0 * * * *"
-          backoffLimit: 3
+          backoffLimit: 0
           concurrencyPolicy: Replace
           successfulJobsHistory: 1
 
