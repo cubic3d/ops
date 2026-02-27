@@ -146,6 +146,16 @@ spec:
             - key:
                 path: /secrets/authelia/jwks_rsa_4096.pem
 
+          cors:
+            endpoints:
+              - authorization
+              - pushed-authorization-request
+              - token
+              - revocation
+              - introspection
+              - userinfo
+            allowed_origins_from_client_redirect_uris: true
+
           claims_policies:
             default:
               id_token:
@@ -254,7 +264,6 @@ spec:
                 - email
               redirect_uris:
                 - https://books.${domain}/oauth2-callback
-              require_pkce: true
               pkce_challenge_method: S256
 
     secret:
