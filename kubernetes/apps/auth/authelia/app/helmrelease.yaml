@@ -166,11 +166,29 @@ spec:
                 - preferred_username
                 - name
 
-          authorization_policies: {}
+          authorization_policies:
+            admins-only:
+              default_policy: deny
+              rules:
+                - policy: two_factor
+                  subject:
+                    - group:admins
+
+            residents-only:
+              default_policy: deny
+              rules:
+                - policy: two_factor
+                  subject:
+                    - group:admins
+                    - group:residents
+
+            everyone:
+              default_policy: two_factor
 
           clients:
             - client_name: Cloudflare
               client_id: cloudflare
+              authorization_policy: admins-only
               client_secret:
                 path: /secrets/authelia/oidc_secret_cloudflare
               consent_mode: implicit
@@ -186,6 +204,7 @@ spec:
 
             - client_name: Node-RED
               client_id: node-red
+              authorization_policy: admins-only
               client_secret:
                 path: /secrets/authelia/oidc_secret_nodered
               consent_mode: implicit
@@ -201,6 +220,7 @@ spec:
 
             - client_name: Windmill
               client_id: windmill
+              authorization_policy: admins-only
               client_secret:
                 path: /secrets/authelia/oidc_secret_windmill
               consent_mode: implicit
@@ -214,6 +234,7 @@ spec:
 
             - client_name: Vikunja
               client_id: vikunja
+              authorization_policy: residents-only
               client_secret:
                 path: /secrets/authelia/oidc_secret_vikunja
               consent_mode: implicit
@@ -226,6 +247,7 @@ spec:
 
             - client_name: Shelfmark
               client_id: shelfmark
+              authorization_policy: everyone
               client_secret:
                 path: /secrets/authelia/oidc_secret_shelfmark
               consent_mode: implicit
@@ -240,6 +262,7 @@ spec:
 
             - client_name: Audiobookshelf
               client_id: audiobookshelf
+              authorization_policy: everyone
               client_secret:
                 path: /secrets/authelia/oidc_secret_audiobookshelf
               consent_mode: implicit
@@ -254,6 +277,7 @@ spec:
 
             - client_name: Booklore
               client_id: booklore
+              authorization_policy: everyone
               public: true
               claims_policy: default
               consent_mode: implicit
