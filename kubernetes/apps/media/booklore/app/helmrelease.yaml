@@ -168,17 +168,15 @@ spec:
               - path: /var/lib/mysql
                 subPath: mysql
 
-      books:
-        type: nfs
-        server: nas.${domain}
-        path: /mnt/fast/books
+      media:
+        existingClaim: media
         advancedMounts:
           booklore:
             app:
               - path: /books
-                subPath: books
+                subPath: library/books
               - path: /bookdrop
-                subPath: bookdrop
+                subPath: downloads/bookdrop
 
       mysqld:
         type: emptyDir

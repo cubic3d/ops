@@ -99,13 +99,11 @@ spec:
       config:
         existingClaim: shelfmark
 
-      bookdrop:
-        type: nfs
-        server: nas.${domain}
-        path: /mnt/fast/books
+      complete:
+        existingClaim: media
         globalMounts:
-          - path: /bookdrop
-            subPath: bookdrop
+          - path: /media/downloads
+            subPath: downloads
 
       tmp:
         type: emptyDir
