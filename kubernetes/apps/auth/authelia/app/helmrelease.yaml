@@ -184,6 +184,7 @@ spec:
 
             everyone:
               default_policy: two_factor
+              rules: []
 
           clients:
             - client_name: Cloudflare
