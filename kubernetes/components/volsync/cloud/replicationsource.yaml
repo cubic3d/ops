@@ -9,8 +9,8 @@ spec:
     schedule: "0 3 * * *"
   kopia:
     repository: ${app}-volsync-cloud
-    copyMethod: ${volsync_copymethod:=Snapshot}
-    storageClassName: ${volsync_storageclass:=longhorn}
+    copyMethod: ${volsync_copymethod:=Clone}
+    storageClassName: ${volsync_storageclass:=longhorn-tmp}
     volumeSnapshotClassName: ${volsync_snapshotclass:=longhorn}
     accessModes:
       - ${volsync_accessmodes:=ReadWriteOnce}
