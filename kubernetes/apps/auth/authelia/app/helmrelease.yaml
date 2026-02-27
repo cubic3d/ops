@@ -242,6 +242,22 @@ spec:
                 - https://audiobooks.${domain}/auth/openid/mobile-redirect
               pkce_challenge_method: S256
 
+            - client_name: Booklore
+              client_id: booklore
+              public: true
+              claims_policy: default
+              consent_mode: implicit
+              scopes:
+                - offline_access
+                - openid
+                - profile
+                - email
+              redirect_uris:
+                - https://books.${domain}/oauth2/callback
+                - https://books.${domain}/*
+              require_pkce: true
+              pkce_challenge_method: S256
+
     secret:
       existingSecret: authelia
 
