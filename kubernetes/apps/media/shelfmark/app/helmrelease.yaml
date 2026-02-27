@@ -88,7 +88,7 @@ spec:
       app:
         className: internal
         hosts:
-          - host: shelfmark.${domain}
+          - host: library.${domain}
             paths:
               - path: /
                 service:
