@@ -20,4 +20,5 @@ just = "latest"
 "ubi:mitsuhiko/minijinja" = "latest"
 gum = "latest"
 kustomize = "latest"
+helm = "latest"
 # 1password is provided by the system
