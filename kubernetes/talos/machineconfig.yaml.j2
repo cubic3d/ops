@@ -13,7 +13,7 @@ machine:
     - 127.0.0.1
     - k8s.{{ '{{ op://cluster/env/domain }}' }}
   kubelet:
-    image: ghcr.io/siderolabs/kubelet:v1.35.1
+    image: ghcr.io/siderolabs/kubelet:v1.35.2
     extraArgs:
       rotate-server-certificates: "true"
     extraMounts:
@@ -140,7 +140,7 @@ cluster:
   serviceAccount:
     key: op://cluster/talos/cluster_serviceaccount_key
   apiServer:
-    image: registry.k8s.io/kube-apiserver:v1.35.1
+    image: registry.k8s.io/kube-apiserver:v1.35.2
     extraArgs:
       enable-aggregator-routing: "true"
       feature-gates: MutatingAdmissionPolicy=true
@@ -155,12 +155,12 @@ cluster:
       rules:
         - level: Metadata
   controllerManager:
-    image: registry.k8s.io/kube-controller-manager:v1.35.1
+    image: registry.k8s.io/kube-controller-manager:v1.35.2
   proxy:
     disabled: true
-    image: registry.k8s.io/kube-proxy:v1.35.1
+    image: registry.k8s.io/kube-proxy:v1.35.2
   scheduler:
-    image: registry.k8s.io/kube-scheduler:v1.35.1
+    image: registry.k8s.io/kube-scheduler:v1.35.2
     config:
       apiVersion: kubescheduler.config.k8s.io/v1
       kind: KubeSchedulerConfiguration
