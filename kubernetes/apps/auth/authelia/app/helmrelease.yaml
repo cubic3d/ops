@@ -253,8 +253,7 @@ spec:
                 - profile
                 - email
               redirect_uris:
-                - https://books.${domain}/oauth2/callback
-                - https://books.${domain}/*
+                - https://books.${domain}/oauth2-callback
               require_pkce: true
               pkce_challenge_method: S256
 
