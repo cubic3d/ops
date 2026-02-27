@@ -228,6 +228,20 @@ spec:
                 - https://library.${domain}/api/auth/oidc/callback
               pkce_challenge_method: S256
 
+            - client_name: Audiobookshelf
+              client_id: audiobookshelf
+              client_secret:
+                path: /secrets/authelia/oidc_secret_audiobookshelf
+              consent_mode: implicit
+              scopes:
+                - openid
+                - profile
+                - email
+              redirect_uris:
+                - https://audiobooks.${domain}/auth/openid/callback
+                - https://audiobooks.${domain}/auth/openid/mobile-redirect
+              pkce_challenge_method: S256
+
     secret:
       existingSecret: authelia
 
@@ -248,3 +262,5 @@ spec:
               path: oidc_secret_vikunja
             - key: oidc_secret_shelfmark
               path: oidc_secret_shelfmark
+            - key: oidc_secret_audiobookshelf
+              path: oidc_secret_audiobookshelf
