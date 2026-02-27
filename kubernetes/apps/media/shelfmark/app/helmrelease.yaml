@@ -99,7 +99,7 @@ spec:
       config:
         existingClaim: shelfmark
 
-      complete:
+      downloads:
         existingClaim: media
         globalMounts:
           - path: /media/downloads
