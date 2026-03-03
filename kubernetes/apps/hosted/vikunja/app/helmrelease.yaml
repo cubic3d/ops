@@ -18,8 +18,8 @@ spec:
         containers:
           app:
             image:
-              repository: docker.io/vikunja/vikunja
-              tag: 1.0.0-rc2
+              repository: ghcr.io/go-vikunja/vikunja
+              tag: 2.1.0
 
             env:
               TZ: Europe/Berlin
