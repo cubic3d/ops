@@ -43,8 +43,9 @@ machine:
       serializeImagePulls: false
     defaultRuntimeSeccompProfileEnabled: true
     disableManifestsDirectory: true
-  network:
-    disableSearchDomain: true
+    nodeIP:
+      validSubnets:
+        - 192.168.40.0/24
   install:
     image: factory.talos.dev/metal-installer/f4817031cd07378f3146b224cdbd210cce736b7d932083a82e913d397f4ac381:v1.12.4
     wipe: false
@@ -76,14 +77,20 @@ machine:
     fs.inotify.max_user_watches: "1048576"
     net.core.rmem_max: "67108864"
     net.core.wmem_max: "67108864"
+    net.ipv4.tcp_rmem: 4096 87380 33554432
+    net.ipv4.tcp_wmem: 4096 65536 33554432
     net.ipv4.neigh.default.gc_thresh1: "4096"
     net.ipv4.neigh.default.gc_thresh2: "8192"
     net.ipv4.neigh.default.gc_thresh3: "16384"
     net.ipv4.tcp_fastopen: "3"
+    net.ipv4.tcp_congestion_control: bbr
+    net.ipv4.tcp_mtu_probing: "1"
+    net.ipv4.tcp_slow_start_after_idle: "0"
+    net.ipv4.tcp_notsent_lowat: "131072"
+    net.ipv4.ping_group_range: 0 2147483647
     user.max_user_namespaces: "11255"
     vm.nr_hugepages: "1024"
   features:
-    stableHostname: true
     {% if ENV.IS_CONTROLPLANE %}
     kubernetesTalosAPIAccess:
       enabled: true
@@ -105,6 +112,7 @@ machine:
       - name: zfs
   nodeLabels:
     topology.kubernetes.io/region: home
+
 cluster:
   id: op://cluster/talos/cluster_id
   secret: op://cluster/talos/cluster_secret
@@ -191,3 +199,33 @@ apiVersion: v1alpha1
 kind: WatchdogTimerConfig
 device: /dev/watchdog0
 timeout: 5m
+---
+apiVersion: v1alpha1
+kind: BondConfig
+name: bond0
+links:
+  - net0
+bondMode: active-backup
+---
+apiVersion: v1alpha1
+kind: DHCPv4Config
+name: bond0
+---
+# IoT
+apiVersion: v1alpha1
+kind: VLANConfig
+name: bond0.10
+vlanID: 10
+parent: bond0
+{% if ENV.IS_CONTROLPLANE %}
+---
+apiVersion: v1alpha1
+kind: Layer2VIPConfig
+name: 192.168.40.90
+link: bond0
+{% endif %}
+---
+apiVersion: v1alpha1
+kind: ResolverConfig
+searchDomains:
+    disableDefault: true
