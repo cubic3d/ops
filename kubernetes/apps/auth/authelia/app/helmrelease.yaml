@@ -272,11 +272,11 @@ spec:
 
             - client_name: Grimmory
               client_id: grimmory
-              public: true
-              claims_policy: default
+              client_secret:
+                path: /secrets/authelia/oidc_secret_grimmary
               consent_mode: implicit
+              claims_policy: default
               scopes:
-                - offline_access
                 - openid
                 - profile
                 - email
@@ -306,3 +306,5 @@ spec:
               path: oidc_secret_shelfmark
             - key: oidc_secret_audiobookshelf
               path: oidc_secret_audiobookshelf
+            - key: oidc_secret_grimmary
+              path: oidc_secret_grimmary
