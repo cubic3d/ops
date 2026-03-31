@@ -9,7 +9,8 @@ spec:
     schedule: "0 * * * *"
   kopia:
     repository: ${app}-volsync
-    copyMethod: ${volsync_copymethod:=Clone}
+    # NOTICE: Clone did accumulate internal system snapshots in longhorn which were not cleaned up. Avoid using it.
+    copyMethod: ${volsync_copymethod:=Snapshot}
     storageClassName: ${volsync_storageclass:=longhorn-tmp}
     volumeSnapshotClassName: ${volsync_snapshotclass:=longhorn}
     accessModes:
