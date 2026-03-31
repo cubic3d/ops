@@ -270,8 +270,8 @@ spec:
                 - https://audiobooks.${domain}/auth/openid/mobile-redirect
               pkce_challenge_method: S256
 
-            - client_name: Booklore
-              client_id: booklore
+            - client_name: Grimmory
+              client_id: grimmory
               public: true
               claims_policy: default
               consent_mode: implicit
