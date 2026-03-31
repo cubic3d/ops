@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app booklore
+  name: &app grimmory
 spec:
   interval: 30m
   chartRef:
@@ -11,7 +11,7 @@ spec:
 
   values:
     controllers:
-      booklore:
+      grimmory:
         annotations:
           reloader.stakater.com/auto: "true"
 
@@ -24,17 +24,17 @@ spec:
             restartPolicy: Always
 
             env:
-              MARIADB_DATABASE: booklore
-              MARIADB_USER: booklore
+              MARIADB_DATABASE: grimmory
+              MARIADB_USER: grimmory
               MARIADB_PASSWORD:
                 valueFrom:
                   secretKeyRef:
-                    name: booklore
+                    name: grimmory
                     key: mariadb_password
               MARIADB_ROOT_PASSWORD:
                 valueFrom:
                   secretKeyRef:
-                    name: booklore
+                    name: grimmory
                     key: mariadb_root_password
 
             probes:
@@ -65,20 +65,20 @@ spec:
 
             args:
               - mysql
-              - booklore:$(MARIADB_PASSWORD)@tcp(localhost:3306)/booklore
+              - grimmory:$(MARIADB_PASSWORD)@tcp(localhost:3306)/grimmory
 
             env:
               MARIADB_PASSWORD:
                 valueFrom:
                   secretKeyRef:
-                    name: booklore
+                    name: grimmory
                     key: mariadb_password
 
         containers:
           app:
             image:
-              repository: ghcr.io/booklore-app/booklore
-              tag: v2.0.5
+              repository: ghcr.io/grimmory-tools/grimmory
+              tag: v2.3.0
 
             command:
               - java
@@ -88,12 +88,12 @@ spec:
 
             env:
               TZ: Europe/Berlin
-              DATABASE_URL: jdbc:mariadb://localhost:3306/booklore
-              DATABASE_USERNAME: booklore
+              DATABASE_URL: jdbc:mariadb://localhost:3306/grimmory
+              DATABASE_USERNAME: grimmory
               DATABASE_PASSWORD:
                 valueFrom:
                   secretKeyRef:
-                    name: booklore
+                    name: grimmory
                     key: mariadb_password
 
             probes:
@@ -158,9 +158,9 @@ spec:
 
     persistence:
       data:
-        existingClaim: booklore
+        existingClaim: grimmory
         advancedMounts:
-          booklore:
+          grimmory:
             app:
               - path: /app/data
                 subPath: app
@@ -171,7 +171,7 @@ spec:
       media:
         existingClaim: media
         advancedMounts:
-          booklore:
+          grimmory:
             app:
               - path: /books
                 subPath: library/books
@@ -183,14 +183,14 @@ spec:
         medium: Memory
         sizeLimit: 1Mi
         advancedMounts:
-          booklore:
+          grimmory:
             mariadb:
               - path: /run/mysqld
 
       tmp:
         type: emptyDir
         advancedMounts:
-          booklore:
+          grimmory:
             app:
               - path: /tmp
                 subPath: app
