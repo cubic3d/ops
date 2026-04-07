@@ -89,7 +89,7 @@ set interfaces loopback lo
     set interfaces {{ interfaceType }} {{ path }} ipv6 address no-default-link-local
     set interfaces {{ interfaceType }} {{ path }} address 'fe80::1/64'
     {# IPv6 ULA #}
-    set interfaces {{ interfaceType }} {{ path }} address '{{ settings.ip.ulaPrefix }}:{{ zone.vlan }}::1/128'
+    set interfaces {{ interfaceType }} {{ path }} address '{{ settings.ip.ulaPrefix }}:{{ zone.vlan }}::1/64'
     {# RA #}
     {% if zone.disable_ra is defined and zone.disable_ra %}
       set service router-advert interface {{ interface }} no-send-advert
@@ -97,6 +97,7 @@ set interfaces loopback lo
     set service router-advert interface {{ interface }} prefix ::/64 deprecate-prefix
     set service router-advert interface {{ interface }} prefix ::/64 preferred-lifetime '600'
     set service router-advert interface {{ interface }} prefix ::/64 valid-lifetime '7200'
+    set service router-advert interface {{ interface }} prefix {{ settings.ip.ulaPrefix }}:{{ zone.vlan }}::/64
     set service router-advert interface {{ interface }} name-server '{{ settings.ip.ulaPrefix }}:{{ zone.vlan }}::1'
     {# mDNS #}
     {% if zone.mdns_repeater is defined %}
