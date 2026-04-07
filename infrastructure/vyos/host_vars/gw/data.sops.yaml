@@ -240,7 +240,7 @@ settings:
             interface: br0
             vlan: 10
             mdns_repeater: true
-            disable_ra: true
+            disable_ra: false
             policies:
                 from4:
                     - only:
@@ -524,7 +524,7 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2026-02-20T15:19:57Z"
-    mac: ENC[AES256_GCM,data:iIRDJiu3jqgziefj0Q9sDSRd6/Bu2t9GF/AvkdIbxVU61TULzgfD/+zQTr2rF/rdzQU9FI4xXP++ILqKEDqIFgjs00EoPUrYA4sLZtpMRYE/Dx1YA+hnZFyx6o5Ftz1tOC15+fC2gOg1wFN9BB4VYIETO7fXpN6B5VrpBYBCZL8=,iv:a73h25r0YddWABtGT/yQSEwbOA0WxeQ4DrxWnX7F75s=,tag:wqKwYLZ/Ilj5kZoUiMWcow==,type:str]
+    lastmodified: "2026-04-07T08:33:48Z"
+    mac: ENC[AES256_GCM,data:UCFtG/bcMzT+h42UrJTsOFU7yZ/Sy0aOLsZAR4fnleywHZtPuCo8bD0E5+Wy7kQUaRXDl0Gqv5NwCcMkvetbc11yNAIHCOrb2BHkVV/A+S15j4k06bfRenQinyic/Tdr5MSEoHbvXdzkJHquuMBJ2SMsF2POkXAV+d+ZQV1p8xk=,iv:XkLwJxwMeyN8zFpo7MDbnwL/Gr+E0MhR3HgeM6gQ1SE=,tag:oK+jtWtoFY0vifVvTHzp7A==,type:str]
     encrypted_suffix: _enc
-    version: 3.11.0
+    version: 3.12.2
