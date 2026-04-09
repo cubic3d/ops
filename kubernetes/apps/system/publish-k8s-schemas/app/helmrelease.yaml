@@ -43,26 +43,62 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/bjw-s-labs/wrangler
-              tag: 4.78.0@sha256:bb9450fce0992b13b3b399f08a93e41af2d6e933c3597e9460916967763096f5
+              repository: docker.io/alpine/git
+              tag: 2.52.0
 
             envFrom:
               - secretRef:
                   name: publish-k8s-schemas
 
+            env:
+              HOME: /config
+              GITHUB_REPOSITORY: cubic3d/crd-catalog
+              GITHUB_PAGES_BRANCH: main
+              GIT_AUTHOR_NAME: &author cubic3d[bot]
+              GIT_AUTHOR_EMAIL: &email 4047015+cubic3d@users.noreply.github.com
+              GIT_COMMITTER_NAME: *author
+              GIT_COMMITTER_EMAIL: *email
+
+            command:
+              - /bin/sh
+              - -ec
             args:
-              - pages
-              - deploy
-              - /data/crdSchemas
-              - --project-name
-              - schemaz
+              - |
+                repo_url="https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+                worktree=/tmp/pages
+
+                rm -rf "${worktree}"
+
+                if git clone --depth=1 --branch "${GITHUB_PAGES_BRANCH}" "${repo_url}" "${worktree}"; then
+                  :
+                else
+                  git clone --depth=1 --no-checkout "${repo_url}" "${worktree}"
+                  cd "${worktree}"
+                  git checkout --orphan "${GITHUB_PAGES_BRANCH}"
+                  find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} \;
+                fi
+
+                cd "${worktree}"
+                find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} \;
+                cp -R /data/crdSchemas/. .
+                touch .nojekyll
+
+                git add --all
+
+                if git diff --cached --quiet; then
+                  echo "No schema changes to publish"
+                  exit 0
+                fi
+
+                git commit -m "job: publish latest CRD schemas ($(date -u '+%Y-%m-%dT%H:%M:%SZ'))"
+                git push origin "${GITHUB_PAGES_BRANCH}"
 
             resources:
               requests:
                 cpu: 10m
                 memory: 128Mi
               limits:
-                memory: 1Gi
+                memory: 128Mi
 
             securityContext:
               allowPrivilegeEscalation: false
@@ -92,10 +128,10 @@ spec:
                 subPath: tmp
 
             app:
-              - path: /config
-                subPath: config
               - path: /data
                 subPath: data
+              - path: /tmp
+                subPath: tmp
 
     serviceAccount:
       publish-k8s-schemas: {}
