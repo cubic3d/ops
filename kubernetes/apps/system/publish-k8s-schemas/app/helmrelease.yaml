@@ -51,7 +51,7 @@ spec:
                   name: publish-k8s-schemas
 
             env:
-              GITHUB_REPOSITORY: github.com/cubic3d/crd-catalog.git
+              GIT_REPO: github.com/cubic3d/crd-catalog.git
               GIT_AUTHOR_NAME: &author cubic3d[bot]
               GIT_AUTHOR_EMAIL: &email 4047015+cubic3d@users.noreply.github.com
               GIT_COMMITTER_NAME: *author
