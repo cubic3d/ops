@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://schemaz.pages.dev/postgres-operator.crunchydata.com/postgrescluster_v1.json
+# yaml-language-server: $schema=https://cubic3d.github.io/crd-catalog/postgres-operator.crunchydata.com/postgrescluster_v1.json
 apiVersion: postgres-operator.crunchydata.com/v1
 kind: PostgresCluster
 metadata:

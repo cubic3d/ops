@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://schemaz.pages.dev/volsync.backube/replicationsource_v1alpha1.json
+# yaml-language-server: $schema=https://cubic3d.github.io/crd-catalog/volsync.backube/replicationsource_v1alpha1.json
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
