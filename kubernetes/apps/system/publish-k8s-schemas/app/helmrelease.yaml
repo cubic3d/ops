@@ -66,7 +66,7 @@ spec:
                 export HOME=/tmp
 
                 git clone --depth=1 \
-                  "https://x-access-token:${GITHUB_TOKEN}@${GIT_REPO}" \
+                  "https://x-access-token:$GITHUB_TOKEN@$GIT_REPO" \
                   /tmp/repo
 
                 mkdir -p /tmp/repo
