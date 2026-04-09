@@ -51,9 +51,7 @@ spec:
                   name: publish-k8s-schemas
 
             env:
-              HOME: /config
-              GITHUB_REPOSITORY: cubic3d/crd-catalog
-              GITHUB_PAGES_BRANCH: main
+              GITHUB_REPOSITORY: github.com/cubic3d/crd-catalog.git
               GIT_AUTHOR_NAME: &author cubic3d[bot]
               GIT_AUTHOR_EMAIL: &email 4047015+cubic3d@users.noreply.github.com
               GIT_COMMITTER_NAME: *author
@@ -61,37 +59,28 @@ spec:
 
             command:
               - /bin/sh
-              - -ec
+              - -c
             args:
               - |
-                repo_url="https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-                worktree=/tmp/pages
+                set -eu
+                export HOME=/tmp
 
-                rm -rf "${worktree}"
+                git clone --depth=1 \
+                  "https://x-access-token:${GITHUB_TOKEN}@${GIT_REPO}" \
+                  /tmp/repo
 
-                if git clone --depth=1 --branch "${GITHUB_PAGES_BRANCH}" "${repo_url}" "${worktree}"; then
-                  :
-                else
-                  git clone --depth=1 --no-checkout "${repo_url}" "${worktree}"
-                  cd "${worktree}"
-                  git checkout --orphan "${GITHUB_PAGES_BRANCH}"
-                  find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} \;
-                fi
-
-                cd "${worktree}"
-                find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} \;
-                cp -R /data/crdSchemas/. .
-                touch .nojekyll
-
-                git add --all
+                mkdir -p /tmp/repo
+                cp -r /data/crdSchemas/. /tmp/repo/
+                cd /tmp/repo
+                git add .
 
                 if git diff --cached --quiet; then
-                  echo "No schema changes to publish"
+                  echo "No changes to commit"
                   exit 0
                 fi
 
                 git commit -m "job: publish latest CRD schemas ($(date -u '+%Y-%m-%dT%H:%M:%SZ'))"
-                git push origin "${GITHUB_PAGES_BRANCH}"
+                git push
 
             resources:
               requests:
