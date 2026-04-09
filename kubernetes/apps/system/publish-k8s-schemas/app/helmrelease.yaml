@@ -72,6 +72,7 @@ spec:
                 mkdir -p /tmp/repo
                 cp -r /data/crdSchemas/. /tmp/repo/
                 cd /tmp/repo
+                touch .nojekyll
                 git add .
 
                 if git diff --cached --quiet; then
