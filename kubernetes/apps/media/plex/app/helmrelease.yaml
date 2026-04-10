@@ -24,7 +24,7 @@ spec:
           app:
             image:
               repository: ghcr.io/home-operations/plex
-              tag: 1.43.1.10576
+              tag: 1.43.1.10611
 
             env:
               TZ: Europe/Berlin
