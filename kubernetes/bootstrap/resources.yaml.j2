@@ -9,8 +9,15 @@ stringData:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: onepassword-connect
+  name: onepassword-connect-credentials
   namespace: secrets
 stringData:
   1password-credentials.json: op://cluster/1password/1password-credentials.json
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: onepassword-connect-token
+  namespace: secrets
+stringData:
   token: op://cluster/1password/token
