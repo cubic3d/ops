@@ -88,3 +88,7 @@ snapshot-all:
     kubectl get replicationsources --no-headers -A | while read -r ns name _; do \
       just k8s snapshot "$ns" "$name"; \
     done
+
+# Render local KS
+render-ks ns name:
+    flux-local build ks --path "flux/cluster" --namespace "{{ ns }}" "{{ name }}"
