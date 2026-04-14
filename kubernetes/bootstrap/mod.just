@@ -8,7 +8,7 @@ nodes := `talosctl config info -o yaml | yq -e '.nodes | join (" ")'`
 
 [private]
 default:
-    just -l k8s-bootstrap
+    just -l bootstrap
 
 # Run all bootstrap steps
 bootstrap: talos kubernetes kubeconfig wait namespaces resources crds apps
