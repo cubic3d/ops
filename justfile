@@ -19,3 +19,8 @@ log lvl msg *args:
 [private]
 template file *args:
   minijinja "{{ file }}" {{ args }} | op inject
+
+
+# Rotate all SOPS secrets
+sops-rotate:
+  find . -type f -name '*.sops.yaml' ! -name ".sops.yaml" -exec sh -c 'sops rotate --in-place "$0"' {} \;

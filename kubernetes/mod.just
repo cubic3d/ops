@@ -73,3 +73,8 @@ mount-pvc ns name:
         "restartPolicy": "Never" \
       } \
     }'
+
+# Shell on node
+node-shell node:
+  kubectl debug node/{{node}} -it --profile=sysadmin --image='mirror.gcr.io/alpine:latest'
+  kubectl delete pod -l app.kubernetes.io/managed-by=kubectl-debug
