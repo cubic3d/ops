@@ -4,7 +4,7 @@ set quiet
 set shell := ['bash', '-euo', 'pipefail', '-c']
 
 mod vyos "infrastructure/vyos"
-mod k8s-bootstrap "kubernetes/bootstrap"
+mod bootstrap "kubernetes/bootstrap"
 mod talos "kubernetes/talos"
 mod k8s "kubernetes"
 
