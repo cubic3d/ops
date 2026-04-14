@@ -1,4 +1,4 @@
-set quiet
+set quiet := true
 set shell := ['bash', '-euo', 'pipefail', '-c']
 
 [private]
@@ -7,8 +7,8 @@ default:
 
 # Check configuration and list changes
 check:
-  ansible-playbook --check site.yaml
+    ansible-playbook --check site.yaml
 
 # Apply configuration
 apply:
-  ansible-playbook site.yaml
+    ansible-playbook site.yaml

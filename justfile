@@ -10,17 +10,17 @@ mod k8s "kubernetes"
 
 [private]
 default:
-  just -l
+    just -l
 
 [private]
 log lvl msg *args:
-  gum log -t rfc3339 -s -l "{{ lvl }}" "{{ msg }}" {{ args }}
+    gum log -t rfc3339 -s -l "{{ lvl }}" "{{ msg }}" {{ args }}
 
 [private]
 template file *args:
-  minijinja "{{ file }}" {{ args }} | op inject
+    minijinja "{{ file }}" {{ args }} | op inject
 
 
 # Rotate all SOPS secrets
 sops-rotate:
-  find . -type f -name '*.sops.yaml' ! -name ".sops.yaml" -exec sh -c 'sops rotate --in-place "$0"' {} \;
+    find . -type f -name '*.sops.yaml' ! -name ".sops.yaml" -exec sh -c 'sops rotate --in-place "$0"' {} \;
