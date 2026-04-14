@@ -62,7 +62,7 @@ namespaces:
 # Apply Kubernetes resources
 resources:
     just log info "Running bootstrap..." "stage" "$0"
-    just template "{{ bootstrap_dir }}/resources.yaml.j2" | kubectl apply --server-side --dry-run=server -f - \
+    just template "{{ bootstrap_dir }}/resources.yaml.j2" | kubectl apply --server-side -f - \
     || just log fatal "Failed to apply Kubernetes resources" "stage" "$0"
 
 # Apply Helmfile CRDs
