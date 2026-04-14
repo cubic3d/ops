@@ -39,7 +39,7 @@ machine-controller node:
 # Get the machine image for a given Talos node
 [private]
 machine-image node:
-    talosctl --nodes {{ node }} get machineconfig --output=jsonpath='{.spec}' | yq -e 'select(.machine) | .machine.install.image'
+    talosctl --nodes {{ node }} get machineconfig -o yaml | yq -e 'select(.metadata.id == "v1alpha1") | .spec' | yq -e 'select(.machine) | .machine.install.image'
 
 # Reboot a given Talos node
 reboot-node node:
