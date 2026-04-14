@@ -78,3 +78,13 @@ mount-pvc ns name:
 node-shell node:
     kubectl debug node/{{ node }} -it --profile=sysadmin --image='mirror.gcr.io/alpine:latest'
     kubectl delete pod -l app.kubernetes.io/managed-by=kubectl-debug
+
+# Create volsync snapshot
+snapshot ns name:
+    kubectl -n "{{ ns }}" patch replicationsources "{{ name }}" --type merge -p '{"spec":{"trigger":{"manual":"$(date +%s)"}}}'
+
+# Create volsync snapshot for all replicationsources
+snapshot-all:
+    kubectl get replicationsources --no-headers -A | while read -r ns name _; do \
+      just k8s snapshot "$ns" "$name"; \
+    done
