@@ -5,6 +5,7 @@ namespace: media
 resources:
   - audiobookshelf/ks.yaml
   - bazarr/ks.yaml
+  - bookboss/ks.yaml
   - grimmory/ks.yaml
   - jellyfin/ks.yaml
   - maintainerr/ks.yaml
