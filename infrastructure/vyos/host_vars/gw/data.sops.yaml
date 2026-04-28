@@ -67,6 +67,7 @@ settings:
                         - drop_icmpv6_hoplimit1: null
                         - accept_icmpv6: null
                         - accept_dhcpv6_pd: null
+                        - accept_wireguard: null
                     - allExcept:
                         - wan
                       default: drop
@@ -524,7 +525,7 @@ sops:
             U3FLc0pBSkdVU1h1V3ZoVXF0cW00YzQKxesVn8VCVWQHL+Ftqdce+q5gGfE2ZJeB
             82vBIwB+98vzky1TI4KjIoEVjMqc3qPpeUrAwNaFg1cTvtvAMOTanQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2026-04-07T08:33:48Z"
-    mac: ENC[AES256_GCM,data:UCFtG/bcMzT+h42UrJTsOFU7yZ/Sy0aOLsZAR4fnleywHZtPuCo8bD0E5+Wy7kQUaRXDl0Gqv5NwCcMkvetbc11yNAIHCOrb2BHkVV/A+S15j4k06bfRenQinyic/Tdr5MSEoHbvXdzkJHquuMBJ2SMsF2POkXAV+d+ZQV1p8xk=,iv:XkLwJxwMeyN8zFpo7MDbnwL/Gr+E0MhR3HgeM6gQ1SE=,tag:oK+jtWtoFY0vifVvTHzp7A==,type:str]
+    lastmodified: "2026-04-28T10:17:35Z"
+    mac: ENC[AES256_GCM,data:OAdW0I0HNdgdqUvAEB3QViV2Yt0+F11GoFfPr1YGqe8/kxmvGrYD2WUUdnHdTksl6DE4izZWkzF/CqWgctrMurKO6R/i0dfbVrqjgZJkKL2OAOtjHKHNPtiF4nKro7KJPGKqDaXmcq88KEkNDDkqTw2eyPKIV+PNNQSIukIK5a4=,iv:4Hl8PRArG5q3V346cNn+EWMuH3OGEdxfAZTFcd18R9g=,tag:hbwja/n/7TWBUz0NwJvPQA==,type:str]
     encrypted_suffix: _enc
     version: 3.12.2
