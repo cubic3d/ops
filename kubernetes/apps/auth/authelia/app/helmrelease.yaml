@@ -253,7 +253,7 @@ spec:
                 - email
                 - groups
               redirect_uris:
-                - https://library.${domain}/api/auth/oidc/callback
+                - https://shelfmark.${domain}/api/auth/oidc/callback
               pkce_challenge_method: S256
 
             - client_name: Audiobookshelf
