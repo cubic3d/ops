@@ -286,6 +286,20 @@ spec:
               pkce_challenge_method: S256
               token_endpoint_auth_method: client_secret_post
 
+            - client_name: Mealie
+              client_id: mealie
+              client_secret:
+                path: /secrets/authelia/oidc_secret_mealie
+              consent_mode: implicit
+              scopes:
+                - openid
+                - profile
+                - email
+                - groups
+              redirect_uris:
+                - https://mealie.${domain}/login
+              pkce_challenge_method: S256
+
     secret:
       existingSecret: authelia
 
@@ -310,3 +324,5 @@ spec:
               path: oidc_secret_audiobookshelf
             - key: oidc_secret_grimmary
               path: oidc_secret_grimmary
+            - key: oidc_secret_mealie
+              path: oidc_secret_mealie
