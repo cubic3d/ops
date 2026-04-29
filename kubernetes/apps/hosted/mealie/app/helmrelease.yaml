@@ -103,3 +103,6 @@ spec:
         existingClaim: mealie
         globalMounts:
           - path: /app/data
+
+      tmp:
+        type: emptyDir
