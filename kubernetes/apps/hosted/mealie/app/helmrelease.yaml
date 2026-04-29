@@ -36,7 +36,7 @@ spec:
               OIDC_ADMIN_GROUP: admins
               OIDC_PROVIDER_NAME: Yachthafen ID
               OPENAI_BASE_URL: https://openrouter.ai/api/v1
-              OPENAI_MODEL: google/gemma-4-26b-a4b-it:free
+              OPENAI_MODEL: openrouter/free
 
             probes:
               liveness: &probes
