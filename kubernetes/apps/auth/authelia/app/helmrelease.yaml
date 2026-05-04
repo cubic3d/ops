@@ -305,6 +305,7 @@ spec:
               client_secret:
                 path: /secrets/authelia/oidc_secret_bookboss
               consent_mode: implicit
+              claims_policy: default
               scopes:
                 - openid
                 - profile
