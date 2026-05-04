@@ -300,6 +300,19 @@ spec:
                 - https://mealie.${domain}/login
               pkce_challenge_method: S256
 
+            - client_name: BookBoss
+              client_id: bookboss
+              client_secret:
+                path: /secrets/authelia/oidc_secret_bookboss
+              consent_mode: implicit
+              scopes:
+                - openid
+                - profile
+                - email
+              redirect_uris:
+                - https://bookboss.${domain}/auth/oidc/callback
+              pkce_challenge_method: S256
+
     secret:
       existingSecret: authelia
 
@@ -326,3 +339,5 @@ spec:
               path: oidc_secret_grimmary
             - key: oidc_secret_mealie
               path: oidc_secret_mealie
+            - key: oidc_secret_bookboss
+              path: oidc_secret_bookboss
