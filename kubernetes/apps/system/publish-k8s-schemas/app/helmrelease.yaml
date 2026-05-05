@@ -98,6 +98,7 @@ spec:
                   - ALL
 
     defaultPodOptions:
+      automountServiceAccountToken: true
       restartPolicy: OnFailure
       securityContext:
         runAsNonRoot: true
