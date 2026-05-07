@@ -99,6 +99,24 @@ spec:
                   identifier: app
                   port: http
 
+      sync:
+        className: external
+        hosts:
+          - host: bookboss-sync.${domain}
+            paths:
+              - path: /opds
+                service:
+                  identifier: app
+                  port: http
+              - path: /koreader
+                service:
+                  identifier: app
+                  port: http
+              - path: /kobo
+                service:
+                  identifier: app
+                  port: http
+
     persistence:
       data:
         existingClaim: bookboss
