@@ -31,8 +31,7 @@ apply-cluster *args:
 [script]
 render-config node:
     export IS_CONTROLPLANE="$(just talos machine-controller {{ node }})"
-    talosctl machineconfig patch <(just template "{{ talos_dir }}/machineconfig.yaml.j2")
-      -p @<(just template "{{ talos_dir }}/nodes/{{ node }}.yaml.j2")
+    talosctl machineconfig patch <(just template "{{ talos_dir }}/machineconfig.yaml.j2") -p @<(just template "{{ talos_dir }}/nodes/{{ node }}.yaml.j2")
 
 # Generate schematic ID from Talos schematic
 [script]
@@ -82,7 +81,5 @@ upgrade-node node:
 [script]
 download-image version schematic:
     gum spin --title "Downloading Talos {{ version }} ..." --
-    curl -sfL --remove-on-error --retry 5 --retry-delay 5 --retry-all-errors
-        -o "{{ talos_dir }}/talos-{{ version }}-{{ replace_regex(schematic, '^(.{8}).*', '$1') }}.iso"
-        "https://factory.talos.dev/image/{{ schematic }}/{{ version }}/metal-amd64.iso"
+    curl -sfL --remove-on-error --retry 5 --retry-delay 5 --retry-all-errors -o "{{ talos_dir }}/talos-{{ version }}-{{ replace_regex(schematic, '^(.{8}).*', '$1') }}.iso" "https://factory.talos.dev/image/{{ schematic }}/{{ version }}/metal-amd64.iso"
     just log info "Downloaded Talos" version "{{ version }}" schematic "{{ schematic }}"
