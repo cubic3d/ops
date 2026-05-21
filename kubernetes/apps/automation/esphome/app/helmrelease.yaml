@@ -121,8 +121,8 @@ spec:
             namespace: network
         rules:
           - backendRefs:
-              - identifier: app
-                port: code-server
+              - identifier: esphome
+                port: http
 
       code-server:
         hostnames:
@@ -132,7 +132,7 @@ spec:
             namespace: network
         rules:
           - backendRefs:
-              - identifier: app
+              - identifier: code-server
                 port: http
 
     rawResources:
