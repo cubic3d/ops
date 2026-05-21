@@ -2,14 +2,14 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &appname ingress-nginx-external
+  name: &appname envoy-gateway
   namespace: &namespace network
 spec:
   targetNamespace: *namespace
   commonMetadata:
     labels:
       app.kubernetes.io/name: *appname
-  path: kubernetes/apps/network/ingress-nginx/external
+  path: kubernetes/apps/network/envoy-gateway/app
   interval: 10m
   prune: true
   wait: true
@@ -17,21 +17,19 @@ spec:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  dependsOn:
-    - name: envoy-gateway-config
 ---
 # yaml-language-server: $schema=https://cubic3d.github.io/crd-catalog/kustomize.toolkit.fluxcd.io/kustomization_v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &appname ingress-nginx-internal
+  name: &appname envoy-gateway-config
   namespace: &namespace network
 spec:
   targetNamespace: *namespace
   commonMetadata:
     labels:
       app.kubernetes.io/name: *appname
-  path: kubernetes/apps/network/ingress-nginx/internal
+  path: kubernetes/apps/network/envoy-gateway/config
   interval: 10m
   prune: true
   wait: true
@@ -40,4 +38,6 @@ spec:
     name: flux-system
     namespace: flux-system
   dependsOn:
-    - name: ingress-nginx-config
+    - name: cert-manager-config
+      namespace: cert-manager
+    - name: envoy-gateway

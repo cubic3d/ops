@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://cubic3d.github.io/crd-catalog/source.toolkit.fluxcd.io/ocirepository_v1.json
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: OCIRepository
+metadata:
+  name: ingress-nginx-internal
+spec:
+  url: oci://mirror.gcr.io/envoyproxy/gateway-helm
+  ref:
+    tag: 1.8.0
+  interval: 10m
+  layerSelector:
+    mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
+    operation: copy
