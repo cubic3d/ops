@@ -136,7 +136,7 @@ spec:
                 port: http
 
     rawResources:
-      securityPolicy-app:
+      authz-app:
         manifest:
           apiVersion: gateway.envoyproxy.io/v1alpha1
           kind: SecurityPolicy
@@ -170,7 +170,7 @@ spec:
                   - Remote-Name
                   - Remote-Email
 
-      securityPolicy-code-server:
+      authz-code-server:
         manifest:
           apiVersion: gateway.envoyproxy.io/v1alpha1
           kind: SecurityPolicy
