@@ -7,4 +7,8 @@ helmDefaults:
     - --include-crds
     - --no-hooks
 
-releases: []
+releases:
+  - name: envoy-gateway
+    namespace: network
+    chart: oci://mirror.gcr.io/envoyproxy/gateway-helm
+    version: 1.8.0
