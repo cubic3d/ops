@@ -48,7 +48,12 @@ spec:
                 drop:
                   - ALL
 
-          code-server:
+      code-server:
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        containers:
+          app:
             image:
               repository: ghcr.io/coder/code-server
               tag: 4.121.0
@@ -95,11 +100,16 @@ spec:
                       - config
 
     service:
-      app:
+      esphome:
+        controller: esphome
         ports:
           http:
             port: 6052
-          code-server:
+
+      code-server:
+        controller: code-server
+        ports:
+          http:
             port: 12321
 
     route:
@@ -110,26 +120,67 @@ spec:
           - name: envoy-internal
             namespace: network
         rules:
-          - matches:
-              - path:
-                  type: PathPrefix
-                  value: /code
-            filters:
-              - type: URLRewrite
-                urlRewrite:
-                  path:
-                    type: ReplacePrefixMatch
-                    replacePrefixMatch: /
-            backendRefs:
+          - backendRefs:
               - identifier: app
                 port: code-server
-          - matches:
-              - path:
-                  type: PathPrefix
-                  value: /
-            backendRefs:
+
+      code-server:
+        hostnames:
+          - esp-code.${domain}
+        parentRefs:
+          - name: envoy-internal
+            namespace: network
+        rules:
+          - backendRefs:
               - identifier: app
                 port: http
+
+    rawResources:
+      securityPolicy-app:
+        manifest:
+          apiVersion: gateway.envoyproxy.io/v1alpha1
+          kind: SecurityPolicy
+          spec:
+            targetRefs:
+              - group: gateway.networking.k8s.io
+                kind: HTTPRoute
+                name: esphome-app
+
+            extAuth: &extAuth
+              failOpen: false
+
+              headersToExtAuth:
+                - accept
+                - cookie
+                - authorization
+                - proxy-authorization
+                - x-forwarded-proto
+
+              http:
+                backendRefs:
+                  - name: authelia
+                    namespace: auth
+                    port: 80
+
+                path: /api/authz/ext-authz/
+
+                headersToBackend:
+                  - Remote-User
+                  - Remote-Groups
+                  - Remote-Name
+                  - Remote-Email
+
+      securityPolicy-code-server:
+        manifest:
+          apiVersion: gateway.envoyproxy.io/v1alpha1
+          kind: SecurityPolicy
+          spec:
+            targetRefs:
+              - group: gateway.networking.k8s.io
+                kind: HTTPRoute
+                name: esphome-code-server
+
+            extAuth: *extAuth
 
     persistence:
       config:

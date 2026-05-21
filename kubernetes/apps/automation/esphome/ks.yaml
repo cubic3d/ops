@@ -26,7 +26,6 @@ spec:
       namespace: secrets
   components:
     - ../../../../components/volsync
-    - ../../../../components/auth
   postBuild:
     substitute:
       app: *appname
