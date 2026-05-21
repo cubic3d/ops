@@ -2,7 +2,7 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: OCIRepository
 metadata:
-  name: ingress-nginx-internal
+  name: envoy-gateway
 spec:
   url: oci://mirror.gcr.io/envoyproxy/gateway-helm
   ref:
