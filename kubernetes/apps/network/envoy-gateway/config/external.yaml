@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=https://cubic3d.github.io/crd-catalog/gateway.networking.k8s.io/gateway_v1.json
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: envoy-external
+  annotations:
+    external-dns.alpha.kubernetes.io/target: &hostname envoy-ext.${domain}
+spec:
+  gatewayClassName: envoy
+  infrastructure:
+    annotations:
+      external-dns.alpha.kubernetes.io/hostname: *hostname
+      # TODO: Change to 192.168.40.60 after migration
+      lbipam.cilium.io/ips: 192.168.40.68
+  listeners:
+    - name: http
+      protocol: HTTP
+      port: 80
+      allowedRoutes:
+        namespaces:
+          from: Same
+    - name: https
+      protocol: HTTPS
+      port: 443
+      allowedRoutes:
+        namespaces:
+          from: All
+      tls:
+        certificateRefs:
+          - kind: Secret
+            name: main-domain-tls
+---
+# yaml-language-server: $schema=https://cubic3d.github.io/crd-catalog/gateway.envoyproxy.io/envoyextensionpolicy_v1alpha1.json
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: EnvoyExtensionPolicy
+metadata:
+  name: envoy-external
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: envoy-external
+  lua:
+    - type: ValueRef
+      valueRef:
+        name: envoy-external-extensions
+        kind: ConfigMap
+        group: v1
