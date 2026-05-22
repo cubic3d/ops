@@ -23,15 +23,19 @@ spec:
         initContainers:
           generate-schemas:
             image:
-              repository: ghcr.io/bjw-s-labs/k8s-crd-extractor
-              tag: 2026.3.11@sha256:a26844ff81905a8fac4dba61b416bed087a1944e20e38634acba5a7f65eeac93
+              repository: ghcr.io/sholdee/crd-schema-publisher
+              tag: v2026.519.317
+
+            args:
+              - extract
+              - -o /data
 
             resources:
               requests:
                 cpu: 10m
                 memory: 128Mi
               limits:
-                memory: 2Gi
+                memory: 1Gi
 
             securityContext:
               allowPrivilegeEscalation: false
@@ -70,7 +74,8 @@ spec:
                   /tmp/repo
 
                 mkdir -p /tmp/repo
-                cp -r /data/crdSchemas/. /tmp/repo/
+                cp -r /data/current. /tmp/repo/
+                rm -rf /tmp/repo/_meta
                 cd /tmp/repo
                 touch .nojekyll
                 git add .
@@ -110,19 +115,11 @@ spec:
     persistence:
       tmpfs:
         type: emptyDir
-        advancedMounts:
-          publish-k8s-schemas:
-            generate-schemas:
-              - path: /config/.datree
-                subPath: data
-              - path: /tmp
-                subPath: tmp
-
-            app:
-              - path: /data
-                subPath: data
-              - path: /tmp
-                subPath: tmp
+        globalMounts:
+          - path: /data
+            subPath: data
+          - path: /tmp
+            subPath: tmp
 
     serviceAccount:
       publish-k8s-schemas: {}
