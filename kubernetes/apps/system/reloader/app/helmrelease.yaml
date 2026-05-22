@@ -14,7 +14,3 @@ spec:
 
     reloader:
       readOnlyRootFileSystem: true
-      # TODO: Enable additional values after deploying some more dependencies
-      # podMonitor:
-      #   enabled: true
-      #   namespace: "{{ .Release.Namespace }}"

@@ -10,8 +10,3 @@ spec:
     name: *app
 
   values:
-    # TODO: Enable additional values after deploying some more dependencies
-    # metrics:
-    #   enabled: true
-    # serviceMonitor:
-    #   enabled: true

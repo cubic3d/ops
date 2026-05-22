@@ -10,10 +10,6 @@ spec:
     name: *app
 
   values:
-    # TODO: Enable additional values after deploying some more dependencies
-    # prometheus:
-    #   enable: true
-
     master:
       resources:
         requests:

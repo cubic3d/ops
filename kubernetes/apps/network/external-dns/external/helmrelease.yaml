@@ -45,10 +45,6 @@ spec:
       limits:
         memory: 42M
 
-    # TODO: Enable additional values after deploying some more dependencies
-    # serviceMonitor:
-    #   enabled: true
-
     sources:
       - ingress
       - crd

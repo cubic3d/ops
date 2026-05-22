@@ -133,7 +133,6 @@ spec:
         name: repo1
         s3: *nas
 
-  # TODO: Add Podmonitor after deploying monitoring stack
   monitoring:
     pgmonitor:
       exporter:
