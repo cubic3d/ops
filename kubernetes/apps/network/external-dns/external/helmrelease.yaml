@@ -29,6 +29,7 @@ spec:
       - --crd-source-kind=DNSEndpoint
       - --ignore-ingress-tls-spec
       - --ingress-class=external
+      - --gateway-name=envoy-external
 
     podAnnotations:
       secret.reloader.stakater.com/reload: external-dns-external
