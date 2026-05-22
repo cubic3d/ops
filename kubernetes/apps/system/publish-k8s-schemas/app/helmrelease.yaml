@@ -75,7 +75,7 @@ spec:
                   /tmp/repo
 
                 mkdir -p /tmp/repo
-                cp -r /data/current. /tmp/repo/
+                cp -r /data/current/. /tmp/repo/
                 rm -rf /tmp/repo/_meta
                 cd /tmp/repo
                 touch .nojekyll
