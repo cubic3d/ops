@@ -71,13 +71,10 @@ spec:
           http:
             port: 8080
 
-    ingress:
+    route:
       app:
-        className: external
-        hosts:
-          - host: s.${domain}
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
+        hostnames:
+          - s.${domain}
+        parentRefs:
+          - name: envoy-external
+            namespace: network

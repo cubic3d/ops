@@ -5,6 +5,6 @@ metadata:
   name: cloudflared-tunnel
 spec:
   endpoints:
-    - dnsName: ingress-ext.${domain}
+    - dnsName: envoy-ext.${domain}
       recordType: CNAME
       targets: ["${cloudflare_tunnel_id}.cfargotunnel.com"]

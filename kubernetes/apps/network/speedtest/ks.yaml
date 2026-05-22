@@ -17,3 +17,8 @@ spec:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
+  components:
+    - ../../../../components/auth
+  postBuild:
+    substitute:
+      app: *appname

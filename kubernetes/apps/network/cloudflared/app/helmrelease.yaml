@@ -100,6 +100,6 @@ spec:
               - hostname: "*.${domain}"
                 originRequest:
                   http2Origin: true
-                  originServerName: ingress-ext.${domain}
-                service: https://ingress-nginx-external-controller.network.svc.cluster.local:443
+                  originServerName: envoy-ext.${domain}
+                service: https://envoy-external.{{ .Release.Namespace }}.svc.cluster.local:443
               - service: http_status:404

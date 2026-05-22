@@ -16,7 +16,11 @@ spec:
   values:
     ingress:
       enabled: true
-      className: external
+      gatewayAPI:
+        enabled: true
+        parentRefs:
+          - name: envoy-external
+            namespace: network
 
     pod:
       kind: Deployment

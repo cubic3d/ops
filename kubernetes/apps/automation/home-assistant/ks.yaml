@@ -26,7 +26,9 @@ spec:
       namespace: database
   components:
     - ../../../../components/volsync
+    - ../../../../components/auth
   postBuild:
     substitute:
       app: *appname
       volsync_capacity: 5Gi
+      auth_target: home-assistant-code-server

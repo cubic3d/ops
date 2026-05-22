@@ -88,34 +88,31 @@ spec:
           http:
             port: *port
 
-    ingress:
+    route:
       app:
-        className: internal
-        hosts:
-          - host: bookboss.${domain}
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
+        hostnames:
+          - bookboss.${domain}
+        parentRefs:
+          - name: envoy-internal
+            namespace: network
 
       sync:
-        className: external
-        hosts:
-          - host: bookboss-sync.${domain}
-            paths:
-              - path: /opds
-                service:
-                  identifier: app
-                  port: http
-              - path: /koreader
-                service:
-                  identifier: app
-                  port: http
-              - path: /kobo
-                service:
-                  identifier: app
-                  port: http
+        hostnames:
+          - bookboss-sync.${domain}
+        parentRefs:
+          - name: envoy-external
+            namespace: network
+        rules:
+          - matches:
+              - path:
+                  type: PathPrefix
+                  value: /opds
+              - path:
+                  type: PathPrefix
+                  value: /koreader
+              - path:
+                  type: PathPrefix
+                  value: /kobo
 
     persistence:
       data:

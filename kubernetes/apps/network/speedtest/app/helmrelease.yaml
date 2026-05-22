@@ -42,17 +42,10 @@ spec:
           http:
             port: 8080
 
-    ingress:
+    route:
       app:
-        className: external
-        annotations:
-          nginx.ingress.kubernetes.io/auth-url: http://authelia.auth.svc.cluster.local/api/authz/auth-request
-          nginx.ingress.kubernetes.io/auth-signin: https://auth.${domain}?rm=$request_method
-          nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
-        hosts:
-          - host: speed.${domain}
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
+        hostnames:
+          - speed.${domain}
+        parentRefs:
+          - name: envoy-external
+            namespace: network

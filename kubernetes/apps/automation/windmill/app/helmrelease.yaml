@@ -107,4 +107,10 @@ spec:
                         workerGroup: native
 
     ingress:
-      className: internal
+      enabled: false
+
+    httproute:
+      enabled: true
+      parentRefs:
+        - name: envoy-internal
+          namespace: network

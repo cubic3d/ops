@@ -20,6 +20,12 @@ spec:
   dependsOn:
     - name: snapshot-controller
       namespace: system
+  components:
+    - ../../../../components/auth
+  postBuild:
+    substitute:
+      app: *appname
+      auth_target: longhorn-httproute
 ---
 # yaml-language-server: $schema=https://cubic3d.github.io/crd-catalog/kustomize.toolkit.fluxcd.io/kustomization_v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
