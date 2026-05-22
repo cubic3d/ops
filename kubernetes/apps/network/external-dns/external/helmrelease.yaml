@@ -51,6 +51,7 @@ spec:
     sources:
       - ingress
       - crd
+      - gateway-httproute
 
     triggerLoopOnEvent: true
     txtOwnerId: main
