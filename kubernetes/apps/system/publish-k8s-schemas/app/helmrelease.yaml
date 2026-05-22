@@ -28,7 +28,8 @@ spec:
 
             args:
               - extract
-              - -o /data
+              - -o
+              - /data
 
             resources:
               requests:
