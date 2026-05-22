@@ -21,4 +21,4 @@ spec:
     - name: external-secrets-stores
       namespace: secrets
     - name: external-dns-external
-    - name: ingress-nginx-external
+    - name: envoy-gateway-config

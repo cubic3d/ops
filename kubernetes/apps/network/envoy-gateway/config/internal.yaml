@@ -10,8 +10,7 @@ spec:
   infrastructure:
     annotations:
       external-dns.alpha.kubernetes.io/hostname: *hostname
-      # TODO: Change to 192.168.40.61 after migration
-      lbipam.cilium.io/ips: 192.168.40.69
+      lbipam.cilium.io/ips: 192.168.40.61
   listeners:
     - name: http
       protocol: HTTP
