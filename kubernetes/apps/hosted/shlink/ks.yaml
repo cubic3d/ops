@@ -24,6 +24,8 @@ spec:
       namespace: database
     - name: crunchy-postgres-operator-secretstore
       namespace: database
+  components:
+    - ../../../../components/auth
 ---
 # yaml-language-server: $schema=https://cubic3d.github.io/crd-catalog/kustomize.toolkit.fluxcd.io/kustomization_v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1

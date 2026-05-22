@@ -28,6 +28,7 @@ spec:
       namespace: database
   components:
     - ../../../../components/volsync
+    - ../../../../components/auth
   postBuild:
     substitute:
       app: *appname

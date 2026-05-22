@@ -122,26 +122,75 @@ spec:
           http:
             port: *port
 
-    ingress:
-      app:
-        className: internal
-        annotations:
-          nginx.ingress.kubernetes.io/auth-url: http://authelia.auth.svc.cluster.local/api/authz/auth-request
-          nginx.ingress.kubernetes.io/auth-signin: https://auth.${domain}?rm=$request_method
-          nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
-        hosts:
-          - host: kopia-nas.${domain}
-            paths:
-              - path: /
-                service:
-                  identifier: nas
-                  port: http
-          - host: kopia-cloud.${domain}
-            paths:
-              - path: /
-                service:
-                  identifier: cloud
-                  port: http
+    route:
+      nas:
+        hostnames:
+          - kopia-nas.${domain}
+        parentRefs:
+          - name: envoy-internal
+            namespace: network
+        rules:
+          - backendRefs:
+              - identifier: nas
+                port: http
+
+      cloud:
+        hostnames:
+          - kopia-cloud.${domain}
+        parentRefs:
+          - name: envoy-internal
+            namespace: network
+        rules:
+          - backendRefs:
+              - identifier: cloud
+                port: http
+
+    rawResources:
+      kopia-nas:
+        manifest:
+          apiVersion: gateway.envoyproxy.io/v1alpha1
+          kind: SecurityPolicy
+          spec:
+            targetRefs:
+              - group: gateway.networking.k8s.io
+                kind: HTTPRoute
+                name: kopia-nas
+
+            extAuth: &extAuth
+              failOpen: false
+
+              headersToExtAuth:
+                - accept
+                - cookie
+                - authorization
+                - proxy-authorization
+                - x-forwarded-proto
+
+              http:
+                backendRefs:
+                  - name: authelia
+                    namespace: auth
+                    port: 80
+
+                path: /api/authz/ext-authz/
+
+                headersToBackend:
+                  - Remote-User
+                  - Remote-Groups
+                  - Remote-Name
+                  - Remote-Email
+
+      kopia-cloud:
+        manifest:
+          apiVersion: gateway.envoyproxy.io/v1alpha1
+          kind: SecurityPolicy
+          spec:
+            targetRefs:
+              - group: gateway.networking.k8s.io
+                kind: HTTPRoute
+                name: kopia-cloud
+
+            extAuth: *extAuth
 
     persistence:
       config-file:

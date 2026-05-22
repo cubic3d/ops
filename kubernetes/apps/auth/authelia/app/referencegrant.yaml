@@ -18,6 +18,8 @@ spec:
     - <<: *policy
       namespace: media
     - <<: *policy
+      namespace: nx
+    - <<: *policy
       namespace: network
     - <<: *policy
       namespace: system

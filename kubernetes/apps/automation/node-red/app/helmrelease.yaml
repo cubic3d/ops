@@ -73,16 +73,13 @@ spec:
           http:
             port: 1880
 
-    ingress:
+    route:
       app:
-        className: internal
-        hosts:
-          - host: r.${domain}
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
+        hostnames:
+          - r.${domain}
+        parentRefs:
+          - name: envoy-internal
+            namespace: network
 
     persistence:
       data:
