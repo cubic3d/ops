@@ -113,6 +113,9 @@ spec:
               - path:
                   type: PathPrefix
                   value: /kobo
+            backendRefs:
+              - identifier: app
+                port: http
 
     persistence:
       data:
