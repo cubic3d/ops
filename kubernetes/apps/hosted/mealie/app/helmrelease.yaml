@@ -35,8 +35,6 @@ spec:
               OIDC_CLIENT_ID: mealie
               OIDC_ADMIN_GROUP: admins
               OIDC_PROVIDER_NAME: Yachthafen ID
-              OPENAI_BASE_URL: https://openrouter.ai/api/v1
-              OPENAI_MODEL: google/gemini-3-flash-preview
 
             probes:
               liveness: &probes
