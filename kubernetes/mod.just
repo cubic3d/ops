@@ -135,9 +135,9 @@ snapshot-all:
 # Render local KS
 [script]
 render-ks ns name:
-    flux-local build ks --path "flux/cluster" --namespace "{{ ns }}" "{{ name }}"
+    flate build ks --namespace "{{ ns }}" "{{ name }}"
 
 # Render local HelmRelease
 [script]
 render-hr ns name:
-    flux-local build hr --path "flux/cluster" --namespace "{{ ns }}" "{{ name }}"
+    flate build hr --namespace "{{ ns }}" "{{ name }}"

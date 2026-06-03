@@ -3,13 +3,13 @@ KUBECONFIG = "{{config_root}}/kubeconfig"
 TALOSCONFIG = "{{config_root}}/talosconfig"
 JUST_UNSTABLE = 1
 MINIJINJA_CONFIG_FILE = "{{config_root}}/.minijinja.toml"
+FLATE_PATH = "{{config_root}}/kubernetes/flux/cluster"
 
 [tools]
 ansible = "latest"
 flux2 = "latest"
 helmfile = "latest"
 kubectl = "latest"
-"pipx:flux-local" = "latest"
 sops = "latest"
 talosctl = "latest"
 task = "latest"
@@ -21,4 +21,5 @@ just = "latest"
 gum = "latest"
 kustomize = "latest"
 helm = "latest"
+"github:home-operations/flate" = "latest"
 # 1password is provided by the system
