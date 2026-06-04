@@ -21,6 +21,10 @@ spec:
               repository: ghcr.io/freshrss/freshrss
               tag: 1.29.1
 
+            envFrom:
+              - secretRef:
+                  name: freshrss
+
             env:
               TZ: Europe/Berlin
               CRON_MIN: "*"
