@@ -329,7 +329,7 @@ spec:
                 - email
                 - groups
               redirect_uris:
-                - https://freshrss.${domain}/i/oidc/
+                - https://freshrss.${domain}/i/oidc
 
     secret:
       existingSecret: authelia
