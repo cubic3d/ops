@@ -1,0 +1,90 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app freshrss
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: *app
+
+  values:
+    controllers:
+      freshrss:
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        containers:
+          app:
+            image:
+              repository: ghcr.io/freshrss/freshrss
+              tag: 1.29.1
+
+            env:
+              TZ: Europe/Berlin
+              CRON_MIN: "*"
+              DOMAIN: freshrss.${domain}
+              LISTEN: &port 8080
+
+              OIDC_ENABLED: "1"
+              OIDC_PROVIDER_METADATA_URL: https://auth.${domain}/.well-known/openid-configuration
+              OIDC_CLIENT_ID: freshrss
+              OIDC_REMOTE_USER_CLAIM: preferred_username
+              OIDC_SCOPES: openid groups email profile
+              OIDC_X_FORWARDED_HEADERS: X-Forwarded-Host X-Forwarded-Port X-Forwarded-Proto
+
+            probes:
+              liveness: &probes
+                enabled: true
+              readiness: *probes
+              startup: *probes
+
+            resources:
+              requests:
+                cpu: 12m
+                memory: 128M
+              limits:
+                memory: 512M
+
+    defaultPodOptions:
+      hostUsers: false
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: node.longhorn.io/create-default-disk
+                    operator: In
+                    values:
+                      - "true"
+                      - config
+
+    service:
+      app:
+        ports:
+          http:
+            port: *port
+
+    route:
+      app:
+        hostnames:
+          - freshrss.${domain}
+        parentRefs:
+          - name: envoy-internal
+            namespace: network
+
+    persistence:
+      data:
+        existingClaim: freshrss
+        globalMounts:
+          - path: /var/www/FreshRSS/data
+            subPath: data
+          - path: /var/www/FreshRSS/extensions
+            subPath: extensions
+
+      tmpfs:
+        type: emptyDir
+        globalMounts:
+          - path: /var/www/FreshRSS/cache
+            subPath: cache
