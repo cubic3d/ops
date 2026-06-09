@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/siderolabs/talos/refs/heads/release-1.12/website/content/v1.12/schemas/config.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/siderolabs/talos/refs/heads/release-1.13/website/content/v1.13/schemas/config.schema.json
 version: v1alpha1
 debug: false
 persist: true
@@ -13,7 +13,7 @@ machine:
     - 127.0.0.1
     - k8s.{{ '{{ op://cluster/env/domain }}' }}
   kubelet:
-    image: ghcr.io/siderolabs/kubelet:v1.36.1
+    image: ghcr.io/siderolabs/kubelet:{{ ENV.K8S_VERSION }}
     extraArgs:
       rotate-server-certificates: "true"
     extraMounts:
@@ -47,7 +47,7 @@ machine:
       validSubnets:
         - 192.168.40.0/24
   install:
-    image: factory.talos.dev/metal-installer/f4817031cd07378f3146b224cdbd210cce736b7d932083a82e913d397f4ac381:v1.13.2
+    image: factory.talos.dev/metal-installer/{{ ENV.SCHEMATIC }}:{{ ENV.TALOS_VERSION }}
     wipe: false
   files:
     - op: create
@@ -147,7 +147,7 @@ cluster:
   serviceAccount:
     key: op://cluster/talos/cluster_serviceaccount_key
   apiServer:
-    image: registry.k8s.io/kube-apiserver:v1.36.1
+    image: registry.k8s.io/kube-apiserver:{{ ENV.K8S_VERSION }}
     extraArgs:
       enable-aggregator-routing: "true"
       feature-gates: HPAScaleToZero=true
@@ -161,12 +161,12 @@ cluster:
       rules:
         - level: Metadata
   controllerManager:
-    image: registry.k8s.io/kube-controller-manager:v1.36.1
+    image: registry.k8s.io/kube-controller-manager:{{ ENV.K8S_VERSION }}
   proxy:
     disabled: true
-    image: registry.k8s.io/kube-proxy:v1.36.1
+    image: registry.k8s.io/kube-proxy:{{ ENV.K8S_VERSION }}
   scheduler:
-    image: registry.k8s.io/kube-scheduler:v1.36.1
+    image: registry.k8s.io/kube-scheduler:{{ ENV.K8S_VERSION }}
     config:
       apiVersion: kubescheduler.config.k8s.io/v1
       kind: KubeSchedulerConfiguration

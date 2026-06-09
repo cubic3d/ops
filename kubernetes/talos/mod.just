@@ -31,11 +31,14 @@ apply-cluster *args:
 [script]
 render-config node:
     export IS_CONTROLPLANE="$(just talos machine-controller {{ node }})"
+    export SCHEMATIC="$(just talos schematic-id)"
+    export TALOS_VERSION="$(just talos talos-version)"
+    export K8S_VERSION="$(just talos k8s-version)"
     talosctl machineconfig patch <(just template "{{ talos_dir }}/machineconfig.yaml.j2") -p @<(just template "{{ talos_dir }}/nodes/{{ node }}.yaml.j2")
 
 # Generate schematic ID from Talos schematic
 [script]
-gen-schematic-id:
+schematic-id:
     curl -sX POST --data-binary @<(just template "{{ talos_dir }}/schematic.yaml.j2") "https://factory.talos.dev/schematics" | jq -r '.id'
 
 # Check if a node is a control plane node
@@ -49,6 +52,18 @@ machine-controller node:
 [script]
 machine-image node:
     talosctl --nodes {{ node }} get machineconfig -o yaml | yq -e 'select(.metadata.id == "v1alpha1") | .spec' | yq -e 'select(.machine) | .machine.install.image'
+
+# Get Talos version from config
+[private]
+[script]
+talos-version:
+    yq eval '.talos_version' "{{ talos_dir }}/version.yaml"
+
+# Get Kubernetes version from config
+[private]
+[script]
+k8s-version:
+    yq eval '.k8s_version' "{{ talos_dir }}/version.yaml"
 
 # Reboot a given Talos node
 [script]
