@@ -28,7 +28,18 @@ spec:
             probes:
               liveness: &probes
                 enabled: true
-              readiness: *probes
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/health/live
+                    port: *port
+              readiness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/health/ready
+                    port: *port
               startup: *probes
 
             resources:
