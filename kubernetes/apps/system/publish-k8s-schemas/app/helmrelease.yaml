@@ -82,6 +82,7 @@ spec:
                 rm -rf /tmp/repo/_meta
                 cd /tmp/repo
                 touch .nojekyll
+                sed -i '\|<div class="stat">Updated|d' index.html
                 git add .
 
                 if git diff --cached --quiet; then
