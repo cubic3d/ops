@@ -31,6 +31,9 @@ spec:
               - -o
               - /data
 
+            env:
+              BASE_PATH: /crd-catalog
+
             resources:
               requests:
                 cpu: 10m
