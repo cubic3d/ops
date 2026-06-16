@@ -98,9 +98,7 @@ node-shell node:
 postgres-dump db file:
     pod="$(kubectl get pod -n database -l '{{ crunchy_postgres_primary_selector }}' -o jsonpath='{.items[0].metadata.name}')"
     [ -n "$pod" ] || { echo "No Crunchy Postgres primary pod found" >&2; exit 1; }
-    kubectl exec -n database "$pod" -c database --
-      pg_dump --username=postgres --dbname="{{ db }}" --format=custom
-      > "{{ file }}"
+    kubectl exec -n database "$pod" -c database -- pg_dump --username=postgres --dbname="{{ db }}" --format=custom > "{{ file }}"
 
 # Restore a local dump file into a database on the Crunchy Postgres primary pod
 [script]
@@ -108,17 +106,14 @@ postgres-dump db file:
 postgres-restore db file:
     pod="$(kubectl get pod -n database -l '{{ crunchy_postgres_primary_selector }}' -o jsonpath='{.items[0].metadata.name}')"
     [ -n "$pod" ] || { echo "No Crunchy Postgres primary pod found" >&2; exit 1; }
-    kubectl exec -i -n database "$pod" -c database --
-      pg_restore --username=postgres --dbname="{{ db }}" --clean --if-exists --no-owner --no-privileges
-      < "{{ file }}"
+    kubectl exec -i -n database "$pod" -c database -- pg_restore --username=postgres --dbname="{{ db }}" --clean --if-exists --no-owner --no-privileges < "{{ file }}"
 
 # Open a psql shell on the Crunchy Postgres primary pod
 [script]
 postgres-psql db='postgres':
     pod="$(kubectl get pod -n database -l '{{ crunchy_postgres_primary_selector }}' -o jsonpath='{.items[0].metadata.name}')"
     [ -n "$pod" ] || { echo "No Crunchy Postgres primary pod found" >&2; exit 1; }
-    kubectl exec -it -n database "$pod" -c database --
-      psql --username=postgres --dbname="{{ db }}"
+    kubectl exec -it -n database "$pod" -c database -- psql --username=postgres --dbname="{{ db }}"
 
 # Create volsync snapshot
 [script]
