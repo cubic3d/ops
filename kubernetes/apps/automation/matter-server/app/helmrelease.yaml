@@ -23,6 +23,11 @@ spec:
               }]
 
           securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+            fsGroupChangePolicy: OnRootMismatch
             sysctls:
               - name: net.ipv6.conf.net1.forwarding
                 value: "0"
@@ -36,6 +41,17 @@ spec:
                 value: "64"
               - name: net.ipv6.conf.net1.autoconf
                 value: "0"
+
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                  - matchExpressions:
+                      - key: node.longhorn.io/create-default-disk
+                        operator: In
+                        values:
+                          - "true"
+                          - config
 
         containers:
           app:
@@ -72,24 +88,6 @@ spec:
               capabilities:
                 drop:
                   - ALL
-
-    defaultPodOptions:
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
-        fsGroupChangePolicy: OnRootMismatch
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: node.longhorn.io/create-default-disk
-                    operator: In
-                    values:
-                      - "true"
-                      - config
 
     service:
       app:
