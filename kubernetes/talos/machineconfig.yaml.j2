@@ -41,6 +41,8 @@ machine:
     extraConfig:
       maxPods: 150
       serializeImagePulls: false
+      allowedUnsafeSysctls:
+        - net.ipv6.conf.net1.*
     defaultRuntimeSeccompProfileEnabled: true
     disableManifestsDirectory: true
     nodeIP:
