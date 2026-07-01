@@ -6,7 +6,7 @@ metadata:
 spec:
   url: oci://mirror.gcr.io/envoyproxy/gateway-helm
   ref:
-    tag: v1.8.1
+    tag: v1.8.2
   interval: 10m
   layerSelector:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
