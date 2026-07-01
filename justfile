@@ -24,7 +24,7 @@ log lvl msg *args:
 [private]
 [script]
 template file *args:
-    minijinja "{{ file }}" {{ args }} | op inject
+    minijinja-cli "{{ file }}" {{ args }} | op inject
 
 
 # Rotate all SOPS secrets
