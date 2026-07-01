@@ -1,0 +1,112 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app matter-server
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: *app
+
+  values:
+    controllers:
+      matter-server:
+        pod:
+          annotations:
+            k8s.v1.cni.cncf.io/networks: |
+              [{
+                "name":"multus-iot",
+                "namespace": "network",
+                "ips": ["192.168.10.62/24", "fd00:c01d:1ced:10:ffff::1/64"],
+                "mac": "15:14:58:bc:4a:ba"
+              }]
+
+          securityContext:
+            sysctls:
+              - name: net.ipv6.conf.net1.forwarding
+                value: "0"
+              - name: net.ipv6.conf.net1.accept_ra
+                value: "1"
+              - name: net.ipv6.conf.net1.accept_ra_defrtr
+                value: "1"
+              - name: net.ipv6.conf.net1.accept_ra_rtr_pref
+                value: "1"
+              - name: net.ipv6.conf.net1.accept_ra_rt_info_max_plen
+                value: "64"
+              - name: net.ipv6.conf.net1.autoconf
+                value: "0"
+
+        containers:
+          app:
+            image:
+              repository: ghcr.io/matter-js/matterjs-server
+              tag: 1.1.6
+
+            env:
+              TZ: Europe/Berlin
+              PORT: &port 5580
+              PRIMARY_INTERFACE: net1
+
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: *port
+              readiness: *probes
+              startup: *probes
+
+            resources:
+              requests:
+                cpu: 5m
+                memory: 128Mi
+              limits:
+                memory: 256Mi
+
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities:
+                drop:
+                  - ALL
+
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: node.longhorn.io/create-default-disk
+                    operator: In
+                    values:
+                      - "true"
+                      - config
+
+    service:
+      app:
+        ports:
+          http:
+            port: *port
+
+    route:
+      app:
+        hostnames:
+          - matter.${domain}
+        parentRefs:
+          - name: envoy-internal
+            namespace: network
+
+    persistence:
+      data:
+        existingClaim: matter-server
+      tmp:
+        type: emptyDir
