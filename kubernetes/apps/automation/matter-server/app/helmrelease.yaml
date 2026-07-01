@@ -63,6 +63,7 @@ spec:
               TZ: Europe/Berlin
               PORT: &port 5580
               PRIMARY_INTERFACE: net1
+              PRODUCTION_MODE: "true"
 
             probes:
               liveness: &probes
