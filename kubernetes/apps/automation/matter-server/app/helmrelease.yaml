@@ -63,6 +63,7 @@ spec:
               TZ: Europe/Berlin
               PORT: &port 5580
               PRIMARY_INTERFACE: net1
+              LISTEN_ADDRESS: eth0
               PRODUCTION_MODE: "true"
 
             probes:
@@ -95,14 +96,6 @@ spec:
         ports:
           http:
             port: *port
-
-    route:
-      app:
-        hostnames:
-          - matter.${domain}
-        parentRefs:
-          - name: envoy-internal
-            namespace: network
 
     persistence:
       data:
