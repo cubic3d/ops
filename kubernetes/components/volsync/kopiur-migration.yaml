@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=https://cubic3d.github.io/crd-catalog/kopiur.home-operations.com/snapshotpolicy_v1alpha1.json
+apiVersion: kopiur.home-operations.com/v1alpha1
+kind: SnapshotPolicy
+metadata:
+  name: ${app}
+  annotations:
+    kopiur.home-operations.com/allow-identity-change: "true"
+spec:
+  mover:
+    cache:
+      capacity: ${volsync_capacity:=1Gi}
+      mode: Ephemeral
+      storageClassName: openebs-hostpath
+    securityContext:
+      runAsUser: ${volsync_puid:=2000}
+      runAsGroup: ${volsync_pgid:=2000}
+  staging:
+    storageClassName: ${volsync_storageclass:=longhorn-tmp}
+  repository:
+    kind: ClusterRepository
+    name: nas
+  retention:
+    keepHourly: 24
+    keepDaily: 7
+    keepWeekly: 4
+  sources:
+    - pvc:
+        name: "${volsync_claim:-${app}}"
+  verification:
+    deep:
+      schedule:
+        cron: H 5 1 * *
+    quick:
+      schedule:
+        cron: H 3 * * *
+  volumeSnapshotClassName: ${volsync_snapshotclass:=longhorn}
+  credentialProjection:
+    enabled: true
+---
+# yaml-language-server: $schema=https://cubic3d.github.io/crd-catalog/kopiur.home-operations.com/snapshotschedule_v1alpha1.json
+apiVersion: kopiur.home-operations.com/v1alpha1
+kind: SnapshotSchedule
+metadata:
+  name: ${app}
+spec:
+  policyRef:
+    name: ${app}
+  schedule:
+    cron: H * * * *
