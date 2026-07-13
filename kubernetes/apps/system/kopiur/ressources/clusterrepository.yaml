@@ -38,3 +38,6 @@ spec:
 
   scheduleDefaults:
     timezone: Europe/Berlin
+
+  moverDefaults:
+    ttlSecondsAfterFinished: 300
