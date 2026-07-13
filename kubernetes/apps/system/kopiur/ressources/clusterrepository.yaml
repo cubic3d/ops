@@ -20,6 +20,11 @@ spec:
 
   server:
     namespace: system
+    auth:
+      secretRef:
+        name: kopiur-nas
+        usernameKey: UI_USERNAME
+        passwordKey: UI_PASSWORD
 
   allowedNamespaces:
     all: true
