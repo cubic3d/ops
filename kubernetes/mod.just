@@ -115,16 +115,16 @@ postgres-psql db='postgres':
     [ -n "$pod" ] || { echo "No Crunchy Postgres primary pod found" >&2; exit 1; }
     kubectl exec -it -n database "$pod" -c database -- psql --username=postgres --dbname="{{ db }}"
 
-# Create volsync snapshot
+# Trigger kopiur snapshot
 [script]
 snapshot ns name:
-    kubectl -n "{{ ns }}" patch replicationsources "{{ name }}" --type merge -p '{"spec":{"trigger":{"manual":"$(date +%s)"}}}'
+    kubectl kopiur -n "{{ ns }}" snapshot now --policy "{{ name }}"
 
-# Create volsync snapshot for all replicationsources
+# Trigger kopiur snapshot for all snapshotpolicies
 [script]
 snapshot-all:
-    kubectl get replicationsources --no-headers -A | while read -r ns name _; do
-      just k8s snapshot "$ns" "$name"
+    kubectl get snapshotpolicies.kopiur.home-operations.com --no-headers -A | while read -r ns name _; do
+      just k8s snapshot-kopiur "$ns" "$name"
     done
 
 # Render local KS
