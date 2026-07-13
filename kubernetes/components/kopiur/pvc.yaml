@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ${kopiur_claim:=${app}}
+  labels:
+    app.kubernetes.io/name: ${app}
+spec:
+  accessModes:
+    - ${kopiur_accessmodes:=ReadWriteOnce}
+  dataSourceRef:
+    kind: Restore
+    apiGroup: kopiur.home-operations.com
+    name: ${app}
+  resources:
+    requests:
+      storage: ${kopiur_capacity:=1Gi}
+  storageClassName: ${kopiur_storageclass:=longhorn}
