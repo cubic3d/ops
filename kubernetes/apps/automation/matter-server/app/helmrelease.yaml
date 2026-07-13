@@ -65,6 +65,7 @@ spec:
               PRIMARY_INTERFACE: net1
               LISTEN_ADDRESS: eth0
               PRODUCTION_MODE: "true"
+              ENABLE_TIME_SYNC: "true"
 
             probes:
               liveness: &probes
