@@ -1,0 +1,67 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app govee2mqtt
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: *app
+
+  values:
+    controllers:
+      govee2mqtt:
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        pod:
+          annotations:
+            k8s.v1.cni.cncf.io/networks: |
+              [{
+                "name":"multus-iot",
+                "namespace": "network",
+                "ips": ["192.168.10.63/24", "fd00:c01d:1ced:10:ffff::2/64"],
+                "mac": "36:a2:c5:4a:7c:1a"
+              }]
+
+        containers:
+          app:
+            image:
+              repository: ghcr.io/wez/govee2mqtt
+              tag: 2026.03.25-ab9deb66
+
+            envFrom:
+              - secretRef:
+                  name: govee2mqtt
+
+            env:
+              TZ: Europe/Berlin
+              GOVEE_MQTT_HOST: mosquitto.database.svc.cluster.local
+              GOVEE_TEMPERATURE_SCALE: C
+
+            resources:
+              requests:
+                cpu: 10m
+                memory: 128Mi
+              limits:
+                memory: 512Mi
+
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities:
+                drop:
+                  - ALL
+
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 2000
+        runAsGroup: 2000
+        fsGroup: 2000
+        fsGroupChangePolicy: OnRootMismatch
+
+    persistence:
+      data:
+        type: emptyDir
