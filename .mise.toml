@@ -11,6 +11,7 @@ flux2 = "latest"
 helmfile = "latest"
 kubectl = "latest"
 "github:home-operations/kopiur" = { version = "latest", rename_exe = "kubectl-kopiur" }
+"github:clbx/kubectl-browse-pvc" = { version = "latest", rename_exe = "kubectl-browse_pvc" }
 sops = "latest"
 talosctl = "latest"
 task = "latest"
