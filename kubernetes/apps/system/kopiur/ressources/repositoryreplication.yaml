@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://cubic3d.github.io/crd-catalog/kopiur.home-operations.com/repositoryreplication_v1alpha1.json
+apiVersion: kopiur.home-operations.com/v1alpha1
+kind: RepositoryReplication
+metadata:
+  name: e2
+spec:
+  sourceRef:
+    kind: ClusterRepository
+    name: nas
+
+  destination:
+    s3:
+      endpoint: t3u7.fra3.idrivee2-58.com
+      bucket: kopiur
+      auth:
+        secretRef:
+          name: kopiur-e2
+
+  schedule:
+    cron: H 6 * * *
+
+  sync:
+    parallel: 8
+    deleteExtra: true
