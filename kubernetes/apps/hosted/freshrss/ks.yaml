@@ -30,4 +30,4 @@ spec:
     substitute:
       app: *appname
       volsync_puid: "0"
-      volsync_pgid: "82"
+      volsync_pgid: "33"
