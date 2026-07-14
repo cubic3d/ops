@@ -11,6 +11,7 @@ spec:
   destination:
     s3:
       endpoint: t3u7.fra3.idrivee2-58.com
+      region: eu-central-2
       bucket: kopiur
       auth:
         secretRef:
