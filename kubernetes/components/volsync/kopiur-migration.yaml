@@ -23,6 +23,8 @@ spec:
     keepHourly: 24
     keepDaily: 7
     keepWeekly: 4
+  compression:
+    compressor: zstd-fastest
   sources:
     - pvc:
         name: "${volsync_claim:-${app}}"
