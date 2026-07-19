@@ -20,15 +20,15 @@ spec:
   dependsOn:
     - name: longhorn
       namespace: longhorn-system
-    - name: volsync
+    - name: kopiur
       namespace: system
     - name: mosquitto
       namespace: database
   components:
-    - ../../../../components/volsync
+    - ../../../../components/kopiur
     - ../../../../components/auth
   postBuild:
     substitute:
       app: *appname
-      volsync_capacity: 5Gi
+      kopiur_capacity: 5Gi
       auth_target: home-assistant-code-server
