@@ -22,12 +22,12 @@ spec:
       namespace: secrets
     - name: longhorn
       namespace: longhorn-system
-    - name: volsync
+    - name: kopiur
       namespace: system
   components:
-    - ../../../../components/volsync
+    - ../../../../components/kopiur
   postBuild:
     substitute:
       app: *appname
-      volsync_puid: "0"
-      volsync_pgid: "33"
+      kopiur_mover_uid: "0"
+      kopiur_mover_gid: "33"

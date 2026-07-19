@@ -22,10 +22,10 @@ spec:
       namespace: secrets
     - name: longhorn
       namespace: longhorn-system
-    - name: volsync
+    - name: kopiur
       namespace: system
   components:
-    - ../../../../components/volsync
+    - ../../../../components/kopiur
   postBuild:
     substitute:
       app: *appname

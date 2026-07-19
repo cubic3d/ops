@@ -24,13 +24,13 @@ spec:
       namespace: longhorn-system
     - name: openebs
       namespace: openebs
-    - name: volsync
+    - name: kopiur
       namespace: system
   components:
-    - ../../../../components/volsync
+    - ../../../../components/kopiur
   postBuild:
     substitute:
       app: *appname
-      volsync_capacity: 2Gi
-      volsync_puid: "1000"
-      volsync_pgid: "1000"
+      kopiur_capacity: 2Gi
+      kopiur_mover_uid: "1000"
+      kopiur_mover_gid: "1000"
