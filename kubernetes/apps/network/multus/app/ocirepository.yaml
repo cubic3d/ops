@@ -4,9 +4,9 @@ kind: OCIRepository
 metadata:
   name: multus
 spec:
-  url: oci://ghcr.io/bjw-s-labs/helm/multus
+  url: oci://ghcr.io/home-operations/charts/multus
   ref:
-    tag: 1.3.2
+    tag: 0.1.0
   interval: 10m
   layerSelector:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip

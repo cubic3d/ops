@@ -16,7 +16,3 @@ spec:
           cpu: 10m
         limits:
           memory: 32Mi
-
-    cni:
-      netPath: /etc/cni/net.d
-      binPath: /opt/cni/bin
