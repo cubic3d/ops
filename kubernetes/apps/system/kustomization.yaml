@@ -5,7 +5,6 @@ namespace: system
 resources:
   - descheduler/ks.yaml
   - generic-device-plugin/ks.yaml
-  - kopia/ks.yaml
   - kopiur/ks.yaml
   - kubelet-csr-approver/ks.yaml
   - node-feature-discovery/ks.yaml
@@ -13,7 +12,6 @@ resources:
   - reloader/ks.yaml
   - snapshot-controller/ks.yaml
   - spegel/ks.yaml
-  - volsync/ks.yaml
   - zfs-scrub/ks.yaml
 components:
   - ../../components/namespace

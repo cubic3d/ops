@@ -12,13 +12,6 @@ crunchy_postgres_primary_selector := "postgres-operator.crunchydata.com/cluster=
 default:
     just -l k8s
 
-# Cleanup VolSync resources created on first provisioning
-[script]
-cleanup-volsync:
-    for r in pvc volumesnapshot; do
-      kubectl get $r -A --no-headers | awk '/volsync-.*-dest/ {print $1, $2}' | xargs -n 2 sh -c 'kubectl delete '$r' -n $0 $1'
-    done
-
 # Cleanup succeeded, pending, and failed pods
 [script]
 cleanup-pods:
