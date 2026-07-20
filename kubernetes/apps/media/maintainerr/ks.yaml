@@ -20,10 +20,10 @@ spec:
   dependsOn:
     - name: longhorn
       namespace: longhorn-system
-    - name: volsync
+    - name: kopiur
       namespace: system
   components:
-    - ../../../../components/volsync
+    - ../../../../components/kopiur
     - ../../../../components/auth
   postBuild:
     substitute:

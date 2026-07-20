@@ -20,14 +20,14 @@ spec:
   dependsOn:
     - name: longhorn
       namespace: longhorn-system
-    - name: volsync
+    - name: kopiur
       namespace: system
     - name: intel-gpu-resource-driver
       namespace: kube-system
   components:
-    - ../../../../components/volsync
+    - ../../../../components/kopiur
     - ../../../../components/gpu
   postBuild:
     substitute:
       app: *appname
-      volsync_capacity: 5Gi
+      kopiur_capacity: 5Gi
