@@ -16,7 +16,7 @@ spec:
           app:
             image:
               repository: public.ecr.aws/docker/library/eclipse-mosquitto
-              tag: 2.0.22
+              tag: 2.1.2-alpine
 
             probes:
               liveness:
@@ -82,9 +82,8 @@ spec:
         data:
           mosquitto.conf: |
             listener 1883
-            allow_anonymous true
+            listener_allow_anonymous true
             autosave_interval 60
             connection_messages false
-            per_listener_settings false
             persistence true
             persistence_location /config
