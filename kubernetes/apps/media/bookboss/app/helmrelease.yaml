@@ -97,6 +97,8 @@ spec:
             namespace: network
 
       sync:
+        labels:
+          k8s-gateway.dns/ignore: "true"
         hostnames:
           - bookboss-sync.${domain}
         parentRefs:
