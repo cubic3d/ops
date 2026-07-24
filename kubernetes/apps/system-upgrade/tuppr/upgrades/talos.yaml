@@ -6,7 +6,7 @@ metadata:
 spec:
   talos:
     # renovate: depName=siderolabs/talos datasource=custom.talos-factory
-    version: v1.13.5
+    version: v1.13.7
 
   healthChecks:
     - apiVersion: kopiur.home-operations.com/v1alpha1
