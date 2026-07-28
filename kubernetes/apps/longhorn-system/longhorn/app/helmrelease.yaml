@@ -35,6 +35,7 @@ spec:
       removeSnapshotsDuringFilesystemTrim: true
       allowCollectingLonghornUsageMetrics: false
       taintToleration: dedicated=gameserver:NoSchedule
+      nodeDrainPolicy: allow-if-replica-is-stopped
 
     longhornManager:
       tolerations:
