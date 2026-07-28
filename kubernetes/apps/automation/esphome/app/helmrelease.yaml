@@ -98,6 +98,12 @@ spec:
                     values:
                       - "true"
                       - config
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: esphome
+              topologyKey: kubernetes.io/hostname
 
     service:
       esphome:
