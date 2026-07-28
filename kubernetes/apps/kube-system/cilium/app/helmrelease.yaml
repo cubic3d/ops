@@ -103,4 +103,5 @@ spec:
         rollOutPods: true
       tls:
         auto:
+          # FIXME: change to certmanager when CRDs are available on bootstrap
           method: cronJob
