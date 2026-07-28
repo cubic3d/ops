@@ -101,3 +101,6 @@ spec:
       ui:
         enabled: true
         rollOutPods: true
+      tls:
+        auto:
+          method: cronJob
