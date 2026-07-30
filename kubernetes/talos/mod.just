@@ -80,7 +80,9 @@ upgrade-node node:
 
 # Download Talos machine image
 [script]
-download-image version schematic:
-    gum spin --title "Downloading Talos {{ version }} ..." --
-    curl -sfL --remove-on-error --retry 5 --retry-delay 5 --retry-all-errors -o "{{ talos_dir }}/talos-{{ version }}-{{ replace_regex(schematic, '^(.{8}).*', '$1') }}.iso" "https://factory.talos.dev/image/{{ schematic }}/{{ version }}/metal-amd64.iso"
-    just log info "Downloaded Talos" version "{{ version }}" schematic "{{ schematic }}"
+download-image version:
+    export SCHEMATIC="$(just talos schematic-id)"
+    curl -fL --remove-on-error --retry 5 --retry-delay 5 --retry-all-errors --progress-bar \
+        -o "{{ source_directory() }}/talos-{{ version }}-${SCHEMATIC:0:8}.iso" \
+        "https://factory.talos.dev/image/${SCHEMATIC}/{{ version }}/metal-amd64.iso"
+    just log info "Downloaded Talos" version "{{ version }}" schematic "${SCHEMATIC}"
