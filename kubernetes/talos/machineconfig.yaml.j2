@@ -190,6 +190,9 @@ cluster:
     ca:
       crt: op://cluster/talos/cluster_etcd_ca_crt
       key: op://cluster/talos/cluster_etcd_ca_key
+    extraArgs:
+      auto-compaction-mode: periodic
+      auto-compaction-retention: 1h
   coreDNS:
     disabled: true
   allowSchedulingOnControlPlanes: true
