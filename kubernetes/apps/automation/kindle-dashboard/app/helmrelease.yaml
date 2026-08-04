@@ -16,6 +16,15 @@ spec:
           imagePullSecrets:
             - name: kindle-dashboard-pull
 
+          annotations:
+            k8s.v1.cni.cncf.io/networks: |
+              [{
+                "name":"multus-iot",
+                "namespace": "network",
+                "ips": ["192.168.10.64/24"],
+                "mac": "0a:fd:28:57:9f:cd"
+              }]
+
         containers:
           app:
             image:
