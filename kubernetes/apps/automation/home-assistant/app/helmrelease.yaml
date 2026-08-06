@@ -45,7 +45,9 @@ spec:
                 drop:
                   - ALL
 
-          code-server:
+      code-server:
+        containers:
+          app:
             image:
               repository: ghcr.io/coder/code-server
               tag: 4.131.0
@@ -90,9 +92,16 @@ spec:
                     values:
                       - "true"
                       - config
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: home-assistant
+              topologyKey: kubernetes.io/hostname
 
     service:
-      app:
+      home-assistant:
+        controller: home-assistant
         type: LoadBalancer
         annotations:
           lbipam.cilium.io/ips: 192.168.40.66
@@ -101,6 +110,7 @@ spec:
             port: 8123
 
       code-server:
+        controller: code-server
         ports:
           http:
             port: 12321
@@ -114,7 +124,7 @@ spec:
             namespace: network
         rules:
           - backendRefs:
-              - identifier: app
+              - identifier: home-assistant
                 port: http
 
       code-server:
