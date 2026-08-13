@@ -8,7 +8,6 @@ resources:
   - home-assistant/ks.yaml
   - kindle-dashboard/ks.yaml
   - matter-server/ks.yaml
-  - n8n/ks.yaml
   - node-red/ks.yaml
   - windmill/ks.yaml
   - zigbee2mqtt/ks.yaml
