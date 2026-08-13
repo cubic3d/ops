@@ -233,19 +233,6 @@ spec:
               redirect_uris:
                 - https://w.${domain}/user/login_callback/authelia
 
-            - client_name: Vikunja
-              client_id: vikunja
-              authorization_policy: residents-only
-              client_secret:
-                path: /secrets/authelia/oidc_secret_vikunja
-              consent_mode: implicit
-              scopes:
-                - openid
-                - profile
-                - email
-              redirect_uris:
-                - https://tasks.${domain}/auth/openid/yachthafenid
-
             - client_name: Shelfmark
               client_id: shelfmark
               client_secret:
@@ -347,8 +334,6 @@ spec:
               path: oidc_secret_nodered
             - key: oidc_secret_windmill
               path: oidc_secret_windmill
-            - key: oidc_secret_vikunja
-              path: oidc_secret_vikunja
             - key: oidc_secret_shelfmark
               path: oidc_secret_shelfmark
             - key: oidc_secret_audiobookshelf
