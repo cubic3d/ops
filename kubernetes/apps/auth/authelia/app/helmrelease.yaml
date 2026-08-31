@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: authelia
-      version: 0.11.6
+      version: 0.11.20
       sourceRef:
         kind: HelmRepository
         name: authelia
@@ -44,10 +44,6 @@ spec:
         - name: TZ
           value: Europe/Berlin
 
-        # FIXME: Remove after possible to enfoce via policies
-        - name: AUTHELIA_WEBAUTHN_EXPERIMENTAL_ENABLE_PASSKEY_UV_TWO_FACTORS
-          value: "true"
-
     configMap:
       telemetry:
         metrics:
@@ -67,6 +63,8 @@ spec:
       webauthn:
         display_name: Yachthafen ID
         enable_passkey_login: true
+        # FIXME: Remove after possible to enfoce via policies
+        experimental_enable_passkey_uv_two_factors: true
 
       authentication_backend:
         password_reset:
