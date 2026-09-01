@@ -26,6 +26,7 @@ spec:
               COMPlus_EnableDiagnostics: "0"
               SONARR__APP__INSTANCENAME: Sonarr
               SONARR__SERVER__PORT: &port 8989
+              SONARR__SERVER__ALLOWEDHOSTS: "*"
               SONARR__LOG__LEVEL: info
               SONARR__LOG__ANALYTICSENABLED: "False"
               SONARR__AUTH__METHOD: External

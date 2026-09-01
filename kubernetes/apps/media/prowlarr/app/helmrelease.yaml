@@ -26,6 +26,7 @@ spec:
               COMPlus_EnableDiagnostics: "0"
               PROWLARR__APP__INSTANCENAME: Prowlarr
               PROWLARR__SERVER__PORT: &port 9696
+              PROWLARR__SERVER__ALLOWEDHOSTS: "*"
               PROWLARR__LOG__LEVEL: info
               PROWLARR__LOG__ANALYTICSENABLED: "False"
               PROWLARR__AUTH__METHOD: External
