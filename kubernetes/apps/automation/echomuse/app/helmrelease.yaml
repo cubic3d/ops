@@ -30,7 +30,7 @@ spec:
 
             env:
               TZ: Europe/Berlin
-              API_PORT: &port 8767
+              API_PORT: &port 8768
               SERVER_IP: 192.168.10.65
               OWW_MODEL: hey_jarvis
               OWW_THRESHOLD: 0.5
