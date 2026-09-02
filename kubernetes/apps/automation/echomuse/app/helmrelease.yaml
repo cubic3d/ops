@@ -34,6 +34,7 @@ spec:
               SERVER_IP: 192.168.10.65
               OWW_MODEL: hey_jarvis
               OWW_THRESHOLD: 0.5
+              DB_PATH: /data/echomuse.db
 
             resources:
               requests:
@@ -85,5 +86,3 @@ spec:
     persistence:
       data:
         existingClaim: echomuse
-        globalMounts:
-          - path: /app/data
