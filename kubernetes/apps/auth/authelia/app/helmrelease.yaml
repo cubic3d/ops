@@ -259,22 +259,6 @@ spec:
                 - https://audiobooks.${domain}/auth/openid/mobile-redirect
               pkce_challenge_method: S256
 
-            - client_name: Grimmory
-              client_id: grimmory
-              client_secret:
-                path: /secrets/authelia/oidc_secret_grimmary
-              consent_mode: implicit
-              claims_policy: default
-              scopes:
-                - openid
-                - profile
-                - email
-                - groups
-              redirect_uris:
-                - https://books.${domain}/oauth2-callback
-              pkce_challenge_method: S256
-              token_endpoint_auth_method: client_secret_post
-
             - client_name: Mealie
               client_id: mealie
               client_secret:
@@ -336,8 +320,6 @@ spec:
               path: oidc_secret_shelfmark
             - key: oidc_secret_audiobookshelf
               path: oidc_secret_audiobookshelf
-            - key: oidc_secret_grimmary
-              path: oidc_secret_grimmary
             - key: oidc_secret_mealie
               path: oidc_secret_mealie
             - key: oidc_secret_bookboss
