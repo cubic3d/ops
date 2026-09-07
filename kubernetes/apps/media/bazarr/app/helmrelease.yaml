@@ -18,27 +18,29 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/home-operations/bazarr
-              tag: 1.6.0
+              repository: ghcr.io/lavx/bazarr
+              tag: 2.6.1
+
+            command:
+              - python
+
+            args:
+              - docker/supervisor.py
+              - --no-update
+              - --config
+              - /config
 
             env:
               TZ: Europe/Berlin
-              # No support for those global settings yet in bazarr
-              COMPlus_EnableDiagnostics: "0"
-              BAZARR__APP__INSTANCENAME: Bazarr
-              BAZARR__SERVER__PORT: &port 6767
-              BAZARR__LOG__LEVEL: info
-              BAZARR__LOG__ANALYTICSENABLED: "False"
-              BAZARR__AUTH__METHOD: External
-              BAZARR__AUTH__APIKEY:
-                valueFrom:
-                  secretKeyRef:
-                    name: bazarr
-                    key: api_key
 
             probes:
               liveness: &probes
                 enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: &port 6767
               readiness: *probes
               startup: *probes
 
