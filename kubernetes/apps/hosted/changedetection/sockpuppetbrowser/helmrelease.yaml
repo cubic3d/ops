@@ -16,7 +16,7 @@ spec:
           app:
             image:
               repository: docker.io/dgtlmoon/sockpuppetbrowser
-              tag: latest@sha256:f166a963b550c29af465c2fac518212e7e3a75f14f0d2b840cf4b79677295764
+              tag: latest@sha256:f627037bd65705e841c159cbc91fb9a601b9d2f1d6447b4bac4f32c7089ee412
 
             env:
               TZ: Europe/Berlin
