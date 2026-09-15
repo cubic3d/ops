@@ -18,12 +18,8 @@ spec:
     name: flux-system
     namespace: flux-system
   dependsOn:
-    - name: external-secrets-stores
-      namespace: secrets
     - name: longhorn
       namespace: longhorn-system
-    - name: kopiur
-      namespace: system
   components:
     - ../../../../components/kopiur
   postBuild:

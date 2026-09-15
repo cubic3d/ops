@@ -20,8 +20,6 @@ spec:
   dependsOn:
     - name: longhorn
       namespace: longhorn-system
-    - name: kopiur
-      namespace: system
   components:
     - ../../../../components/kopiur
     - ../../../../components/auth

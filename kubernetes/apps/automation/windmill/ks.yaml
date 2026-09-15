@@ -18,8 +18,6 @@ spec:
     name: flux-system
     namespace: flux-system
   dependsOn:
-    - name: external-secrets-stores
-      namespace: secrets
     - name: crunchy-postgres-operator-cluster
       namespace: database
     - name: crunchy-postgres-operator-secretstore

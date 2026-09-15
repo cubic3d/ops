@@ -20,10 +20,6 @@ spec:
   dependsOn:
     - name: longhorn
       namespace: longhorn-system
-    - name: kopiur
-      namespace: system
-    - name: external-secrets-stores
-      namespace: secrets
   components:
     - ../../../../components/kopiur
   postBuild:

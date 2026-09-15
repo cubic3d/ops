@@ -18,7 +18,5 @@ spec:
     name: flux-system
     namespace: flux-system
   dependsOn:
-    - name: external-secrets-stores
-      namespace: secrets
     - name: external-dns-external
     - name: envoy-gateway-config

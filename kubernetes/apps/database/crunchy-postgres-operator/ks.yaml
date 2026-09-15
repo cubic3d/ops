@@ -39,8 +39,6 @@ spec:
     namespace: flux-system
   dependsOn:
     - name: crunchy-postgres-operator
-    - name: external-secrets-stores
-      namespace: secrets
 ---
 # yaml-language-server: $schema=https://cubic3d.github.io/crd-catalog/kustomize.toolkit.fluxcd.io/kustomization_v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
@@ -63,8 +61,6 @@ spec:
     namespace: flux-system
   dependsOn:
     - name: crunchy-postgres-operator-cluster
-    - name: external-secrets
-      namespace: secrets
 ---
 # yaml-language-server: $schema=https://cubic3d.github.io/crd-catalog/kustomize.toolkit.fluxcd.io/kustomization_v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
