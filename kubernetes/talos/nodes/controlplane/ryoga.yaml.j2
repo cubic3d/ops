@@ -1,12 +1,12 @@
-machine:
-  type: controlplane
-  install:
-    diskSelector:
-      model: INTEL SSDSCKJW12
----
 apiVersion: v1alpha1
 kind: HostnameConfig
 hostname: ryoga.h.{{ '{{ op://cluster/env/domain }}' }}
+---
+apiVersion: v1alpha1
+kind: UnattendedInstallConfig
+provisioning:
+  diskSelector:
+    match: disk.model == "INTEL SSDSCKJW12"
 ---
 apiVersion: v1alpha1
 kind: LinkAliasConfig

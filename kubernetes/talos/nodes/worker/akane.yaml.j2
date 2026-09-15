@@ -1,17 +1,20 @@
-machine:
-  type: worker
-  install:
-    diskSelector:
-      model: Samsung SSD 970 EVO Plus 500GB
-  nodeLabels:
-    node.longhorn.io/create-default-disk: "true"
----
 apiVersion: v1alpha1
 kind: HostnameConfig
 hostname: akane.h.{{ '{{ op://cluster/env/domain }}' }}
+---
+apiVersion: v1alpha1
+kind: UnattendedInstallConfig
+provisioning:
+  diskSelector:
+    match: disk.model == "Samsung SSD 970 EVO Plus 500GB"
 ---
 apiVersion: v1alpha1
 kind: LinkAliasConfig
 name: net0
 selector:
     match: link.driver == "e1000e" && mac(link.permanent_addr).endsWith(":cb:2d")
+---
+apiVersion: v1alpha1
+kind: KubeNodeConfig
+labels:
+  node.longhorn.io/create-default-disk: "true"

@@ -1,0 +1,134 @@
+machine:
+  type: controlplane
+  ca:
+    crt: op://cluster/talos/machine_ca_crt
+    key: op://cluster/talos/machine_ca_key
+  certSANs:
+    - 127.0.0.1
+    - k8s.{{ '{{ op://cluster/env/domain }}' }}
+cluster:
+  etcd:
+    ca:
+      crt: op://cluster/talos/cluster_etcd_ca_crt
+      key: op://cluster/talos/cluster_etcd_ca_key
+    extraArgs:
+      auto-compaction-mode: periodic
+      auto-compaction-retention: 1h
+---
+apiVersion: v1alpha1
+kind: KubeAPIServerCAConfig
+issuingCA:
+  cert: op://cluster/talos/cluster_ca_crt
+  key: op://cluster/talos/cluster_ca_key
+---
+apiVersion: v1alpha1
+kind: KubeAggregatorCAConfig
+issuingCA:
+  cert: op://cluster/talos/cluster_aggregatorca_crt
+  key: op://cluster/talos/cluster_aggregatorca_key
+---
+apiVersion: v1alpha1
+kind: KubeServiceAccountConfig
+issuer:
+  privateKey: op://cluster/talos/cluster_serviceaccount_key
+  issuerURL: https://192.168.40.90:6443
+---
+apiVersion: v1alpha1
+kind: Layer2VIPConfig
+name: 192.168.40.90
+link: bond0
+---
+apiVersion: v1alpha1
+kind: KubeNodeConfig
+labels:
+  node-role.kubernetes.io/control-plane: ""
+---
+apiVersion: v1alpha1
+kind: KubeAPIServerConfig
+image: registry.k8s.io/kube-apiserver:v1.36.3
+extraArgs:
+  enable-aggregator-routing: "true"
+certExtraSANs:
+  - 127.0.0.1
+  - 192.168.40.90
+  - k8s.{{ '{{ op://cluster/env/domain }}' }}
+---
+apiVersion: v1alpha1
+kind: KubeAuditPolicyConfig
+configuration:
+  apiVersion: audit.k8s.io/v1
+  kind: Policy
+  rules:
+    - level: Metadata
+---
+apiVersion: v1alpha1
+kind: KubeAuthenticationConfig
+configuration:
+  anonymous:
+    conditions:
+      - path: /livez
+      - path: /readyz
+      - path: /healthz
+    enabled: true
+  jwt: []
+---
+apiVersion: v1alpha1
+kind: KubeAuthorizerConfig
+name: node
+type: Node
+---
+apiVersion: v1alpha1
+kind: KubeAuthorizerConfig
+name: rbac
+type: RBAC
+---
+apiVersion: v1alpha1
+kind: KubeControllerManagerConfig
+image: registry.k8s.io/kube-controller-manager:v1.36.3
+---
+apiVersion: v1alpha1
+kind: KubeCoreDNSConfig
+enabled: false
+---
+apiVersion: v1alpha1
+kind: KubeEtcdEncryptionConfig
+config:
+  resources:
+    - providers:
+        - secretbox:
+            keys:
+              - name: key2
+                secret: op://cluster/talos/cluster_secretboxencryptionsecret
+      resources:
+        - secrets
+---
+apiVersion: v1alpha1
+kind: KubeProxyConfig
+enabled: false
+image: registry.k8s.io/kube-proxy:v1.36.3
+---
+apiVersion: v1alpha1
+kind: KubeSchedulerConfig
+config:
+  profiles:
+    - schedulerName: default-scheduler
+      plugins:
+        score:
+          disabled:
+            - name: ImageLocality
+      pluginConfig:
+        - name: PodTopologySpread
+          args:
+            defaultingType: List
+            defaultConstraints:
+              - maxSkew: 1
+                topologyKey: kubernetes.io/hostname
+                whenUnsatisfiable: ScheduleAnyway
+image: registry.k8s.io/kube-scheduler:v1.36.3
+---
+apiVersion: v1alpha1
+kind: KubeTalosAPIAccessConfig
+allowedRoles:
+  - os:admin
+allowedKubernetesNamespaces:
+  - system-upgrade

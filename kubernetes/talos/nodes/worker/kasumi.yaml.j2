@@ -1,18 +1,12 @@
-machine:
-  type: worker
-  install:
-    diskSelector:
-      model: GIM128
-  kubelet:
-    extraConfig:
-      registerWithTaints:
-        - key: dedicated
-          value: gameserver
-          effect: NoSchedule
----
 apiVersion: v1alpha1
 kind: HostnameConfig
 hostname: kasumi.h.{{ '{{ op://cluster/env/domain }}' }}
+---
+apiVersion: v1alpha1
+kind: UnattendedInstallConfig
+provisioning:
+  diskSelector:
+    match: disk.model == "GIM128"
 ---
 apiVersion: v1alpha1
 kind: LinkAliasConfig
@@ -20,3 +14,8 @@ name: net0
 selector:
     # Port 1
     match: link.driver == "igb" && mac(link.permanent_addr).endsWith(":16:4c")
+---
+apiVersion: v1alpha1
+kind: KubeNodeConfig
+taints:
+  dedicated: gameserver:NoSchedule
