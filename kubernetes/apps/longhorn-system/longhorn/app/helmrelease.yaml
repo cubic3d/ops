@@ -23,6 +23,7 @@ spec:
 
     defaultSettings:
       createDefaultDiskLabeledNodes: true
+      defaultDataPath: /var/mnt/longhorn/
       defaultDataLocality: best-effort
       replicaAutoBalance: best-effort
       storageMinimalAvailablePercentage: "1"
