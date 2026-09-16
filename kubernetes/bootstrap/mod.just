@@ -5,8 +5,6 @@ set quiet
 set script-interpreter := ['bash', '-euo', 'pipefail']
 set shell := ['bash', '-euo', 'pipefail', '-c']
 
-kubernetes_dir := justfile_dir() + '/kubernetes'
-bootstrap_dir := kubernetes_dir + '/bootstrap'
 controller := `talosctl config info -o yaml | yq -r -e '.endpoints[0]'`
 nodes := `talosctl config info -o yaml | yq -e '.nodes | join (" ")'`
 
@@ -81,3 +79,44 @@ nodes-ready:
             sleep 5
         done
     fi
+
+# Regenerate the talosconfig file in case it's expired or missing
+[confirm]
+talosconfig:
+    tmp="$(mktemp -d)"
+    trap 'rm -rf "$tmp"' EXIT
+
+    op read 'op://cluster/talos/machine_ca_crt' | base64 -d > "$tmp/ca.crt"
+    op read 'op://cluster/talos/machine_ca_key' | base64 -d > "$tmp/ca.key"
+
+    (
+      cd "$tmp"
+      talosctl gen key --name admin
+      talosctl gen csr --key admin.key --ip 127.0.0.1
+      talosctl gen crt --ca ca --csr admin.csr --name admin --hours 8760
+    )
+
+    endpoints="$(find "{{ justfile_dir() }}/kubernetes/talos/nodes/controlplane" -name '*.yaml.j2' -printf '%f\n' | sed 's/\.yaml\.j2$//' | jq -Rsc 'split("\n")[:-1]')"
+    nodes="$(find "{{ justfile_dir() }}/kubernetes/talos/nodes" -name '*.yaml.j2' -printf '%f\n' | sed 's/\.yaml\.j2$//' | sort | jq -Rsc 'split("\n")[:-1]')"
+
+    CA="$(base64 -w0 "$tmp/ca.crt")" \
+    CRT="$(base64 -w0 "$tmp/admin.crt")" \
+    KEY="$(base64 -w0 "$tmp/admin.key")" \
+    ENDPOINTS="$endpoints" \
+    NODES="$nodes" \
+    yq -n '
+      {
+        "context": "main",
+        "contexts": {
+          "main": {
+            "endpoints": env(ENDPOINTS),
+            "nodes": env(NODES),
+            "ca": strenv(CA),
+            "crt": strenv(CRT),
+            "key": strenv(KEY)
+          }
+        }
+      }
+    ' > "$TALOSCONFIG"
+
+    chmod 600 "$TALOSCONFIG"
