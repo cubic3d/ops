@@ -97,10 +97,5 @@ spec:
           - http
       relay:
         enabled: true
-        rollOutPods: true
       ui:
         enabled: true
-        rollOutPods: true
-      tls:
-        auto:
-          method: certmanager
