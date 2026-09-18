@@ -29,6 +29,10 @@ render-config node:
         -p @<(just template "{{ source_directory() }}/${role}.yaml.j2") \
         -p @<(just template "{{ source_directory() }}/nodes/${role}/{{ node }}.yaml.j2")
 
+# Validate rendered configuration for a given node
+validate-config node:
+    just talos render-config "{{ node }}" | talosctl validate --config /dev/stdin --mode metal --strict
+
 # Reset a node
 [confirm]
 reset-node node *args:
