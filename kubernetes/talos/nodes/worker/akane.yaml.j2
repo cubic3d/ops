@@ -1,6 +1,6 @@
 apiVersion: v1alpha1
 kind: HostnameConfig
-hostname: akane.h.{{ '{{ op://cluster/env/domain }}' }}
+hostname: akane.h.{{ op://cluster/env/domain }}
 ---
 apiVersion: v1alpha1
 kind: UnattendedInstallConfig

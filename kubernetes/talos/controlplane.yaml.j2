@@ -5,7 +5,7 @@ machine:
     key: op://cluster/talos/machine_ca_key
   certSANs:
     - 127.0.0.1
-    - k8s.{{ '{{ op://cluster/env/domain }}' }}
+    - k8s.{{ op://cluster/env/domain }}
 cluster:
   etcd:
     ca:
@@ -18,19 +18,34 @@ cluster:
 apiVersion: v1alpha1
 kind: KubeAPIServerCAConfig
 issuingCA:
-  cert: op://cluster/talos/cluster_ca_crt
-  key: op://cluster/talos/cluster_ca_key
+  cert: |-
+    {% filter indent(4, true) -%}
+    op://cluster/talos/cluster_ca_crt
+    {%- endfilter +%}
+  key: |-
+    {% filter indent(4, true) -%}
+    op://cluster/talos/cluster_ca_key
+    {%- endfilter +%}
 ---
 apiVersion: v1alpha1
 kind: KubeAggregatorCAConfig
 issuingCA:
-  cert: op://cluster/talos/cluster_aggregatorca_crt
-  key: op://cluster/talos/cluster_aggregatorca_key
+  cert: |-
+    {% filter indent(4, true) -%}
+    op://cluster/talos/cluster_aggregatorca_crt
+    {%- endfilter +%}
+  key: |-
+    {% filter indent(4, true) -%}
+    op://cluster/talos/cluster_aggregatorca_key
+    {%- endfilter +%}
 ---
 apiVersion: v1alpha1
 kind: KubeServiceAccountConfig
 issuer:
-  privateKey: op://cluster/talos/cluster_serviceaccount_key
+  privateKey: |-
+    {% filter indent(4, true) -%}
+    op://cluster/talos/cluster_serviceaccount_key
+    {%- endfilter +%}
   issuerURL: https://192.168.40.90:6443
 ---
 apiVersion: v1alpha1
@@ -51,7 +66,7 @@ extraArgs:
 certExtraSANs:
   - 127.0.0.1
   - 192.168.40.90
-  - k8s.{{ '{{ op://cluster/env/domain }}' }}
+  - k8s.{{ op://cluster/env/domain }}
 ---
 apiVersion: v1alpha1
 kind: KubeAuditPolicyConfig

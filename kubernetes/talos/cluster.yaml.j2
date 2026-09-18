@@ -9,7 +9,7 @@ machine:
   token: op://cluster/talos/machine_token
   certSANs:
     - 127.0.0.1
-    - k8s.{{ '{{ op://cluster/env/domain }}' }}
+    - k8s.{{ op://cluster/env/domain }}
 cluster:
   token: op://cluster/talos/cluster_token
 ---
@@ -21,7 +21,10 @@ endpoint: https://192.168.40.90:6443
 apiVersion: v1alpha1
 kind: KubeAPIServerCAConfig
 acceptedCAs:
-  - op://cluster/talos/cluster_ca_crt
+  - |-
+    {% filter indent(4, true) -%}
+    op://cluster/talos/cluster_ca_crt
+    {%- endfilter +%}
 ---
 apiVersion: v1alpha1
 kind: BondConfig
@@ -66,7 +69,7 @@ clusterSecret: op://cluster/talos/cluster_secret
 apiVersion: v1alpha1
 kind: UnattendedInstallConfig
 installer:
-  image: factory.talos.dev/metal-installer/{{ ENV.SCHEMATIC }}:v1.14.1
+  image: factory.talos.dev/metal-installer/[[ ENV.SCHEMATIC ]]:v1.14.1
 provisioning:
   wipe: false
 ---
