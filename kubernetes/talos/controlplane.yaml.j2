@@ -18,11 +18,11 @@ cluster:
 apiVersion: v1alpha1
 kind: KubeAPIServerCAConfig
 issuingCA:
-  cert: |-
+  cert: |
     {% filter indent(4, true) -%}
     op://cluster/talos/cluster_ca_crt
     {%- endfilter +%}
-  key: |-
+  key: |
     {% filter indent(4, true) -%}
     op://cluster/talos/cluster_ca_key
     {%- endfilter +%}
@@ -30,11 +30,11 @@ issuingCA:
 apiVersion: v1alpha1
 kind: KubeAggregatorCAConfig
 issuingCA:
-  cert: |-
+  cert: |
     {% filter indent(4, true) -%}
     op://cluster/talos/cluster_aggregatorca_crt
     {%- endfilter +%}
-  key: |-
+  key: |
     {% filter indent(4, true) -%}
     op://cluster/talos/cluster_aggregatorca_key
     {%- endfilter +%}
@@ -42,7 +42,7 @@ issuingCA:
 apiVersion: v1alpha1
 kind: KubeServiceAccountConfig
 issuer:
-  privateKey: |-
+  privateKey: |
     {% filter indent(4, true) -%}
     op://cluster/talos/cluster_serviceaccount_key
     {%- endfilter +%}

@@ -21,7 +21,8 @@ endpoint: https://192.168.40.90:6443
 apiVersion: v1alpha1
 kind: KubeAPIServerCAConfig
 acceptedCAs:
-  - |-
+  # FIXME: On controlplane nodes this is merged with the issuingCA and not deduplicated. Missing newline will lead to a malformed CA bundle and kubelet will fail to start.
+  - |
     {% filter indent(4, true) -%}
     op://cluster/talos/cluster_ca_crt
     {%- endfilter +%}
