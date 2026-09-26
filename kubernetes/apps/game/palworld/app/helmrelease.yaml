@@ -56,7 +56,7 @@ spec:
       app:
         type: LoadBalancer
         annotations:
-          external-dns.kubernetes.io/hostname: pal.${domain}
+          coredns.io/hostname: pal.${domain}
           lbipam.cilium.io/ips: 192.168.40.67
         ports:
           http:

@@ -9,7 +9,7 @@ spec:
   gatewayClassName: envoy
   infrastructure:
     annotations:
-      external-dns.kubernetes.io/hostname: *hostname
+      coredns.io/hostname: *hostname
       lbipam.cilium.io/ips: 192.168.40.61
   listeners:
     - name: http

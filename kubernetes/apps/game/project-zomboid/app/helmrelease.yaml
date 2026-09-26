@@ -45,7 +45,7 @@ spec:
       app:
         type: LoadBalancer
         annotations:
-          external-dns.kubernetes.io/hostname: zomboid.${domain}
+          coredns.io/hostname: zomboid.${domain}
           lbipam.cilium.io/ips: 192.168.40.68
         ports:
           game:
