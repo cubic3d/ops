@@ -23,6 +23,8 @@ spec:
 
             env:
               TZ: Europe/Berlin
+              PUID: 1000
+              PGID: 1000
               ADMIN_USERNAME: cubic
               STEAM_VAC: false
 
