@@ -4,5 +4,6 @@ kind: Kustomization
 namespace: game
 resources:
   - palworld/ks.yaml
+  - project-zomboid/ks.yaml
 components:
   - ../../components/namespace

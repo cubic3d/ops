@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://cubic3d.github.io/crd-catalog/externaldns.k8s.io/dnsendpoint_v1alpha1.json
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: project-zomboid
+spec:
+  endpoints:
+    - dnsName: zomboid.${domain}
+      recordType: CNAME
+      targets:
+        - h.${domain}
+      providerSpecific:
+        - name: external-dns.kubernetes.io/cloudflare-proxied
+          value: "false"

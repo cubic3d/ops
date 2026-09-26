@@ -1,0 +1,69 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app project-zomboid
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: *app
+
+  values:
+    controllers:
+      project-zomboid:
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        containers:
+          app:
+            image:
+              repository: docker.io/indifferentbroccoli/projectzomboid-server-docker
+              tag: v1.1.9
+
+            env:
+              TZ: Europe/Berlin
+              ADMIN_USERNAME: cubic
+              STEAM_VAC: false
+
+            envFrom:
+              - secretRef:
+                  name: project-zomboid
+
+    defaultPodOptions:
+      tolerations:
+        - key: dedicated
+          operator: Equal
+          value: gameserver
+          effect: NoSchedule
+      nodeSelector:
+        kubernetes.io/hostname: kasumi
+
+    service:
+      app:
+        type: LoadBalancer
+        annotations:
+          external-dns.kubernetes.io/hostname: zomboid.${domain}
+          lbipam.cilium.io/ips: 192.168.40.68
+        ports:
+          game:
+            port: 16261
+            primary: true
+            protocol: UDP
+          direct:
+            port: 16262
+            protocol: UDP
+          rcon:
+            port: 27015
+            protocol: TCP
+
+    persistence:
+      runtime:
+        existingClaim: project-zomboid-runtime
+        globalMounts:
+          - path: /project-zomboid
+
+      save:
+        existingClaim: project-zomboid
+        globalMounts:
+          - path: /project-zomboid-config
