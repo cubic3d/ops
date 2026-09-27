@@ -54,3 +54,8 @@ spec:
     persistence:
       tmp:
         type: emptyDir
+        globalMounts:
+          - path: /tmp
+            subPath: tmp
+          - path: /.local
+            subPath: local
