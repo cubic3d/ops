@@ -23,6 +23,9 @@ spec:
               SCREEN_WIDTH: 1920
               SCREEN_HEIGHT: 1024
               SCREEN_DEPTH: 16
+              HOME: /tmp
+              XDG_CONFIG_HOME: /tmp/.config
+              XDG_CACHE_HOME: /tmp/.cache
 
             probes:
               liveness: &probes
@@ -54,8 +57,3 @@ spec:
     persistence:
       tmp:
         type: emptyDir
-        globalMounts:
-          - path: /tmp
-            subPath: tmp
-          - path: /.local
-            subPath: local
