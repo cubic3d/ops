@@ -28,7 +28,49 @@ sync-secret ns='' name='':
 
 # Mount a PVC to a temporary pod
 browse-pvc namespace claim:
-    kubectl browse-pvc -n {{ namespace }} -i mirror.gcr.io/alpine:edge {{ claim }}
+    overrides=$(cat <<'JSON'
+    {
+      "apiVersion": "v1",
+      "spec": {
+        "containers": [
+          {
+            "name": "mount",
+            "image": "docker.io/library/alpine:edge",
+            "command": [
+              "/bin/sh"
+            ],
+            "workingDir": "/data",
+            "stdin": true,
+            "stdinOnce": true,
+            "tty": true,
+            "volumeMounts": [
+              {
+                "name": "data",
+                "mountPath": "/data"
+              }
+            ]
+          }
+        ],
+        "volumes": [
+          {
+            "name": "data",
+            "persistentVolumeClaim": {
+              "claimName": "{{ claim }}"
+            }
+          }
+        ],
+        "tolerations": [
+          {
+            "operator": "Exists",
+            "effect": "NoSchedule"
+          }
+        ],
+        "restartPolicy": "Never"
+      }
+    }
+    JSON
+    )
+    kubectl run -n "{{ namespace }}" "browse-{{ claim }}" -i --tty --rm --image=docker.io/library/alpine:edge --privileged --overrides="$overrides"
 
 # Shell on node
 node-shell node:
