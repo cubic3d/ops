@@ -51,6 +51,8 @@ spec:
       host:
         type: hostPath
         hostPath: /
+        globalMounts:
+          - path: /host
 
     defaultPodOptions:
       nodeSelector:
