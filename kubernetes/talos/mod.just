@@ -15,7 +15,7 @@ apply-node node *args:
 [confirm]
 apply-cluster *args:
     kubectl get nodes --no-headers | while read -r node _; do
-      just talos apply-node ${node} {{ args }}
+      just --yes talos apply-node ${node} {{ args }}
     done
 
 # Render Talos machine configuration for a given node
