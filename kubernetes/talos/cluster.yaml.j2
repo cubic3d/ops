@@ -145,6 +145,7 @@ kind: KubeNodeConfig
 nodeIP:
   validSubnets:
     - 192.168.40.0/24
+    - fd00:c01d:1ced:40::/64
 labels:
   topology.kubernetes.io/region: home
 ---
@@ -169,10 +170,13 @@ image: ghcr.io/siderolabs/kubelet:v1.37.1
 apiVersion: v1alpha1
 kind: KubeNetworkConfig
 dnsDomain: cluster.local
+nodeCIDRMaskSizeIPv6: 112
 podSubnets:
   - 10.244.0.0/16
+  - fd00:c01d:1ced:98::/96
 serviceSubnets:
   - 10.96.0.0/12
+  - fd00:c01d:1ced:97::/112
 ---
 apiVersion: v1alpha1
 kind: KubePrismConfig
