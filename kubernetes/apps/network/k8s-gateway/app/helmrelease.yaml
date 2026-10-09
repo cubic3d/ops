@@ -11,11 +11,31 @@ spec:
 
   values:
     replicaCount: 2
-    domain: ${domain}
-    ttl: 1
 
-    watchedResources:
-      ["HTTPRoute", "TLSRoute", "GRPCRoute", "Ingress", "Service"]
+    servers:
+      - zones:
+          - zone: ${domain}
+        port: 53
+        plugins:
+          - name: k8s_gateway
+            parameters: ${domain}
+            configBlock: |-
+              apex k8s-gateway.network
+              ttl 1
+              resources HTTPRoute TLSRoute GRPCRoute Ingress Service
+          - name: log
+          - name: errors
+          - name: health
+            configBlock: |-
+              lameduck 5s
+          - name: ready
+          - name: prometheus
+            parameters: 0.0.0.0:9153
+          - name: forward
+            parameters: . /etc/resolv.conf
+          - name: loop
+          - name: reload
+          - name: loadbalance
 
     service:
       annotations:
