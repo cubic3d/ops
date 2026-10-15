@@ -27,6 +27,7 @@ spec:
               PGID: 1000
               ADMIN_USERNAME: cubic
               STEAM_VAC: false
+              FIX_MOD_CASE: "true"
 
             envFrom:
               - secretRef:
