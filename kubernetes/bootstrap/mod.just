@@ -33,7 +33,6 @@ kubernetes:
       sleep 5
     done
 
-[private]
 kubeconfig:
     just log info "Running stage..." "stage" "{{ recipe_name() }}"
     if ! talosctl kubeconfig -n "{{ controller }}" -f --force-context-name ops {{ justfile_dir() }}; then
