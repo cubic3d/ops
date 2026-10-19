@@ -24,4 +24,5 @@ gum = "latest"
 kustomize = "latest"
 helm = "latest"
 "github:home-operations/flate" = "latest"
+github-cli = "latest"
 # 1password is provided by the system
