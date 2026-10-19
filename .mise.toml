@@ -25,4 +25,5 @@ kustomize = "latest"
 helm = "latest"
 "github:home-operations/flate" = "latest"
 github-cli = "latest"
+"aqua:dlvhdr/gh-dash" = "latest"
 # 1password is provided by the system
