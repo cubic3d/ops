@@ -300,6 +300,19 @@ spec:
               redirect_uris:
                 - https://freshrss.${domain}/i/oidc/
 
+            - client_name: Bambuddy
+              client_id: bambuddy
+              client_secret:
+                path: /secrets/authelia/oidc_secret_bambuddy
+              consent_mode: implicit
+              scopes:
+                - openid
+                - profile
+                - email
+              redirect_uris:
+                - https://bambuddy.${domain}/api/v1/auth/oidc/callback
+              pkce_challenge_method: S256
+
     secret:
       existingSecret: authelia
 
@@ -326,3 +339,5 @@ spec:
               path: oidc_secret_bookboss
             - key: oidc_secret_freshrss
               path: oidc_secret_freshrss
+            - key: oidc_secret_bambuddy
+              path: oidc_secret_bambuddy
