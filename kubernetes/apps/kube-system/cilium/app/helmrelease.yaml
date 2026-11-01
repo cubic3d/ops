@@ -30,7 +30,7 @@ spec:
       id: 1
     cni:
       exclusive: false
-    devices: bond+
+    devices: bond0
     endpointRoutes:
       enabled: true
     envoy:
