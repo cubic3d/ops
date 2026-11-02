@@ -24,7 +24,7 @@ spec:
           generate-schemas:
             image:
               repository: ghcr.io/sholdee/crd-schema-publisher
-              tag: v2026.1023.52824
+              tag: v2026.1102.63220
 
             args:
               - extract
