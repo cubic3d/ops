@@ -25,3 +25,4 @@ spec:
   postBuild:
     substitute:
       app: *appname
+      kopiur_capacity: 5Gi
