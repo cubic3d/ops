@@ -17,6 +17,8 @@ spec:
     bpf:
       datapathMode: netkit
       masquerade: true
+      vlanBypass:
+        - 10 # IoT
       preallocateMaps: true
       # FIXME: temporary workaround for https://github.com/cilium/cilium/issues/39892
       tproxy: false
