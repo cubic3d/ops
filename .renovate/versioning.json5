@@ -2,12 +2,21 @@
   $schema: "https://docs.renovatebot.com/renovate-schema.json",
   packageRules: [
     {
-      description: "Loose versioning for non-semver packages",
+      description: "Four-component numeric versioning",
       matchDatasources: ["docker"],
       matchPackageNames: [
         "ghcr.io/home-operations/plex",
+        "ghcr.io/maziggy/bambuddy",
       ],
-      versioning: "loose",
+      versioning: "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)\\.(?<build>\\d+)$",
+    },
+    {
+      description: "Four-component Bambuddy-prefixed versioning",
+      matchDatasources: ["docker"],
+      matchPackageNames: [
+        "ghcr.io/maziggy/bambu-studio-api",
+      ],
+      versioning: "regex:^bambuddy-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)\\.(?<build>\\d+)$",
     },
   ],
 }
