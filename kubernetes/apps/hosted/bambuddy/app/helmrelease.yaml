@@ -40,19 +40,19 @@ spec:
 
             env:
               TZ: Europe/Berlin
-              PORT: &port 8000
+              PORT: &bambuddyPort 8000
               BAMBU_STUDIO_API_URL: http://bambuddy-slicer-api:3000
 
             probes:
-              liveness: &probes
+              liveness: &bambuddyProbes
                 enabled: true
                 custom: true
                 spec:
                   httpGet:
                     path: /health
-                    port: *port
-              readiness: *probes
-              startup: *probes
+                    port: *bambuddyPort
+              readiness: *bambuddyProbes
+              startup: *bambuddyProbes
 
             resources:
               requests:
@@ -79,18 +79,18 @@ spec:
 
             env:
               TZ: Europe/Berlin
-              PORT: &port 3000
+              PORT: &slicerApiPort 3000
 
             probes:
-              liveness: &probes
+              liveness: &slicerApiProbes
                 enabled: true
                 custom: true
                 spec:
                   httpGet:
                     path: /health
-                    port: *port
-              readiness: *probes
-              startup: *probes
+                    port: *slicerApiPort
+              readiness: *slicerApiProbes
+              startup: *slicerApiProbes
 
             resources:
               requests:
@@ -119,13 +119,13 @@ spec:
         controller: bambuddy
         ports:
           http:
-            port: *port
+            port: *bambuddyPort
 
       slicer-api:
         controller: slicer-api
         ports:
           http:
-            port: *port
+            port: *slicerApiPort
 
     route:
       bambuddy:
