@@ -21,6 +21,16 @@ spec:
                 "ips": ["192.168.10.67/24"],
                 "mac": "82:64:bb:76:4b:50"
               }]
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                  - matchExpressions:
+                      - key: node.longhorn.io/create-default-disk
+                        operator: In
+                        values:
+                          - "true"
+                          - config
 
         containers:
           app:
@@ -31,6 +41,7 @@ spec:
             env:
               TZ: Europe/Berlin
               PORT: &port 8000
+              BAMBU_STUDIO_API_URL: http://bambuddy-slicer-api:3000
 
             probes:
               liveness: &probes
@@ -59,6 +70,42 @@ spec:
                 drop:
                   - ALL
 
+      slicer-api:
+        containers:
+          app:
+            image:
+              repository: ghcr.io/maziggy/bambu-studio-api
+              tag: bambuddy-1.2.5.7
+
+            env:
+              TZ: Europe/Berlin
+              PORT: &port 3000
+
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: *port
+              readiness: *probes
+              startup: *probes
+
+            resources:
+              requests:
+                cpu: 50m
+                memory: 250Mi
+              limits:
+                memory: 2Gi
+
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities:
+                drop:
+                  - ALL
+
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
@@ -66,41 +113,53 @@ spec:
         runAsGroup: 2000
         fsGroup: 2000
         fsGroupChangePolicy: OnRootMismatch
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: node.longhorn.io/create-default-disk
-                    operator: In
-                    values:
-                      - "true"
-                      - config
 
     service:
-      app:
+      bambuddy:
+        controller: bambuddy
+        ports:
+          http:
+            port: *port
+
+      slicer-api:
+        controller: slicer-api
         ports:
           http:
             port: *port
 
     route:
-      app:
+      bambuddy:
         hostnames:
           - bambuddy.${domain}
         parentRefs:
           - name: envoy-internal
             namespace: network
+        rules:
+          - backendRefs:
+              - identifier: bambuddy
+                port: http
 
     persistence:
       data:
         existingClaim: bambuddy
-        globalMounts:
-          - path: /app/data
+        advancedMounts:
+          bambuddy:
+            app:
+              - path: /app/data
+
+      logs:
+        type: emptyDir
+        advancedMounts:
+          bambuddy:
+            app:
+              - path: /app/logs
+
+      slicer-data:
+        type: emptyDir
+        advancedMounts:
+          slicer-api:
+            app:
+              - path: /app/data
 
       tmp:
         type: emptyDir
-        globalMounts:
-          - path: /tmp
-            subPath: tmp
-          - path: /app/logs
-            subPath: logs
