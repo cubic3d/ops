@@ -8,7 +8,7 @@
         "ghcr.io/home-operations/plex",
         "ghcr.io/maziggy/bambuddy",
       ],
-      versioning: "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)\\.(?<build>\\d+)$",
+      versioning: "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)(?:\\.(?<build>\\d+))?$",
     },
     {
       description: "Four-component Bambuddy-prefixed versioning",
@@ -16,7 +16,7 @@
       matchPackageNames: [
         "ghcr.io/maziggy/bambu-studio-api",
       ],
-      versioning: "regex:^bambuddy-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)\\.(?<build>\\d+)$",
+      versioning: "regex:^bambuddy-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)(?:\\.(?<build>\\d+))?$",
     },
   ],
 }
