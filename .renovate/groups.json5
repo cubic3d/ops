@@ -37,5 +37,15 @@
         commitMessageTopic: "{{{groupName}}} group",
       },
     },
+    {
+      description: "Bambuddy Group",
+      groupName: "Bambuddy",
+      minimumGroupSize: 2,
+      matchDatasources: ["docker"],
+      matchPackageNames: ["/maziggy/"],
+      group: {
+        commitMessageTopic: "{{{groupName}}} group",
+      },
+    },
   ],
 }
