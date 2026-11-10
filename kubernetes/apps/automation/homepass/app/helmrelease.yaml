@@ -33,10 +33,21 @@ spec:
               GUEST_URL: https://hp.${domain}
               LOCAL_NETWORK_CIDRS: 192.168.0.0/16
 
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: *port
+              readiness: *probes
+              startup: *probes
+
             resources:
               requests:
                 cpu: 10m
-                memory: 256Mi
+                memory: 128Mi
               limits:
                 memory: 512Gi
 
