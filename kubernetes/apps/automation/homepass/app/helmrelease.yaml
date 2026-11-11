@@ -32,6 +32,7 @@ spec:
               PORT: &port 5880
               GUEST_URL: https://hp.${domain}
               LOCAL_NETWORK_CIDRS: 192.168.0.0/16
+              TRUSTED_PROXIES: 10.244.0.0/16,fd00:c01d:1ced:98::/96
 
             probes:
               liveness: &probes
