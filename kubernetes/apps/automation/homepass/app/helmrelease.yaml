@@ -77,7 +77,7 @@ spec:
                       - config
 
     service:
-      homepass:
+      app:
         ports:
           http:
             port: *port
@@ -89,6 +89,23 @@ spec:
         parentRefs:
           - name: envoy-internal
             namespace: network
+
+      external:
+        labels:
+          k8s-gateway.dns/ignore: "true"
+        hostnames:
+          - hp.${domain}
+        parentRefs:
+          - name: envoy-external
+            namespace: network
+        rules:
+          - matches:
+              - path:
+                  type: PathPrefix
+                  value: /g
+            backendRefs:
+              - identifier: app
+                port: http
 
     persistence:
       data:
