@@ -71,6 +71,15 @@ spec:
                   - ALL
 
       slicer-api:
+        # FIXME: remove override after github.com/maziggy/bambuddy/issues/3524 is resolved
+        pod:
+          securityContext:
+            runAsNonRoot: false
+            runAsUser: 0
+            runAsGroup: 0
+            fsGroup: 0
+            fsGroupChangePolicy: OnRootMismatch
+
         containers:
           app:
             image:
