@@ -6,7 +6,7 @@ metadata:
 spec:
   url: oci://ghcr.io/home-operations/charts/kopiur
   ref:
-    tag: 0.10.20
+    tag: 0.10.21
   interval: 10m
   layerSelector:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
