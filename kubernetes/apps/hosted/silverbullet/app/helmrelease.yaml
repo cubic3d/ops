@@ -21,10 +21,6 @@ spec:
               repository: ghcr.io/silverbulletmd/silverbullet
               tag: 3.0.0
 
-            envFrom:
-              - secretRef:
-                  name: silverbullet
-
             env:
               TZ: Europe/Berlin
 
